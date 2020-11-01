@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="LeetCode 组队刷题活动组队刷 LeetCode  介绍代码仓库　代码仓库的坐标：asdf2014 &#x2F; algorithm 报名途径　只需要在《Algorithm》文末留言，即可随时参与 留言内容的话，至少要留一下自己的 Github 名称，方便我们这边统计汇总。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出  参与方式　每位参与的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithm">
+<meta property="og:url" content="https://yuzhouwan.com/posts/666/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="LeetCode 组队刷题活动组队刷 LeetCode  介绍代码仓库　代码仓库的坐标：asdf2014 &#x2F; algorithm 报名途径　只需要在《Algorithm》文末留言，即可随时参与 留言内容的话，至少要留一下自己的 Github 名称，方便我们这边统计汇总。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出  参与方式　每位参与的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_qq_group_5366753.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_gitter_community.svg">
+<meta property="og:image" content="https://img.shields.io/github/contributors/asdf2014/algorithm">
+<meta property="og:image" content="https://img.shields.io/github/languages/count/asdf2014/algorithm">
+<meta property="og:image" content="https://img.shields.io/github/commit-activity/m/asdf2014/algorithm?cacheSeconds=3600">
+<meta property="og:image" content="https://img.shields.io/github/license/asdf2014/algorithm">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_comparison_computational_complexity.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_singly_linked_list.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_doubly_linked_list.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_circularly_linked_list.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_binary_search.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2019-05-01T13:38:08.000Z">
+<meta property="article:modified_time" content="2020-09-30T14:20:11.900Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/algorithm/algorithm_qq_group_5366753.svg">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/666/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Algorithm | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/666/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Algorithm
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-01 21:38:08" itemprop="dateCreated datePublished" datetime="2019-05-01T21:38:08+08:00">2019-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-30 22:20:11" itemprop="dateModified" datetime="2020-09-30T22:20:11+08:00">2020-09-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="LeetCode-组队刷题活动"><a href="#LeetCode-组队刷题活动" class="headerlink" title="LeetCode 组队刷题活动"></a>LeetCode 组队刷题活动</h2><div class="note primary">组队刷 LeetCode</div>
+
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h4 id="代码仓库"><a href="#代码仓库" class="headerlink" title="代码仓库"></a>代码仓库</h4><p>　代码仓库的坐标：<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm">asdf2014 / algorithm</a></strong></p>
+<h4 id="报名途径"><a href="#报名途径" class="headerlink" title="报名途径"></a>报名途径</h4><p>　只需要在《<a href="https://yuzhouwan.com/posts/666/">Algorithm</a>》文末留言，即可随时参与</p>
+<div class="note success">留言内容的话，至少要留一下自己的 Github 名称，方便我们这边统计汇总。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出</div>
+
+<h4 id="参与方式"><a href="#参与方式" class="headerlink" title="参与方式"></a>参与方式</h4><p>　每位参与的小伙伴，都会获得代码仓库的 Collaborator 权限，可以自由地提交代码（不限制语种）。在 <code>/Codes/${User}</code> 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/invitations">asdf2014 - algorithm - invitations</a> 链接中认领。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">"<span class="subst">$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="刷题频率"><a href="#刷题频率" class="headerlink" title="刷题频率"></a>刷题频率</h4><p>　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”</p>
+<h4 id="选题策略"><a href="#选题策略" class="headerlink" title="选题策略"></a>选题策略</h4><p>　分为两个阶段：</p>
+<ul>
+<li>前 100 题都是经典中的经典，所以我们第一阶段先将这些题目吃透</li>
+<li>第二阶段，通过程序进行<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nbviewer.jupyter.org/github/asdf2014/algorithm/blob/master/Picker/leetcode_picker.ipynb"><strong>随机选定</strong></a>，历史题库可以点击<a href="https://yuzhouwan.com/posts/666/#Index">链接</a>看到</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>　操作 Git 时遇到问题的话，可以参考我的一篇博客《<a href="https://yuzhouwan.com/posts/30041/">Git 高级玩法</a>》</p>
+<div class="note success">也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴</div>
+
+<p>　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="/picture/algorithm/algorithm_qq_group_5366753.svg" alt></a> 或者 Gitter 聊天室 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://gitter.im/yuzhouwan/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img data-src="/picture/algorithm/algorithm_gitter_community.svg" alt></a></p>
+<div class="note danger">但是，请不要在评论区讨论入群问题的答案，避免打广告的进入</div>
+
+<p>　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：</p>
+<div class="tabs" id="code"><ul class="nav-tabs"><li class="tab"><a href="#code-1">CODE 1</a></li><li class="tab"><a href="#code-2">CODE 2</a></li><li class="tab active"><a href="#code-3">CODE 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="code-1"><p><strong>迭代解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        n = n - <span class="number">1</span></span><br><span class="line">        sum_ = a + b</span><br><span class="line">        a = b</span><br><span class="line">        b = sum_</span><br><span class="line">    <span class="keyword">return</span> b</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane" id="code-2"><p><strong>递归解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> solution(n - <span class="number">1</span>) + solution(n - <span class="number">2</span>)</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane active" id="code-3"><p><strong>动态规划解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    cache = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, n + <span class="number">1</span>)]</span><br><span class="line">    cache[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        cache[i] = cache[i - <span class="number">1</span>] + cache[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> cache[n]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<a id="more"></a>
+<h3 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h3><p>　截止目前为止，活跃的小伙伴数量：<a href="https://yuzhouwan.com/posts/666/"><img data-src="https://img.shields.io/github/contributors/asdf2014/algorithm" alt></a>，使用到的语言种类：<a href="https://yuzhouwan.com/posts/666/"><img data-src="https://img.shields.io/github/languages/count/asdf2014/algorithm" alt></a>，代码提交频率：<a href="https://yuzhouwan.com/posts/666/"><img data-src="https://img.shields.io/github/commit-activity/m/asdf2014/algorithm?cacheSeconds=3600" alt></a>，开源许可证：<a href="https://yuzhouwan.com/posts/666/"><img data-src="https://img.shields.io/github/license/asdf2014/algorithm" alt></a></p>
+<h3 id="排行榜"><a href="#排行榜" class="headerlink" title="排行榜"></a>排行榜</h3><h4 id="完成题目最多的小伙伴"><a href="#完成题目最多的小伙伴" class="headerlink" title="完成题目最多的小伙伴"></a>完成题目最多的小伙伴</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">User</th>
+<th style="text-align:center">Completed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/gracekoo">gracekoo</a></strong></td>
+<td style="text-align:center">160</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/zsdostar">zsdostar</a></strong></td>
+<td style="text-align:center">54</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/gmywq392">gmywq392</a></strong></td>
+<td style="text-align:center">50</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/Liam">Liam</a></td>
+<td style="text-align:center">47</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/jxdeng3264">jxdeng3264</a></td>
+<td style="text-align:center">46</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/ZZhang">ZZhang</a></td>
+<td style="text-align:center">34</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/Buddy119">Buddy119</a></td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/lxycg">lxycg</a></td>
+<td style="text-align:center">29</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/asdf2014">asdf2014</a></td>
+<td style="text-align:center">29</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/mggger">mggger</a></td>
+<td style="text-align:center">14</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="最活跃的小伙伴"><a href="#最活跃的小伙伴" class="headerlink" title="最活跃的小伙伴"></a>最活跃的小伙伴</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">User</th>
+<th style="text-align:center">Latest Active Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/asdf2014">asdf2014</a></strong></td>
+<td style="text-align:center">2020-07-27 20:54:46</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/ZZhang">ZZhang</a></strong></td>
+<td style="text-align:center">2020-07-26 22:56:26</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/gracekoo">gracekoo</a></strong></td>
+<td style="text-align:center">2020-07-16 17:42:18</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/Buddy119">Buddy119</a></td>
+<td style="text-align:center">2020-06-07 23:26:47</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/gmywq392">gmywq392</a></td>
+<td style="text-align:center">2020-04-02 10:40:19</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/Liam">Liam</a></td>
+<td style="text-align:center">2020-03-13 13:31:26</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/lxycg">lxycg</a></td>
+<td style="text-align:center">2020-03-02 11:39:32</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/BoCai">BoCai</a></td>
+<td style="text-align:center">2020-02-17 23:06:11</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/yore">yore</a></td>
+<td style="text-align:center">2020-02-15 12:25:07</td>
+</tr>
+<tr>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/tree/master/Codes/zsdostar">zsdostar</a></td>
+<td style="text-align:center">2020-01-22 18:37:49</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note info">下文将总结归纳大家讨论交流的内容，不断地沉淀解题过程中思考的点滴</div>
+
+
+
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><p><img data-src="/picture/algorithm/algorithm_comparison_computational_complexity.svg" alt="Algorithm Complexity"></p>
+<center>（图片来源：<a href="https://zh.wikipedia.org/wiki/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>，已确认版权为 CC BY-SA 4.0 协议）</center>
+
+
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">运行时间</th>
+<th style="text-align:center">运行时间举例</th>
+<th style="text-align:center">算法举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">常数时间</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">判断一个二进制数的奇偶</td>
+</tr>
+<tr>
+<td style="text-align:center">反阿克曼时间</td>
+<td style="text-align:center">$O(\alpha (n))$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">并查集的单个操作的平摊时间</td>
+</tr>
+<tr>
+<td style="text-align:center">迭代对数时间</td>
+<td style="text-align:center">$O(\log ^{\ast}n)$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/图着色问题">分布式圆环着色问题</a></td>
+</tr>
+<tr>
+<td style="text-align:center">对数对数时间</td>
+<td style="text-align:center">$O(\log \log n)$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">有界优先队列的单个操作</td>
+</tr>
+<tr>
+<td style="text-align:center">对数时间</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">$\log n$，$\log n^{2}$</td>
+<td style="text-align:center">二分搜索</td>
+</tr>
+<tr>
+<td style="text-align:center">幂对数时间</td>
+<td style="text-align:center">$(\log n)^{O(1)}$</td>
+<td style="text-align:center">$(\log n)^{2}$</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">幂时间（小于 1 次）</td>
+<td style="text-align:center">$O(n^{c})$，$0&lt;c&lt;1$</td>
+<td style="text-align:center">$n^{\frac {1}{2}}$，$n^{\frac {2}{3}}$</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/K-d树">K-d 树</a>的搜索操作</td>
+</tr>
+<tr>
+<td style="text-align:center">线性时间</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$n$</td>
+<td style="text-align:center">无序数组的搜索</td>
+</tr>
+<tr>
+<td style="text-align:center">线性迭代对数时间</td>
+<td style="text-align:center">$O(n\log ^ {\ast}n)$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">莱姆德·赛德尔的三角分割多边形算法</td>
+</tr>
+<tr>
+<td style="text-align:center">线性对数时间</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$n\log n$</td>
+<td style="text-align:center">最快的比较排序</td>
+</tr>
+<tr>
+<td style="text-align:center">二次时间</td>
+<td style="text-align:center">$O(n^{2})$</td>
+<td style="text-align:center">$n^{2}$</td>
+<td style="text-align:center">冒泡排序、插入排序</td>
+</tr>
+<tr>
+<td style="text-align:center">三次时间</td>
+<td style="text-align:center">$O(n^{3})$</td>
+<td style="text-align:center">$n^{3}$</td>
+<td style="text-align:center">矩阵乘法的基本实现</td>
+</tr>
+<tr>
+<td style="text-align:center">多项式时间</td>
+<td style="text-align:center">$2^{O(\log n)}=n^{O(1)}$</td>
+<td style="text-align:center">$n$，$n\log n$，$n^{10}$</td>
+<td style="text-align:center">线性规划中的卡马卡算法，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/AKS質數測試">AKS 质数测试</a></td>
+</tr>
+<tr>
+<td style="text-align:center">准多项式时间</td>
+<td style="text-align:center">$2^{(\log n)^{O(1)}}$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">关于有向斯坦纳树问题最著名的 $O(\log ^{2}n)$ 近似算法</td>
+</tr>
+<tr>
+<td style="text-align:center">次指数时间（第一定义）</td>
+<td style="text-align:center">$O(2^{n^{\epsilon }})$，ε &gt; 0</td>
+<td style="text-align:center">$O(2^{(\log n)^{\log \log n}})$</td>
+<td style="text-align:center">假设复杂性理论推测，BPP 包含在 SUBEXP 中</td>
+</tr>
+<tr>
+<td style="text-align:center">次指数时间（第二定义）</td>
+<td style="text-align:center">$2^{o(n)}$</td>
+<td style="text-align:center">$2^{n^{\frac1{3}}}$</td>
+<td style="text-align:center">用于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/整数分解">整数分解</a>与图形同构问题的著名算法</td>
+</tr>
+<tr>
+<td style="text-align:center">指数时间</td>
+<td style="text-align:center">$2^{O(n)}$</td>
+<td style="text-align:center">$1.1^n$，$10^n$</td>
+<td style="text-align:center">使用动态规划解决<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/旅行推销员问题">旅行推销员问题</a></td>
+</tr>
+<tr>
+<td style="text-align:center">阶乘时间</td>
+<td style="text-align:center">$O(O!)$</td>
+<td style="text-align:center">$n!$</td>
+<td style="text-align:center">通过暴力搜索解决旅行推销员问题</td>
+</tr>
+<tr>
+<td style="text-align:center">指数时间</td>
+<td style="text-align:center">$2^{poly(n)}$</td>
+<td style="text-align:center">$2^n, 2^{n^2}$</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">双重指数时间</td>
+<td style="text-align:center">$2^{2^{poly(n)}}$</td>
+<td style="text-align:center">$2^{2^n}$</td>
+<td style="text-align:center">在预膨胀算术中决定一个给定描述的真实性</td>
+</tr>
+</tbody>
+</table>
+</div>
+<center>（表格来源：<a href="https://zh.wikipedia.org/wiki/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>）</center>
+
+
+
+
+
+<h2 id="经典算法"><a href="#经典算法" class="headerlink" title="经典算法"></a>经典算法</h2><h3 id="String-Matching"><a href="#String-Matching" class="headerlink" title="String Matching"></a>String Matching</h3><h4 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h4><h5 id="朴素算法（Naive-Algorithm）"><a href="#朴素算法（Naive-Algorithm）" class="headerlink" title="朴素算法（Naive Algorithm）"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/gaochundong/p/string_matching.html">朴素算法（Naive Algorithm）</a></h5><h5 id="Rabin-Karp-算法"><a href="#Rabin-Karp-算法" class="headerlink" title="Rabin-Karp 算法"></a>Rabin-Karp 算法</h5><h5 id="有限自动机算法（Finite-Automation）"><a href="#有限自动机算法（Finite-Automation）" class="headerlink" title="有限自动机算法（Finite Automation）"></a>有限自动机算法（Finite Automation）</h5><h5 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h5><p>　KMP，<a target="_blank" rel="external nofollow noopener noreferrer" href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm"><strong>K</strong>nuth-<strong>M</strong>orris-<strong>P</strong>ratt</a> 匹配<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">算法</a></p>
+<h5 id="Boyer-Moore-算法"><a href="#Boyer-Moore-算法" class="headerlink" title="Boyer-Moore 算法"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/gaochundong/p/boyer_moore_string_matching_algorithm.html">Boyer-Moore 算法</a></h5><h5 id="Simon-算法"><a href="#Simon-算法" class="headerlink" title="Simon 算法"></a>Simon 算法</h5><h5 id="Colussi-算法"><a href="#Colussi-算法" class="headerlink" title="Colussi 算法"></a>Colussi 算法</h5><h5 id="Galil-Giancarlo-算法"><a href="#Galil-Giancarlo-算法" class="headerlink" title="Galil-Giancarlo 算法"></a>Galil-Giancarlo 算法</h5><h5 id="Apostolico-Crochemore-算法"><a href="#Apostolico-Crochemore-算法" class="headerlink" title="Apostolico-Crochemore 算法"></a>Apostolico-Crochemore 算法</h5><h5 id="Horspool-算法"><a href="#Horspool-算法" class="headerlink" title="Horspool 算法"></a>Horspool 算法</h5><h5 id="Sunday-算法"><a href="#Sunday-算法" class="headerlink" title="Sunday 算法"></a>Sunday 算法</h5><h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><h5 id="string-to-integer-atoi"><a href="#string-to-integer-atoi" class="headerlink" title="string-to-integer-atoi"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/string-to-integer-atoi/submissions/">string-to-integer-atoi</a></h5><div class="tabs" id="code8"><ul class="nav-tabs"><li class="tab active"><a href="#code8-1">CODE8 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code8-1"><p><strong>正则匹配解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">patten = <span class="string">'^(([+|-]\\d+)|\\d+)'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">string_to_integer_atoi</span>(<span class="params">s</span>):</span></span><br><span class="line">    match = re.search(patten, s.strip())</span><br><span class="line">    res = int(match.group()) <span class="keyword">if</span> match <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> max(min(res, <span class="number">2</span> ** <span class="number">31</span> - <span class="number">1</span>), <span class="number">-2</span> ** <span class="number">31</span>)</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="letter-combinations-of-a-phone-number"><a href="#letter-combinations-of-a-phone-number" class="headerlink" title="letter-combinations-of-a-phone-number"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">letter-combinations-of-a-phone-number</a></h5><div class="tabs" id="code17"><ul class="nav-tabs"><li class="tab active"><a href="#code17-1">CODE17 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code17-1"><p><strong>算术解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">chars = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>, <span class="string">"g"</span>, <span class="string">"h"</span>, <span class="string">"i"</span>, <span class="string">"j"</span>, <span class="string">"k"</span>, <span class="string">"l"</span>, <span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"o"</span>, <span class="string">"p"</span>, <span class="string">"q"</span>, <span class="string">"r"</span>, <span class="string">"s"</span>, <span class="string">"t"</span>, <span class="string">"u"</span>, <span class="string">"v"</span>, <span class="string">"w"</span>, <span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span> ]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">letter_combinations_of_a_phone_number</span>(<span class="params">digits</span>):</span></span><br><span class="line">    <span class="keyword">if</span> len(digits) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">if</span> len(digits) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> letters(digits[<span class="number">0</span>])]</span><br><span class="line">    previous = letter_combinations_of_a_phone_number(digits[:<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> [i + j <span class="keyword">for</span> i <span class="keyword">in</span> previous <span class="keyword">for</span> j <span class="keyword">in</span> letters(digits[<span class="number">-1</span>])]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">letters</span>(<span class="params">n</span>):</span></span><br><span class="line">    n = int(n)</span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">1</span> <span class="keyword">or</span> n &gt; <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">elif</span> n &lt;= <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">return</span> chars[(n - <span class="number">2</span>) * <span class="number">3</span> : (n - <span class="number">1</span>) * <span class="number">3</span>]</span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">7</span>:</span><br><span class="line">        <span class="keyword">return</span> chars[<span class="number">15</span>:<span class="number">19</span>]</span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">return</span> chars[<span class="number">19</span>:<span class="number">22</span>]</span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> chars[<span class="number">22</span>:<span class="number">26</span>]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="valid-parentheses"><a href="#valid-parentheses" class="headerlink" title="valid-parentheses"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/valid-parentheses/">valid-parentheses</a></h5><div class="tabs" id="code20"><ul class="nav-tabs"><li class="tab active"><a href="#code20-1">CODE20 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code20-1"><p><strong>堆栈解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">valid_parentheses</span>(<span class="params">s: str</span>) -&gt; bool:</span></span><br><span class="line">    <span class="keyword">if</span> len(s) == <span class="number">0</span> <span class="keyword">or</span> len(s) % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> revert_pairs.values():</span><br><span class="line">            stack.append(c)</span><br><span class="line">        <span class="keyword">elif</span> c <span class="keyword">in</span> revert_pairs:</span><br><span class="line">            <span class="keyword">if</span> len(stack) == <span class="number">0</span> <span class="keyword">or</span> stack.pop() <span class="keyword">is</span> <span class="keyword">not</span> revert_pairs[c]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> len(stack) == <span class="number">0</span></span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="zigzag-conversion"><a href="#zigzag-conversion" class="headerlink" title="zigzag-conversion"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/zigzag-conversion/">zigzag-conversion</a></h5><div class="tabs" id="code6"><ul class="nav-tabs"><li class="tab"><a href="#code6-1">CODE6 1</a></li><li class="tab active"><a href="#code6-2">CODE6 2</a></li></ul><div class="tab-content"><div class="tab-pane" id="code6-1"><p><strong>纯数学解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zigzag_conversion</span>(<span class="params">s, num_rows</span>):</span></span><br><span class="line">    s_len = len(s)</span><br><span class="line">    <span class="keyword">if</span> s_len == <span class="number">0</span> <span class="keyword">or</span> num_rows &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">    <span class="keyword">if</span> s_len &lt; <span class="number">3</span> <span class="keyword">or</span> num_rows == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    middle_num = num_rows - <span class="number">2</span></span><br><span class="line">    cycle_num = num_rows + middle_num</span><br><span class="line">    remain = s_len % cycle_num</span><br><span class="line">    x_total = (s_len // cycle_num) * (middle_num + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> &lt; remain &lt;= num_rows:</span><br><span class="line">        x_total += <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> remain &gt; num_rows:</span><br><span class="line">        x_total += remain - num_rows + <span class="number">1</span></span><br><span class="line">    arr = [[<span class="string">""</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(x_total)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(num_rows)]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        cycle_times = count // cycle_num</span><br><span class="line">        remain = count % cycle_num</span><br><span class="line">        <span class="keyword">if</span> remain &lt; num_rows:</span><br><span class="line">            arr[remain][cycle_times * (middle_num + <span class="number">1</span>)] = c</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            arr[num_rows - (remain - (num_rows - <span class="number">1</span>)) - <span class="number">1</span>][ cycle_times * (middle_num + <span class="number">1</span>) + remain - num_rows + <span class="number">1</span> ] = c</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(str(x) <span class="keyword">for</span> inner_arr <span class="keyword">in</span> arr <span class="keyword">for</span> x <span class="keyword">in</span> inner_arr)</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane active" id="code6-2"><p><strong>爬格子解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zigzag_conversion</span>(<span class="params">s, num_rows</span>):</span></span><br><span class="line">    <span class="keyword">if</span> num_rows == <span class="number">1</span> <span class="keyword">or</span> num_rows &gt;= len(s):</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    res = [<span class="string">""</span>] * num_rows</span><br><span class="line">    index, step = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        res[index] += c</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">0</span>:</span><br><span class="line">            step = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> index == num_rows - <span class="number">1</span>:</span><br><span class="line">            step = <span class="number">-1</span></span><br><span class="line">        index += step</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(res)</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><h5 id="Book"><a href="#Book" class="headerlink" title="Book"></a>Book</h5><ul>
+<li>《<a target="_blank" rel="external nofollow noopener noreferrer" href="https://book.douban.com/subject/2038862/">柔性字符串匹配</a>》</li>
+</ul>
+<h3 id="Sorting-Algorithm"><a href="#Sorting-Algorithm" class="headerlink" title="Sorting Algorithm"></a>Sorting Algorithm</h3><h4 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">wikipedia 排序算法</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/tag/sort/">Leetcode Sort</a></li>
+</ul>
+<h3 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>　<strong>动态规划</strong>（<strong>DP</strong>，<strong>D</strong>ynamic <strong>P</strong>rogramming），是一种通过把原问题分解为相对简单的子问题，以求解复杂问题的方法</p>
+<h4 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h4><h5 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h5><p>　用来描述该问题的子问题的解</p>
+<h5 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h5><p>　状态和状态之间的关系式</p>
+<p>　例如，可以将斐波那契数列表示为：</p>
+<script type="math/tex; mode=display">
+f(x) = 
+\begin{cases}
+0, x = 0 \\
+1, x = 1 \\
+f(x - 1) + f(x - 2), x \ge 2, x \in N
+\end{cases}</script><h5 id="递推"><a href="#递推" class="headerlink" title="递推"></a>递推</h5><p>　每个阶段只有一个状态</p>
+<h5 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h5><p>　每个阶段的最优状态，都是由上一个阶段的最优状态得到的</p>
+<h5 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h5><p>　每个阶段的最优状态，是由之前所有阶段的状态的组合得到的</p>
+<h5 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h5><p>　每个阶段的最优状态，可以从之前<strong>某个阶段</strong>的某个或某些状态<strong>直接得到</strong>，而<strong>不管</strong>之前这个状态是<strong>如何得到的</strong></p>
+<h5 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h5><p>　每个阶段的最优状态，可以从之前某个阶段的某个或某些状态直接得到</p>
+<h5 id="无后效性"><a href="#无后效性" class="headerlink" title="无后效性"></a>无后效性</h5><p>　不管之前这个状态是如何得到的</p>
+<h4 id="实战-1"><a href="#实战-1" class="headerlink" title="实战"></a>实战</h4><h5 id="longest-palindromic-substring"><a href="#longest-palindromic-substring" class="headerlink" title="longest-palindromic-substring"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/longest-palindromic-substring/">longest-palindromic-substring</a></h5><div class="tabs" id="code5"><ul class="nav-tabs"><li class="tab active"><a href="#code5-1">CODE5 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code5-1"><p><strong>S(n) = $O(1)$ 解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">longest_palindromic_substring</span>(<span class="params">s</span>):</span></span><br><span class="line">    res = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        odd = find(s, i, i)</span><br><span class="line">        even = find(s, i, i + <span class="number">1</span>)</span><br><span class="line">        res = max(res, odd, even, key=len)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">s, left, right</span>):</span></span><br><span class="line">    <span class="keyword">while</span> left &gt;= <span class="number">0</span> <span class="keyword">and</span> right &lt; len(s) <span class="keyword">and</span> s[left] == s[right]:</span><br><span class="line">        left -= <span class="number">1</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> s[left + <span class="number">1</span>:right]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="regular-expression-matching"><a href="#regular-expression-matching" class="headerlink" title="regular-expression-matching"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/regular-expression-matching/">regular-expression-matching</a></h5><div class="tabs" id="code10"><ul class="nav-tabs"><li class="tab active"><a href="#code10-1">CODE10 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code10-1"><p><strong>动态规划解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">regular_expression_matching</span>(<span class="params">s, p</span>):</span></span><br><span class="line">    dp = [[<span class="literal">False</span>] * (len(s) + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(p) + <span class="number">1</span>)]</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(p)):</span><br><span class="line">        dp[i + <span class="number">1</span>][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] <span class="keyword">and</span> p[i] == <span class="string">"*"</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(p)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">if</span> p[i] == <span class="string">"*"</span>:</span><br><span class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i - <span class="number">1</span>][j + <span class="number">1</span>] <span class="keyword">or</span> dp[i][j + <span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> p[i - <span class="number">1</span>] == s[j] <span class="keyword">or</span> p[i - <span class="number">1</span>] == <span class="string">"."</span>:</span><br><span class="line">                    dp[i + <span class="number">1</span>][j + <span class="number">1</span>] |= dp[i + <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i][j] <span class="keyword">and</span> (p[i] == s[j] <span class="keyword">or</span> p[i] == <span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="generate-parentheses"><a href="#generate-parentheses" class="headerlink" title="generate-parentheses"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/generate-parentheses/">generate-parentheses</a></h5><div class="tabs" id="code22"><ul class="nav-tabs"><li class="tab active"><a href="#code22-1">CODE22 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code22-1"><p><strong>动态规划解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_parentheses</span>(<span class="params">n: int</span>) -&gt; [str]:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    res = [[<span class="literal">None</span>], [<span class="string">"()"</span>]]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        tmp = []</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">            tmp1 = res[j]</span><br><span class="line">            tmp2 = res[i - j - <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">for</span> t1 <span class="keyword">in</span> tmp1:</span><br><span class="line">                <span class="keyword">for</span> t2 <span class="keyword">in</span> tmp2:</span><br><span class="line">                    <span class="keyword">if</span> t1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                        t1 = <span class="string">""</span></span><br><span class="line">                    <span class="keyword">if</span> t2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                        t2 = <span class="string">""</span></span><br><span class="line">                    tmp.append(<span class="string">"("</span> + t1 + <span class="string">")"</span> + t2)</span><br><span class="line">        res.append(tmp)</span><br><span class="line">    <span class="keyword">return</span> res[n]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h4 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">wikipedia 动态规划</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/23995189">什么是动态规划？动态规划的意义是什么？</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/tag/dynamic-programming/">Leetcode Dynamic Programming</a></li>
+</ul>
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><h4 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h4><h5 id="开放式寻址"><a href="#开放式寻址" class="headerlink" title="开放式寻址"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Open_addressing">开放式寻址</a></h5><ul>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B">线性探测</a>法</p>
+<p>从发生冲突的地址起，依次判断下一个地址是否为空，直到碰到空闲的地址</p>
+</li>
+<li><p>直接定址法</p>
+<p>取关键字 $k$ 或者 $k$ 的某个线性函数值（$a \cdot k + b$）作为哈希地址</p>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Quadratic_probing">二次探测</a>法</p>
+<p>以关键字 $k$ 或者 $k$ 加上某个常数的平方（$k + 1^2$、$k + 2^2$、$k + 3^2$ $\dots$）作为哈希地址</p>
+</li>
+<li><p>伪随机数法</p>
+<p>采用一个伪随机数当作哈希函数</p>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Double_hashing">双重哈希</a>法</p>
+<p>双重哈希是用于开放寻址最好的方法之一，散列函数如下：</p>
+<script type="math/tex; mode=display">h(i, k)=(h_1(k)+i \cdot h_2(k)) \mod \vert T \vert</script><p>为了能查找整个散列表，值 $h_2(k)$ 需要与表的大小 $T$ 互质。为确保这一条件成立，可采用以下两种方法</p>
+<ul>
+<li>取 $T$ 为 2 的幂，并设计一个总产生奇数的 $h_2$</li>
+<li>取 $T$ 为质数，并设计一个总是产生较 $T$ 小的正整数的 $h_2$</li>
+</ul>
+</li>
+</ul>
+<h5 id="关键字分析"><a href="#关键字分析" class="headerlink" title="关键字分析"></a>关键字分析</h5><ul>
+<li><p>数字分析法</p>
+<p>提取关键字中，取值比较均匀的数字作为哈希地址</p>
+</li>
+<li><p>平方取中法</p>
+<p>如果关键字各个部分的分布都不均匀的话，可以先求出它的平方值，然后按照需求取中间的几位作为哈希地址</p>
+</li>
+<li><p>分段叠加法</p>
+<p>按照哈希表地址位数将关键字分成位数相等的几部分，其中最后一部分可以比较短。然后将这几部分相加，舍弃最高进位后的结果，即可作为该关键字的哈希地址</p>
+</li>
+</ul>
+<h5 id="冲突转移"><a href="#冲突转移" class="headerlink" title="冲突转移"></a>冲突转移</h5><ul>
+<li><p>拉链法</p>
+<p>拉链法，又称链接地址法，是将哈希值相同的元素构成一个同义词的单链表</p>
+</li>
+<li><p>公共溢出区</p>
+<p>将哈希表分为公共区和溢出区，当发生溢出时，将所有溢出数据统一写入到溢出区</p>
+</li>
+</ul>
+<h4 id="实战-2"><a href="#实战-2" class="headerlink" title="实战"></a>实战</h4><h5 id="two-sum"><a href="#two-sum" class="headerlink" title="two-sum"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/two-sum/">two-sum</a></h5><div class="tabs" id="code1"><ul class="nav-tabs"><li class="tab active"><a href="#code1-1">CODE1 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code1-1"><p><strong>T(n) = S(n) = $O(n)$ 解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_sum</span>(<span class="params">nums, target</span>):</span></span><br><span class="line">    nums_len = len(nums)</span><br><span class="line">    <span class="keyword">if</span> nums_len &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    cache = {}</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(nums_len):</span><br><span class="line">        n = nums[i]</span><br><span class="line">        <span class="keyword">if</span> n <span class="keyword">in</span> cache:</span><br><span class="line">            <span class="keyword">return</span> [cache[n], i]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cache[target - n] = i</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h4 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://cyan4973.github.io/xxHash/">xxHash: an extremely fast non-cryptographic hash algorithm, working at speeds close to RAM limits</a></li>
+</ul>
+<h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h3><h4 id="种类-1"><a href="#种类-1" class="headerlink" title="种类"></a>种类</h4><h5 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h5><p><img data-src="/picture/algorithm/algorithm_singly_linked_list.svg" alt="单向链表"></p>
+<center>（图片来源：<a href="https://en.wikipedia.org/wiki/File:Singly-linked-list.svg" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>，已确认无版权）</center>
+
+<h6 id="快慢指针法"><a href="#快慢指针法" class="headerlink" title="快慢指针法"></a>快慢指针法</h6><p>　该方法常用于解决查找单向链表的中点、判断链表是否存在环等问题。大体思路便是，设计一快一慢两个指针，记做 <code>fast</code> 和 <code>slow</code>。同时，控制 <code>fast</code> 的速度是 <code>slow</code> 的两倍（如，<code>fast = fast.next.next; slow = slow.next</code>）。这样，可以保证当 <code>fast</code> 到达链表尾部的时候，<code>slow</code> 刚好在链表中间</p>
+<h5 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h5><p><img data-src="/picture/algorithm/algorithm_doubly_linked_list.svg" alt="双向链表"></p>
+<center>（图片来源：<a href="https://en.wikipedia.org/wiki/File:Doubly-linked-list.svg" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>，已确认无版权）</center>
+
+<h5 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h5><p><img data-src="/picture/algorithm/algorithm_circularly_linked_list.svg" alt="循环链表"></p>
+<center>（图片来源：<a href="https://en.wikipedia.org/wiki/File:Circularly-linked-list.svg" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>，已确认无版权）</center>
+
+<h4 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Linked list</th>
+<th style="text-align:center">Array</th>
+<th style="text-align:center">Dynamic array</th>
+<th style="text-align:center">Balanced tree</th>
+<th style="text-align:center">Random access list</th>
+<th>Hashed array tree</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Indexing</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Insert/delete at beginning</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center"><code>N/A</code></td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Insert/delete at end</td>
+<td style="text-align:center">$O(1)$ when last element is known;<br>$O(n)$ when last element is unknown</td>
+<td style="text-align:center"><code>N/A</code></td>
+<td style="text-align:center">$O(1)$ <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Amortized_analysis">amortized</a></td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">$O(\log n)$ updating</td>
+<td>$O(1)$ <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Amortized_analysis">amortized</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Insert/delete in middle</td>
+<td style="text-align:center">search time + $O(1)$</td>
+<td style="text-align:center"><code>N/A</code></td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">$O(\log n)$ updating</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Wasted space (average)</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td>$O(\sqrt{n})$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<center>（表格来源：<a href="https://en.wikipedia.org/wiki/Linked_list" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>）</center>
+
+
+
+<h4 id="实战-3"><a href="#实战-3" class="headerlink" title="实战"></a>实战</h4><h5 id="add-two-numbers"><a href="#add-two-numbers" class="headerlink" title="add-two-numbers"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/add-two-numbers/">add-two-numbers</a></h5><div class="tabs" id="code2"><ul class="nav-tabs"><li class="tab active"><a href="#code2-1">CODE2 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code2-1"><p><strong>T(n) = $O(n)$ 解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_two_numbers</span>(<span class="params">left, right</span>):</span></span><br><span class="line">    carry = <span class="number">0</span></span><br><span class="line">    tmp = ListNode(<span class="number">0</span>)</span><br><span class="line">    root = tmp</span><br><span class="line">    <span class="keyword">while</span> left <span class="keyword">or</span> right:</span><br><span class="line">        total = carry + left.val + right.val</span><br><span class="line">        left = left.next</span><br><span class="line">        right = right.next</span><br><span class="line">        carry = total // <span class="number">10</span></span><br><span class="line">        tmp.next = ListNode(total % <span class="number">10</span>)</span><br><span class="line">        tmp = tmp.next</span><br><span class="line">    <span class="keyword">return</span> root.next</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="remove-nth-node-from-end-of-list"><a href="#remove-nth-node-from-end-of-list" class="headerlink" title="remove-nth-node-from-end-of-list"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/">remove-nth-node-from-end-of-list</a></h5><div class="tabs" id="code19"><ul class="nav-tabs"><li class="tab active"><a href="#code19-1">CODE19 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code19-1"><p><strong>遍历解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove_nth_node_from_end_of_list</span>(<span class="params">head: ListNode, n: int</span>) -&gt; ListNode:</span></span><br><span class="line">    tmp = head</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> tmp:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        tmp = tmp.next</span><br><span class="line">    n = count + <span class="number">1</span> - n</span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">is</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> head.next</span><br><span class="line">    tmp = head</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n - <span class="number">2</span>):</span><br><span class="line">        tmp = tmp.next</span><br><span class="line">    tmp.next = tmp.next.next</span><br><span class="line">    <span class="keyword">return</span> head</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="merge-two-sorted-lists"><a href="#merge-two-sorted-lists" class="headerlink" title="merge-two-sorted-lists"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/merge-two-sorted-lists/">merge-two-sorted-lists</a></h5><div class="tabs" id="code21"><ul class="nav-tabs"><li class="tab active"><a href="#code21-1">CODE21 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code21-1"><p><strong>遍历解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_two_sorted_lists</span>(<span class="params">l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    root = tmp = ListNode(<span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">or</span> l2 <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">if</span> l2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            tmp.next = l1</span><br><span class="line">            l1 = l1.next</span><br><span class="line">        <span class="keyword">elif</span> l1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            tmp.next = l2</span><br><span class="line">            l2 = l2.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> l1.val &lt; l2.val:</span><br><span class="line">                tmp.next = l1</span><br><span class="line">                l1 = l1.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tmp.next = l2</span><br><span class="line">                l2 = l2.next</span><br><span class="line">        tmp = tmp.next</span><br><span class="line">    <span class="keyword">return</span> root.next</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h3 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h3><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>　滑动窗口算法，主要用于解决数组或者字符串的子元素问题。它可以将嵌套的循环问题，转换为单循环问题，从而降低时间复杂度</p>
+<h4 id="实战-4"><a href="#实战-4" class="headerlink" title="实战"></a>实战</h4><h5 id="longest-substring-without-repeating-characters"><a href="#longest-substring-without-repeating-characters" class="headerlink" title="longest-substring-without-repeating-characters"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">longest-substring-without-repeating-characters</a></h5><div class="tabs" id="code3"><ul class="nav-tabs"><li class="tab active"><a href="#code3-1">CODE3 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code3-1"><p><strong>T(n) = S(n) = $O(n)$ 解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">longest_substring_without_repeating_characters</span>(<span class="params">s</span>):</span></span><br><span class="line">    begin = <span class="number">0</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    cache = {}</span><br><span class="line">    <span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(s):</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> cache <span class="keyword">and</span> begin &lt;= cache[c]:</span><br><span class="line">            begin = cache[c] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = max(res, i - begin + <span class="number">1</span>)</span><br><span class="line">        cache[c] = i</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><h4 id="实战-5"><a href="#实战-5" class="headerlink" title="实战"></a>实战</h4><h5 id="reverse-integer"><a href="#reverse-integer" class="headerlink" title="reverse-integer"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/reverse-integer/">reverse-integer</a></h5><div class="tabs" id="code7"><ul class="nav-tabs"><li class="tab active"><a href="#code7-1">CODE7 1</a></li><li class="tab"><a href="#code7-2">CODE7 2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code7-1"><p><strong>纯数学的方式</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_integer</span>(<span class="params">x</span>):</span></span><br><span class="line">    sign = (x &gt; <span class="number">0</span>) - (x &lt; <span class="number">0</span>)</span><br><span class="line">    x *= sign</span><br><span class="line">    size = len(str(x))</span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, size + <span class="number">1</span>):</span><br><span class="line">        remaining = x % <span class="number">10</span></span><br><span class="line">        refactor = <span class="number">10</span> ** (size - i)</span><br><span class="line">        res += remaining * refactor</span><br><span class="line">        x //= <span class="number">10</span></span><br><span class="line">    <span class="keyword">if</span> res &gt; <span class="number">2</span> ** <span class="number">31</span> - <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> sign * res</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane" id="code7-2"><p><strong>字符串切片</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_integer</span>(<span class="params">x</span>):</span></span><br><span class="line">    sign = (x &gt; <span class="number">0</span>) - (x &lt; <span class="number">0</span>)</span><br><span class="line">    res = int(str(x * sign)[::<span class="number">-1</span>])</span><br><span class="line">    <span class="keyword">return</span> sign * res * (res &lt; <span class="number">2</span> ** <span class="number">31</span>)</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="palindrome-number"><a href="#palindrome-number" class="headerlink" title="palindrome-number"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/palindrome-number/">palindrome-number</a></h5><div class="tabs" id="code9"><ul class="nav-tabs"><li class="tab"><a href="#code9-1">CODE9 1</a></li><li class="tab active"><a href="#code9-2">CODE9 2</a></li></ul><div class="tab-content"><div class="tab-pane" id="code9-1"><p><strong>纯数学的方式</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">palindrome_number</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">elif</span> x == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    h, rev = x, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> h:</span><br><span class="line">        rev = rev * <span class="number">10</span> + h % <span class="number">10</span></span><br><span class="line">        h //= <span class="number">10</span></span><br><span class="line">    <span class="keyword">return</span> rev == x</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane active" id="code9-2"><p><strong>字符串反转</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">palindrome_number</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x == <span class="number">0</span> <span class="keyword">or</span> (x &gt; <span class="number">0</span>) <span class="keyword">and</span> int(str(x)[::<span class="number">-1</span>]) == x</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="roman-to-integer"><a href="#roman-to-integer" class="headerlink" title="roman-to-integer"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/roman-to-integer/">roman-to-integer</a></h5><div class="tabs" id="code13"><ul class="nav-tabs"><li class="tab active"><a href="#code13-1">CODE13 1</a></li><li class="tab"><a href="#code13-2">CODE13 2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code13-1"><p><strong>纯数学的方式</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">d = {<span class="string">"I"</span>: <span class="number">1</span>, <span class="string">"V"</span>: <span class="number">5</span>, <span class="string">"X"</span>: <span class="number">10</span>, <span class="string">"L"</span>: <span class="number">50</span>, <span class="string">"C"</span>: <span class="number">100</span>, <span class="string">"D"</span>: <span class="number">500</span>, <span class="string">"M"</span>: <span class="number">1000</span>}</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">roman_to_integer</span>(<span class="params">s</span>):</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    high = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> reversed(s):</span><br><span class="line">        now = d[c]</span><br><span class="line">        <span class="keyword">if</span> now &lt; high:</span><br><span class="line">            res -= now</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res += now</span><br><span class="line">        high = max(high, now)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane" id="code13-2"><p><strong>字符串替换</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d = {<span class="string">"I"</span>: <span class="number">1</span>, <span class="string">"V"</span>: <span class="number">5</span>, <span class="string">"X"</span>: <span class="number">10</span>, <span class="string">"L"</span>: <span class="number">50</span>, <span class="string">"C"</span>: <span class="number">100</span>, <span class="string">"D"</span>: <span class="number">500</span>, <span class="string">"M"</span>: <span class="number">1000</span>}</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">roman_to_integer</span>(<span class="params">s</span>):</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    s = s.replace(<span class="string">"IV"</span>, <span class="string">"IIII"</span>).replace(<span class="string">"IX"</span>, <span class="string">"VIIII"</span>)</span><br><span class="line">    s = s.replace(<span class="string">"XL"</span>, <span class="string">"XXXX"</span>).replace(<span class="string">"XC"</span>, <span class="string">"LXXXX"</span>)</span><br><span class="line">    s = s.replace(<span class="string">"CD"</span>, <span class="string">"CCCC"</span>).replace(<span class="string">"CM"</span>, <span class="string">"DCCCC"</span>)</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        res += d[c]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h5 id="3sum"><a href="#3sum" class="headerlink" title="3sum"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/3sum/">3sum</a></h5><div class="tabs" id="code15"><ul class="nav-tabs"><li class="tab active"><a href="#code15-1">CODE15 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code15-1"><p><strong>基于 2sum 的思路</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum3</span>(<span class="params">nums</span>):</span></span><br><span class="line">    <span class="keyword">if</span> len(nums) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    nums.sort()</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> enumerate(nums[:<span class="number">-2</span>]):</span><br><span class="line">        <span class="keyword">if</span> k &gt;= <span class="number">1</span> <span class="keyword">and</span> v == nums[k - <span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        cache = {}</span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums[k + <span class="number">1</span>:]:</span><br><span class="line">            <span class="keyword">if</span> n <span class="keyword">not</span> <span class="keyword">in</span> cache:</span><br><span class="line">                cache[-v - n] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tmp = [v, -v - n, n]</span><br><span class="line">                <span class="keyword">if</span> tmp <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">                    res += [tmp]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h2 id="预测算法"><a href="#预测算法" class="headerlink" title="预测算法"></a>预测算法</h2><h3 id="简易平均法"><a href="#简易平均法" class="headerlink" title="简易平均法"></a>简易平均法</h3><h4 id="算术平均值"><a href="#算术平均值" class="headerlink" title="算术平均值"></a>算术平均值</h4><h4 id="加权平均值"><a href="#加权平均值" class="headerlink" title="加权平均值"></a>加权平均值</h4><script type="math/tex; mode=display">\frac{\sum^{n}_{i = 1}w_ix_i}{\sum^{n}_{i = 1}w_i}</script><h3 id="移动平均法"><a href="#移动平均法" class="headerlink" title="移动平均法"></a>移动平均法</h3><h3 id="指数平滑法"><a href="#指数平滑法" class="headerlink" title="指数平滑法"></a>指数平滑法</h3><h4 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://westerly-lzh.github.io/cn/2014/05/Exponential-Smoothing/">指数平滑</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-movavg-aggregation.html#%20_holt_winters">ElasticSearch Holt-Winters</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://tech.meituan.com/order-holtwinter.html">外卖订单量预测异常报警模型实践</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/u010665216/article/details/78051192">Holt-Winters 模型原理分析及代码实现（python）</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/kemaswill/archive/2013/04/01/2993583.html">时间序列挖掘 - 预测算法 - 三次指数平滑法（Holt-Winters）</a></li>
+</ul>
+<h3 id="线性回归法"><a href="#线性回归法" class="headerlink" title="线性回归法"></a>线性回归法</h3><h2 id="分类算法"><a href="#分类算法" class="headerlink" title="分类算法"></a>分类算法</h2><h3 id="贝叶斯（Bayes）"><a href="#贝叶斯（Bayes）" class="headerlink" title="贝叶斯（Bayes）"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86">贝叶斯（Bayes）</a></h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><script type="math/tex; mode=display">P(B \mid A) = \frac{P(B)\,P(A \mid B)}{P(A)}</script><p>　其中，$P(A \mid B)$ 是在 $B$ 发生的情况下 $A$ 发生的可能性，称为 $A$ 的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87">后验概率</a>。相应的，$P(B \mid A)$ 则称为 $B$ 后验概率；$P(A)$ 是不考虑任何 $B$ 方面的因素下 $A$ 发生的可能性，称为 $A$ 的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%85%88%E9%AA%8C%E6%A6%82%E7%8E%87">先验概率</a>（或<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87">边缘概率</a>）。相应的，$P(B)$ 则称为 $B$ 的先验概率</p>
+<h4 id="种类-2"><a href="#种类-2" class="headerlink" title="种类"></a>种类</h4><h5 id="特征独立性"><a href="#特征独立性" class="headerlink" title="特征独立性"></a>特征独立性</h5><p>　按照特征之间<strong>独立性</strong>的强弱，可以分为 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/25097242">朴素贝叶斯</a>、半朴素贝叶斯、（一般的）贝叶斯 等</p>
+<h5 id="分布情况"><a href="#分布情况" class="headerlink" title="分布情况"></a>分布情况</h5><p>　按照属性和特征的<strong>分布</strong>情况，又可以分为 高斯贝叶斯、多项式贝叶斯、伯努利贝叶斯 等</p>
+<h5 id="离散程度"><a href="#离散程度" class="headerlink" title="离散程度"></a>离散程度</h5><p>　按照训练集的<strong>离散</strong>程度，还可以分为 离散型贝叶斯、连续型贝叶斯、混合型贝叶斯 等</p>
+<h4 id="编码实战"><a href="#编码实战" class="headerlink" title="编码实战"></a>编码实战</h4><p>　The set <code>A</code> contains 30 <code>a</code> and 10 <code>b</code>, and the set <code>B</code> contains 20 <code>a</code> and 20 <code>b</code>, then what is the value of <code>P(A|a)</code>?</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">situations = dict()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">priori_probability</span>(<span class="params">situation, probability</span>):</span></span><br><span class="line">    situations[situation] = probability  <span class="comment"># P(A), P(B)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">posterior_probability</span>(<span class="params">situation, probability</span>):</span></span><br><span class="line">    old_prob = situations[situation]</span><br><span class="line">    situations[situation] = old_prob * probability  <span class="comment"># P(A)P(a|A), P(B)P(a|B)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span>():</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> situation <span class="keyword">in</span> situations.values():</span><br><span class="line">        count += situation  <span class="comment"># P(A)P(a|A) + P(B)P(a|B)</span></span><br><span class="line">    <span class="keyword">for</span> situation, probability <span class="keyword">in</span> situations.items():</span><br><span class="line">        <span class="comment"># P(A)P(a|A)/(P(A)P(a|A) + P(B)P(a|B)), P(B)P(a|B)/(P(A)P(a|A) + P(B)P(a|B))</span></span><br><span class="line">        situations[situation] = situations[situation] / count</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prob</span>(<span class="params">hypothis</span>):</span></span><br><span class="line">    <span class="keyword">return</span> situations[hypothis]  <span class="comment"># P(A|a), P(B|a)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">priori_probability(<span class="string">'A'</span>, <span class="number">0.5</span>)  <span class="comment"># P(A)=1/2</span></span><br><span class="line">priori_probability(<span class="string">'B'</span>, <span class="number">0.5</span>)  <span class="comment"># P(B)=1/2</span></span><br><span class="line"></span><br><span class="line">posterior_probability(<span class="string">'A'</span>, <span class="number">0.75</span>)  <span class="comment"># P(a|A)=3/4</span></span><br><span class="line">posterior_probability(<span class="string">'B'</span>, <span class="number">0.5</span>)   <span class="comment"># P(a|B)=1/2</span></span><br><span class="line"></span><br><span class="line">normalize()</span><br><span class="line">prob = prob(<span class="string">'A'</span>)  <span class="comment"># P(A|a)</span></span><br><span class="line">print(<span class="string">'The probability of getting `a` that belongs to set `A`: %s'</span> % prob)</span><br><span class="line"><span class="comment"># P(a|A): 从 A 中获取 a</span></span><br><span class="line"><span class="comment"># P(A|a): 获取 a，并且 a 恰巧是属于 A 的</span></span><br><span class="line"><span class="comment"># 这两个描述的场景完全不同，对应的概率也因而不同</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>　当存在多个特征变量时，表达式可扩展为</p>
+<script type="math/tex; mode=display">P(C \mid F_1,\dots,F_n) = \frac{P(C) \, P(F_1,\dots,F_n \mid C)}{P(F_1,\dots,F_n)} = \frac{1}{Z} P(C)\prod_{i=1}^n P(F_i \mid C)</script><p>　其中，$\frac{1}{Z}$ 是一个只与 $F_i$ 相关的缩放因子，且当特征变量的值固定时，$\frac{1}{Z}$ 为常量</p>
+<h3 id="支持向量机（SVM）"><a href="#支持向量机（SVM）" class="headerlink" title="支持向量机（SVM）"></a>支持向量机（SVM）</h3><ul>
+<li><a href="https://yuzhouwan.com/posts/42737/">感知机</a>追求最大程度正确划分，最小化错误，但相对容易造成过拟合</li>
+<li>支持向量机追求在大致正确分类的同时，最大化 margin，一定程度上避免了过拟合。但是由于 SVM 是借助二次规划来求解支持向量，而求解二次规划将涉及 m 阶矩阵的计算（m 为样本的个数）。所以当 m 的数目很大时，该矩阵的存储将消耗大量的机器资源，且运算的时间成本也会很高</li>
+</ul>
+<h2 id="聚类算法"><a href="#聚类算法" class="headerlink" title="聚类算法"></a>聚类算法</h2><h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><h4 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h4><p>　输入聚类个数 k，以及包含 n 个数据对象的数据库，输出满足方差最小标准 k 个聚类的一种算法</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li>从 n 个数据对象任意选择 k 个对象作为初始聚类中心</li>
+<li>根据每个聚类对象的均值（中心对象），计算每个对象与这些中心对象的距离；并根据最小距离重新对相应对象进行划分</li>
+<li>重新计算每个（有变化）聚类的均值（中心对象）</li>
+<li>计算标准测度函数，当满足一定条件，如函数收敛时，则算法终止；如果条件不满足则回到第二步</li>
+</ul>
+<h2 id="基数估算"><a href="#基数估算" class="headerlink" title="基数估算"></a>基数估算</h2><h3 id="非概率算法"><a href="#非概率算法" class="headerlink" title="非概率算法"></a>非概率算法</h3><h4 id="BitMap"><a href="#BitMap" class="headerlink" title="BitMap"></a>BitMap</h4><h4 id="Roaring-Bitmap"><a href="#Roaring-Bitmap" class="headerlink" title="Roaring Bitmap"></a>Roaring Bitmap</h4><h4 id="Bloom-filter"><a href="#Bloom-filter" class="headerlink" title="Bloom filter"></a>Bloom filter</h4><h4 id="双层字典码"><a href="#双层字典码" class="headerlink" title="双层字典码"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.infoq.cn/article/2012%2F08%2Fpowerdrill-in-memory-column-stor">双层字典码</a></h4><h3 id="概率算法"><a href="#概率算法" class="headerlink" title="概率算法"></a>概率算法</h3><h4 id="Count-Mean-Min-Sketch"><a href="#Count-Mean-Min-Sketch" class="headerlink" title="Count-Mean-Min Sketch"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cnblogs.com/fxjwind/p/3289221.html">Count-Mean-Min Sketch</a></h4><h4 id="LogLog-Counting"><a href="#LogLog-Counting" class="headerlink" title="LogLog Counting"></a>LogLog Counting</h4><h4 id="Linear-Counting"><a href="#Linear-Counting" class="headerlink" title="Linear Counting"></a>Linear Counting</h4><h4 id="LogLog-Counting-1"><a href="#LogLog-Counting-1" class="headerlink" title="LogLog Counting"></a>LogLog Counting</h4><h4 id="Adaptive-Counting"><a href="#Adaptive-Counting" class="headerlink" title="Adaptive Counting"></a>Adaptive Counting</h4><h4 id="HyperLogLog-Counting"><a href="#HyperLogLog-Counting" class="headerlink" title="HyperLogLog Counting"></a>HyperLogLog Counting</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">m = <span class="number">2</span> ^ b  <span class="comment"># with b in [4...16]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> m == <span class="number">16</span>:</span><br><span class="line">    alpha = <span class="number">0.673</span></span><br><span class="line"><span class="keyword">elif</span> m == <span class="number">32</span>:</span><br><span class="line">    alpha = <span class="number">0.697</span></span><br><span class="line"><span class="keyword">elif</span> m == <span class="number">64</span>:</span><br><span class="line">    alpha = <span class="number">0.709</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    alpha = <span class="number">0.7213</span> / (<span class="number">1</span> + <span class="number">1.079</span> / m)</span><br><span class="line"></span><br><span class="line">registers = [<span class="number">0</span>] * m  <span class="comment"># initialize m registers to 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Construct the HLL structure</span></span><br><span class="line"><span class="keyword">for</span> h <span class="keyword">in</span> hashed(data):</span><br><span class="line">    register_index = <span class="number">1</span> + get_register_index(h, b)  <span class="comment"># binary address of the rightmost b bits</span></span><br><span class="line">    run_length = run_of_zeros(h, b)  <span class="comment"># length of the run of zeroes starting at bit b+1</span></span><br><span class="line">    registers[register_index] = max(registers[register_index], run_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Determine the cardinality</span></span><br><span class="line">DV_est = alpha * m ^ <span class="number">2</span> * <span class="number">1</span> / sum(<span class="number">2</span> ^ -register)  <span class="comment"># the DV estimate</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DV_est &lt; <span class="number">5</span> / <span class="number">2</span> * m:  <span class="comment"># small range correction</span></span><br><span class="line">    V = count_of_zero_registers(registers)  <span class="comment"># the number of registers equal to zero</span></span><br><span class="line">    <span class="keyword">if</span> V == <span class="number">0</span>:  <span class="comment"># if none of the registers are empty, use the HLL estimate</span></span><br><span class="line">        DV = DV_est</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        DV = m * log(m / V)  <span class="comment"># i.e. balls and bins correction</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DV_est &lt;= (<span class="number">1</span> / <span class="number">30</span> * <span class="number">2</span> ^ <span class="number">32</span>):  <span class="comment"># intermediate range, no correction</span></span><br><span class="line">    DV = DV_est</span><br><span class="line"><span class="keyword">if</span> DV_est &gt; (<span class="number">1</span> / <span class="number">30</span> * <span class="number">2</span> ^ <span class="number">32</span>):  <span class="comment"># large range correction</span></span><br><span class="line">    DV = <span class="number">-2</span> ^ <span class="number">32</span> * log(<span class="number">1</span> - DV_est / <span class="number">2</span> ^ <span class="number">32</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog++"></a>HyperLogLog++</h4><h4 id="MinHash"><a href="#MinHash" class="headerlink" title="MinHash"></a>MinHash</h4><h4 id="HyperLogLog-amp-Inclusion-exculsion-principle"><a href="#HyperLogLog-amp-Inclusion-exculsion-principle" class="headerlink" title="HyperLogLog++ &amp; Inclusion-exculsion principle"></a>HyperLogLog++ &amp; Inclusion-exculsion principle</h4><h4 id="HyperLogLog-amp-MinHash"><a href="#HyperLogLog-amp-MinHash" class="headerlink" title="HyperLogLog++ &amp; MinHash"></a>HyperLogLog++ &amp; MinHash</h4><h3 id="参考-5"><a href="#参考-5" class="headerlink" title="参考"></a>参考</h3><h4 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://juejin.im/entry/59d2e6b46fb9a00a4c27370d">Bitmap 的原理和实现</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/yizishou/article/details/78365791">EWAHCompressedBitmap 数据结构及原理</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/yizishou/article/details/78342499">Roaring Bitmap 数据结构及原理</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.pilosa.com/blog/range-encoded-bitmaps/">Using Bitmaps to Perform Range Queries</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://colobu.com/2016/07/02/bloom-filter-for-scala/">JVM 上最快的 Bloom filter 实现</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://arganzheng.life/bloom-filter-for-distributed-system.html">Bloom filter 在分布式环境中的应用</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://shzhangji.com/cnblogs/2017/08/27/an-introduction-to-stream-lib-the-stream-processing-utilities/">实时计算工具库 stream-lib 使用指南</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://blog.codinglabs.org/tag.html#HyperLogLogCounting">解读 Cardinality Estimation 算法</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://research.neustar.biz/2012/10/25/sketch-of-the-day-hyperloglog-cornerstone-of-a-big-data-infrastructure/">Sketch of the Day：HyperLogLog — Cornerstone of a Big Data Infrastructure</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://content.research.neustar.biz/blog/runs.html">Sketch of the Day：Probabilistic Counting with Stochastic Averaging（PCSA）</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/u011489043/article/details/78727128">分布式缓存 Redis 之 HyperLogLog</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://soulmachine.gitbooks.io/system-design/content/cn/bigdata/heavy-hitters.html">Top K 频繁项</a></li>
+</ul>
+<h4 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/lemire/javaewah">A compressed alternative to the Java BitSet class</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/RoaringBitmap/RoaringBitmap">RoaringBitmap：A better compressed bitset in Java</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://datasketches.github.io/">Sketches Library from YAHOO</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/addthis/stream-lib">Stream summarizer and cardinality estimator</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/chaoslawful/ccard-lib#experiment">The following estimating results is calculated using bitmap with length of 2^16 (64k) bytes</a></li>
+</ul>
+<h2 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h2><h3 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h3><p>　二分查找（<strong>B</strong>inary <strong>S</strong>earch，也称折半搜索、对数搜索），是一种在有序数组中查找某一特定元素的搜索算法</p>
+<p><img data-src="/picture/algorithm/algorithm_binary_search.png" alt="Binary Search"></p>
+<center>（图片来源：<a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95#/media/File:Binary_search_into_array.png" target="_blank" rel="external nofollow noopener noreferrer">wikipedia.org</a>，已确认无版权）</center>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间复杂度</th>
+<th style="text-align:center">T(n) / S(n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">平均</td>
+<td style="text-align:center">$O(\log n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">最优</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">最坏</td>
+<td style="text-align:center">$O(\log n)$</td>
+</tr>
+<tr>
+<td style="text-align:center">最坏</td>
+<td style="text-align:center">迭代：$O(1)$；递归：$O(\log n)$（无<a href="https://yuzhouwan.com/posts/27328/#尾递归">尾调用</a>消除）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="实战-6"><a href="#实战-6" class="headerlink" title="实战"></a>实战</h4><h5 id="median-of-two-sorted-arrays"><a href="#median-of-two-sorted-arrays" class="headerlink" title="median-of-two-sorted-arrays"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/median-of-two-sorted-arrays/">median-of-two-sorted-arrays</a></h5><div class="tabs" id="code4"><ul class="nav-tabs"><li class="tab active"><a href="#code4-1">CODE4 1</a></li></ul><div class="tab-content"><div class="tab-pane active" id="code4-1"><p><strong>Merge Sort 解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">median_of_two_sorted_arrays</span>(<span class="params">nums1, nums2</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    count1 = <span class="number">0</span></span><br><span class="line">    count2 = <span class="number">0</span></span><br><span class="line">    len1 = len(nums1)</span><br><span class="line">    len2 = len(nums2)</span><br><span class="line">    total_len = len1 + len2</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(total_len):</span><br><span class="line">        <span class="keyword">if</span> count1 == len1:</span><br><span class="line">            nums.extend(nums2[count2::])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> count2 == len2:</span><br><span class="line">            nums.extend(nums1[count1::])</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        n1 = nums1[count1]</span><br><span class="line">        n2 = nums2[count2]</span><br><span class="line">        <span class="keyword">if</span> n1 &gt; n2:</span><br><span class="line">            nums.append(n2)</span><br><span class="line">            count2 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            nums.append(n1)</span><br><span class="line">            count1 += <span class="number">1</span></span><br><span class="line">    middle = total_len // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> total_len % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> (nums[middle - <span class="number">1</span>] + nums[middle]) / <span class="number">2</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> nums[middle]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+<h3 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h3><h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><h3 id="AVL-树"><a href="#AVL-树" class="headerlink" title="AVL 树"></a>AVL 树</h3><h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h3 id="B-树"><a href="#B-树" class="headerlink" title="B 树"></a>B 树</h3><h3 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+ 树"></a>B+ 树</h3><h4 id="参考-6"><a href="#参考-6" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/30527705">AVL 树，红黑树，B 树，B+ 树，Trie 树都分别应用在哪些现实场景中？</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/27700617">平衡二叉树、B 树、B+ 树、<code>B*</code> 树，理解其中一种你就都明白了</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/z702143700/article/details/49079107">二叉查找树、平衡二叉树、红黑树、B- / B+ 树 性能对比</a></li>
+</ul>
+<h3 id="SnapTreeMap"><a href="#SnapTreeMap" class="headerlink" title="SnapTreeMap"></a>SnapTreeMap</h3><h4 id="参考-7"><a href="#参考-7" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nbronson">nbronson</a> / <strong>snaptree</strong></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6719">use SnapTreeMap instead of ConcurrentSkipListMap #6719</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.datastax.com/dev/blog/cassandra-2-1-now-over-50-faster">Cassandra 2.1: now over 50% faster</a></li>
+</ul>
+<h3 id="LSM-tree"><a href="#LSM-tree" class="headerlink" title="LSM tree"></a>LSM tree</h3><h4 id="参考-8"><a href="#参考-8" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/Yaokai_AssultMaster/article/details/72877127">深入理解 HBase 的系统架构</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.infoq.com/cn/articles/hbase-casestudy-facebook-messages">HBase 优化案例分析：Facebook Messages 系统问题与解决方案</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kancloud.cn/taobaomysql/monthly/67115">TokuDB 数据结构 Fractal-Trees 与 LSM-Trees 对比</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf">WiscKey: Separating Keys from Values in SSD-conscious Storage</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://kernelmaker.github.io/Btree_LSM_FTI">B+ Tree、LSM、Fractal tree index 读写放大分析</a></li>
+</ul>
+<h3 id="前缀树"><a href="#前缀树" class="headerlink" title="前缀树"></a>前缀树</h3><h4 id="Tire-Tree-Double-Array-Aho-Corasick"><a href="#Tire-Tree-Double-Array-Aho-Corasick" class="headerlink" title="Tire Tree + Double Array + Aho-Corasick"></a>Tire Tree + Double Array + Aho-Corasick</h4><h5 id="参考-9"><a href="#参考-9" class="headerlink" title="参考"></a>参考</h5><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.hankcs.com/program/java/tire-tree-participle.html">Trie 树分词</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.hankcs.com/program/java/%e5%8f%8c%e6%95%b0%e7%bb%84trie%e6%a0%91doublearraytriejava%e5%ae%9e%e7%8e%b0.html">双数组 Trie 树（DoubleArrayTrie）Java 实现</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.hankcs.com/program/algorithm/implementation-and-analysis-of-aho-corasick-algorithm-in-java.html">Aho-Corasick 算法的 Java 实现与分析</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.hankcs.com/program/algorithm/aho-corasick-double-array-trie.html">Aho-Corasick 自动机结合 DoubleArrayTrie 极速多模式匹配</a></li>
+</ul>
+<h4 id="Patricia-Tree"><a href="#Patricia-Tree" class="headerlink" title="Patricia Tree"></a>Patricia Tree</h4><h4 id="SlimTire"><a href="#SlimTire" class="headerlink" title="SlimTire"></a>SlimTire</h4><h5 id="参考-10"><a href="#参考-10" class="headerlink" title="参考"></a>参考</h5><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://openacid.github.io/">SlimTrie: 单机百亿文件的极致索引</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/openacid">openacid</a> / <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/openacid/slim">slim</a></strong></li>
+<li>wikipedia: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/User:Drmingdrmer/%E6%B2%99%E7%9B%92">SlimTrie</a></li>
+</ul>
+<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><h3 id="图计算"><a href="#图计算" class="headerlink" title="图计算"></a>图计算</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>　<strong>图计算</strong>是以<strong>图论</strong>为基础的对现实世界的一种<strong>图</strong>结构的抽象表达，以及在这种数据结构上的计算模式。通常，在图计算中，基本的数据结构表达就是：</p>
+<p>　$G = (V, E, D)$，其中，V = vertex（顶点或者节点），E = edge（边），D = data（权重）</p>
+<p>　比如说：对于一个消费者的原始购买行为，有两类节点：用户和产品，边就是购买行为，权重是边上的一个数据结构，可以是购买次数和最后购买时间。对于许多我们面临的物理世界的数据问题，都可以利用图结构的来抽象表达：比如社交网络，网页链接关系，用户传播网络，用户网络点击、浏览和购买行为，甚至消费者评论内容，内容分类标签，产品分类标签等等</p>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><h3 id="GPG"><a href="#GPG" class="headerlink" title="GPG"></a>GPG</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ brew install gpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成</span></span><br><span class="line">$ <span class="built_in">export</span> GPG_TTY=$(tty)</span><br><span class="line">$ gpg --gen-key</span><br><span class="line">$ gpg --list-keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">$ git config --global user.signingkey xxx</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="压缩算法"><a href="#压缩算法" class="headerlink" title="压缩算法"></a>压缩算法</h2><h3 id="ZSTD"><a href="#ZSTD" class="headerlink" title="ZSTD"></a>ZSTD</h3><h4 id="参考-11"><a href="#参考-11" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://facebook.github.io/zstd/">Zstandard is a real-time compression algorithm, providing high compression ratios</a></li>
+</ul>
+<h2 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h2><h3 id="参考-12"><a href="#参考-12" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.65.7300&amp;rep=rep1&amp;type=pdf">A Genetic Selection Algorithm for OLAP Data Cubes</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/abs/1602.04613">Towards reducing the multidimensionality of OLAP cubes using the Evolutionary Algorithms and Factor Analysis Methods</a></li>
+</ul>
+<h2 id="人工智能"><a href="#人工智能" class="headerlink" title="人工智能"></a>人工智能</h2><p>　详见，我的另一篇博客《<a href="https://yuzhouwan.com/posts/42737/">人工智能</a>》</p>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>标题</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/two-sum/">1</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#two-sum">Two Sum</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Hash">Hash</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/add-two-numbers/">2</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#add-two-numbers">Add Two Numbers</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Linked-List">Linked List</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">3</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#longest-substring-without-repeating-characters">Longest Substring Without Repeating Characters</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Sliding-Window">Sliding Window</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/median-of-two-sorted-arrays/">4</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#median-of-two-sorted-arrays">Median of Two Sorted Arrays</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Binary-Search">Binary Search</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/longest-palindromic-substring/">5</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#longest-palindromic-substring">Longest Palindromic Substring</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Dynamic-Programming">Dynamic Programming</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/zigzag-conversion/">6</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#zigzag-conversion">ZigZag Conversion</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/reverse-integer/">7</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#reverse-integer">Reverse Integer</a></td>
+<td><a href="https://yuzhouwan.com/posts/4534/">Math</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/string-to-integer-atoi/">8</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#string-to-integer-atoi">String to Integer (atoi)</a></td>
+<td><a href="https://yuzhouwan.com/posts/4534/">Math</a> &amp; <a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/palindrome-number/">9</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#palindrome-number">Palindrome Number</a></td>
+<td><a href="https://yuzhouwan.com/posts/4534/">Math</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/regular-expression-matching/">10</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#regular-expression-matching">Regular Expression Matching</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a> &amp; <a href="https://yuzhouwan.com/posts/666/#Dynamic-Programming">Dynamic Programming</a> &amp; Backtracking</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/container-with-most-water/">11</a></td>
+<td>Container With Most Water</td>
+<td>Array &amp; Two Pointers</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/integer-to-roman/">12</a></td>
+<td>Integer to Roman</td>
+<td><a href="https://yuzhouwan.com/posts/4534/">Math</a> &amp; <a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/roman-to-integer/">13</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#roman-to-integer">Roman to Integer</a></td>
+<td><a href="https://yuzhouwan.com/posts/4534/">Math</a> &amp; <a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/longest-common-prefix/">14</a></td>
+<td>Longest Common Prefix</td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/3sum/">15</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#3sum">3Sum</a></td>
+<td>Array &amp; Two Pointers</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/3sum-closest/">16</a></td>
+<td>3Sum Closest</td>
+<td>Array &amp; Two Pointers</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">17</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#letter-combinations-of-a-phone-number">Letter Combinations of a Phone Number</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a> &amp; Backtracking</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/4sum">18</a></td>
+<td>4Sum</td>
+<td>Array &amp; <a href="https://yuzhouwan.com/posts/666/#Hash">Hash Table</a> &amp; Two Pointers</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/">19</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#remove-nth-node-from-end-of-list">Remove Nth Node From End of List</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Linked-List">Linked List</a> &amp; Two Pointers</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/valid-parentheses/">20</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#valid-parentheses">Valid Parentheses</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a> &amp; Stack</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/merge-two-sorted-lists/">21</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#merge-two-sorted-lists">Merge Two Sorted Lists</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#Linked-List">Linked List</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leetcode.com/problems/generate-parentheses/">22</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#generate-parentheses">Generate Parentheses</a></td>
+<td><a href="https://yuzhouwan.com/posts/666/#String-Matching">String</a> &amp; <a href="https://yuzhouwan.com/posts/666/#Dynamic-Programming">Dynamic Programming</a> &amp; Backtracking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="Blog-1"><a href="#Blog-1" class="headerlink" title="Blog"></a>Blog</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://codecapsule.com/2012/01/18/how-to-implement-a-paper/">How to implement an algorithm from a scientific paper</a></li>
+</ul>
+<h3 id="Book-1"><a href="#Book-1" class="headerlink" title="Book"></a>Book</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Algorithms and Data Structures using Python</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.com/Structures-Algorithms-Undergraduate-Computer-Science/dp/3319130714">Data Structures and Algorithms with Python</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.com/Structures-Algorithms-Python-Michael-Goodrich/dp/812656217X">Data Structures and Algorithms in Python</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tianyicui/pack">背包九讲</a></li>
+</ul>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://paperswithcode.com/sota">Paper with Code</a></li>
+</ul>
+<h3 id="Github-1"><a href="#Github-1" class="headerlink" title="Github"></a>Github</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/MisterBooo/LeetCodeAnimation">用动画的形式呈现解 LeetCode 题目的思路</a></li>
+</ul>
+<h3 id="Tool"><a href="#Tool" class="headerlink" title="Tool"></a>Tool</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://plugins.jetbrains.com/plugin/12132-leetcode-editor">在 IDEA 编辑器中安装 LeetCode 刷题插件</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200906/" rel="bookmark">Presto：分布式 SQL 查询引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190816/" rel="bookmark">Gradle 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200316/" rel="bookmark">Netty：从入门到实践</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/18651/" rel="bookmark">Scala 实战</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/666/" title="Algorithm">https://yuzhouwan.com/posts/666/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/190413/" rel="prev" title="那些绕不过去的 Java 知识点">
+      <i class="fa fa-chevron-left"></i> 那些绕不过去的 Java 知识点
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/190816/" rel="next" title="Gradle 实战">
+      Gradle 实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-%E7%BB%84%E9%98%9F%E5%88%B7%E9%A2%98%E6%B4%BB%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 组队刷题活动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.1.</span> <span class="nav-text">代码仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%A5%E5%90%8D%E9%80%94%E5%BE%84"><span class="nav-number">1.1.2.</span> <span class="nav-text">报名途径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E4%B8%8E%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">参与方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B7%E9%A2%98%E9%A2%91%E7%8E%87"><span class="nav-number">1.1.4.</span> <span class="nav-text">刷题频率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5"><span class="nav-number">1.1.5.</span> <span class="nav-text">选题策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.2.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E8%A1%8C%E6%A6%9C"><span class="nav-number">1.4.</span> <span class="nav-text">排行榜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E9%A2%98%E7%9B%AE%E6%9C%80%E5%A4%9A%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4"><span class="nav-number">1.4.1.</span> <span class="nav-text">完成题目最多的小伙伴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E6%B4%BB%E8%B7%83%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4"><span class="nav-number">1.4.2.</span> <span class="nav-text">最活跃的小伙伴</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.1.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-Matching"><span class="nav-number">3.1.</span> <span class="nav-text">String Matching</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8D%E7%B1%BB"><span class="nav-number">3.1.1.</span> <span class="nav-text">种类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E7%AE%97%E6%B3%95%EF%BC%88Naive-Algorithm%EF%BC%89"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">朴素算法（Naive Algorithm）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Rabin-Karp-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Rabin-Karp 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%AE%97%E6%B3%95%EF%BC%88Finite-Automation%EF%BC%89"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">有限自动机算法（Finite Automation）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#KMP"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">KMP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Boyer-Moore-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">Boyer-Moore 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Simon-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.6.</span> <span class="nav-text">Simon 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Colussi-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.7.</span> <span class="nav-text">Colussi 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Galil-Giancarlo-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.8.</span> <span class="nav-text">Galil-Giancarlo 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Apostolico-Crochemore-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.9.</span> <span class="nav-text">Apostolico-Crochemore 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Horspool-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.10.</span> <span class="nav-text">Horspool 算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sunday-%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.1.11.</span> <span class="nav-text">Sunday 算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">3.1.2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#string-to-integer-atoi"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">string-to-integer-atoi</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#letter-combinations-of-a-phone-number"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">letter-combinations-of-a-phone-number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#valid-parentheses"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">valid-parentheses</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#zigzag-conversion"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">zigzag-conversion</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.1.3.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Book"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">Book</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sorting-Algorithm"><span class="nav-number">3.2.</span> <span class="nav-text">Sorting Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Programming"><span class="nav-number">3.3.</span> <span class="nav-text">Dynamic Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="nav-number">3.3.2.</span> <span class="nav-text">关键概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8A%B6%E6%80%81"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">状态转移方程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%92%E6%8E%A8"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">递推</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">3.3.2.6.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84"><span class="nav-number">3.3.2.7.</span> <span class="nav-text">最优子结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0%E5%90%8E%E6%95%88%E6%80%A7"><span class="nav-number">3.3.2.8.</span> <span class="nav-text">无后效性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#longest-palindromic-substring"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">longest-palindromic-substring</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#regular-expression-matching"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">regular-expression-matching</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#generate-parentheses"><span class="nav-number">3.3.3.3.</span> <span class="nav-text">generate-parentheses</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-2"><span class="nav-number">3.3.4.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">3.4.</span> <span class="nav-text">Hash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81"><span class="nav-number">3.4.1.</span> <span class="nav-text">哈希冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%BC%8F%E5%AF%BB%E5%9D%80"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">开放式寻址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E6%9E%90"><span class="nav-number">3.4.1.2.</span> <span class="nav-text">关键字分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%B2%E7%AA%81%E8%BD%AC%E7%A7%BB"><span class="nav-number">3.4.1.3.</span> <span class="nav-text">冲突转移</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-2"><span class="nav-number">3.4.2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#two-sum"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">two-sum</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-3"><span class="nav-number">3.4.3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linked-List"><span class="nav-number">3.5.</span> <span class="nav-text">Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8D%E7%B1%BB-1"><span class="nav-number">3.5.1.</span> <span class="nav-text">种类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">单向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E6%B3%95"><span class="nav-number">3.5.1.1.1.</span> <span class="nav-text">快慢指针法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">3.5.1.2.</span> <span class="nav-text">双向链表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">3.5.1.3.</span> <span class="nav-text">循环链表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94"><span class="nav-number">3.5.2.</span> <span class="nav-text">性能对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-3"><span class="nav-number">3.5.3.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#add-two-numbers"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">add-two-numbers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#remove-nth-node-from-end-of-list"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">remove-nth-node-from-end-of-list</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#merge-two-sorted-lists"><span class="nav-number">3.5.3.3.</span> <span class="nav-text">merge-two-sorted-lists</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sliding-Window"><span class="nav-number">3.6.</span> <span class="nav-text">Sliding Window</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">3.6.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-4"><span class="nav-number">3.6.2.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#longest-substring-without-repeating-characters"><span class="nav-number">3.6.2.1.</span> <span class="nav-text">longest-substring-without-repeating-characters</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math"><span class="nav-number">3.7.</span> <span class="nav-text">Math</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-5"><span class="nav-number">3.7.1.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#reverse-integer"><span class="nav-number">3.7.1.1.</span> <span class="nav-text">reverse-integer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#palindrome-number"><span class="nav-number">3.7.1.2.</span> <span class="nav-text">palindrome-number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#roman-to-integer"><span class="nav-number">3.7.1.3.</span> <span class="nav-text">roman-to-integer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3sum"><span class="nav-number">3.7.1.4.</span> <span class="nav-text">3sum</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">预测算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E5%B9%B3%E5%9D%87%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">简易平均法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text">算术平均值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="nav-number">4.1.2.</span> <span class="nav-text">加权平均值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">移动平均法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%B9%B3%E6%BB%91%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">指数平滑法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-4"><span class="nav-number">4.3.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%B3%95"><span class="nav-number">4.4.</span> <span class="nav-text">线性回归法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">分类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%88Bayes%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">贝叶斯（Bayes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">5.1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%8D%E7%B1%BB-2"><span class="nav-number">5.1.2.</span> <span class="nav-text">种类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">特征独立性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E6%83%85%E5%86%B5"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">分布情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E7%A8%8B%E5%BA%A6"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">离散程度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%AE%9E%E6%88%98"><span class="nav-number">5.1.3.</span> <span class="nav-text">编码实战</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">5.1.4.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%EF%BC%88SVM%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">支持向量机（SVM）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means"><span class="nav-number">6.1.</span> <span class="nav-text">K-means</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.1.2.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E4%BC%B0%E7%AE%97"><span class="nav-number">7.</span> <span class="nav-text">基数估算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95"><span class="nav-number">7.1.</span> <span class="nav-text">非概率算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BitMap"><span class="nav-number">7.1.1.</span> <span class="nav-text">BitMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Roaring-Bitmap"><span class="nav-number">7.1.2.</span> <span class="nav-text">Roaring Bitmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bloom-filter"><span class="nav-number">7.1.3.</span> <span class="nav-text">Bloom filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%B1%82%E5%AD%97%E5%85%B8%E7%A0%81"><span class="nav-number">7.1.4.</span> <span class="nav-text">双层字典码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95"><span class="nav-number">7.2.</span> <span class="nav-text">概率算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Count-Mean-Min-Sketch"><span class="nav-number">7.2.1.</span> <span class="nav-text">Count-Mean-Min Sketch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LogLog-Counting"><span class="nav-number">7.2.2.</span> <span class="nav-text">LogLog Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear-Counting"><span class="nav-number">7.2.3.</span> <span class="nav-text">Linear Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LogLog-Counting-1"><span class="nav-number">7.2.4.</span> <span class="nav-text">LogLog Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adaptive-Counting"><span class="nav-number">7.2.5.</span> <span class="nav-text">Adaptive Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HyperLogLog-Counting"><span class="nav-number">7.2.6.</span> <span class="nav-text">HyperLogLog Counting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">7.2.7.</span> <span class="nav-text">HyperLogLog++</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MinHash"><span class="nav-number">7.2.8.</span> <span class="nav-text">MinHash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HyperLogLog-amp-Inclusion-exculsion-principle"><span class="nav-number">7.2.9.</span> <span class="nav-text">HyperLogLog++ &amp; Inclusion-exculsion principle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HyperLogLog-amp-MinHash"><span class="nav-number">7.2.10.</span> <span class="nav-text">HyperLogLog++ &amp; MinHash</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-5"><span class="nav-number">7.3.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Blog"><span class="nav-number">7.3.1.</span> <span class="nav-text">Blog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github"><span class="nav-number">7.3.2.</span> <span class="nav-text">Github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3"><span class="nav-number">8.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Search"><span class="nav-number">8.1.</span> <span class="nav-text">Binary Search</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98-6"><span class="nav-number">8.1.1.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#median-of-two-sorted-arrays"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">median-of-two-sorted-arrays</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="nav-number">8.2.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">8.3.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVL-%E6%A0%91"><span class="nav-number">8.4.</span> <span class="nav-text">AVL 树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">8.5.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">8.6.</span> <span class="nav-text">B 树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E6%A0%91-1"><span class="nav-number">8.7.</span> <span class="nav-text">B+ 树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-6"><span class="nav-number">8.7.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SnapTreeMap"><span class="nav-number">8.8.</span> <span class="nav-text">SnapTreeMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-7"><span class="nav-number">8.8.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSM-tree"><span class="nav-number">8.9.</span> <span class="nav-text">LSM tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-8"><span class="nav-number">8.9.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E6%A0%91"><span class="nav-number">8.10.</span> <span class="nav-text">前缀树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tire-Tree-Double-Array-Aho-Corasick"><span class="nav-number">8.10.1.</span> <span class="nav-text">Tire Tree + Double Array + Aho-Corasick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E8%80%83-9"><span class="nav-number">8.10.1.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Patricia-Tree"><span class="nav-number">8.10.2.</span> <span class="nav-text">Patricia Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SlimTire"><span class="nav-number">8.10.3.</span> <span class="nav-text">SlimTire</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E8%80%83-10"><span class="nav-number">8.10.3.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA"><span class="nav-number">9.</span> <span class="nav-text">图论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E8%AE%A1%E7%AE%97"><span class="nav-number">9.1.</span> <span class="nav-text">图计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">9.1.1.</span> <span class="nav-text">概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">10.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPG"><span class="nav-number">10.1.</span> <span class="nav-text">GPG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">压缩算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZSTD"><span class="nav-number">11.1.</span> <span class="nav-text">ZSTD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83-11"><span class="nav-number">11.1.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">12.</span> <span class="nav-text">遗传算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-12"><span class="nav-number">12.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="nav-number">13.</span> <span class="nav-text">人工智能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">14.</span> <span class="nav-text">Index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">15.</span> <span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog-1"><span class="nav-number">15.1.</span> <span class="nav-text">Blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Book-1"><span class="nav-number">15.2.</span> <span class="nav-text">Book</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-number">15.3.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-1"><span class="nav-number">15.4.</span> <span class="nav-text">Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tool"><span class="nav-number">15.5.</span> <span class="nav-text">Tool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">16.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/666/";
+    this.page.identifier = "posts/666/";
+    this.page.title = "Algorithm";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '0d9e06a9ef140a870d13dd1765fcdc6c',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

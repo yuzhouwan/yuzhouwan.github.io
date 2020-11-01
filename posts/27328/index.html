@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是 JVM?　A Java Virtual Machine（JVM）is an abstract computing machine that enables a computer to run a Java program. 为什么要有 JVM?跨平台性　JVM 的存在，使得 Java 程序 能够轻易地在多平台上移植，基本上脱离了对硬件的依赖性（这也满足了 David Parnas 的 “信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何运用 JVM 知识提高编程水平">
+<meta property="og:url" content="https://yuzhouwan.com/posts/27328/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="什么是 JVM?　A Java Virtual Machine（JVM）is an abstract computing machine that enables a computer to run a Java program. 为什么要有 JVM?跨平台性　JVM 的存在，使得 Java 程序 能够轻易地在多平台上移植，基本上脱离了对硬件的依赖性（这也满足了 David Parnas 的 “信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/jvm/jvm_sandbox.jpg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/jvm/jvm.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2016-07-16T09:38:16.000Z">
+<meta property="article:modified_time" content="2020-10-29T13:44:24.896Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Groovy">
+<meta property="article:tag" content="Scala">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/jvm/jvm_sandbox.jpg">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/27328/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何运用 JVM 知识提高编程水平 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/27328/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何运用 JVM 知识提高编程水平
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-07-16 17:38:16" itemprop="dateCreated datePublished" datetime="2016-07-16T17:38:16+08:00">2016-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM?"></a>什么是 JVM?</h2><p>　A <strong>J</strong>ava <strong>V</strong>irtual <strong>M</strong>achine（JVM）is an abstract computing machine that enables a computer to run a Java program.</p>
+<h2 id="为什么要有-JVM"><a href="#为什么要有-JVM" class="headerlink" title="为什么要有 JVM?"></a>为什么要有 JVM?</h2><h3 id="跨平台性"><a href="#跨平台性" class="headerlink" title="跨平台性"></a>跨平台性</h3><p>　JVM 的存在，使得 Java 程序 能够轻易地在多平台上移植，基本上脱离了对硬件的依赖性（这也满足了 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/David_Parnas">David Parnas</a> 的 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Information_hiding">信息隐藏</a>” 准则）</p>
+<h3 id="多语言性"><a href="#多语言性" class="headerlink" title="多语言性"></a>多语言性</h3><p>　因为底层 JIT 编译优化、高效 GC、JUC 对多线程并发编程的支持，以及社区中海量成熟的库 等优点，使得<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/List_of_JVM_languages">很多语言</a>都开发出可运行在 JVM 上的版本</p>
+<p>　同时，多语言混合编程成为一种趋势，在需要快速开发、灵活部署 和 针对特定问题的 DSL 等场景下，选择恰当的 JVM-hosted language，可以最大化原有代码的价值</p>
+<p>　<strong>那么，在日常的开发过程中，究竟应该如何运用 JVM 的知识，来逐步提高实际编程水平呢？ 上下而求索后，找到了以下几个层面作为出发点</strong></p>
+<a id="more"></a>
+<h2 id="编码层面"><a href="#编码层面" class="headerlink" title="编码层面"></a>编码层面</h2><h3 id="递归-vs-尾递归"><a href="#递归-vs-尾递归" class="headerlink" title="递归 vs 尾递归"></a>递归 vs 尾递归</h3><h4 id="循环调用"><a href="#循环调用" class="headerlink" title="循环调用"></a>循环调用</h4><figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span></span>(i: <span class="type">Int</span>): <span class="type">Int</span> = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"># <span class="number">10</span> 亿次 <span class="keyword">for</span> 循环调用</span><br><span class="line"><span class="number">0</span>: aload_0                                                                                 | 从局部变量 <span class="number">0</span> 中装载引用类型值</span><br><span class="line"><span class="number">1</span>: getfield         #<span class="number">29</span>  <span class="comment">// Field i$1:Lscala/runtime/IntRef;                               | 从对象中获取字段</span></span><br><span class="line"><span class="number">4</span>: getstatic        #<span class="number">33</span>  <span class="comment">// Field com/yuzhouwan/jit/Inc$.MODULE$:Lcom/yuzhouwan/jit/Inc$;  | 从类中获取静态字段</span></span><br><span class="line"><span class="number">7</span>: aload_0                                                                                 | 从局部变量 <span class="number">0</span> 中装载引用类型值</span><br><span class="line"><span class="number">8</span>: getfield         #<span class="number">29</span>  <span class="comment">// Field i$1:Lscala/runtime/IntRef;                               | 从对象中获取字段</span></span><br><span class="line"><span class="number">11</span>: getfield        #<span class="number">38</span>  <span class="comment">// Field scala/runtime/IntRef.elem:I                              | 从对象中获取字段</span></span><br><span class="line"></span><br><span class="line"><span class="number">14</span>: invokevirtual   #<span class="number">42</span>  <span class="comment">// Method com/yuzhouwan/jit/Inc$.inc:(I)I                         | 运行时按照对象的类来调用实例方法</span></span><br><span class="line"><span class="number">17</span>: putfield        #<span class="number">38</span>  <span class="comment">// Field scala/runtime/IntRef.elem:I                              | 设置对象中字段的值</span></span><br><span class="line"></span><br><span class="line"><span class="number">20</span>: <span class="keyword">return</span>                                                                                 | 从方法中返回，返回值为 void</span><br><span class="line"></span><br><span class="line"># 被调用的累加方法</span><br><span class="line"><span class="number">0</span>: iload_1                 | 从局部变量 <span class="number">1</span> 中装载 int 类型值入栈</span><br><span class="line"><span class="number">1</span>: iconst_1                | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">2</span>: iadd                    | 将栈顶两 int 类型数相加，结果入栈</span><br><span class="line"><span class="number">3</span>: ireturn                 | 返回 int 类型值</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> 亿次循环，大约 <span class="number">4014</span> ms</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rec</span></span>(i: <span class="type">Int</span>): <span class="type">Int</span> = {</span><br><span class="line">  <span class="keyword">if</span> (i == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  rec(i - <span class="number">1</span>) + <span class="number">1</span>  <span class="comment">// change 1 to i, then counting...</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="number">0</span>: iload_1                                      | 从局部变量 <span class="number">1</span> 中装载 int 类型值</span><br><span class="line"><span class="number">1</span>: iconst_1                                     | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">2</span>: if_icmpne       <span class="number">7</span>                            | 若栈顶两 int 类型值前小于等于后则跳转</span><br><span class="line"><span class="number">5</span>: iconst_1                                     | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">6</span>: ireturn                                      | 返回 int 类型值</span><br><span class="line"></span><br><span class="line"><span class="number">7</span>: aload_0                                      | 从局部变量 <span class="number">0</span> 中装载引用类型值</span><br><span class="line"><span class="number">8</span>: iload_1                                      | 从局部变量 <span class="number">1</span> 中装载 int 类型值</span><br><span class="line"><span class="number">9</span>: iconst_1                                     | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">10</span>: isub                                        | 将栈顶两 int 类型数相减，结果入栈</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>: invokevirtual   #<span class="number">24</span>  <span class="comment">// Method rec:(I)I     | 运行时按照对象的类来调用实例方法</span></span><br><span class="line"><span class="number">14</span>: iconst_1                                    | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">15</span>: iadd                                        | 将栈顶两 int 类型数相加，结果入栈</span><br><span class="line"><span class="number">16</span>: ireturn                                     | 返回 int 类型值</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> 万次递归，耗时 <span class="number">1</span> ms，速度低下的同时，超过一定数量（≈<span class="number">14940</span>），还会报错 <span class="type">StackOverflowError</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="尾递归"><a href="#尾递归" class="headerlink" title="尾递归"></a>尾递归</h4><figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@tailrec</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tailRec</span></span>(i: <span class="type">Int</span>, iterator: <span class="type">Int</span>): <span class="type">Int</span> =</span><br><span class="line">  <span class="keyword">if</span> (iterator &gt; <span class="number">0</span>) tailRec(i + <span class="number">1</span>, iterator - <span class="number">1</span>) <span class="keyword">else</span> i</span><br><span class="line"></span><br><span class="line"><span class="number">0</span>: iload_2                | 从局部变量 <span class="number">2</span> 中装载 int 类型值入栈</span><br><span class="line"><span class="number">1</span>: iconst_0               | <span class="number">0</span>(int) 值入栈</span><br><span class="line"><span class="number">2</span>: if_icmple       <span class="number">16</span>     | 若栈顶两 int 类型值前小于等于后则跳转</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>: iload_1                | 从局部变量 <span class="number">1</span> 中装载 int 类型值入栈</span><br><span class="line"><span class="number">6</span>: iconst_1               | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">7</span>: iadd                   | 将栈顶两 int 类型数相加，结果入栈</span><br><span class="line"></span><br><span class="line"><span class="number">8</span>: iload_2                | 从局部变量 <span class="number">2</span> 中装载 int 类型值入栈</span><br><span class="line"><span class="number">9</span>: iconst_1               | <span class="number">1</span>(int) 值入栈</span><br><span class="line"><span class="number">10</span>: isub                  | 将栈顶两 int 类型数相减，结果入栈</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>: istore_2              | 将栈顶 int 类型值保存到局部变量 <span class="number">2</span> 中</span><br><span class="line"><span class="number">12</span>: istore_1              | 将栈顶 int 类型值保存到局部变量 <span class="number">1</span> 中</span><br><span class="line"><span class="number">13</span>: goto            <span class="number">0</span>     | 无条件跳转到指定位置</span><br><span class="line"></span><br><span class="line"><span class="number">16</span>: iload_1               | 从局部变量 <span class="number">1</span> 中装载 int 类型值入栈</span><br><span class="line"><span class="number">17</span>: ireturn               | 返回 int 类型值</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> 亿次尾递归，大约 <span class="number">1</span> ms</span><br></pre></td></tr></tbody></table></figure>
+<p>　通过以上 <a href="https://yuzhouwan.com/posts/18651/">Scala</a> 代码 和 对应的 Bytecode 可以分析得出，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Tail_call">尾递归</a> 作为递归的一种特殊情况，既保证了 代码的 <strong>简洁性</strong></p>
+<p>　也因为，尾递归的调用处于函数的末尾，之前函数累计下的所有信息都可以抹除掉。不需要像递归一样，在每次调用之后，都要存储 寄存器值、返回地址 等信息，从而可以避免 栈空间上的消耗，即同时保证了程序的 <strong>高效性</strong></p>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-hacker/src/main/scala/com/yuzhouwan/hacker/jit">here</a>.</p>
+<h3 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h3><h4 id="ReentrantReadWriteLock-锁的公平性"><a href="#ReentrantReadWriteLock-锁的公平性" class="headerlink" title="ReentrantReadWriteLock 锁的公平性"></a>ReentrantReadWriteLock 锁的公平性</h4><p>　提到并发编程，里面可以涉及的东西，包括 线程、锁、多线程、互斥同步、并行、并发（模型）、线程安全、内存模型 等等，足以写成好几本书。但是，这里我们只就一点来讨论，ReentrantReadWriteLock 锁的公平性</p>
+<p>　首先，我们需要明确 公平锁（Fair）和 非公平锁（Nonfair）两者在锁机制上有什么区别？前者，加锁前检查是否有排队等待的线程，优先执行已经在排队等待的线程，保证先来先得；后者，则是加锁时不考虑队列中等待的线程，直接尝试获取锁，获取不到再加到队尾等待</p>
+<p>　因此，重入读写锁默认的 <strong>非公平锁</strong>，可以避免 ReentrantLock 独占锁带来的吞吐量问题</p>
+<p>　那么，进一步思考之后，新问题来了：在什么样的场景下，ReentrantReadWriteLock 的公平锁反而会是更佳的选择呢，为什么，又该怎么做？</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReentrantLockFairness</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Lock FAIR_LOCK = <span class="keyword">new</span> ReentrantLock(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">static</span> Lock UNFAIR_LOCK = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Fairness</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{</span><br><span class="line">        <span class="keyword">private</span> Lock lock;</span><br><span class="line"></span><br><span class="line">        Fairness(Lock lock) {</span><br><span class="line">            <span class="keyword">this</span>.lock = lock;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {</span><br><span class="line">                lock.lock();</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    System.out.print(Thread.currentThread().getName());</span><br><span class="line">                } <span class="keyword">finally</span> {</span><br><span class="line">                    lock.unlock();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 公平锁，很少会连续获取到锁</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 0 0 0 0 0 1 2 4 3 1 2 4 3 1 2 4 3 1 2 4 3 1 2 4 3</span></span><br><span class="line"><span class="comment"> * 0 1 0 1 0 1 0 1 4 0 1 4 4 4 4 2 2 2 2 2 3 3 3 3 3</span></span><br><span class="line"><span class="comment"> * 1 0 2 4 3 1 0 2 4 3 1 0 2 4 3 1 0 2 4 3 1 0 2 4 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fair</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">    Thread thread;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {</span><br><span class="line">        thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ReentrantLockFairness.Fairness(ReentrantLockFairness.FAIR_LOCK));</span><br><span class="line">        thread.setName(i + <span class="string">" "</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">    }</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">}</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 相比公平锁，非公平锁 能经常性地连续获取到锁</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 0 0 0 0 0 3 3 3 3 3 1 1 1 1 1 2 2 2 2 2 4 4 4 4 4</span></span><br><span class="line"><span class="comment"> * 0 0 2 2 2 2 2 4 4 4 4 4 1 1 1 1 1 0 0 0 3 3 3 3 3</span></span><br><span class="line"><span class="comment"> * 1 1 1 1 1 4 4 4 4 4 0 0 0 0 0 2 2 2 2 2 3 3 3 3 3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unfair</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">    Thread thread;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {</span><br><span class="line">        thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ReentrantLockFairness.Fairness(ReentrantLockFairness.UNFAIR_LOCK));</span><br><span class="line">        thread.setName(i + <span class="string">" "</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">    }</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>　实际在使用的时候，公平锁 只需要在构造参数中设置即可，内部 <strong>AQS</strong>（<strong>A</strong>bstract<strong>Q</strong>ueued<strong>S</strong>ynchronizer）中，利用 相对 ALock 而言空间复杂度更低的 <strong>CLH 队列锁</strong> 来实现公平性</p>
+<p>　同时，共享锁 和 独占锁 分别实现了 读写操作，从而读操作之间是没有竞争冲突的，因此 ReentrantReadWriteLock 的最适场景是 <strong>读多于写</strong></p>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/blob/master/yuzhouwan-hacker/src/main/java/com/yuzhouwan/hacker/algorithms/thread/lock/ReentrantLockFairness.java">here</a> and <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/blob/master/yuzhouwan-hacker/src/test/java/com/yuzhouwan/hacker/algorithms/thread/lock/ReentrantLockFairnessTest.java">here</a>.</p>
+<h4 id="synchronized-的性能之争"><a href="#synchronized-的性能之争" class="headerlink" title="synchronized 的性能之争"></a>synchronized 的性能之争</h4><p>　在低并发的情况下（$threads \lt 4$），高版本的 JDK 里面 synchronized 实现同步的性能更高。超过 15 个线程之后，则建议使用 <a href="https://yuzhouwan.com/posts/27328/#并发编程">ReentrantLock</a> 可重入锁进行并发控制</p>
+<p>　如果可以使用 <a href="https://yuzhouwan.com/posts/31130/#ConcurrentHashMap-如何实现线程安全">ConcurrentHashMap</a> / <a href="https://yuzhouwan.com/posts/31915/#LongAdder">LongAdder</a>（分段锁）实现的应用场景，则尽量避免使用 synchronized 进行实现</p>
+<p>　另一方面，synchonrized 方法适用于重复 “释放锁，又获取锁” 的场景。我们可以利用 synchronized 的方法块使得锁，一直被持有，从而提高性能。例如，下面这个 StringBuffer 的场景，增加了 synchronized 块之后，可以使得性能与 StringBuilder 几乎无异</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="keyword">synchronized</span> (buffer) {</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9999999</span>; i++) {</span><br><span class="line">    buffer.append(i);</span><br><span class="line">    buffer.delete(<span class="number">0</span>, buffer.length() - <span class="number">1</span>);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/blob/master/yuzhouwan-hacker/src/test/java/com/yuzhouwan/hacker/algorithms/thread/sync/StringBufferTest.java">here</a>.<br>Tips: ConcurrentHashMap：Java 7 基于分段锁，Java 8 基于 CAS</p>
+<h2 id="参数调优层面"><a href="#参数调优层面" class="headerlink" title="参数调优层面"></a>参数调优层面</h2><h3 id="TimeSort"><a href="#TimeSort" class="headerlink" title="TimeSort"></a>TimeSort</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>　这里，列举技术群（群号见本文末尾）里讨论过的一个问题：ResourceManager crash because TimSort [<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/YARN-4743">YARN-4743</a>]</p>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>　依据报错信息，可定位出 Yarn 中 MergeSort 存在问题。随后，怀疑是 JDK7 中为了修复 JDK 本身的漏洞：比较器里面比较的两个值时，如果这两个值同时为空的话，则传入的顺序将决定比较的结果，因而破坏了比较器的 “传递性”。从而，使用 TimSort 替换了默认的 MergeSort 增强了 Comparator 的实现约束。更多可参见 Oracle 官网上已修复的 bugs 的归档列表：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6804124">JDK-6804124</a> : Replace “modified mergesort” in java.util.Arrays.sort with timsort</p>
+<h4 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h4><p>　最快的解决方式，便是屏蔽 JDK7 中新增的 “传递性” 检查（其实是一种倒退）。具体方式为，在 JVM 中配置 <code>java.util.Arrays.useLegacyMergeSort=true</code>，或者，在程序中设置对应的环境变量 <code>System.setProperty("java.util.Arrays.useLegacyMergeSort", "true")</code></p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>　最终，该问题在 Hadoop3.x 中得到解决，官方修复了传递性问题，使其满足 TimSort 的规范</p>
+<h3 id="G1GC"><a href="#G1GC" class="headerlink" title="G1GC"></a>G1GC</h3><p>　详见：《<a href="https://yuzhouwan.com/posts/31915/#G1GC">ZooKeeper 原理与优化 - G1GC</a>》</p>
+<h3 id="LongAdder"><a href="#LongAdder" class="headerlink" title="LongAdder"></a>LongAdder</h3><p>　详见：《<a href="https://yuzhouwan.com/posts/31915/#LongAdder">ZooKeeper 原理与优化 - LongAdder</a>》</p>
+<h3 id="AlwaysPreTouch"><a href="#AlwaysPreTouch" class="headerlink" title="AlwaysPreTouch"></a>AlwaysPreTouch</h3><p>　详见：《<a href="https://yuzhouwan.com/posts/31915/#swappiness">ZooKeeper 原理与优化 - swappiness</a>》</p>
+<h2 id="语种层面"><a href="#语种层面" class="headerlink" title="语种层面"></a>语种层面</h2><p>　在不同应用场景下，我们要如何选择出合适的 JVM 语言，来满足各种各样的开发需求呢？</p>
+<p>　一方面，我们可能需要 Java、<a href="https://yuzhouwan.com/posts/18651/">Scala</a> 此类静态编译的语言，通过编译时检查，来保证代码的安全性和一致性；而另一方面，则希望能够借助 JPython、Groovy 此类的动态语言，快速开发出我们想要的功能。下面，我们举两个比较常见的场景</p>
+<h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><p>　其一，利用 Scala 的表达性来编写 <strong>Scala Tester</strong>，使得单元测试的代码，更具有可读性</p>
+<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">DefineA</span> </span>{</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) {</span><br><span class="line">    bigMistake()</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="meta">@DefineAnnotation</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">bigMistake</span></span>(): <span class="type">Unit</span> = {</span><br><span class="line">    println(<span class="string">"bigMistake..."</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">UnitTestStyle</span> <span class="keyword">extends</span> <span class="title">FlatSpec</span></span></span><br><span class="line"><span class="class">  <span class="keyword">with</span> <span class="title">Matchers</span> <span class="keyword">with</span> <span class="title">OptionValues</span> <span class="keyword">with</span> <span class="title">Inside</span> <span class="keyword">with</span> <span class="title">Inspectors</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">DefineATest</span> <span class="keyword">extends</span> <span class="title">UnitTestStyle</span> </span>{</span><br><span class="line"></span><br><span class="line">  <span class="string">"DefineA's bigMistake method"</span> should <span class="string">"output a information"</span> in {</span><br><span class="line">    <span class="keyword">new</span> <span class="type">DefineA</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-bigdata/yuzhouwan-bigdata-spark/src/test/scala/com/yuzhouwan/bigdata/spark">here</a>.</p>
+<h3 id="Groovy"><a href="#Groovy" class="headerlink" title="Groovy"></a>Groovy</h3><p>　其二，利用 Groovy 的简洁语法、开放类特性等，来完成 <strong>DSL</strong></p>
+<figure class="highlight groovy"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> invokeMethod(String name, args) {</span><br><span class="line">  print <span class="string">"&lt;${name}"</span></span><br><span class="line">  args.each {</span><br><span class="line">    arg -&gt;</span><br><span class="line">      <span class="keyword">if</span> (arg <span class="keyword">instanceof</span> Map) {</span><br><span class="line">        arg.each {</span><br><span class="line">          print <span class="string">" ${it.key} ='${it.value}' "</span></span><br><span class="line">        }</span><br><span class="line">      } <span class="keyword">else</span> <span class="keyword">if</span> (arg <span class="keyword">instanceof</span> Closure) {</span><br><span class="line">        print <span class="string">'&gt;'</span></span><br><span class="line">        arg.delegate = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">def</span> value = arg.call()</span><br><span class="line">        <span class="keyword">if</span> (value) {</span><br><span class="line">          print <span class="string">"${value}"</span></span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">  }</span><br><span class="line">  println <span class="string">"&lt;/${name}&gt;"</span></span><br><span class="line">}</span><br><span class="line">html {</span><br><span class="line">  head {</span><br><span class="line">    meta {</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  body {</span><br><span class="line">    table(<span class="attr">style:</span> <span class="string">'margin:2px;'</span>) {</span><br><span class="line">      tr(<span class="string">'class'</span>: <span class="string">'trClass'</span>, <span class="attr">style:</span> <span class="string">'padding:2px;'</span>) {</span><br><span class="line">        td { <span class="string">'http://'</span> }</span><br><span class="line">        td { <span class="string">'yuzhouwan.'</span> }</span><br><span class="line">        td { <span class="string">'com'</span> }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-hacker/src/main/groovy/com/yuzhouwan/hacker/dsl">here</a>.</p>
+<h2 id="内部机制"><a href="#内部机制" class="headerlink" title="内部机制"></a>内部机制</h2><h3 id="实时-GC-的原理"><a href="#实时-GC-的原理" class="headerlink" title="实时 GC 的原理"></a>实时 GC 的原理</h3><p>　首先，需要明确定义什么是实时 GC（RTGC，Real-time Collection），即真正的 RTGC 要求对 GC 中 Mutator 赋值器的中断进行精确的控制</p>
+<p>　常见的回收器 和 实时 GC 调度策略，有如下实现：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">回收器 Collector</th>
+<th style="text-align:center">工作机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">万物静止式回收器 Stop-the-world collector</td>
+<td style="text-align:center">Mutator 在内存分配，发现内存不足时，发起 GC</td>
+</tr>
+<tr>
+<td style="text-align:left">增量式回收器 Incremental collector</td>
+<td style="text-align:center">要求 Mutator 不仅在内存分配时，还需要在 访问堆（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C">利用 “读写屏障” 的部分有序 来提高性能</a>）的时候检查是否需要发起 GC</td>
+</tr>
+<tr>
+<td style="text-align:left">并发回收器 Concurrent collector</td>
+<td style="text-align:center">GC 与 Mutator 的工作 并发执行</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">GC 调度 Scheduling</th>
+<th style="text-align:center">调度机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">基于工作的调度 Work-based scheduling</td>
+<td style="text-align:center">按照 Mutator 的每个工作单元分配 GC 任务</td>
+</tr>
+<tr>
+<td style="text-align:left">基于间隙的调度 Slack-based scheduling</td>
+<td style="text-align:center">实时任务的调度间隙完成 GC</td>
+</tr>
+<tr>
+<td style="text-align:left">基于时间的调度 Time-based scheduling</td>
+<td style="text-align:center">预留出独占式的 GC 时间</td>
+</tr>
+<tr>
+<td style="text-align:left">整合式的调度 <code>税收与开支</code> 策略 Tax-and-Spend</td>
+<td style="text-align:center">允许不同的线程可以有着不同的 Mutator 使用率，通过线程分配的弹性，尽可能地减少线程中断</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>　实际上，对吞吐量的提高 和 时间窗口、延时的缩小，在 Tax-and-Spend 调度策略 应用到 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://researcher.ibm.com/researcher/files/us-hindm/Bacon.pdf">Metronome 回收器</a> 之后，得以证实</p>
+<h3 id="沙箱"><a href="#沙箱" class="headerlink" title="沙箱"></a>沙箱</h3><p><img data-src="/picture/jvm/jvm_sandbox.jpg" alt></p>
+<center>（利用 <a href="https://github.com/staruml" target="_blank" rel="external nofollow noopener noreferrer">StarUML</a>™ 绘制而成）</center>
+
+
+
+
+
+<h3 id="ClassLoader-隔离"><a href="#ClassLoader-隔离" class="headerlink" title="ClassLoader 隔离"></a>ClassLoader 隔离</h3><p>　初步了解 JVM 沙箱的原理之后，我们便可以尝试解决一些安全性相关的问题了。下面以大型项目中，经常会遇到的依赖冲突问题为例。介绍一种以 ClassLoader 隔离来解决该问题的方式</p>
+<h4 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h4><p>　<a href="https://yuzhouwan.com/posts/5845/">Apache Druid</a> 中 com.sun.jersey（1.19）和 Dataflow 中 org.glassfish.jersey（2.25.1）冲突问题</p>
+<p>Tips: Dataflow 是自研的、类似于 <a href="https://yuzhouwan.com/posts/26002/#Kafka-Connect">Kafka Connect</a> 的框架</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><h5 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h5><p>　Apache Druid 中升级 Jersey（但是大面积改动开源社区的代码，不利于后期升级与维护）</p>
+<h5 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h5><p>　降级 Dataflow 中的 Jersey（后续再接入其他的组件，Jersey 又不一样了，又该如何协调；降级后，可能部分功能不支持；改造的工作量也不小）</p>
+<h5 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h5><p>　使用其他的 RESTful 组件（Dropwizard / Ninja / Play / RestExpress / Restlet / Restx / SpringBoot / RestEasy 等）</p>
+<p>　简单调研后，首选 RestEasy，不像 SpringBoot 那么重，比 Jersey 性能更好</p>
+<h5 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h5><p>　把 Dataflow 里面的依赖，都用 shade 隐藏起来，可以彻底解决和其他接入组件的依赖冲突的问题，避免后续又发现除了 Jersey 其他的冲突</p>
+<p>　同时，因为 glassfish 里面存在类似 <code>public static class Builder implements javax.ws.rs.client.Invocation.Builder</code> 全限定名的写法，是无法被 shade 的，所以只能 shade 去隐藏 <code>com.sun.jersey</code></p>
+<p>Tips: Shade 插件的具体使用方法，详见《<a href="https://yuzhouwan.com/posts/2254/#Shade-插件解决-Jar-多版本共存">Maven 高级玩法</a>》</p>
+<h5 id="方案五"><a href="#方案五" class="headerlink" title="方案五"></a>方案五</h5><p>　使用 ClassLoader 或者 OSGi 进行隔离（同时，还可以将 Dataflow 里面的 K2H / K2ES / K2D 组件做成 <strong>热部署</strong>）</p>
+<p>　另外，前不久刚 release 的 Java 9 中的模块化，也可以完成组件隔离的工作。不过，考虑到需要保证生产级应用的 SLA 要求，暂不采用（截止 2018-6-5 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase9-3934878.html">JDK 9</a> 最新 release 版本为 v9.0.4）</p>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ClassLoader</td>
+<td>实现简单</td>
+<td>复杂功能，实现相对困难</td>
+</tr>
+<tr>
+<td>OSGi</td>
+<td>OSGi 规范有很多成熟的框架；<br>轻松实现模块化，插件式加载卸载组件；<br>支持热部署</td>
+<td>框架过重，容易引入风险</td>
+</tr>
+<tr>
+<td>Java 9 Module</td>
+<td>从 JVM 内核层面对模块化进行支持</td>
+<td>目前尚未成熟</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="编码实战"><a href="#编码实战" class="headerlink" title="编码实战"></a>编码实战</h4><h5 id="组件拆分"><a href="#组件拆分" class="headerlink" title="组件拆分"></a>组件拆分</h5><p>Tips: 如何利用 assembly 插件对项目进行组件拆分，详见我的另一篇博客《<a href="https://yuzhouwan.com/posts/2254/#Assembly-插件">Maven 高级玩法</a>》</p>
+<h5 id="判断是否为父子类关系"><a href="#判断是否为父子类关系" class="headerlink" title="判断是否为父子类关系"></a>判断是否为父子类关系</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果是由不同的 ClassLoader 加载的，即使是父子类关系，仍然无法做类型转换</span></span><br><span class="line"><span class="comment">// 不过可以通过 序列化 / 反序列化 的方式，绕过这个问题</span></span><br><span class="line">assertEquals(<span class="keyword">true</span>, A.class.isAssignableFrom(B.class));</span><br><span class="line">assertEquals(<span class="keyword">true</span>, B.class.isAssignableFrom(C.class));</span><br><span class="line">assertEquals(<span class="keyword">true</span>, A.class.isAssignableFrom(C.class));</span><br><span class="line">assertEquals(<span class="keyword">true</span>, A.class.getClassLoader().equals(B.class.getClassLoader()));</span><br><span class="line">assertEquals(<span class="keyword">true</span>, B.class.getClassLoader().equals(C.class.getClassLoader()));</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>{</span><br><span class="line">}</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">implements</span> <span class="title">A</span> </span>{</span><br><span class="line">}</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span> </span>{</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/blob/master/yuzhouwan-hacker/src/test/java/com/yuzhouwan/hacker/jvm/ClassTest.java#L18">here</a>.</p>
+<h5 id="子类强转为父类"><a href="#子类强转为父类" class="headerlink" title="子类强转为父类"></a>子类强转为父类</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> failed = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">try</span> {</span><br><span class="line">    B b = (B) C.class.newInstance();</span><br><span class="line">} <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">    failed = <span class="keyword">true</span>;</span><br><span class="line">}</span><br><span class="line">assertEquals(<span class="keyword">false</span>, failed);</span><br><span class="line">failed = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">try</span> {</span><br><span class="line">    C c = (C) B.class.newInstance();</span><br><span class="line">} <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">    failed = <span class="keyword">true</span>;</span><br><span class="line">}</span><br><span class="line">assertEquals(<span class="keyword">true</span>, failed);</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/blob/master/yuzhouwan-hacker/src/test/java/com/yuzhouwan/hacker/jvm/ClassTest.java#L35">here</a>.</p>
+<h5 id="对不同-ClassLoader-下的类进行类型强转"><a href="#对不同-ClassLoader-下的类进行类型强转" class="headerlink" title="对不同 ClassLoader 下的类进行类型强转"></a>对不同 ClassLoader 下的类进行类型强转</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">currentThread().setContextClassLoader(newClassLoader);</span><br><span class="line"><span class="keyword">try</span> (ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">     ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(baos)) {</span><br><span class="line">    oos.writeObject(clazz.newInstance());</span><br><span class="line">    <span class="keyword">try</span> (ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">         ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(bais) {</span><br><span class="line">             <span class="meta">@Override</span></span><br><span class="line">             <span class="keyword">protected</span> Class&lt;?&gt; resolveClass(ObjectStreamClass desc) {</span><br><span class="line">                 String name = desc.getName();</span><br><span class="line">                 <span class="keyword">try</span> {</span><br><span class="line">                     <span class="comment">// 这里需要覆写 resolveClass 方法，否则默认会在 readObject 的时候，</span></span><br><span class="line">                     <span class="comment">// 用 sun.misc.VM#latestUserDefinedLoader 对 Class 进行解析判断，</span></span><br><span class="line">                     <span class="comment">// 并报错 “无法进行类型强转”</span></span><br><span class="line">                     <span class="keyword">return</span> Class.forName(name, <span class="keyword">false</span>, newClassLoader);</span><br><span class="line">                 } <span class="keyword">catch</span> (ClassNotFoundException ex) {</span><br><span class="line">                     <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(ex);</span><br><span class="line">                 }</span><br><span class="line">             }</span><br><span class="line">         }) {</span><br><span class="line">        <span class="keyword">return</span> newClassLoader.loadClass(DataflowBase.class.getName()).cast(ois.readObject());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="自定义-ClassLoader"><a href="#自定义-ClassLoader" class="headerlink" title="自定义 ClassLoader"></a>自定义 ClassLoader</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLClassLoader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PluginClassLoader</span> <span class="keyword">extends</span> <span class="title">URLClassLoader</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String JAR_POSTFIX = <span class="string">".jar"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String URL_PROTOCOL_FILE = <span class="string">"file"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> {</span><br><span class="line">        ClassLoader.registerAsParallelCapable();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PluginClassLoader</span><span class="params">(ClassLoader parent, String... jarPaths)</span> </span>{</span><br><span class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> URL[]{}, parent);</span><br><span class="line">        <span class="keyword">for</span> (String jarPath : jarPaths) loadJar(jarPath);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PluginClassLoader</span><span class="params">(String... jarPaths)</span> </span>{</span><br><span class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> URL[]{}, <span class="keyword">null</span>);   <span class="comment">// MUST NOT: set parent classLoader as null!</span></span><br><span class="line">        <span class="keyword">for</span> (String jarPath : jarPaths) loadJar(jarPath);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="keyword">throws</span> ClassNotFoundException {</span><br><span class="line"><span class="comment">//        System.out.println(String.format("Loading class: %s...", name));</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.loadClass(name);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException {</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.findClass(name);</span><br><span class="line">        } <span class="keyword">catch</span> (ClassNotFoundException e) {</span><br><span class="line">            <span class="keyword">return</span> PluginClassLoader.class.getClassLoader().loadClass(name);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadJar</span><span class="params">(String dirPath)</span> </span>{</span><br><span class="line">        File dir = <span class="keyword">new</span> File(dirPath);</span><br><span class="line">        <span class="keyword">if</span> (!dir.exists() || !dir.isDirectory()) <span class="keyword">return</span>;</span><br><span class="line">        File[] files;</span><br><span class="line">        <span class="keyword">if</span> ((files = dir.listFiles()) == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">for</span> (File file : files) {</span><br><span class="line">            <span class="keyword">if</span> (file == <span class="keyword">null</span> || !file.isFile() || !file.getName().endsWith(JAR_POSTFIX)) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                <span class="keyword">this</span>.addURL(file);</span><br><span class="line">            } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line"><span class="comment">//                e.printStackTrace();    // skip failed url.</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addURL</span><span class="params">(File file)</span> </span>{</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            <span class="keyword">super</span>.addURL(<span class="keyword">new</span> URL(URL_PROTOCOL_FILE, <span class="keyword">null</span>, file.getCanonicalPath()));</span><br><span class="line">        } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(String.format(<span class="string">"Cannot add url [%s]!"</span>, file.getAbsolutePath()), e);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="主体逻辑"><a href="#主体逻辑" class="headerlink" title="主体逻辑"></a>主体逻辑</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 ClassLoader 的反射进行对象初始化</span></span><br><span class="line"><span class="comment">// 并使用对象流，避免不同 ClassLoader 之间类型转换的问题</span></span><br><span class="line">(String type) -&gt; AccessController.&lt;AbstractBean&gt;doPrivileged(</span><br><span class="line"> (PrivilegedAction) () -&gt; {</span><br><span class="line">     ClassLoader old = currentThread().getContextClassLoader();</span><br><span class="line">     <span class="keyword">try</span> {</span><br><span class="line">         Class&lt;? extends AbstractBean&gt; parse = (Class&lt;? extends AbstractBean&gt;) AbstractBean.parse(type);</span><br><span class="line">         <span class="keyword">final</span> PluginClassLoader plugin = PluginUtils.CLASSLOADERS.get(type);</span><br><span class="line">         currentThread().setContextClassLoader(plugin);</span><br><span class="line">         <span class="keyword">try</span> (ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">              ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(baos)) {</span><br><span class="line">             oos.writeObject(parse.newInstance());</span><br><span class="line">             <span class="keyword">try</span> (ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">                  ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(bais) {</span><br><span class="line">                      <span class="meta">@Override</span></span><br><span class="line">                      <span class="keyword">protected</span> Class&lt;?&gt; resolveClass(ObjectStreamClass desc) {</span><br><span class="line">                          String name = desc.getName();</span><br><span class="line">                          <span class="keyword">try</span> {</span><br><span class="line">                              <span class="keyword">return</span> Class.forName(name, <span class="keyword">false</span>, plugin);</span><br><span class="line">                          } <span class="keyword">catch</span> (ClassNotFoundException ex) {</span><br><span class="line">                              <span class="keyword">throw</span> <span class="keyword">new</span> FmException(ex);</span><br><span class="line">                          }</span><br><span class="line">                      }</span><br><span class="line">                  }) {</span><br><span class="line">                 Object readObj = ois.readObject();</span><br><span class="line">                   <span class="keyword">return</span> (AbstractBean) readObj;</span><br><span class="line">                 <span class="keyword">return</span> plugin.loadClass(AbstractBean.class.getName()).cast(readObj);</span><br><span class="line">             }</span><br><span class="line">         }</span><br><span class="line">     } <span class="keyword">catch</span> (InstantiationException | IllegalAccessException | IOException | ClassNotFoundException e) {</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">     } <span class="keyword">finally</span> {</span><br><span class="line">         <span class="keyword">if</span> (old != <span class="keyword">null</span>) currentThread().setContextClassLoader(old);</span><br><span class="line">     }</span><br><span class="line"> });</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断传入的 type 类型是否是合法的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Class&lt;?&gt; parse(String type) <span class="keyword">throws</span> FmException {</span><br><span class="line">    Type subType = Type.OTHER;</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        subType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));</span><br><span class="line">    } <span class="keyword">catch</span> (IllegalArgumentException ignored) {</span><br><span class="line">    }</span><br><span class="line">    String className = type;</span><br><span class="line">    <span class="keyword">if</span> (!Type.OTHER.equals(subType)) className = subType.getTypeName();</span><br><span class="line">    <span class="keyword">return</span> PluginUtils.parseType(type, className, AbstractBean.class);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 依据 type 类型加载指定目录下的依赖包，并加载对应的 class</span></span><br><span class="line"><span class="meta">@SuppressWarnings("unchecked")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Class&lt;?&gt; parseType(String type, String className, Class&lt;T&gt; base) <span class="keyword">throws</span> FmException {</span><br><span class="line">    ClassLoader oldClassLoader = currentThread().getContextClassLoader();</span><br><span class="line">    ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        PluginClassLoader pc;</span><br><span class="line">        <span class="keyword">if</span> (!CLASSLOADERS.containsKey(type))</span><br><span class="line">            pc = <span class="keyword">new</span> PluginClassLoader(<span class="comment">/*oldClassLoader*/</span>systemClassLoader,</span><br><span class="line">                    getPluginPathByTypeName(type), getCommonPath());</span><br><span class="line">        <span class="keyword">else</span> pc = CLASSLOADERS.get(type);</span><br><span class="line">        currentThread().setContextClassLoader(pc);</span><br><span class="line">        Class&lt;?&gt; baseClazz = pc.loadClass(base.getName());</span><br><span class="line">        Class&lt;?&gt; subClazz = pc.loadClass(className);</span><br><span class="line">        <span class="keyword">if</span> (baseClazz.isAssignableFrom(subClazz)) {</span><br><span class="line">            CLASSLOADERS.put(type, pc);</span><br><span class="line">            <span class="keyword">return</span> subClazz;</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(String.format(<span class="string">"Class %s is not a child of %s!"</span>, className, base.getName()));</span><br><span class="line">    } <span class="keyword">catch</span> (ClassNotFoundException e) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Unable to load type: "</span>.concat(className), e);</span><br><span class="line">    }<span class="comment">/* finally {</span></span><br><span class="line"><span class="comment">        currentThread().setContextClassLoader(oldClassLoader);</span></span><br><span class="line"><span class="comment">    }*/</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-hacker/src/main/java/com/yuzhouwan/hacker/jvm/classloader">here</a>.</p>
+<h3 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h3><p>　内存模型中，主要的组成分为 <strong>主内存</strong> 和 <strong>工作内存</strong> 两部分（线程访问工作内存，工作内存通过 8 种原子性的操作，来和主内存交互），特性包括 <strong>原子性</strong>、<strong>可见性</strong> 和 <strong>有序性</strong>（其中，有序性 由 volatile / synchronized / happens-before 原则 来保证）</p>
+<p><img data-src="/picture/jvm/jvm.png" alt></p>
+<center>（利用 <a href="https://products.office.com/en-us/visio/visio-online" target="_blank" rel="external nofollow noopener noreferrer">Visio</a>™ 绘制而成）</center>
+
+
+
+<p><br></p>
+<p>　相信熟知 JVM 相关知识，对于提升日常编程水平，还有很多方面可以探索。限于本人有限的水平，暂时只能总结出以上几点。希望此文能起到抛砖引玉的作用，期待各位精彩的观点和建议 ^_^</p>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190816/" rel="bookmark">Gradle 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/18651/" rel="bookmark">Scala 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/20644/" rel="bookmark">Apache Flink</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2254/" rel="bookmark">Maven 高级玩法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190413/" rel="bookmark">那些绕不过去的 Java 知识点</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/27328/" title="如何运用 JVM 知识提高编程水平">https://yuzhouwan.com/posts/27328/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Groovy/" rel="tag"># Groovy</a>
+              <a href="/tags/Scala/" rel="tag"># Scala</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/4735/" rel="prev" title="Real-time ML with Spark">
+      <i class="fa fa-chevron-left"></i> Real-time ML with Spark
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/54206/" rel="next" title="大数据生态圈里的一致性算法">
+      大数据生态圈里的一致性算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-JVM"><span class="nav-number">1.</span> <span class="nav-text">什么是 JVM?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-JVM"><span class="nav-number">2.</span> <span class="nav-text">为什么要有 JVM?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">跨平台性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">多语言性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%B1%82%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">编码层面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92-vs-%E5%B0%BE%E9%80%92%E5%BD%92"><span class="nav-number">3.1.</span> <span class="nav-text">递归 vs 尾递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%B0%83%E7%94%A8"><span class="nav-number">3.1.1.</span> <span class="nav-text">循环调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-number">3.1.2.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BE%E9%80%92%E5%BD%92"><span class="nav-number">3.1.3.</span> <span class="nav-text">尾递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ReentrantReadWriteLock-%E9%94%81%E7%9A%84%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="nav-number">3.2.1.</span> <span class="nav-text">ReentrantReadWriteLock 锁的公平性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized-%E7%9A%84%E6%80%A7%E8%83%BD%E4%B9%8B%E4%BA%89"><span class="nav-number">3.2.2.</span> <span class="nav-text">synchronized 的性能之争</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98%E5%B1%82%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">参数调优层面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TimeSort"><span class="nav-number">4.1.</span> <span class="nav-text">TimeSort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">4.1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">4.1.3.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">4.1.4.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1GC"><span class="nav-number">4.2.</span> <span class="nav-text">G1GC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LongAdder"><span class="nav-number">4.3.</span> <span class="nav-text">LongAdder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AlwaysPreTouch"><span class="nav-number">4.4.</span> <span class="nav-text">AlwaysPreTouch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E7%A7%8D%E5%B1%82%E9%9D%A2"><span class="nav-number">5.</span> <span class="nav-text">语种层面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala"><span class="nav-number">5.1.</span> <span class="nav-text">Scala</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Groovy"><span class="nav-number">5.2.</span> <span class="nav-text">Groovy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">内部机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%97%B6-GC-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">实时 GC 的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E7%AE%B1"><span class="nav-number">6.2.</span> <span class="nav-text">沙箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassLoader-%E9%9A%94%E7%A6%BB"><span class="nav-number">6.3.</span> <span class="nav-text">ClassLoader 隔离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="nav-number">6.3.1.</span> <span class="nav-text">场景描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">6.3.2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="nav-number">6.3.2.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89"><span class="nav-number">6.3.2.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E5%9B%9B"><span class="nav-number">6.3.2.4.</span> <span class="nav-text">方案四</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%94"><span class="nav-number">6.3.2.5.</span> <span class="nav-text">方案五</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">6.3.3.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%AE%9E%E6%88%98"><span class="nav-number">6.3.4.</span> <span class="nav-text">编码实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%8B%86%E5%88%86"><span class="nav-number">6.3.4.1.</span> <span class="nav-text">组件拆分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E7%88%B6%E5%AD%90%E7%B1%BB%E5%85%B3%E7%B3%BB"><span class="nav-number">6.3.4.2.</span> <span class="nav-text">判断是否为父子类关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB%E5%BC%BA%E8%BD%AC%E4%B8%BA%E7%88%B6%E7%B1%BB"><span class="nav-number">6.3.4.3.</span> <span class="nav-text">子类强转为父类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E4%B8%8D%E5%90%8C-ClassLoader-%E4%B8%8B%E7%9A%84%E7%B1%BB%E8%BF%9B%E8%A1%8C%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC"><span class="nav-number">6.3.4.4.</span> <span class="nav-text">对不同 ClassLoader 下的类进行类型强转</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-ClassLoader"><span class="nav-number">6.3.4.5.</span> <span class="nav-text">自定义 ClassLoader</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E4%BD%93%E9%80%BB%E8%BE%91"><span class="nav-number">6.3.4.6.</span> <span class="nav-text">主体逻辑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">6.4.</span> <span class="nav-text">内存模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/27328/";
+    this.page.identifier = "posts/27328/";
+    this.page.title = "如何运用 JVM 知识提高编程水平";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '225083070501431db0925f43a758a995',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

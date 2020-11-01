@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Presto 是什么？ Presto™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Presto：分布式 SQL 查询引擎">
+<meta property="og:url" content="https://yuzhouwan.com/posts/200906/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="Presto 是什么？ Presto™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (P">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_architecture.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_architecture_with_sql.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_sql_execute.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_connector.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_vs_hive.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/prestosql_standalone_ui.jpg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/prestosql_query_details.jpg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_star_history.jpg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2020-09-06T15:06:25.000Z">
+<meta property="article:modified_time" content="2020-11-01T15:45:10.358Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Apache Druid">
+<meta property="article:tag" content="PrestoDB">
+<meta property="article:tag" content="Apache Hive">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Presto">
+<meta property="article:tag" content="PrestoSQL">
+<meta property="article:tag" content="MPP">
+<meta property="article:tag" content="SPI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/presto/presto_architecture.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/200906/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Presto：分布式 SQL 查询引擎 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/200906/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Presto：分布式 SQL 查询引擎
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-06 23:06:25" itemprop="dateCreated datePublished" datetime="2020-09-06T23:06:25+08:00">2020-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-01 23:45:10" itemprop="dateModified" datetime="2020-11-01T23:45:10+08:00">2020-11-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>34k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>31 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Presto-是什么？"><a href="#Presto-是什么？" class="headerlink" title="Presto 是什么？"></a>Presto 是什么？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestodb.io/">Presto</a></strong>™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.</p>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/">Presto</a></strong>™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.</p>
+</blockquote>
+<div class="note success">下文将详细介绍二者的区别</div>
+
+
+
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="Coordinator"><a href="#Coordinator" class="headerlink" title="Coordinator"></a>Coordinator</h4><p>　负责管理 Worker 和 MetaStore 节点，以及接受客户端查询请求，并进行 SQL 的语法解析（Parser）、执行计划生成与优化（Planner）和查询任务的调度（Scheduler）</p>
+<div class="note info">Coordinator 通过 RESTful 接口与 Client 和 Worker 交互</div>
+
+<h4 id="Worker"><a href="#Worker" class="headerlink" title="Worker"></a>Worker</h4><p>　负责具体的查询计算和数据读写</p>
+<h4 id="Discovery-Server"><a href="#Discovery-Server" class="headerlink" title="Discovery Server"></a>Discovery Server</h4><p>　负责发现集群的各个节点，用于节点间心跳监控</p>
+<div class="note success">一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署</div>
+
+<a id="more"></a>
+<h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><h4 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h4><p>　负责访问不同的数据源，相当于访问数据库的驱动</p>
+<h4 id="Catalog"><a href="#Catalog" class="headerlink" title="Catalog"></a>Catalog</h4><p>　负责记录 Schema 信息和 DataSource 的引用。Presto 中一个完整的表名通过 <code>&lt;Catalog&gt;.&lt;Schema&gt;.&lt;Table&gt;</code> 组合表示。例如 <code>hive.test_data.test</code>，则表示：</p>
+<ul>
+<li>Catalog 为 <code>hive</code></li>
+<li>Schema 为 <code>test_data</code></li>
+<li>Table 为 <code>test</code></li>
+</ul>
+<h4 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h4><p>　一种组织 Table 的方式</p>
+<h4 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h4><p>　等同于关系型数据库中表的概念</p>
+<h3 id="查询模型"><a href="#查询模型" class="headerlink" title="查询模型"></a>查询模型</h3><h4 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h4><p>　兼容 ANSI 标准的 SQL 字符串</p>
+<h4 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h4><p>　当 Presto 解析一条 SQL 语句时，会将其转换为 Query，并创建一个分布式 Query 执行计划</p>
+<div class="note info">整个查询过程涉及 Stage、Task、Split、Connector 和 DataSource 等组件的协同工作</div>
+
+<h4 id="Stage"><a href="#Stage" class="headerlink" title="Stage"></a>Stage</h4><p>　当 Presto 执行查询时，会进一步分为多个 Stage 阶段来执行</p>
+<h4 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h4><p>　Stage 包含了一系列的 Task，而 Task 才是真正在 Worker 之上被执行的逻辑</p>
+<h4 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h4><p>　Split 主要是为了拆分大规模数据集，以便 Task 在此之上执行</p>
+<h4 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h4><p>　Driver 是一系列运算实例，可以理解为是内存中的一组物理运算符</p>
+<div class="note info">Task 可以包含一个或者多个并行的 Driver</div>
+
+<h4 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h4><p>　Operator 可以消费（Consume）、转换（Transform）和生产（Produce）数据。例如，一个 Table Scan 从一个 Connector 中 fetch 数据，并生产数据以供给 Operator 消费</p>
+<h4 id="Exchange"><a href="#Exchange" class="headerlink" title="Exchange"></a>Exchange</h4><p>　Exchanage 负责在 Presto 的节点之间，传输一个 Query 的不同 Stage 的数据。Task 可以生产数据到一个 output 缓存区，也可以通过 Exchange 客户端消费其他 Task 生产的数据</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/zh-hans/Ad_hoc">Ad Hoc</a>（即席查询，秒级或分钟级的查询响应）</li>
+<li>比 Hive 快 10x 倍<ul>
+<li>完全基于内存的并行计算</li>
+<li>流水线</li>
+<li>本地化计算</li>
+<li>动态编译执行计划</li>
+<li>内存规划</li>
+<li>近似查询（类似于 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sameeragarwal/blinkdb">BlinkDB</a>）</li>
+<li><a href="https://yuzhouwan.com/posts/27328/">GC</a> 控制</li>
+</ul>
+</li>
+<li>支持多种数据源（Hive、<a href="https://yuzhouwan.com/posts/5845/">Druid</a>、<a href="https://yuzhouwan.com/posts/26002/">Kafka</a>、<a href="https://yuzhouwan.com/posts/39683/#MySQL">MySQL</a>、MongoDB、<a href="https://yuzhouwan.com/posts/2129/">Redis</a>、<a href="https://yuzhouwan.com/posts/31915/#JMX">JMX</a>、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC">ORC</a> 等）</li>
+<li>Client 支持多种编程语言（<a href="https://yuzhouwan.com/posts/190413/">Java</a>、<a href="https://yuzhouwan.com/posts/43687/">Python</a>、Ruby、PHP、<a href="https://yuzhouwan.com/posts/23363/">Node.js</a> 等）</li>
+<li>支持 JDBC / ODBC 连接</li>
+<li>支持 Kerberos 认证</li>
+<li>支持查询 LZO 压缩的数据</li>
+<li>ANSI <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/SQL">SQL</a>（窗口函数、Join、聚合、复杂查询等）</li>
+</ul>
+<div class="note info">Ad Hoc（拉丁短语，英语直译为 for this）即席查询，用户根据实际需求，灵活地选择查询条件，系统生成相应的统计报表。与普通应用查询不同的是，普通应用查询需要通过编程定制开发</div>
+<div class="note info">即席（jí xí），表示入席、就位、当场等含义</div>
+<div class="note info">ANSI（American National Standards Institute）美国国家标准学会</div>
+
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul>
+<li>不支持 SQL 的隐式类型转换，而 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types">Hive 支持</a></li>
+<li>不支持容错<br>查询请求会分发到多个 Worker 上，当任意一个 Worker 执行失败，Master 会感知到，并认为整个查询请求失败了。并且 Presto 并没有重试机制，所以需要业务端完成重试</li>
+</ul>
+<div class="note success">Presto 属于强数据类型，并不支持类型的隐式转换，所以无法进行不同数据类型之间的比较，例如 '2' &gt; 1 等。不过，在对应算子中增加新的语义行为即可支持。下文将介绍具体的编码过程</div>
+
+
+
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img data-src="/picture/presto/presto_architecture.png" alt="Presto Architecture"></p>
+<center>（图片来源：<a href="https://medium.com/@adirmashiach/facebook-prestodb-full-review-4ba59720a92" target="_blank" rel="external nofollow noopener noreferrer">medium.com</a>™）</center>
+
+<p><img data-src="/picture/presto/presto_architecture_with_sql.png" alt="Presto Architecture with SQL"></p>
+<center>（图片来源：<a href="https://www.slideshare.net/Hadoop_Summit/presto-facebook" target="_blank" rel="external nofollow noopener noreferrer">slideshare.net</a>™）</center>
+
+<div class="note info">从架构图可以看出，Presto 采用的是经典的 Master-Slave 模型</div>
+
+<h3 id="SQL-执行流程图"><a href="#SQL-执行流程图" class="headerlink" title="SQL 执行流程图"></a>SQL 执行流程图</h3><p><img data-src="/picture/presto/presto_sql_execute.png" alt="Presto SQL Execute"></p>
+<center>（图片来源：<a href="https://www.cnblogs.com/sorco/p/7060166.html" target="_blank" rel="external nofollow noopener noreferrer">cnblogs.com</a>™）</center>
+
+<h3 id="Connector-交互图"><a href="#Connector-交互图" class="headerlink" title="Connector 交互图"></a>Connector 交互图</h3><p><img data-src="/picture/presto/presto_connector.png" alt="Presto Connector"></p>
+<center>（图片来源：<a href="https://www.slideshare.net/Hadoop_Summit/presto-facebook" target="_blank" rel="external nofollow noopener noreferrer">slideshare.net</a>™）</center>
+
+<h3 id="交互时序图"><a href="#交互时序图" class="headerlink" title="交互时序图"></a>交互时序图</h3><pre class="mermaid">sequenceDiagram
+
+participant Client
+participant Coordinator
+participant Worker
+participant Connector
+participant Discovery Server
+
+Client -&gt;&gt;+ Coordinator : query
+Coordinator -&gt;&gt;+ Worker : choose workers
+Worker -&gt;&gt;- Coordinator : return worker list
+Coordinator -&gt;&gt;+ Worker : send task
+Worker -&gt;&gt;+ Connector : load data
+Connector -&gt;&gt;- Worker : return data
+Worker -&gt;&gt; Worker : execute task
+Worker -&gt;&gt;- Coordinator : return result
+Coordinator -&gt;&gt;- Client : return result
+loop regularly
+  Coordinator --&gt;&gt; Discovery Server : heart beat
+  Worker --&gt;&gt; Discovery Server : heart beat
+end</pre>
+
+<div class="note info">其中，与 Discovery Server 的心跳并不参与到查询过程中</div>
+<div class="note info">集群状态感知的时间间隔为 5s，具体细节详见 io.prestosql.metadata.DiscoveryNodeManager#startPollingNodeStates</div>
+
+<h3 id="Service-Discovery"><a href="#Service-Discovery" class="headerlink" title="Service Discovery"></a>Service Discovery</h3><p>　Presto 并不是由 Worker 主动发送心跳，而是 Discovery Server 定时探测节点是否存活。内部基于 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/airlift/discovery">Airlift</a> 框架来实现服务发现，通过 HTTP 协议进行通讯。在 <code>etc/config.properties</code> 文件中配置的 <code>discovery.uri</code> 参数，会透传给 Airlift 框架。如果，我们将 <code>discovery.uri</code> 参数，设置为 <code>http://127.0.0.1:9999</code>，则可以通过访问 <code>http://127.0.0.1:9999/v1/service</code> 地址，获取到所有注册的服务（包括服务类型、ID、通讯地址、服务所在的节点等信息），具体返回内容如下：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"environment"</span>: <span class="string">"presto"</span>,</span><br><span class="line">  <span class="attr">"services"</span>: [</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"1f538ad9-e4b0-40a2-88a7-8e901b6d8ce6"</span>,</span><br><span class="line">      <span class="attr">"nodeId"</span>: <span class="string">"presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"presto-coordinator"</span>,</span><br><span class="line">      <span class="attr">"pool"</span>: <span class="string">"general"</span>,</span><br><span class="line">      <span class="attr">"location"</span>: <span class="string">"/presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: {</span><br><span class="line">        <span class="attr">"http"</span>: <span class="string">"http://127.0.0.1:9999"</span>,</span><br><span class="line">        <span class="attr">"http-external"</span>: <span class="string">"http://127.0.0.1:9999"</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"89a0bf46-a949-4d62-8c65-c6fb9afe1bb2"</span>,</span><br><span class="line">      <span class="attr">"nodeId"</span>: <span class="string">"presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"discovery"</span>,</span><br><span class="line">      <span class="attr">"pool"</span>: <span class="string">"general"</span>,</span><br><span class="line">      <span class="attr">"location"</span>: <span class="string">"/presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: {</span><br><span class="line">        <span class="attr">"http"</span>: <span class="string">"http://127.0.0.1:9999"</span>,</span><br><span class="line">        <span class="attr">"http-external"</span>: <span class="string">"http://127.0.0.1:9999"</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"253a93c3-ebe9-46cf-a0ee-41e7de56c620"</span>,</span><br><span class="line">      <span class="attr">"nodeId"</span>: <span class="string">"presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"presto"</span>,</span><br><span class="line">      <span class="attr">"pool"</span>: <span class="string">"general"</span>,</span><br><span class="line">      <span class="attr">"location"</span>: <span class="string">"/presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: {</span><br><span class="line">        <span class="attr">"node_version"</span>: <span class="string">"344"</span>,</span><br><span class="line">        <span class="attr">"coordinator"</span>: <span class="string">"true"</span>,</span><br><span class="line">        <span class="attr">"http"</span>: <span class="string">"http://127.0.0.1:9999"</span>,</span><br><span class="line">        <span class="attr">"http-external"</span>: <span class="string">"http://127.0.0.1:9999"</span>,</span><br><span class="line">        <span class="attr">"connectorIds"</span>: <span class="string">"system,druid"</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"0a9970f3-6717-4979-8f28-7f12c7bd7c75"</span>,</span><br><span class="line">      <span class="attr">"nodeId"</span>: <span class="string">"presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"jmx-http"</span>,</span><br><span class="line">      <span class="attr">"pool"</span>: <span class="string">"general"</span>,</span><br><span class="line">      <span class="attr">"location"</span>: <span class="string">"/presto_node_1"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: {</span><br><span class="line">        <span class="attr">"http"</span>: <span class="string">"http://127.0.0.1:9999"</span>,</span><br><span class="line">        <span class="attr">"http-external"</span>: <span class="string">"http://127.0.0.1:9999"</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<div class="note info">上述 IP 地址相关信息已脱敏</div>
+
+<p>　更加具体地来说，是在 <code>HeartbeatFailureDetector</code> 类中启动了一个执行周期为 5s 的定时任务，不断地调用 <code>updateMonitoredServices</code> 方法，来更新集群的服务状态。另外，<code>DiscoveryNodeManager</code> 类中也会启动一个执行周期为 5s 的定时任务，不断地调用 <code>pollWorkers</code> 方法，来检查各个节点的状态。Node 的状态主要分为 active、inactive、shuttingDown 三种，以集合的形式保存在了 AllNodes 类中。后续再选择 Worker 的时候会判断是否存活，并通过 AllNodes#getActiveNodes 方法获取到 active 状态的 Node 集合。另外，我们可以访问 <code>http://localhost:9999/v1/info/state</code> 地址，来检查节点是否处于 active 状态。如果节点存活，则会返回 <code>"ACTIVE"</code> 字符串</p>
+<h3 id="MPP"><a href="#MPP" class="headerlink" title="MPP"></a>MPP</h3><p>　Presto 采用 MPP（<strong>M</strong>assively <strong>P</strong>arallel <strong>P</strong>rocessing）大规模并行处理架构，来解决大量数据分析的场景。该架构的主要特征，如下：</p>
+<ul>
+<li>任务并行执行</li>
+<li>分布式计算</li>
+<li>Shared Nothing</li>
+<li>横向扩展</li>
+<li>数据分布式存储（本地化）</li>
+</ul>
+<h3 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h3><p>　Presto 采用 <a href="https://yuzhouwan.com/posts/190413/#SPI-解耦">SPI</a>（<strong>S</strong>ervice <strong>P</strong>rovider <strong>I</strong>nterface）服务提供发现机制，来插件化地支持多种数据源，以实现联邦查询（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Federated_search">Federation Query</a>，指能够通过一条 SQL 查询，对处于完全不同的系统中的不同的数据库和模式，进行引用和使用）</p>
+<h2 id="比对"><a href="#比对" class="headerlink" title="比对"></a>比对</h2><h3 id="Presto-vs-Apache-Hive"><a href="#Presto-vs-Apache-Hive" class="headerlink" title="Presto vs Apache Hive"></a>Presto vs Apache Hive</h3><h4 id="优势比较"><a href="#优势比较" class="headerlink" title="优势比较"></a>优势比较</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Presto</th>
+<th style="text-align:center">Apache Hive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>场景特征</strong></td>
+<td style="text-align:center">交互式查询</td>
+<td style="text-align:center">高吞吐</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Join</strong></td>
+<td style="text-align:center">一个较大的事实表 + 多个较小的维度表</td>
+<td style="text-align:center">事实表 + 事实表</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>窗口函数</strong></td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>SQL 标准化</strong></td>
+<td style="text-align:center">ANSI SQL</td>
+<td style="text-align:center">HiveQL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="架构比较"><a href="#架构比较" class="headerlink" title="架构比较"></a>架构比较</h4><p><img data-src="/picture/presto/presto_vs_hive.png" alt="Presto vs Hive on Architecture"></p>
+<center>（图片来源：<a href="https://blog.treasuredata.com/blog/2015/03/20/presto-versus-hive/" target="_blank" rel="external nofollow noopener noreferrer">treasuredata.com</a>™）</center>
+
+<h3 id="Presto-vs-Amazon-Athena"><a href="#Presto-vs-Amazon-Athena" class="headerlink" title="Presto vs Amazon Athena"></a>Presto vs Amazon Athena</h3><p>　本质上，Amazon Athena（雅典娜）是一款完全支持标准 SQL 的 Presto</p>
+<h3 id="PrestoDB-vs-PrestoSQL"><a href="#PrestoDB-vs-PrestoSQL" class="headerlink" title="PrestoDB vs PrestoSQL"></a>PrestoDB vs PrestoSQL</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">PrestoDB</th>
+<th style="text-align:center">PrestoSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>开源时间</strong></td>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">2018</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>研发主力</strong></td>
+<td style="text-align:center">Facebook</td>
+<td style="text-align:center">Martin、Dain 和 David</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>通讯模式</strong></td>
+<td style="text-align:center">支持 RESTful 和二进制</td>
+<td style="text-align:center">仅支持 RESTful</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>查询下推</strong></td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>技术输出</strong></td>
+<td style="text-align:center">博客</td>
+<td style="text-align:center">博客 + 视频 + 书籍</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Connector 数量</strong></td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">30</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>社区活跃度</strong></td>
+<td style="text-align:center">相对不活跃</td>
+<td style="text-align:center">相对活跃</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>合并 PR 数量</strong></td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/prestodb/presto/pulse/monthly">90</a></td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/prestosql/presto/pulse/monthly">205</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>解决 Issues 数量</strong></td>
+<td style="text-align:center">52</td>
+<td style="text-align:center">81</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>改动的代码行数</strong></td>
+<td style="text-align:center">20088</td>
+<td style="text-align:center">63297</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note info">上表中 PR、Issues 和代码行数的统计时间范围是最近一个月的</div>
+
+
+
+
+
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><div class="note info">这里我们以 PrestoSQL 为例，整体部署步骤与 PrestoDB 相似。不同的是，PrestoSQL 需要较新的 Java11，而 PrestoDB 仍然停留在 Java8</div>
+
+<h3 id="单机版"><a href="#单机版" class="headerlink" title="单机版"></a>单机版</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://repo1.maven.org/maven2/io/prestosql/presto-server/344/presto-server-344.tar.gz</span><br><span class="line">$ tar zxvf presto-server-344.tar.gz</span><br><span class="line">$ ln -s presto-server-344 presto</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> presto</span><br><span class="line">$ mkdir etc</span><br><span class="line">$ <span class="built_in">cd</span> etc</span><br><span class="line">$ touch node.properties jvm.config config.properties log.properties</span><br><span class="line">$ mkdir catalog</span><br><span class="line">$ touch catalog/jmx.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim catalog/jmx.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">connector.name</span>=<span class="string">jmx</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim config.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">coordinator</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">node-scheduler.include-coordinator</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">query.max-memory</span>=<span class="string">8GB</span></span><br><span class="line"><span class="meta">query.max-memory-per-node</span>=<span class="string">1GB</span></span><br><span class="line"><span class="meta">http-server.http.port</span>=<span class="string">9999</span></span><br><span class="line"><span class="meta">discovery-server.enabled</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">discovery.uri</span>=<span class="string">http://127.0.0.1:9999</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim jvm.config</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">-server</span></span><br><span class="line"><span class="attr">-Xmx8G</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">+UseG1GC</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">G1HeapRegionSize=32M</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">+UseGCOverheadLimit</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">+ExplicitGCInvokesConcurrent</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">+HeapDumpOnOutOfMemoryError</span></span><br><span class="line"><span class="meta">-XX</span>:<span class="string">+ExitOnOutOfMemoryError</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim node.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">node.environment</span>=<span class="string">presto</span></span><br><span class="line"><span class="meta">node.id</span>=<span class="string">presto_node_1</span></span><br><span class="line"><span class="meta">node.data-dir</span>=<span class="string">/Users/benedictjin/apps/prestoData</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim launcher</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">export</span> <span class="string">JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.5.jdk/Contents/Home</span></span><br><span class="line"><span class="attr">export</span> <span class="string">PATH=$JAVA_HOME:$PATH</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ..</span><br><span class="line">$ bin/launcher start</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/launcher status</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动日志</span></span><br><span class="line">$ tail -f ~/apps/prestoData/var/<span class="built_in">log</span>/launcher.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行日志</span></span><br><span class="line">$ tail -f ~/apps/prestoData/var/<span class="built_in">log</span>/server.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 请求日志</span></span><br><span class="line">$ tail -f ~/apps/prestoData/var/<span class="built_in">log</span>/http-request.log</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h4><p><img data-src="/picture/presto/prestosql_standalone_ui.jpg" alt="PrestoSQL Standalone UI"></p>
+<p><img data-src="/picture/presto/prestosql_query_details.jpg" alt="PrestoSQL Query Details"></p>
+<center>（对 <a href="https://prestosql.io/" target="_blank" rel="external nofollow noopener noreferrer">PrestoSQL</a>™ 的截图）</center>
+
+<h4 id="开启-Debug-模式"><a href="#开启-Debug-模式" class="headerlink" title="开启 Debug 模式"></a>开启 Debug 模式</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim etc/jvm.config</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-agentlib:jdwp=transport=dt_socket,server=y,<span class="built_in">suspend</span>=n,address=5005</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/launcher restart</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stopped 19181</span><br><span class="line">Started as 21861</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Docker-容器版"><a href="#Docker-容器版" class="headerlink" title="Docker 容器版"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hub.docker.com/r/prestosql/presto">Docker 容器版</a></h3><h4 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull prestosql/presto</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="启动-1"><a href="#启动-1" class="headerlink" title="启动"></a>启动</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p 8080:8080 --name presto prestosql/presto</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it presto presto --catalog tpch --schema sf1</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:sf1&gt; show tables;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  Table</span><br><span class="line">----------</span><br><span class="line"> customer</span><br><span class="line"> lineitem</span><br><span class="line"> nation</span><br><span class="line"> orders</span><br><span class="line"> part</span><br><span class="line"> partsupp</span><br><span class="line"> region</span><br><span class="line"> supplier</span><br><span class="line">(8 rows)</span><br><span class="line"></span><br><span class="line">Query 20200906_033706_00013_ne522, FINISHED, 1 node</span><br><span class="line">Splits: 19 total, 19 <span class="keyword">done</span> (100.00%)</span><br><span class="line">0.28 [8 rows, 158B] [28 rows/s, 558B/s]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:sf1&gt; select * from customer <span class="built_in">limit</span> 3;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> custkey |        name        |              address               | nationkey |      phone      | acctbal | mktsegment |</span><br><span class="line">---------+--------------------+------------------------------------+-----------+-----------------+---------+------------+------------------------------------------------</span><br><span class="line">   75001 | Customer<span class="comment">#000075001 | iQyegZCktrxX8jMFs9ip               |         3 | 13-826-812-1458 | 6154.12 | FURNITURE  | quickly ironic pinto beans up the blithely fluf</span></span><br><span class="line">   75002 | Customer<span class="comment">#000075002 | TRzWtXys54mXmbNLlZQ4UR,5VkzA4Ycjsx |        24 | 34-175-692-7923 | 8258.87 | FURNITURE  | tes. carefully even requests about the express,</span></span><br><span class="line">   75003 | Customer<span class="comment">#000075003 | OVaJQHekQKFzsjqYpkLD               |        24 | 34-440-315-8937 | 6870.87 | MACHINERY  |  even patterns. deposits unwind furiously. furi</span></span><br><span class="line">(3 rows)</span><br><span class="line"></span><br><span class="line">Query 20200906_033714_00014_ne522, FINISHED, 1 node</span><br><span class="line">Splits: 21 total, 19 <span class="keyword">done</span> (90.48%)</span><br><span class="line">0.25 [11K rows, 0B] [43.6K rows/s, 0B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Kubernetes-集群版"><a href="#Kubernetes-集群版" class="headerlink" title="Kubernetes 集群版"></a>Kubernetes 集群版</h3><p>　详见，我的另一篇博客：<a href="https://yuzhouwan.com/posts/200926/#%E6%90%AD%E5%BB%BA-PrestoDB-%E9%9B%86%E7%BE%A4">Helm 实战</a></p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="Apache-Druid-Connector"><a href="#Apache-Druid-Connector" class="headerlink" title="Apache Druid Connector"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/docs/current/connector/druid.html">Apache Druid Connector</a></h3><h4 id="配置-Catalog"><a href="#配置-Catalog" class="headerlink" title="配置 Catalog"></a>配置 Catalog</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim etc/catalog/druid.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">connector.name</span>=<span class="string">druid</span></span><br><span class="line"><span class="meta">connection-url</span>=<span class="string">jdbc:avatica:remote:url=http://remote_druid_cluster:8082/druid/v2/sql/avatica/</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="开放-Broker-端口"><a href="#开放-Broker-端口" class="headerlink" title="开放 Broker 端口"></a>开放 Broker 端口</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> `ps -ef | grep 8082 | grep -v grep | awk <span class="string">'{print $2}'</span>`; <span class="built_in">export</span> POD_NAME=$(kubectl get pods --namespace default -l <span class="string">"app=druid,release=`helm list | grep druid- | awk '{print <span class="variable">$1</span>}'`"</span> | grep broker | awk <span class="string">'{print $1}'</span>) ; nohup kubectl port-forward <span class="variable">$POD_NAME</span> 8082:8082 --address 0.0.0.0 2&gt;&amp;1 &amp;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="重启-Presto"><a href="#重启-Presto" class="headerlink" title="重启 Presto"></a>重启 Presto</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/launcher restart</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/presto --catalog druid --server localhost:9999 --schema default</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="显示-Catalog"><a href="#显示-Catalog" class="headerlink" title="显示 Catalog"></a>显示 Catalog</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ presto:druid&gt; show catalogs;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Catalog</span><br><span class="line">---------</span><br><span class="line"> druid</span><br><span class="line"> system</span><br><span class="line">(2 rows)</span><br><span class="line"></span><br><span class="line">Query 20200906_125808_00062_pg9xm, FINISHED, 1 node</span><br><span class="line">Splits: 19 total, 19 <span class="keyword">done</span> (100.00%)</span><br><span class="line">0.30 [0 rows, 0B] [0 rows/s, 0B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="显示-Schema"><a href="#显示-Schema" class="headerlink" title="显示 Schema"></a>显示 Schema</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ presto:druid&gt; show schemas from druid;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">       Schema</span><br><span class="line">--------------------</span><br><span class="line"> druid</span><br><span class="line"> information_schema</span><br><span class="line">(2 rows)</span><br><span class="line"></span><br><span class="line">Query 20200906_125828_00063_pg9xm, FINISHED, 1 node</span><br><span class="line">Splits: 19 total, 19 <span class="keyword">done</span> (100.00%)</span><br><span class="line">5.14 [2 rows, 33B] [0 rows/s, 6B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ presto:default&gt; use druid.druid;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="显示所有表"><a href="#显示所有表" class="headerlink" title="显示所有表"></a>显示所有表</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:druid&gt; show tables;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   Table</span><br><span class="line">-----------</span><br><span class="line"> wikipedia</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">Query 20200906_083924_00017_pg9xm, FINISHED, 1 node</span><br><span class="line">Splits: 19 total, 19 <span class="keyword">done</span> (100.00%)</span><br><span class="line">0.29 [1 rows, 24B] [3 rows/s, 82B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="查询-1"><a href="#查询-1" class="headerlink" title="查询"></a>查询</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:druid&gt; select * from wikipedia <span class="built_in">where</span> <span class="string">"cityName"</span> != <span class="string">''</span> order by <span class="string">"__time"</span> desc <span class="built_in">limit</span> 3;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">         __time          |    channel    | cityname |                                                            comment</span><br><span class="line">-------------------------+---------------+----------+--------------------------------------------------------------------------------------------------------------------</span><br><span class="line"> 2016-06-27 21:00:00.000 | <span class="comment">#en.wikipedia | Glasgow  | /* Presenters */Dan Neal Is Guest Presenting But Is Not A Main Stand In.</span></span><br><span class="line"> 2016-06-27 21:00:00.000 | <span class="comment">#en.wikipedia | Bothell  | /* BAMN */</span></span><br><span class="line"> 2016-06-27 21:00:00.000 | <span class="comment">#de.wikipedia | Pamplona | /* Fahrzeuge mit Wankelmotor */  new entries, actual vehicles, easy to check on the web, no reason to delete or blo</span></span><br><span class="line">(3 rows)</span><br><span class="line"></span><br><span class="line">Query 20200906_084953_00028_pg9xm, FINISHED, 1 node</span><br><span class="line">Splits: 18 total, 18 <span class="keyword">done</span> (100.00%)</span><br><span class="line">0.69 [1.53K rows, 0B] [2.22K rows/s, 0B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/docs/current/sql/explain.html">Explain</a></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:druid&gt; explain select * from wikipedia <span class="built_in">where</span> <span class="string">"cityName"</span> != <span class="string">''</span> order by <span class="string">"__time"</span> desc <span class="built_in">limit</span> 3;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"> Fragment <span class="number">0</span> [SINGLE]</span><br><span class="line">     Output layout: [__time, channel, cityname, comment, count, countryisocode, countryname, diffurl, flags, isanonymous, isminor, isnew, isrobot, isunpatrolled, metroco</span><br><span class="line">     Output partitioning: SINGLE []</span><br><span class="line">     Stage Execution Strategy: UNGROUPED_EXECUTION</span><br><span class="line">     Output[__time, channel, cityname, comment, count, countryisocode, countryname, diffurl, flags, isanonymous, isminor, isnew, isrobot, isunpatrolled, metrocode, names</span><br><span class="line">     │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar, fl</span><br><span class="line">     │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: ?}</span><br><span class="line">     └─ TopN[<span class="number">3</span> by (__time DESC_NULLS_LAST)]</span><br><span class="line">        │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar,</span><br><span class="line">        └─ LocalExchange[SINGLE] ()</span><br><span class="line">           │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varch</span><br><span class="line">           │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: ?}</span><br><span class="line">           └─ RemoteSource[<span class="number">1</span>]</span><br><span class="line">                  Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:va</span><br><span class="line"></span><br><span class="line"> Fragment <span class="number">1</span> [SOURCE]</span><br><span class="line">     Output layout: [__time, channel, cityname, comment, count, countryisocode, countryname, diffurl, flags, isanonymous, isminor, isnew, isrobot, isunpatrolled, metroco</span><br><span class="line">     Output partitioning: SINGLE []</span><br><span class="line">     Stage Execution Strategy: UNGROUPED_EXECUTION</span><br><span class="line">     TopNPartial[<span class="number">3</span> by (__time DESC_NULLS_LAST)]</span><br><span class="line">     │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar, fl</span><br><span class="line">     └─ TableScan[druid:druid.wikipedia druid.druid.wikipedia, grouped = <span class="keyword">false</span>]</span><br><span class="line">            Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar,</span><br><span class="line">            Estimates: {rows: ? (?), cpu: ?, memory: <span class="number">0</span>B, network: <span class="number">0</span>B}</span><br><span class="line">            channel := channel:varchar:VARCHAR</span><br><span class="line">            flags := flags:varchar:VARCHAR</span><br><span class="line">            regionisocode := regionIsoCode:varchar:VARCHAR</span><br><span class="line">            isnew := isNew:varchar:VARCHAR</span><br><span class="line">            sum_deleted := sum_deleted:bigint:BIGINT</span><br><span class="line">            isunpatrolled := isUnpatrolled:varchar:VARCHAR</span><br><span class="line">            isminor := isMinor:varchar:VARCHAR</span><br><span class="line">            regionname := regionName:varchar:VARCHAR</span><br><span class="line">            isanonymous := isAnonymous:varchar:VARCHAR</span><br><span class="line">            sum_added := sum_added:bigint:BIGINT</span><br><span class="line">            sum_deltabucket := sum_deltaBucket:bigint:BIGINT</span><br><span class="line">            __time := __time:timestamp(<span class="number">3</span>):TIMESTAMP</span><br><span class="line">            diffurl := diffUrl:varchar:VARCHAR</span><br><span class="line">            isrobot := isRobot:varchar:VARCHAR</span><br><span class="line">            metrocode := metroCode:varchar:VARCHAR</span><br><span class="line">            cityname := cityName:varchar:VARCHAR</span><br><span class="line">            count := count:bigint:BIGINT</span><br><span class="line">            countryname := countryName:varchar:VARCHAR</span><br><span class="line">            countryisocode := countryIsoCode:varchar:VARCHAR</span><br><span class="line">            namespace := namespace:varchar:VARCHAR</span><br><span class="line">            comment := comment:varchar:VARCHAR</span><br><span class="line">            page := page:varchar:VARCHAR</span><br><span class="line">            sum_commentlength := sum_commentLength:bigint:BIGINT</span><br><span class="line">            user := user:varchar:VARCHAR</span><br><span class="line">            sum_delta := sum_delta:bigint:BIGINT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="number">1</span> row)</span><br><span class="line"></span><br><span class="line">Query <span class="number">20200906_113246_00048</span>_pg9xm, FINISHED, <span class="number">1</span> node</span><br><span class="line">Splits: <span class="number">1</span> total, <span class="number">1</span> done (<span class="number">100.00</span>%)</span><br><span class="line"><span class="number">0.34</span> [<span class="number">0</span> rows, <span class="number">0</span>B] [<span class="number">0</span> rows/s, <span class="number">0</span>B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Explain-Anaylze"><a href="#Explain-Anaylze" class="headerlink" title="Explain Anaylze"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/docs/current/sql/explain-analyze.html">Explain Anaylze</a></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presto:druid&gt; explain analyze select * from wikipedia <span class="built_in">where</span> <span class="string">"cityName"</span> != <span class="string">''</span> order by <span class="string">"__time"</span> desc <span class="built_in">limit</span> 3;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"> Fragment <span class="number">1</span> [SINGLE]</span><br><span class="line">     CPU: <span class="number">3.74</span>ms, Scheduled: <span class="number">25.39</span>ms, Input: <span class="number">3</span> rows (<span class="number">1.18</span>kB); per task: avg.: <span class="number">3.00</span> std.dev.: <span class="number">0.00</span>, Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">     Output layout: [__time, channel, cityname, comment, count, countryisocode, countryname, diffurl, flags, isanonymous, isminor, isnew, isrobot, isunpatrolled, metroco</span><br><span class="line">     Output partitioning: SINGLE []</span><br><span class="line">     Stage Execution Strategy: UNGROUPED_EXECUTION</span><br><span class="line">     TopN[<span class="number">3</span> by (__time DESC_NULLS_LAST)]</span><br><span class="line">     │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar, fl</span><br><span class="line">     │   CPU: <span class="number">0.00</span>ns (<span class="number">0.00</span>%), Scheduled: <span class="number">7.00</span>ms (<span class="number">1.65</span>%), Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">     │   Input avg.: <span class="number">3.00</span> rows, Input std.dev.: <span class="number">0.00</span>%</span><br><span class="line">     └─ LocalExchange[SINGLE] ()</span><br><span class="line">        │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar,</span><br><span class="line">        │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: ?}</span><br><span class="line">        │   CPU: <span class="number">1.00</span>ms (<span class="number">2.78</span>%), Scheduled: <span class="number">2.00</span>ms (<span class="number">0.47</span>%), Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">        │   Input avg.: <span class="number">0.19</span> rows, Input std.dev.: <span class="number">387.30</span>%</span><br><span class="line">        └─ RemoteSource[<span class="number">2</span>]</span><br><span class="line">               Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varch</span><br><span class="line">               CPU: <span class="number">0.00</span>ns (<span class="number">0.00</span>%), Scheduled: <span class="number">0.00</span>ns (<span class="number">0.00</span>%), Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">               Input avg.: <span class="number">0.19</span> rows, Input std.dev.: <span class="number">387.30</span>%</span><br><span class="line"></span><br><span class="line"> Fragment <span class="number">2</span> [SOURCE]</span><br><span class="line">     CPU: <span class="number">35.54</span>ms, Scheduled: <span class="number">413.99</span>ms, Input: <span class="number">1533</span> rows (<span class="number">547.77</span>kB); per task: avg.: <span class="number">1533.00</span> std.dev.: <span class="number">0.00</span>, Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">     Output layout: [__time, channel, cityname, comment, count, countryisocode, countryname, diffurl, flags, isanonymous, isminor, isnew, isrobot, isunpatrolled, metroco</span><br><span class="line">     Output partitioning: SINGLE []</span><br><span class="line">     Stage Execution Strategy: UNGROUPED_EXECUTION</span><br><span class="line">     TopNPartial[<span class="number">3</span> by (__time DESC_NULLS_LAST)]</span><br><span class="line">     │   Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar, fl</span><br><span class="line">     │   CPU: <span class="number">2.00</span>ms (<span class="number">5.56</span>%), Scheduled: <span class="number">18.00</span>ms (<span class="number">4.26</span>%), Output: <span class="number">3</span> rows (<span class="number">1.18</span>kB)</span><br><span class="line">     │   Input avg.: <span class="number">1533.00</span> rows, Input std.dev.: <span class="number">0.00</span>%</span><br><span class="line">     └─ TableScan[druid:druid.wikipedia druid.druid.wikipedia, grouped = <span class="keyword">false</span>]</span><br><span class="line">            Layout: [__time:timestamp(<span class="number">3</span>), channel:varchar, cityname:varchar, comment:varchar, count:bigint, countryisocode:varchar, countryname:varchar, diffurl:varchar,</span><br><span class="line">            Estimates: {rows: ? (?), cpu: ?, memory: <span class="number">0</span>B, network: <span class="number">0</span>B}</span><br><span class="line">            CPU: <span class="number">33.00</span>ms (<span class="number">91.67</span>%), Scheduled: <span class="number">396.00</span>ms (<span class="number">93.62</span>%), Output: <span class="number">1533</span> rows (<span class="number">547.77</span>kB)</span><br><span class="line">            Input avg.: <span class="number">1533.00</span> rows, Input std.dev.: <span class="number">0.00</span>%</span><br><span class="line">            channel := channel:varchar:VARCHAR</span><br><span class="line">            flags := flags:varchar:VARCHAR</span><br><span class="line">            regionisocode := regionIsoCode:varchar:VARCHAR</span><br><span class="line">            isnew := isNew:varchar:VARCHAR</span><br><span class="line">            sum_deleted := sum_deleted:bigint:BIGINT</span><br><span class="line">            isunpatrolled := isUnpatrolled:varchar:VARCHAR</span><br><span class="line">            isminor := isMinor:varchar:VARCHAR</span><br><span class="line">            regionname := regionName:varchar:VARCHAR</span><br><span class="line">            isanonymous := isAnonymous:varchar:VARCHAR</span><br><span class="line">            sum_added := sum_added:bigint:BIGINT</span><br><span class="line">            sum_deltabucket := sum_deltaBucket:bigint:BIGINT</span><br><span class="line">            __time := __time:timestamp(<span class="number">3</span>):TIMESTAMP</span><br><span class="line">            diffurl := diffUrl:varchar:VARCHAR</span><br><span class="line">            isrobot := isRobot:varchar:VARCHAR</span><br><span class="line">            metrocode := metroCode:varchar:VARCHAR</span><br><span class="line">            cityname := cityName:varchar:VARCHAR</span><br><span class="line">            count := count:bigint:BIGINT</span><br><span class="line">            countryname := countryName:varchar:VARCHAR</span><br><span class="line">            countryisocode := countryIsoCode:varchar:VARCHAR</span><br><span class="line">            namespace := namespace:varchar:VARCHAR</span><br><span class="line">            comment := comment:varchar:VARCHAR</span><br><span class="line">            page := page:varchar:VARCHAR</span><br><span class="line">            sum_commentlength := sum_commentLength:bigint:BIGINT</span><br><span class="line">            user := user:varchar:VARCHAR</span><br><span class="line">            sum_delta := sum_delta:bigint:BIGINT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="number">1</span> row)</span><br><span class="line"></span><br><span class="line">Query <span class="number">20200906_113431_00049</span>_pg9xm, FINISHED, <span class="number">1</span> node</span><br><span class="line">Splits: <span class="number">35</span> total, <span class="number">35</span> done (<span class="number">100.00</span>%)</span><br><span class="line"><span class="number">5.76</span> [<span class="number">1.53</span>K rows, <span class="number">0</span>B] [<span class="number">266</span> rows/s, <span class="number">0</span>B/s]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><div class="note info">鉴于诸多缘由，这里我们基于 PrestoSQL 进行分析</div>
+
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java -version</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version <span class="string">"11.0.9"</span> 2020-10-20 LTS</span><br><span class="line">Java(TM) SE Runtime Environment 18.9 (build 11.0.9+7-LTS)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.9+7-LTS, mixed mode)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> --depth 1 --single-branch --branch master https://github.com/prestosql/presto/</span><br><span class="line">$ <span class="built_in">cd</span> presto</span><br><span class="line">$ mvn clean install -T 1C -DskipTests -pl <span class="string">'!presto-docs'</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><pre class="mermaid">sequenceDiagram
+
+participant PrestoServer
+participant Platform
+participant Server
+participant Logger
+participant ImmutableList
+participant ImmutableList.Builder
+participant Bootstrap
+participant ConfigurationLoader
+
+participant Injector
+participant LifeCycleManager
+participant ServerInfoResource
+participant Announcer
+participant CertificateAuthenticatorManager
+participant GroupProviderManager
+participant EventListenerManager
+participant PasswordAuthenticatorManager
+participant AccessControlManager
+participant ResourceGroupManager
+participant SessionPropertyDefaults
+participant StaticCatalogStore
+participant PluginManager
+
+participant ConfigurationFactory
+participant Elements
+participant RecordingBinder
+participant Module
+
+participant System
+
+participant AbstractConfigurationAwareModule
+participant ServerConfig
+
+participant ServerMainModule
+participant CoordinatorModule
+participant WorkerModule
+
+participant LifeCycleModule
+participant ConfigurationModule
+
+participant Guice
+
+
+PrestoServer -&gt;&gt; PrestoServer : main
+
+
+opt check the version of java
+PrestoServer -&gt;&gt;+ Platform : nullToEmpty
+Platform -&gt;&gt;- PrestoServer : java.version
+alt java.version &lt; 11
+PrestoServer -&gt;&gt; System : exit(100)
+end
+end
+
+
+PrestoServer -&gt;&gt;+ Server : new
+Server -&gt;&gt;- PrestoServer : Server
+PrestoServer -&gt;&gt; Server : start
+Server -&gt;&gt; Server : doStart
+
+Server -&gt;&gt;+ ImmutableList : builder
+ImmutableList -&gt;&gt;- Server : ImmutableList.Builder
+
+
+opt init modules
+Server -&gt;&gt;+ ServerMainModule : new
+ServerMainModule -&gt;&gt;- Server : ServerMainModule
+end
+
+
+Server -&gt;&gt; ImmutableList.Builder : add
+Server -&gt;&gt; ImmutableList.Builder : build
+ImmutableList.Builder -&gt;&gt; Server : ImmutableList
+Server -&gt;&gt; Bootstrap : new
+Bootstrap -&gt;&gt; Server : Bootstrap
+Bootstrap -&gt;&gt;+ Bootstrap : initialize
+
+
+opt config
+Bootstrap -&gt;&gt;+ ConfigurationLoader : loadPropertiesFrom(configFile)
+ConfigurationLoader -&gt;&gt;- Bootstrap : Map<string, string> requiredProperties
+Bootstrap -&gt;&gt;+ ConfigurationLoader : getSystemProperties
+ConfigurationLoader -&gt;&gt;+ System : getProperties
+System -&gt;&gt;- ConfigurationLoader : Properties
+ConfigurationLoader -&gt;&gt;- Bootstrap : Map<string, string> systemProperties
+
+Bootstrap -&gt;&gt;+ ConfigurationFactory : new
+ConfigurationFactory -&gt;&gt;- Bootstrap : ConfigurationFactory
+end
+
+
+
+opt install module by airlift
+ConfigurationFactory -&gt;&gt; ConfigurationFactory : registerConfigurationClasses
+
+ConfigurationFactory -&gt;&gt;+ Elements : getElements(modules)
+Elements -&gt;&gt;+ RecordingBinder : new
+RecordingBinder -&gt;&gt;- Elements : RecordingBinder
+Elements -&gt;&gt; RecordingBinder : install(module)
+
+opt setup modules, for example, ServerMainModule
+Elements -&gt;&gt; Module : configure(binder)
+Module -&gt;&gt; AbstractConfigurationAwareModule : setup
+AbstractConfigurationAwareModule -&gt;&gt; ServerMainModule : setup
+ServerMainModule -&gt;&gt;+ AbstractConfigurationAwareModule : buildConfigObject
+AbstractConfigurationAwareModule -&gt;&gt;- ServerMainModule : ServerConfig
+ServerMainModule -&gt;&gt;+ ServerConfig : isCoordinator
+ServerConfig -&gt;&gt;- ServerMainModule : boolean
+
+alt true
+ServerMainModule -&gt;&gt;+ CoordinatorModule : new
+CoordinatorModule -&gt;&gt;+ ServerMainModule : CoordinatorModule
+else false
+ServerMainModule -&gt;&gt;+ WorkerModule : new
+WorkerModule -&gt;&gt;+ ServerMainModule : WorkerModule
+end
+
+ServerMainModule -&gt;&gt; AbstractConfigurationAwareModule : install
+end
+
+Elements -&gt;&gt; StackTraceElements : clearCache
+Elements -&gt;&gt;+ RecordingBinder : binder.elements
+RecordingBinder -&gt;&gt;- Elements : List<element>
+Elements -&gt;&gt;- ConfigurationFactory : List<element>
+
+
+ConfigurationFactory -&gt;&gt; ConfigurationFactory : validateRegisteredConfigurationProvider
+end
+
+
+
+
+opt system modules
+Bootstrap -&gt;&gt;+ LifeCycleModule : new
+LifeCycleModule -&gt;&gt;- Bootstrap : LifeCycleModule
+Bootstrap -&gt;&gt;+ ConfigurationModule : new
+ConfigurationModule -&gt;&gt;- Bootstrap : ConfigurationModule
+end
+
+opt create the injector
+Bootstrap -&gt;&gt;+ Guice : createInjector
+Guice -&gt;&gt;- Bootstrap : Injector
+end
+
+opt create the life-cycle manager and start it
+Bootstrap -&gt;&gt;+ Injector : getInstance
+Injector -&gt;&gt;- Bootstrap : LifeCycleManager
+Bootstrap -&gt;&gt; LifeCycleManager : start
+end
+
+
+Bootstrap -&gt;&gt;- Bootstrap : Injector
+
+
+
+Server -&gt;&gt;+ Injector : getInstance(PluginManager.class)
+Injector -&gt;&gt;- Server : PluginManager
+Server -&gt;&gt; PluginManager : loadPlugins
+
+Server -&gt;&gt;+ Injector : getInstance(StaticCatalogStore.class)
+Injector -&gt;&gt;- Server : StaticCatalogStore
+Server -&gt;&gt; StaticCatalogStore : loadCatalogs
+
+Server -&gt;&gt;+ Injector : getInstance(SessionPropertyDefaults.class)
+Injector -&gt;&gt;- Server : SessionPropertyDefaults
+Server -&gt;&gt; SessionPropertyDefaults : loadConfigurationManager
+
+Server -&gt;&gt;+ Injector : getInstance(ResourceGroupManager.class)
+Injector -&gt;&gt;- Server : ResourceGroupManager
+Server -&gt;&gt; ResourceGroupManager : loadConfigurationManager
+
+Server -&gt;&gt;+ Injector : getInstance(AccessControlManager.class)
+Injector -&gt;&gt;- Server : AccessControlManager
+Server -&gt;&gt; AccessControlManager : loadSystemAccessControl
+
+Server -&gt;&gt;+ Injector : getInstance(PasswordAuthenticatorManager.class)
+Injector -&gt;&gt;- Server : PasswordAuthenticatorManager
+Server -&gt;&gt; PasswordAuthenticatorManager : loadPasswordAuthenticator
+
+Server -&gt;&gt;+ Injector : getInstance(EventListenerManager.class)
+Injector -&gt;&gt;- Server : EventListenerManager
+Server -&gt;&gt; EventListenerManager : loadEventListeners
+
+Server -&gt;&gt;+ Injector : getInstance(GroupProviderManager.class)
+Injector -&gt;&gt;- Server : GroupProviderManager
+Server -&gt;&gt; GroupProviderManager : loadConfiguredGroupProvider
+
+Server -&gt;&gt;+ Injector : getInstance(CertificateAuthenticatorManager.class)
+Injector -&gt;&gt;- Server : CertificateAuthenticatorManager
+Server -&gt;&gt; CertificateAuthenticatorManager : loadCertificateAuthenticator
+
+Server -&gt;&gt;+ Injector : getInstance(Announcer.class)
+Injector -&gt;&gt;- Server : Announcer
+Server -&gt;&gt; Announcer : start
+
+Server -&gt;&gt;+ Injector : getInstance(ServerInfoResource.class)
+Injector -&gt;&gt;- Server : ServerInfoResource
+Server -&gt;&gt; ServerInfoResource : startupComplete
+
+Server -&gt;&gt; Logger : "======== SERVER STARTED ========")</element></element></string,></string,></pre>
+
+<div class="note info">用于放大网页的组合键（⌘+）并不会起作用，如果想要缩放流程图，请采用双指捏合或张开的手势</div>
+<div class="note info">出于渲染复杂度的考虑，在 Module 初始化阶段省略了 NodeModule、DiscoveryModule、HttpServerModule、JsonModule、JaxrsModule、MBeanModule、PrefixObjectNameGeneratorModule、JmxModule、JmxHttpModule、LogJmxModule、TraceTokenModule、EventModule、JsonEventModule、ServerSecurityModule、AccessControlModule、EventListenerModule、GracefulShutdownModule、WarningCollectorModule</div>
+
+<h3 id="请求链路"><a href="#请求链路" class="headerlink" title="请求链路"></a>请求链路</h3><pre class="mermaid">sequenceDiagram
+
+participant Client
+participant QueuedStatementResource
+participant QueuedStatementResource.Query
+participant QueuedStatementResource#queries
+participant DispatchManager
+participant QueuedStatementResource.Query
+participant ExecutingStatementResource
+participant ExecutingStatementResource#queries
+participant io.prestosql.server.protocol.Query
+participant Futures
+
+opt send query to queue
+Client -&gt;&gt;+ QueuedStatementResource : POST /v1/statement
+
+QueuedStatementResource -&gt;&gt; QueuedStatementResource : postStatement
+
+QueuedStatementResource -&gt;&gt;+ QueuedStatementResource.Query : new
+QueuedStatementResource.Query -&gt;&gt;+ DispatchManager : createQueryId
+DispatchManager -&gt;&gt;- QueuedStatementResource.Query : QueryId
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource : QueuedStatementResource.Query
+
+QueuedStatementResource -&gt;&gt; QueuedStatementResource#queries : put with queryId
+
+QueuedStatementResource -&gt;&gt;+ QueuedStatementResource.Query : getQueryResults
+
+QueuedStatementResource.Query -&gt;&gt;+ QueuedStatementResource.Query : createQueryResults
+QueuedStatementResource.Query -&gt;&gt;+ QueuedStatementResource.Query : getNextUri
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource.Query : URI (http://localhost:9999/v1/statement/queued/20200906_093843_00041_pg9xm/y3f077eadf2dca6425d56173bac9afea11161cdd0/1)
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource.Query : QueryResults
+
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource : QueryResults
+
+QueuedStatementResource -&gt;&gt;+ Response : ok
+Response -&gt;&gt;- QueuedStatementResource : Response
+
+QueuedStatementResource -&gt;&gt;- Client : Response
+end
+
+
+
+
+
+
+opt get query from queue and dispatch it
+
+Client -&gt;&gt; QueuedStatementResource : GET /v1/statement/queued/{queryId}/{slug}/{token}
+
+QueuedStatementResource -&gt;&gt;+ QueuedStatementResource : getQuery
+QueuedStatementResource -&gt;&gt;+ QueuedStatementResource#queries : get by queryId
+QueuedStatementResource#queries -&gt;&gt;+ QueuedStatementResource : QueuedStatementResource.Query
+QueuedStatementResource -&gt;&gt;- QueuedStatementResource : QueuedStatementResource.Query
+
+opt wait for query to be dispatched, up to the wait timeout
+QueuedStatementResource -&gt;&gt;+ QueuedStatementResource.Query : waitForDispatched
+QueuedStatementResource.Query -&gt;&gt;+ DispatchManager : waitForDispatched
+DispatchManager -&gt;&gt;- QueuedStatementResource.Query : ListenableFuture<!--?-->
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource : ListenableFuture<!--?-->
+end
+
+opt when state changes, fetch the next result
+QueuedStatementResource -&gt;&gt; QueuedStatementResource.Query : getQueryResults
+QueuedStatementResource.Query -&gt;&gt; QueuedStatementResource.Query : createQueryResults
+QueuedStatementResource.Query -&gt;&gt;+ QueuedStatementResource.Query : getNextUri
+QueuedStatementResource.Query -&gt;&gt;+ QueuedStatementResource.Query : getRedirectUri
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource.Query : URI (http://localhost:9999/v1/statement/executing/20200906_093843_00041_pg9xm/y714bd6e0605f3fdf63d1aac8d10aa92f4c81cf23/0)
+QueuedStatementResource.Query -&gt;&gt;- QueuedStatementResource.Query : URI
+QueuedStatementResource.Query -&gt;&gt; QueuedStatementResource : QueryResults
+
+QueuedStatementResource -&gt;&gt;+ Futures : transform
+Futures -&gt;&gt;- QueuedStatementResource : ListenableFuture<queryresults>
+end
+
+opt transform to Response
+QueuedStatementResource -&gt;&gt;+ Response : ok
+Response -&gt;&gt;- QueuedStatementResource : Response
+
+QueuedStatementResource -&gt;&gt;+ Futures : transform
+Futures -&gt;&gt;- QueuedStatementResource : ListenableFuture<response>
+end
+
+QueuedStatementResource -&gt;&gt; QueuedStatementResource : bindAsyncResponse
+QueuedStatementResource -&gt;&gt; Client : Response
+
+end
+
+
+
+
+
+opt execute
+
+Client -&gt;&gt;+ ExecutingStatementResource : GET /v1/statement/executing/{queryId}/{slug}/{token}
+
+opt get or recreate query
+ExecutingStatementResource -&gt;&gt; ExecutingStatementResource : getQueryResults
+ExecutingStatementResource -&gt;&gt;+ ExecutingStatementResource#queries : get by queryId
+
+alt exist
+ExecutingStatementResource#queries -&gt;&gt;- ExecutingStatementResource : io.prestosql.server.protocol.Query
+else not-exist
+ExecutingStatementResource -&gt;&gt;+ io.prestosql.server.protocol.Query : create
+io.prestosql.server.protocol.Query -&gt;&gt;- ExecutingStatementResource : io.prestosql.server.protocol.Query
+ExecutingStatementResource -&gt;&gt;+ ExecutingStatementResource#queries : computeIfAbsent
+ExecutingStatementResource#queries -&gt;&gt;- ExecutingStatementResource : io.prestosql.server.protocol.Query
+end
+
+end
+
+opt result
+ExecutingStatementResource -&gt;&gt; ExecutingStatementResource : asyncQueryResults
+ExecutingStatementResource -&gt;&gt;+ io.prestosql.server.protocol.Query : waitForResults
+io.prestosql.server.protocol.Query -&gt;&gt;- ExecutingStatementResource : ListenableFuture<queryresults>
+ExecutingStatementResource -&gt;&gt;+ ExecutingStatementResource : toResponse
+ExecutingStatementResource -&gt;&gt;- ExecutingStatementResource : Response
+ExecutingStatementResource -&gt;&gt;+ Futures : transform
+Futures -&gt;&gt;- ExecutingStatementResource : ListenableFuture<response>
+ExecutingStatementResource -&gt;&gt; ExecutingStatementResource : bindAsyncResponse
+end
+
+end
+
+ExecutingStatementResource -&gt;&gt;- Client : Response</response></queryresults></response></queryresults></pre>
+
+<div class="note info">PrestoSQL 内部通过 getNextUri 方法，不断地获取下阶段需要调用的接口，推动完成整个请求链路的流转</div>
+<div class="note info">取消已提交查询的流程与之类似，这里便不赘述</div>
+<div class="note info">出于渲染复杂度的考虑，更细节的 Session、Transaction、StateMachine、Scheduler 和 Task 等概念，并没有在流程中体现出</div>
+
+
+
+
+
+
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="不支持类型的隐式转换"><a href="#不支持类型的隐式转换" class="headerlink" title="不支持类型的隐式转换"></a>不支持类型的隐式转换</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>　原本只支持数值类型之间的比较，例如 <code>2 &gt; 1</code>：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ScalarOperator(GREATER_THAN)</span></span><br><span class="line"><span class="meta">@SqlType(StandardTypes.BOOLEAN)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">greaterThan</span><span class="params">(<span class="meta">@SqlType(StandardTypes.BIGINT)</span> <span class="keyword">long</span> left, <span class="meta">@SqlType(StandardTypes.BIGINT)</span> <span class="keyword">long</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> left &gt; right;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>　增加以下方法，以支持字符串与数值之间的比较，例如 <code>'2' &gt; 1</code>：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ScalarOperator(GREATER_THAN)</span></span><br><span class="line"><span class="meta">@SqlType(StandardTypes.BOOLEAN)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">greaterThan</span><span class="params">(<span class="meta">@SqlType(StandardTypes.VARCHAR)</span> String left, <span class="meta">@SqlType(StandardTypes.BIGINT)</span> <span class="keyword">long</span> right)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> Long.parseLong(left) &gt; right;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<div class="note success">当然也可以显示地调用 cast 函数进行类型转换</div>
+
+<h3 id="jmx-properties-does-not-contain-connector-name"><a href="#jmx-properties-does-not-contain-connector-name" class="headerlink" title="jmx.properties does not contain connector.name"></a>jmx.properties does not contain connector.name</h3><h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>　JMX Connector 的 <code>connector.name</code> 属于必填字段，给 jmx.properties 增加一行 <code>connector.name=jmx</code> 即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim catalog/jmx.properties</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">connector.name</span>=<span class="string">jmx</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="compiler-message-file-broken"><a href="#compiler-message-file-broken" class="headerlink" title="compiler message file broken"></a>compiler message file broken</h3><h4 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- maven-compiler-plugin:<span class="number">3.8</span>.<span class="number">0</span>:testCompile (<span class="keyword">default</span>-testCompile) @ presto-main ---</span><br><span class="line">[INFO] Changes detected - recompiling the <span class="keyword">module</span>!</span><br><span class="line">[INFO] Compiling <span class="number">942</span> source files to /Users/benedictjin/code/prestosql/presto-main/target/test-classes</span><br><span class="line">compiler message file broken: key=compiler.misc.msg.bug arguments=<span class="number">11.0</span>.<span class="number">5</span>, {<span class="number">1</span>}, {<span class="number">2</span>}, {<span class="number">3</span>}, {<span class="number">4</span>}, {<span class="number">5</span>}, {<span class="number">6</span>}, {<span class="number">7</span>}</span><br><span class="line">java.lang.NullPointerException</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.visitApply(Flow.java:<span class="number">1235</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodInvocation.accept(JCTree.java:<span class="number">1634</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">49</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$BaseAnalyzer.scan(Flow.java:<span class="number">398</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.visitVarDef(Flow.java:<span class="number">989</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCVariableDecl.accept(JCTree.java:<span class="number">956</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">49</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$BaseAnalyzer.scan(Flow.java:<span class="number">398</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">57</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.visitBlock(Flow.java:<span class="number">997</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:<span class="number">1020</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">49</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$BaseAnalyzer.scan(Flow.java:<span class="number">398</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.visitMethodDef(Flow.java:<span class="number">964</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(JCTree.java:<span class="number">866</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">49</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$BaseAnalyzer.scan(Flow.java:<span class="number">398</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.visitClassDef(Flow.java:<span class="number">927</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:<span class="number">774</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:<span class="number">49</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$BaseAnalyzer.scan(Flow.java:<span class="number">398</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.analyzeTree(Flow.java:<span class="number">1327</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow$FlowAnalyzer.analyzeTree(Flow.java:<span class="number">1317</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.comp.Flow.analyzeTree(Flow.java:<span class="number">218</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:<span class="number">1401</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:<span class="number">1375</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:<span class="number">973</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.api.JavacTaskImpl.lambda$doCall$<span class="number">0</span>(JavacTaskImpl.java:<span class="number">104</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.api.JavacTaskImpl.handleExceptions(JavacTaskImpl.java:<span class="number">147</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.api.JavacTaskImpl.doCall(JavacTaskImpl.java:<span class="number">100</span>)</span><br><span class="line">    at jdk.compiler/com.sun.tools.javac.api.JavacTaskImpl.call(JavacTaskImpl.java:<span class="number">94</span>)</span><br><span class="line">    at org.codehaus.plexus.compiler.javac.JavaxToolsCompiler.compileInProcess(JavaxToolsCompiler.java:<span class="number">126</span>)</span><br><span class="line">    at org.codehaus.plexus.compiler.javac.JavacCompiler.performCompile(JavacCompiler.java:<span class="number">174</span>)</span><br><span class="line">    at org.apache.maven.plugin.compiler.AbstractCompilerMojo.execute(AbstractCompilerMojo.java:<span class="number">1129</span>)</span><br><span class="line">    at org.apache.maven.plugin.compiler.TestCompilerMojo.execute(TestCompilerMojo.java:<span class="number">181</span>)</span><br><span class="line">    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:<span class="number">137</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:<span class="number">210</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:<span class="number">156</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:<span class="number">148</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:<span class="number">117</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.builder.multithreaded.MultiThreadedBuilder$<span class="number">1.</span>call(MultiThreadedBuilder.java:<span class="number">190</span>)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.builder.multithreaded.MultiThreadedBuilder$<span class="number">1.</span>call(MultiThreadedBuilder.java:<span class="number">186</span>)</span><br><span class="line">    at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:<span class="number">264</span>)</span><br><span class="line">    at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:<span class="number">515</span>)</span><br><span class="line">    at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:<span class="number">264</span>)</span><br><span class="line">    at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1128</span>)</span><br><span class="line">    at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">628</span>)</span><br><span class="line">    at java.base/java.lang.Thread.run(Thread.java:<span class="number">834</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>　低版本 JDK11 的已知 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://bugs.openjdk.java.net/browse/JDK-8212586">Bug</a>，升级至当前最新的版本（JDK11.0.9+7-LTS）后解决</p>
+<h2 id="社区发展"><a href="#社区发展" class="headerlink" title="社区发展"></a>社区发展</h2><h3 id="Star-趋势"><a href="#Star-趋势" class="headerlink" title="Star 趋势"></a>Star 趋势</h3><p><img data-src="/picture/presto/presto_star_history.jpg" alt="Presto Star History"></p>
+<center>（图片来源：<a href="https://star-history.t9t.io/#prestodb/presto&amp;apache/hive&amp;prestosql/presto" target="_blank" rel="external nofollow noopener noreferrer">star-history.t9t.io</a>™ 官网）</center>
+
+<h3 id="个人贡献"><a href="#个人贡献" class="headerlink" title="个人贡献"></a>个人贡献</h3><ul>
+<li>Pull Request<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/prestodb/presto/pulls?q=is%3Apr+author%3Aasdf2014">PrestoDB</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/prestosql/presto/pulls?q=is%3Apr+author%3Aasdf2014">PrestoSQL</a></li>
+</ul>
+</li>
+</ul>
+<p>　详见：《<a href="https://yuzhouwan.com/posts/19631/">如何成为 Apache 的 PMC</a>》</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestodb.io/docs/current/connector.html">PrestoDB Connectors</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/docs/current/connector.html">PrestoSQL Connectors</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestodb.io/docs/current/develop/example-http.html">Example HTTP Connector</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.starburstdata.com/latest/kubernetes/hpa.html">Horizontal scaling</a></li>
+</ul>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://prestosql.io/docs/current/connector/phoenix.html">PrestoSQL Phoenix Connector</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/analysys/presto-hbase-connector">PrestoSQL HBase Connector</a></li>
+</ul>
+<h3 id="Book"><a href="#Book" class="headerlink" title="Book"></a>Book</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.com/Presto-Definitive-Guide-Storage-Environment-ebook/dp/B086R9FHB7/">《Presto: The Definitive Guide》</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200926/" rel="bookmark">Helm 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200919/" rel="bookmark">Kubernetes 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/26002/" rel="bookmark">Apache Kafka 分布式消息队列框架</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190413/" rel="bookmark">那些绕不过去的 Java 知识点</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/200906/" title="Presto：分布式 SQL 查询引擎">https://yuzhouwan.com/posts/200906/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Apache-Druid/" rel="tag"># Apache Druid</a>
+              <a href="/tags/PrestoDB/" rel="tag"># PrestoDB</a>
+              <a href="/tags/Apache-Hive/" rel="tag"># Apache Hive</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Presto/" rel="tag"># Presto</a>
+              <a href="/tags/PrestoSQL/" rel="tag"># PrestoSQL</a>
+              <a href="/tags/MPP/" rel="tag"># MPP</a>
+              <a href="/tags/SPI/" rel="tag"># SPI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/200726/" rel="prev" title="梳理微积分知识体系">
+      <i class="fa fa-chevron-left"></i> 梳理微积分知识体系
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/200919/" rel="next" title="Kubernetes 实战">
+      Kubernetes 实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Presto-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Presto 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Coordinator"><span class="nav-number">2.1.1.</span> <span class="nav-text">Coordinator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Worker"><span class="nav-number">2.1.2.</span> <span class="nav-text">Worker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discovery-Server"><span class="nav-number">2.1.3.</span> <span class="nav-text">Discovery Server</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">2.2.</span> <span class="nav-text">数据源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Connector"><span class="nav-number">2.2.1.</span> <span class="nav-text">Connector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Catalog"><span class="nav-number">2.2.2.</span> <span class="nav-text">Catalog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Schema"><span class="nav-number">2.2.3.</span> <span class="nav-text">Schema</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Table"><span class="nav-number">2.2.4.</span> <span class="nav-text">Table</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">查询模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Statement"><span class="nav-number">2.3.1.</span> <span class="nav-text">Statement</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Query"><span class="nav-number">2.3.2.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stage"><span class="nav-number">2.3.3.</span> <span class="nav-text">Stage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Task"><span class="nav-number">2.3.4.</span> <span class="nav-text">Task</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Split"><span class="nav-number">2.3.5.</span> <span class="nav-text">Split</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Driver"><span class="nav-number">2.3.6.</span> <span class="nav-text">Driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Operator"><span class="nav-number">2.3.7.</span> <span class="nav-text">Operator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exchange"><span class="nav-number">2.3.8.</span> <span class="nav-text">Exchange</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">3.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A3%E5%8A%BF"><span class="nav-number">3.2.</span> <span class="nav-text">劣势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">4.1.</span> <span class="nav-text">架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">4.2.</span> <span class="nav-text">SQL 执行流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connector-%E4%BA%A4%E4%BA%92%E5%9B%BE"><span class="nav-number">4.3.</span> <span class="nav-text">Connector 交互图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="nav-number">4.4.</span> <span class="nav-text">交互时序图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-Discovery"><span class="nav-number">4.5.</span> <span class="nav-text">Service Discovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPP"><span class="nav-number">4.6.</span> <span class="nav-text">MPP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPI"><span class="nav-number">4.7.</span> <span class="nav-text">SPI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E5%AF%B9"><span class="nav-number">5.</span> <span class="nav-text">比对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Presto-vs-Apache-Hive"><span class="nav-number">5.1.</span> <span class="nav-text">Presto vs Apache Hive</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF%E6%AF%94%E8%BE%83"><span class="nav-number">5.1.1.</span> <span class="nav-text">优势比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%AF%94%E8%BE%83"><span class="nav-number">5.1.2.</span> <span class="nav-text">架构比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Presto-vs-Amazon-Athena"><span class="nav-number">5.2.</span> <span class="nav-text">Presto vs Amazon Athena</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PrestoDB-vs-PrestoSQL"><span class="nav-number">5.3.</span> <span class="nav-text">PrestoDB vs PrestoSQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%9C%BA%E7%89%88"><span class="nav-number">6.1.</span> <span class="nav-text">单机版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">6.1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">6.1.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">6.1.3.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-number">6.1.4.</span> <span class="nav-text">查看运行状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="nav-number">6.1.5.</span> <span class="nav-text">查看日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">6.1.6.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-Debug-%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.7.</span> <span class="nav-text">开启 Debug 模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-%E5%AE%B9%E5%99%A8%E7%89%88"><span class="nav-number">6.2.</span> <span class="nav-text">Docker 容器版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.2.3.</span> <span class="nav-text">客户端连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.2.4.</span> <span class="nav-text">查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kubernetes-%E9%9B%86%E7%BE%A4%E7%89%88"><span class="nav-number">6.3.</span> <span class="nav-text">Kubernetes 集群版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">7.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Druid-Connector"><span class="nav-number">7.1.</span> <span class="nav-text">Apache Druid Connector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Catalog"><span class="nav-number">7.1.1.</span> <span class="nav-text">配置 Catalog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%94%BE-Broker-%E7%AB%AF%E5%8F%A3"><span class="nav-number">7.1.2.</span> <span class="nav-text">开放 Broker 端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AF-Presto"><span class="nav-number">7.1.3.</span> <span class="nav-text">重启 Presto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">7.1.4.</span> <span class="nav-text">启动客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA-Catalog"><span class="nav-number">7.1.5.</span> <span class="nav-text">显示 Catalog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA-Schema"><span class="nav-number">7.1.6.</span> <span class="nav-text">显示 Schema</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">7.1.7.</span> <span class="nav-text">切换数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%89%80%E6%9C%89%E8%A1%A8"><span class="nav-number">7.1.8.</span> <span class="nav-text">显示所有表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2-1"><span class="nav-number">7.1.9.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explain"><span class="nav-number">7.1.10.</span> <span class="nav-text">Explain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Explain-Anaylze"><span class="nav-number">7.1.11.</span> <span class="nav-text">Explain Anaylze</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">8.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">8.1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">8.2.</span> <span class="nav-text">启动流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E9%93%BE%E8%B7%AF"><span class="nav-number">8.3.</span> <span class="nav-text">请求链路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91"><span class="nav-number">9.</span> <span class="nav-text">踩过的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%94%AF%E6%8C%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.1.</span> <span class="nav-text">不支持类型的隐式转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">9.1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">9.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jmx-properties-does-not-contain-connector-name"><span class="nav-number">9.2.</span> <span class="nav-text">jmx.properties does not contain connector.name</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">9.2.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compiler-message-file-broken"><span class="nav-number">9.3.</span> <span class="nav-text">compiler message file broken</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">9.3.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">9.3.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA%E5%8F%91%E5%B1%95"><span class="nav-number">10.</span> <span class="nav-text">社区发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Star-%E8%B6%8B%E5%8A%BF"><span class="nav-number">10.1.</span> <span class="nav-text">Star 趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E8%B4%A1%E7%8C%AE"><span class="nav-number">10.2.</span> <span class="nav-text">个人贡献</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">11.</span> <span class="nav-text">资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Doc"><span class="nav-number">11.1.</span> <span class="nav-text">Doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github"><span class="nav-number">11.2.</span> <span class="nav-text">Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Book"><span class="nav-number">11.3.</span> <span class="nav-text">Book</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">12.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/200906/";
+    this.page.identifier = "posts/200906/";
+    this.page.title = "Presto：分布式 SQL 查询引擎";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : 'fe1107a7149977efa3cc53704d6adb86',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

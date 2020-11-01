@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="关于本文　本文主要是为了，记录给 Apache Druid &#x2F; Apache Eagle &#x2F; Apache Flink &#x2F; Apache HBase &#x2F; Apache Kafka &#x2F; Apache Superset &#x2F; Apache ZooKeeper &amp; Apache Curator &#x2F; TensorFlow &#x2F; Alibaba DataX 等开源项目贡献代码，尽自己一点绵薄之力的过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何成为 Apache 的 PMC">
+<meta property="og:url" content="https://yuzhouwan.com/posts/19631/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="关于本文　本文主要是为了，记录给 Apache Druid &#x2F; Apache Eagle &#x2F; Apache Flink &#x2F; Apache HBase &#x2F; Apache Kafka &#x2F; Apache Superset &#x2F; Apache ZooKeeper &amp; Apache Curator &#x2F; TensorFlow &#x2F; Alibaba DataX 等开源项目贡献代码，尽自己一点绵薄之力的过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/pmc/pmc_idea_license.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2017-04-03T07:46:21.000Z">
+<meta property="article:modified_time" content="2020-10-19T16:51:08.689Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Apache Kafka">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Apache Druid">
+<meta property="article:tag" content="Apache ZooKeeper">
+<meta property="article:tag" content="Apache Flink">
+<meta property="article:tag" content="开源社区">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Github">
+<meta property="article:tag" content="Apache Eagle">
+<meta property="article:tag" content="Apache HBase">
+<meta property="article:tag" content="Apache Superset">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/pmc/pmc_idea_license.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/19631/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何成为 Apache 的 PMC | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/19631/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何成为 Apache 的 PMC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-03 15:46:21" itemprop="dateCreated datePublished" datetime="2017-04-03T15:46:21+08:00">2017-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-20 00:51:08" itemprop="dateModified" datetime="2020-10-20T00:51:08+08:00">2020-10-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/" itemprop="url" rel="index"><span itemprop="name">开源社区</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　本文主要是为了，记录给 <a href="https://yuzhouwan.com/posts/5845/"><code>Apache Druid</code></a> / <a href="https://yuzhouwan.com/posts/39683/"><code>Apache Eagle</code></a> / <a href="https://yuzhouwan.com/posts/20644/"><code>Apache Flink</code></a> / <a href="https://yuzhouwan.com/posts/45888/"><code>Apache HBase</code></a> / <a href="https://yuzhouwan.com/posts/26002/"><code>Apache Kafka</code></a> / <a href="https://yuzhouwan.com/posts/743/"><code>Apache Superset</code></a> / <a href="https://yuzhouwan.com/posts/31915/"><code>Apache ZooKeeper</code></a> &amp; <a href="https://yuzhouwan.com/posts/31915/"><code>Apache Curator</code></a> / <a href="https://yuzhouwan.com/posts/42737/"><code>TensorFlow</code></a> / <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX"><code>Alibaba DataX</code></a> <a href="https://yuzhouwan.com/posts/19631/#其他">等</a>开源项目贡献代码，尽自己一点绵薄之力的过程</p>
+<p>　文章最后，总结了一些经验之谈，期冀能帮助到同样<strong>热爱开源</strong>、也想成为 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://people.apache.org/committer-index.html#asdf2014">PMC</a> 的小伙伴们</p>
+<a id="more"></a>
+<h2 id="开源贡献纪实"><a href="#开源贡献纪实" class="headerlink" title="开源贡献纪实"></a>开源贡献纪实</h2><h3 id="Apache-Druid"><a href="#Apache-Druid" class="headerlink" title="Apache / Druid"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/5845/">Druid</a></h3><h4 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Some code refactor for better performance of <code>Avro-Extension</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4092">#4092</a></td>
+<td>Merged</td>
+<td>2017-03-22</td>
+<td>2017-04-25</td>
+</tr>
+<tr>
+<td>Explain Avro´s unnecessary EOFException (#4098) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4100">#4100</a></td>
+<td>Merged</td>
+<td>2017-03-23</td>
+<td>2017-03-24</td>
+</tr>
+<tr>
+<td>Improve <code>collection</code> related things that reusing a immutable object instead of creating a new object <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4135">#4135</a></td>
+<td>Merged</td>
+<td>2017-03-30</td>
+<td>2017-05-17</td>
+</tr>
+<tr>
+<td>Increment the resource of <code>JVM</code> and the number of threads in <code>Travis</code> instead of default <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4139">#4139</a></td>
+<td>Closed</td>
+<td>2017-03-31</td>
+<td></td>
+</tr>
+<tr>
+<td>Update outdated RLE paper and improve some code refactoring <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4286">#4286</a></td>
+<td>Merged</td>
+<td>2017-05-17</td>
+<td>2017-05-19</td>
+</tr>
+<tr>
+<td>Fix bug in SegmentAnalyzer.analyzeComplexColumn() <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/issues/5939">#5939</a> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/5954">#5954</a></td>
+<td>Merged</td>
+<td>2018-07-07</td>
+<td>2018-07-10</td>
+</tr>
+<tr>
+<td>Remove redundant type parameters and enforce some other style and inspection rules <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/5980">#5980</a></td>
+<td>Merged</td>
+<td>2018-07-09</td>
+<td>2018-07-28</td>
+</tr>
+<tr>
+<td>Add IRC#druid-dev shields.io into README <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6002">#6002</a></td>
+<td>Merged</td>
+<td>2018-07-13</td>
+<td>2018-07-22</td>
+</tr>
+<tr>
+<td>Add the ‘—fail-at-end’ option to maven command for ‘strictly compiled’ part <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6078">#6078</a></td>
+<td>Merged</td>
+<td>2018-07-31</td>
+<td>2018-08-01</td>
+</tr>
+<tr>
+<td>Fix missing exception handling as part of <code>io.druid.java.util.http.client.netty.HttpClientPipelineFactory</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6090">#6090</a></td>
+<td>Merged</td>
+<td>2018-08-02</td>
+<td>2018-08-11</td>
+</tr>
+<tr>
+<td>Make time-related variables more readable <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6158">#6158</a></td>
+<td>Merged</td>
+<td>2018-08-12</td>
+<td>2018-08-22</td>
+</tr>
+<tr>
+<td>Add maven.exec.xxx.skip option for exec-maven-plugin <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6162">#6162</a></td>
+<td>Merged</td>
+<td>2018-08-13</td>
+<td>2018-09-25</td>
+</tr>
+<tr>
+<td>Fix assertionError at testCheckpointForInactiveTaskGroup in KafkaSupervisorTest <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6192">#6192</a></td>
+<td>Merged</td>
+<td>2018-08-19</td>
+<td>2018-08-22</td>
+</tr>
+<tr>
+<td>Fix wrong counter getFailedSendingTimeCounter method <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6793">#6793</a></td>
+<td>Merged</td>
+<td>2019-01-02</td>
+<td>2019-01-02</td>
+</tr>
+<tr>
+<td>In addition to special cases such as avoiding deadlock, make sure that the current thread has got the connectionLock object lock when accessing the statements object <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6903">#6903</a></td>
+<td>Merged</td>
+<td>2019-01-23</td>
+<td>2019-01-28</td>
+</tr>
+<tr>
+<td>For performance reasons, use <code>java.util.Base64</code> instead of Base64 in Apache Commons Codec and Guava <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6913">#6913</a></td>
+<td>Merged</td>
+<td>2019-01-25</td>
+<td>2019-01-26</td>
+</tr>
+<tr>
+<td>Add “REVERSE” / “REPEAT” / “RIGHT” / “LEFT” functions <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7334">#7334</a></td>
+<td>Merged</td>
+<td>2019-03-23</td>
+<td>2019-04-10</td>
+</tr>
+<tr>
+<td>Fix broken links in api-reference.md <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7670">#7670</a></td>
+<td>Merged</td>
+<td>2019-04-16</td>
+<td>2019-04-16</td>
+</tr>
+<tr>
+<td>Bump httpcore from 4.4.4 to 4.4.11 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7870">#7870</a></td>
+<td>Merged</td>
+<td>2019-06-12</td>
+<td>2019-08-10</td>
+</tr>
+<tr>
+<td>Optimize images by ImgBot <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7873">#7873</a></td>
+<td>Merged</td>
+<td>2019-06-12</td>
+<td>2019-06-25</td>
+</tr>
+<tr>
+<td>Bump jmh from 1.19 to 1.21 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7876">#7876</a></td>
+<td>Merged</td>
+<td>2019-06-13</td>
+<td>2019-06-17</td>
+</tr>
+<tr>
+<td>Bump RoaringBitmap from 0.8.0 to 0.8.6 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7906">#7906</a></td>
+<td>Merged</td>
+<td>2019-06-17</td>
+<td>2019-06-17</td>
+</tr>
+<tr>
+<td>Bump commons-cli from 1.2 to 1.3.1 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7966">#7966</a></td>
+<td>Merged</td>
+<td>2019-06-26</td>
+<td>2019-06-26</td>
+</tr>
+<tr>
+<td>Bump jaxb-api from 2.3.0 to 2.3.1 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7978">#7978</a></td>
+<td>Merged</td>
+<td>2019-06-27</td>
+<td>2019-06-27</td>
+</tr>
+<tr>
+<td>Bump commons-validator from 1.4.0 to 1.5.1 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7987">#7987</a></td>
+<td>Merged</td>
+<td>2019-06-28</td>
+<td>2019-06-28</td>
+</tr>
+<tr>
+<td>Bump commons-codec from 1.7 to 1.12 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/7995">#7995</a></td>
+<td>Merged</td>
+<td>2019-06-29</td>
+<td>2019-06-29</td>
+</tr>
+<tr>
+<td>Bump rhino from 1.7R5 to 1.7.11 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8008">#8008</a></td>
+<td>Merged</td>
+<td>2019-07-02</td>
+<td>2019-08-10</td>
+</tr>
+<tr>
+<td>Bump JUnitParams from 1.0.4 to 1.1.1 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8017">#8017</a></td>
+<td>Merged</td>
+<td>2019-07-03</td>
+<td>2019-08-21</td>
+</tr>
+<tr>
+<td>Hide descriptive comments in <code>pull_request_template.md</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8313">#8313</a></td>
+<td>Merged</td>
+<td>2019-08-15</td>
+<td>2019-08-16</td>
+</tr>
+<tr>
+<td>Fix missing format argument <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8331">#8331</a></td>
+<td>Merged</td>
+<td>2019-08-19</td>
+<td>2019-08-19</td>
+</tr>
+<tr>
+<td>Fix resource leak <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8337">#8337</a></td>
+<td>Merged</td>
+<td>2019-08-19</td>
+<td>2019-08-20</td>
+</tr>
+<tr>
+<td>Add grade shield <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8344">#8344</a></td>
+<td>Merged</td>
+<td>2019-08-20</td>
+<td>2019-08-21</td>
+</tr>
+<tr>
+<td>Fix unused format argument <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8345">#8345</a></td>
+<td>Merged</td>
+<td>2019-08-20</td>
+<td>2019-08-21</td>
+</tr>
+<tr>
+<td>Fix result of division may be truncated <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8355">#8355</a></td>
+<td>Merged</td>
+<td>2019-08-21</td>
+<td>2019-09-04</td>
+</tr>
+<tr>
+<td>Reduce the size of images with lossless compression <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8358">#8358</a></td>
+<td>Merged</td>
+<td>2019-08-21</td>
+<td>2019-08-22</td>
+</tr>
+<tr>
+<td>Suppress index-out-of-bounds warning from LGTM about loop unrolling <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8380">#8380</a></td>
+<td>Merged</td>
+<td>2019-08-23</td>
+<td>2019-09-04</td>
+</tr>
+<tr>
+<td>Fix inconsistent equals and hashCode <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8381">#8381</a></td>
+<td>Merged</td>
+<td>2019-08-23</td>
+<td>2019-09-04</td>
+</tr>
+<tr>
+<td>Fix alerts from LGTM about python files <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8383">#8383</a></td>
+<td>Merged</td>
+<td>2019-08-23</td>
+<td>2019-09-07</td>
+</tr>
+<tr>
+<td>Add docker shield <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8403">#8403</a></td>
+<td>Merged</td>
+<td>2019-08-26</td>
+<td>2019-08-27</td>
+</tr>
+<tr>
+<td>Fix missing space in string literal and spurious Javadoc @param tags from LGTM <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8491">#8491</a></td>
+<td>Merged</td>
+<td>2019-09-09</td>
+<td>2019-09-16</td>
+</tr>
+<tr>
+<td>Fix resource leaks and suppress an incorrect LGTM alert <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8589">#8589</a></td>
+<td>Merged</td>
+<td>2019-09-25</td>
+<td>2019-10-11</td>
+</tr>
+<tr>
+<td>Fix NPE for subquery with limit <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/8775">#8775</a></td>
+<td>Merged</td>
+<td>2019-10-29</td>
+<td>2019-12-18</td>
+</tr>
+<tr>
+<td>Exclude .asf.yaml from the configuration of the rat plugin <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/9088">#9088</a></td>
+<td>Merged</td>
+<td>2019-12-21</td>
+<td>2019-12-24</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/issues/created_by/asdf2014">Issues</a></h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/issues/created_by/asdf2014">All issues in Druid</a><br>Open / Close / Total : 0 / 5 / 5</p>
+<hr>
+<h3 id="Apache-Eagle"><a href="#Apache-Eagle" class="headerlink" title="Apache / Eagle"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/39683/">Eagle</a></h3><h4 id="Pull-Request-1"><a href="#Pull-Request-1" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pulls?utf8=%E2%9C%93&amp;q=is%3Apr%20author%3Aasdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-981">EAGLE-981</a>] GC overhead limit exceeded <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/896">#896</a></td>
+<td>Merged</td>
+<td>2017-03-30</td>
+<td>2017-04-18</td>
+</tr>
+<tr>
+<td>[<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-982">EAGLE-982</a>] The log length has exceeded the limit of 4 MB in Travis <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/897">#897</a></td>
+<td>Merged</td>
+<td>2017-03-30</td>
+<td>2017-04-18</td>
+</tr>
+<tr>
+<td>[<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-992">EAGLE-992</a>] HBase Naming that unify <code>Hbase</code> and <code>HBase</code> into <code>HBase</code><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/905">#905</a></td>
+<td>Merged</td>
+<td>2017-04-06</td>
+<td>2017-04-18</td>
+</tr>
+<tr>
+<td>[<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-1009">EAGLE-1009</a>] Fix <code>return</code> inside <code>finally</code> block may result in losing exception <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/920">#920</a></td>
+<td>Merged</td>
+<td>2017-04-18</td>
+<td>2017-04-19</td>
+</tr>
+<tr>
+<td>[MINOR] Fix some project construction problems about <code>test sources</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/922">#922</a></td>
+<td>Closed</td>
+<td>2017-04-19</td>
+<td></td>
+</tr>
+<tr>
+<td>[<a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-1012">EAGLE-1012</a>] Some language level problems <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/925">#925</a></td>
+<td>Closed</td>
+<td>2017-04-19</td>
+<td></td>
+</tr>
+<tr>
+<td>[MINOR] Fxi sprk/egle issues in JPM module <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/eagle/pull/943">#943</a></td>
+<td>Closed</td>
+<td>2017-06-07</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Issues-1"><a href="#Issues-1" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-981?jql=project%20%3D%20EAGLE%20AND%20reporter%20in%20(%22benedict%20jin%22)">Issues</a></h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/EAGLE-981?jql=project%20%3D%20EAGLE%20AND%20reporter%20in%20(%22benedict%20jin%22)">All issues in Eagle</a><br>Open / Close / Total : 4 / 5 / 9</p>
+<hr>
+<h3 id="Apache-Flink"><a href="#Apache-Flink" class="headerlink" title="Apache / Flink"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/20644/">Flink</a></h3><h4 id="Pull-Request-2"><a href="#Pull-Request-2" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/flink/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/FLINK-6868">FLINK-6868</a>[build] Using <code>scala.binary.version</code> for <code>flink-streaming-scala</code> in <code>Cassandra Connector</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/flink/pull/4087">#4087</a></td>
+<td>Merged</td>
+<td>2017-06-08</td>
+<td>2017-06-25</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/FLINK-7369">FLINK-7369</a>: Add more information for <code>Key group index out of range of key group range</code> exception <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/flink/pull/4474">#4474</a></td>
+<td>Merged</td>
+<td>2017-08-04</td>
+<td>2017-08-04</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Issues-2"><a href="#Issues-2" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/FLINK-6868?jql=project%20%3D%20FLINK%20AND%20reporter%20in%20(%22benedict%20jin%22)">Issues</a></h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/FLINK-6868?jql=project%20%3D%20FLINK%20AND%20reporter%20in%20(%22benedict%20jin%22)">All issues in Flink</a><br>Open / Close / Total : 0 / 3 / 3</p>
+<p>Tips: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://flink.apache.org/contributing/how-to-contribute.html">How to Contribute to Flink</a></p>
+<hr>
+<h3 id="Apache-HBase"><a href="#Apache-HBase" class="headerlink" title="Apache / HBase"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/45888/">HBase</a></h3><h4 id="Pull-Request-3"><a href="#Pull-Request-3" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/hbase/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/HBASE-18470">HBASE-18470</a>: Fix a bug in <code>RetriesExhaustedWithDetailsException#getDesc</code> describe<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/hbase/pull/56">#56</a></td>
+<td>Merged</td>
+<td>2017-07-28</td>
+<td>2017-08-03</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="Apache-Kafka"><a href="#Apache-Kafka" class="headerlink" title="Apache / Kafka"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/26002/">Kafka</a></h3><h4 id="Pull-Request-4"><a href="#Pull-Request-4" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/kafka/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[MINOR] Improve runtime / storage / metrics / config parts <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/kafka/pull/4525">#4525</a></td>
+<td>Merged</td>
+<td>2018-02-05</td>
+<td>2018-02-14</td>
+</tr>
+<tr>
+<td>MINOR: Catch null pointer exception for empty leader URL when assignment is null <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/kafka/pull/4798">#4798</a></td>
+<td>Merged</td>
+<td>2018-03-30</td>
+<td>2018-11-17</td>
+</tr>
+<tr>
+<td>MINOR: Remove magic number and extract Pattern instance from method as class field <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/kafka/pull/4799">#4799</a></td>
+<td>Merged</td>
+<td>2018-03-30</td>
+<td>2018-04-09</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="Apache-Superset"><a href="#Apache-Superset" class="headerlink" title="Apache / Superset"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/743/">Superset</a></h3><h4 id="Pull-Request-5"><a href="#Pull-Request-5" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>little code refactor in models.py <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2124">#2124</a></td>
+<td>Merged</td>
+<td>2017-02-07</td>
+<td>2017-02-07</td>
+</tr>
+<tr>
+<td>Fix werkzeug instance was created twice in Debug Mode (#2135) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2136">#2136</a></td>
+<td>Merged</td>
+<td>2017-02-08</td>
+<td>2017-02-14</td>
+</tr>
+<tr>
+<td>Fix ExtDeprecationWarning (#2137) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2138">#2138</a></td>
+<td>Merged</td>
+<td>2017-02-08</td>
+<td>2017-02-09</td>
+</tr>
+<tr>
+<td>Some code refactoring <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2139">#2139</a></td>
+<td>Merged</td>
+<td>2017-02-08</td>
+<td>2017-02-09</td>
+</tr>
+<tr>
+<td>Using the time zone with specific name for querying Druid <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2143">#2143</a></td>
+<td>Merged</td>
+<td>2017-02-09</td>
+<td>2017-02-10</td>
+</tr>
+<tr>
+<td>Aggregate data outside of topN into a single category <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2176">#2176</a></td>
+<td>Closed</td>
+<td>2017-02-15</td>
+<td></td>
+</tr>
+<tr>
+<td>Fix UNKNOWN option in setup.py <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2199">#2199</a></td>
+<td>Closed</td>
+<td>2017-02-17</td>
+<td></td>
+</tr>
+<tr>
+<td>fix timezone issues in slices (#2354) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2370">#2370</a></td>
+<td>Closed</td>
+<td>2017-03-08</td>
+<td></td>
+</tr>
+<tr>
+<td>Fix unicode issues (#2308 #2282) <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/2401">#2401</a></td>
+<td>Merged</td>
+<td>2017-03-14</td>
+<td>2017-03-15</td>
+</tr>
+<tr>
+<td>Fix rst grammar problems <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/4116">#4116</a></td>
+<td>Merged</td>
+<td>2017-12-26</td>
+<td>2017-12-26</td>
+</tr>
+<tr>
+<td>Fix invaild gitter url <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/4125">#4125</a></td>
+<td>Merged</td>
+<td>2017-12-27</td>
+<td>2018-01-05</td>
+</tr>
+<tr>
+<td>Hanization <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/pull/4126">#4126</a></td>
+<td>Merged</td>
+<td>2017-12-27</td>
+<td>2018-01-13</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Issues-3"><a href="#Issues-3" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/issues/created_by/asdf2014">Issues</a></h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/incubator-superset/issues/created_by/asdf2014">All issues in Superset</a><br>Open / Close / Total : 0 / 21 / 21</p>
+<hr>
+<h3 id="Apache-ZooKeeper"><a href="#Apache-ZooKeeper" class="headerlink" title="Apache / ZooKeeper"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/31915/">ZooKeeper</a></h3><h4 id="Pull-Request-6"><a href="#Pull-Request-6" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2784">ZOOKEEPER-2784</a>: Add same <code>sid</code> config problem check <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/257">#257</a></td>
+<td>Closed</td>
+<td>2017-05-18</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2789">ZOOKEEPER-2789</a>: Reassign <code>ZXID</code> for solving 32bit overflow problem <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/262">#262</a></td>
+<td>Open</td>
+<td>2017-05-23</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2815">ZOOKEEPER-2815</a>: 1. Using try clause to close resource; 2. Others code refactoring for PERSISTENCE module <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/283">#283</a></td>
+<td>Merged</td>
+<td>2017-06-16</td>
+<td>2017-06-26</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2816">ZOOKEEPER-2816</a>: Code refactoring for <code>ZK_SERVER</code> module <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/288">#288</a></td>
+<td>Merged</td>
+<td>2017-06-20</td>
+<td>2017-06-26</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2817">ZOOKEEPER-2817</a>: Using <code>Collections.singletonList</code> instead of <code>Arrays.asList(oneElement)</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/290">#290</a></td>
+<td>Closed</td>
+<td>2017-06-22</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2821">ZOOKEEPER-2821</a>: 1. Fix spell issues; 2. Remove unnecessary boxing / unboxing; 3. Simplify <code>return</code> clause; 4. … <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/293">#293</a></td>
+<td>Closed</td>
+<td>2017-06-27</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2822">ZOOKEEPER-2822</a>: Wrong <code>ObjectName</code> about <code>MBeanServer</code> in JMX module <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/294">#294</a></td>
+<td>Merged</td>
+<td>2017-06-27</td>
+<td>2018-11-27</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2823">ZOOKEEPER-2823</a>: 1. Fix spell issues; 2. Standardize <code>StringBuilder#append</code> usage; 3. Using <code>try</code> clause for … <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/295">#295</a></td>
+<td>Closed</td>
+<td>2017-06-28</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2824">ZOOKEEPER-2824</a>: <code>FileChannel#size</code> info should be added to <code>FileTxnLog#commit</code> to solve the confuse that reason is too large log or too busy disk I/O <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/296">#296</a></td>
+<td>Merged</td>
+<td>2017-06-28</td>
+<td>2018-02-02</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2825">ZOOKEEPER-2825</a>: 1. Remove unnecessary import; 2. <code>contains</code> instead of <code>indexOf &gt; -1</code> for more readable … <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/297">#297</a></td>
+<td>Merged</td>
+<td>2017-06-29</td>
+<td>2018-01-31</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2826">ZOOKEEPER-2826</a>: Code refactoring for <code>CLI</code> module <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/298">#298</a></td>
+<td>Merged</td>
+<td>2017-06-29</td>
+<td>2018-01-31</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2835">ZOOKEEPER-2835</a>: Run server with <code>-XX:+AlwaysPreTouch</code> jvm flag <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/301">#301</a></td>
+<td>Closed</td>
+<td>2017-07-04</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2837">ZOOKEEPER-2837</a>: Add a special START_SERVER_JVMFLAGS option only for <code>start</code> command to distinguish … <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/302">#302</a></td>
+<td>Closed</td>
+<td>2017-07-04</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2840">ZOOKEEPER-2840</a>: Should using <code>System.nanoTime() ^ this.hashCode()</code> for StaticHostProvider <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/303">#303</a></td>
+<td>Open</td>
+<td>2017-07-05</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2892">ZOOKEEPER-2892</a>: Improve lazy initialize and close stream for <code>PrepRequestProcessor</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/361">#361</a></td>
+<td>Merged</td>
+<td>2017-09-06</td>
+<td>2018-02-07</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Issues-4"><a href="#Issues-4" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2784?jql=project%20%3D%20ZOOKEEPER%20AND%20reporter%20in%20(%22benedict%20jin%22)">Issues</a></h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/ZOOKEEPER-2784?jql=project%20%3D%20ZOOKEEPER%20AND%20reporter%20in%20(%22benedict%20jin%22)">All issues in ZooKeeper</a><br>Open / Close / Total : 10 / 8 / 18</p>
+<hr>
+<h3 id="Apache-Curator"><a href="#Apache-Curator" class="headerlink" title="Apache / Curator"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache">Apache</a> / <a href="https://yuzhouwan.com/posts/31915/">Curator</a></h3><h4 id="Pull-Request-7"><a href="#Pull-Request-7" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/curator/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/CURATOR-523">CURATOR-523</a>: Fix ByteBuffer’s compatibility issues <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/curator/pull/321">#321</a></td>
+<td>Merged</td>
+<td>2019-08-01</td>
+<td>2019-08-23</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="Alibaba-DataX"><a href="#Alibaba-DataX" class="headerlink" title="Alibaba / DataX"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba">Alibaba</a> / <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX">DataX</a></h3><h4 id="Pull-Request-8"><a href="#Pull-Request-8" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pulls/asdf2014">Pull Request</a></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Status</th>
+<th>Create Date</th>
+<th>Merge Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add OpenTSDB reader and TSDB writer <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pull/328">#328</a></td>
+<td>Merged</td>
+<td>2019-04-26</td>
+<td>2019-04-26</td>
+</tr>
+<tr>
+<td>Add OpenTSDB reader and TSDB writer into README.md <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pull/329">#329</a></td>
+<td>Merged</td>
+<td>2019-04-26</td>
+<td>2019-04-26</td>
+</tr>
+<tr>
+<td>Bump JDK to 1.8 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pull/494">#494</a></td>
+<td>Merged</td>
+<td>2019-10-08</td>
+<td>2019-10-08</td>
+</tr>
+<tr>
+<td>Add TSDB Reader <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pull/495">#495</a></td>
+<td>Merged</td>
+<td>2019-10-08</td>
+<td>2019-10-08</td>
+</tr>
+<tr>
+<td>Add TSDB Reader into README doc <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pull/499">#499</a></td>
+<td>Merged</td>
+<td>2019-10-08</td>
+<td>2019-10-08</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/alibaba/DataX/pulls/asdf2014">Alibaba DataX</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/aliyun/aliyun-tsdb-java-sdk/pulls/asdf2014">Aliyun TSDB Java SDK</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/helm/charts/pulls/asdf2014">Helm Charts</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/crate/crate/pulls/asdf2014">CrateDB</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/elastic/elasticsearch/pulls/asdf2014">ElasticSearch</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/grpc/grpc-java/pulls/asdf2014">Grpc-Java</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/theme-next/hexo-theme-next/pulls/asdf2014">Hexo Theme Next</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/httprunner/har2case/pulls/asdf2014">HttpRunner</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/hankcs/ID-CNN-CWS/pulls/asdf2014">ID-CNN-CWS</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/lensesio/kafka-connect-ui/pulls/asdf2014">Kafka Connect UI</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/lucene-solr/pulls/asdf2014">Lucene</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/OpenTSDB/opentsdb/pulls/asdf2014">OpenTSDB</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/tensorflow/pulls/asdf2014">Tensorflow</a></li>
+</ul>
+<h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>　需要提前说明的是，大家不能为了成为 PMC 而去成为 PMC。我们的初衷应该是认可开源，热爱开源，乐于和全球的开发者一起努力，做出来一些有意义的东西。换句话说，如果一行代码都还没贡献，就开始到处找攻略或捷径，则是很不可取的。当然有这个目标是很好的，但是正常情况下，成为 PMC 不是一蹴而就的事情。需要我们付出足够多的心力和汗水之后，才会水到渠成地收到来自 ASF 的邀请函。</p>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>　如果说成为 PMC 这件事完全没有任何技巧，也是不可能的。下面就来说一些大家需要注意的事项，尽量地少走弯路：</p>
+<h3 id="选择项目"><a href="#选择项目" class="headerlink" title="选择项目"></a>选择项目</h3><p>　第一步当然是寻找一个合适自己的项目，能和自己的兴趣或工作内容相关的项目，自然是最好不过了。另外，也要从是否有商业公司在背后主导，是否有长期活跃的 PMC，是否具备和其他同类产品的核心竞争力，是否在架构上存在重大缺陷，是否对新代码贡献者很包容 等等角度来判断，这个项目是否值得你去付出大量的精力。</p>
+<h3 id="代码贡献"><a href="#代码贡献" class="headerlink" title="代码贡献"></a>代码贡献</h3><p>　按理说，任何的代码提交，都已经先建立 issues 发起一次讨论。一方面，可以让社区里的其他代码贡献者，知道你想要做什么样的事情；另一方面，也可以听取其他人的意见，包括你要做的这件事的必要性，以及是否有其他更好的实现思路。如果刚开始对某一个项目进行代码贡献，则可以从认领一些 issues 来开始。比较好的开源项目，还会在 issues 上打上类似 <code>Contributions Welcome</code> 的标签。</p>
+<h3 id="代码评审"><a href="#代码评审" class="headerlink" title="代码评审"></a>代码评审</h3><p>　很多小伙伴会认为只有 Committer 才能对其他人的代码进行 review。其实不然，任何你想到的有价值的意见，都可以提出来。并且，在帮助评审他人代码的同时，还能学习到别人解决问题的方式方法。尤其是在一些有争议的地方，可以看到不同的贡献者，针对同一个问题从不同角度的思考，对自己的思维开拓也是大有裨益的。</p>
+<h2 id="代码提交的几个注意点"><a href="#代码提交的几个注意点" class="headerlink" title="代码提交的几个注意点"></a>代码提交的几个注意点</h2><h3 id="通用技巧"><a href="#通用技巧" class="headerlink" title="通用技巧"></a>通用技巧</h3><h4 id="保持-Diff-信息最简"><a href="#保持-Diff-信息最简" class="headerlink" title="保持 Diff 信息最简"></a>保持 Diff 信息最简</h4><p>　PR 中不应该做无关的 Code Format（import / 代码缩进 等）</p>
+<h4 id="保持-PR-的相关性"><a href="#保持-PR-的相关性" class="headerlink" title="保持 PR 的相关性"></a>保持 PR 的相关性</h4><p>　不做无关的 代码优化，尤其是对其他不相关的类（可以另起 PR 进行优化）</p>
+<h4 id="保持-代码风格一致"><a href="#保持-代码风格一致" class="headerlink" title="保持 代码风格一致"></a>保持 代码风格一致</h4><p>　关闭 IDE 自动优化 import 合并为通配符 <code>*</code> 的功能（如，<code>import java.io.*</code> 等）</p>
+<h3 id="因地制宜"><a href="#因地制宜" class="headerlink" title="因地制宜"></a>因地制宜</h3><h4 id="Apache-Druid-1"><a href="#Apache-Druid-1" class="headerlink" title="Apache Druid"></a>Apache Druid</h4><p>　遵照 Apache <a href="https://yuzhouwan.com/posts/5845/">Druid</a> 编码规则，比如 参数列表，需要分行写 等</p>
+<h4 id="Apache-Eagle-1"><a href="#Apache-Eagle-1" class="headerlink" title="Apache Eagle"></a>Apache Eagle</h4><p>　Apache <a href="https://yuzhouwan.com/posts/39683/">Eagle</a> 需要 squash PR 中的 commits 等等</p>
+<h4 id="Apache-HBase-1"><a href="#Apache-HBase-1" class="headerlink" title="Apache HBase"></a>Apache HBase</h4><p>　Apache <a href="https://yuzhouwan.com/posts/45888/">HBase</a> 是以 Patch + Jira 为主的代码维护模式，Github 里面只是代码镜像，所以提交代码不需要创建 PR</p>
+<h4 id="Apache-Superset-1"><a href="#Apache-Superset-1" class="headerlink" title="Apache Superset"></a>Apache Superset</h4><p>　Apache <a href="https://yuzhouwan.com/posts/743/">Superset</a> / <a href="https://yuzhouwan.com/posts/42737/">Tensorflow</a> 之类的 Python 项目，需要注意 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.python.org/dev/peps/pep-0537/">PEP</a> 规范</p>
+<h4 id="Apache-ZooKeeper-1"><a href="#Apache-ZooKeeper-1" class="headerlink" title="Apache ZooKeeper"></a>Apache ZooKeeper</h4><p>　参照官方给出的提交代码的文档即可 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/HowToContribute">How to Contribute to ZooKeeper</a></p>
+<h4 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h4><p>　除了遵循 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/elastic/elasticsearch/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> 文档中提及的内容，还有一些不成文的规定，例如 <a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 的 Committer 对于 <code>varA == false</code> 这类冗余的写法很是赞同，认为可以减少丢失 <code>!</code> 的风险</p>
+<h3 id="好的习惯"><a href="#好的习惯" class="headerlink" title="好的习惯"></a>好的习惯</h3><ul>
+<li>在提交之前，先更新 master 分支，并通过 <code>git rebase -i master</code> 命令，将自己的提交<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4135">置顶</a></strong>（主分支，也可能不叫 master，比如 Kafka 的主分支是 trunk）</li>
+<li>保证自己的代码，能够被单元测试覆盖到。如果原本的测试用例，无法覆盖到，则需要自己编写对应的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/pull/257">单元测试</a></li>
+<li>提交<strong>性能提升型</strong> PR，需要自己写好 benchmark，并贴出<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/4092">压测结果</a></li>
+<li>提交 PR 的时候，在标题的前面增加 <code>[JIRA]</code>（对应的 Jira 号）、<code>[MINOR]</code>（微小的改动）、<code>[WIP]</code>（未完成的修改）和 <code>[Benchmarking]</code>（性能测试中） 之类的标示，可以帮助 Committer 更高效地处理 PR</li>
+</ul>
+<p>Tips: 关于 Git 的相关操作，详见我的另一篇博客：《<a href="https://yuzhouwan.com/posts/30041/">Git 高级玩法</a>》</p>
+<h2 id="那么成为-Apache-PMC-有什么好处？"><a href="#那么成为-Apache-PMC-有什么好处？" class="headerlink" title="那么成为 Apache PMC 有什么好处？"></a>那么成为 Apache PMC 有什么好处？</h2><ul>
+<li><p>可以拥有一个 @apache.org 的邮箱</p>
+</li>
+<li><p>在任何一个 Apache 项目中发言都将标识 Member 徽章</p>
+</li>
+<li><p>可以免费使用 IDEA 全家桶中的所有产品</p>
+<p><img data-src="/picture/pmc/pmc_idea_license.png" alt="JetBrains All Products Pack license for ASF Committers"></p>
+<center>（对 <a href="https://www.jetbrains.com/idea/" target="_blank" rel="external nofollow noopener noreferrer">IntelliJ IDEA</a>™ 的截图）</center>
+
+
+
+
+
+
+
+
+</li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/31915/" rel="bookmark">ZooKeeper 原理与优化</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/39683/" rel="bookmark">Apache Eagle 深度调研</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200926/" rel="bookmark">Helm 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200919/" rel="bookmark">Kubernetes 实战</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/19631/" title="如何成为 Apache 的 PMC">https://yuzhouwan.com/posts/19631/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Apache-Kafka/" rel="tag"># Apache Kafka</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Apache-Druid/" rel="tag"># Apache Druid</a>
+              <a href="/tags/Apache-ZooKeeper/" rel="tag"># Apache ZooKeeper</a>
+              <a href="/tags/Apache-Flink/" rel="tag"># Apache Flink</a>
+              <a href="/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/" rel="tag"># 开源社区</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Github/" rel="tag"># Github</a>
+              <a href="/tags/Apache-Eagle/" rel="tag"># Apache Eagle</a>
+              <a href="/tags/Apache-HBase/" rel="tag"># Apache HBase</a>
+              <a href="/tags/Apache-Superset/" rel="tag"># Apache Superset</a>
+              <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/22654/" rel="prev" title="搜索引擎 ElasticSearch">
+      <i class="fa fa-chevron-left"></i> 搜索引擎 ElasticSearch
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/743/" rel="next" title="Apache Superset 二次开发">
+      Apache Superset 二次开发 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">关于本文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E7%BA%AA%E5%AE%9E"><span class="nav-number">2.</span> <span class="nav-text">开源贡献纪实</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Druid"><span class="nav-number">2.1.</span> <span class="nav-text">Apache &#x2F; Druid</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request"><span class="nav-number">2.1.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues"><span class="nav-number">2.1.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Eagle"><span class="nav-number">2.2.</span> <span class="nav-text">Apache &#x2F; Eagle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Flink"><span class="nav-number">2.3.</span> <span class="nav-text">Apache &#x2F; Flink</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-HBase"><span class="nav-number">2.4.</span> <span class="nav-text">Apache &#x2F; HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-3"><span class="nav-number">2.4.1.</span> <span class="nav-text">Pull Request</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Kafka"><span class="nav-number">2.5.</span> <span class="nav-text">Apache &#x2F; Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-4"><span class="nav-number">2.5.1.</span> <span class="nav-text">Pull Request</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Superset"><span class="nav-number">2.6.</span> <span class="nav-text">Apache &#x2F; Superset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-5"><span class="nav-number">2.6.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues-3"><span class="nav-number">2.6.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-ZooKeeper"><span class="nav-number">2.7.</span> <span class="nav-text">Apache &#x2F; ZooKeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-6"><span class="nav-number">2.7.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues-4"><span class="nav-number">2.7.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Curator"><span class="nav-number">2.8.</span> <span class="nav-text">Apache &#x2F; Curator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-7"><span class="nav-number">2.8.1.</span> <span class="nav-text">Pull Request</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alibaba-DataX"><span class="nav-number">2.9.</span> <span class="nav-text">Alibaba &#x2F; DataX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request-8"><span class="nav-number">2.9.1.</span> <span class="nav-text">Pull Request</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.10.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%A1%B7"><span class="nav-number">3.</span> <span class="nav-text">初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E5%B7%A7"><span class="nav-number">4.</span> <span class="nav-text">技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.1.</span> <span class="nav-text">选择项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B4%A1%E7%8C%AE"><span class="nav-number">4.2.</span> <span class="nav-text">代码贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1"><span class="nav-number">4.3.</span> <span class="nav-text">代码评审</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E7%9A%84%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">代码提交的几个注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">5.1.</span> <span class="nav-text">通用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8C%81-Diff-%E4%BF%A1%E6%81%AF%E6%9C%80%E7%AE%80"><span class="nav-number">5.1.1.</span> <span class="nav-text">保持 Diff 信息最简</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8C%81-PR-%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="nav-number">5.1.2.</span> <span class="nav-text">保持 PR 的相关性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%9D%E6%8C%81-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E4%B8%80%E8%87%B4"><span class="nav-number">5.1.3.</span> <span class="nav-text">保持 代码风格一致</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A0%E5%9C%B0%E5%88%B6%E5%AE%9C"><span class="nav-number">5.2.</span> <span class="nav-text">因地制宜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-Druid-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">Apache Druid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-Eagle-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">Apache Eagle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-HBase-1"><span class="nav-number">5.2.3.</span> <span class="nav-text">Apache HBase</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-Superset-1"><span class="nav-number">5.2.4.</span> <span class="nav-text">Apache Superset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-ZooKeeper-1"><span class="nav-number">5.2.5.</span> <span class="nav-text">Apache ZooKeeper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ElasticSearch"><span class="nav-number">5.2.6.</span> <span class="nav-text">ElasticSearch</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%BD%E7%9A%84%E4%B9%A0%E6%83%AF"><span class="nav-number">5.3.</span> <span class="nav-text">好的习惯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E6%88%90%E4%B8%BA-Apache-PMC-%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">那么成为 Apache PMC 有什么好处？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/19631/";
+    this.page.identifier = "posts/19631/";
+    this.page.title = "如何成为 Apache 的 PMC";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '66908e5e0109a9934de0a12b706b1821',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

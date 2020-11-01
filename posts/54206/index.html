@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大数据生态圈中，保证一致性的方式举不胜举 Hadoop 用 ZooKeeper（Zab，即支持事务顺序的 Paxos） ElasticSearch 用 Hash 路由算法（而非一致性 Hash） Cassandra 用 Gossip 闲话算法 Redis 用 Raft 选举算法  他们各有什么区别，为什么会如此选型？ Paxos 选举算法　Paxos 是最先解决拜占庭将军问题的算法，利用过半选举的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据生态圈里的一致性算法">
+<meta property="og:url" content="https://yuzhouwan.com/posts/54206/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="大数据生态圈中，保证一致性的方式举不胜举 Hadoop 用 ZooKeeper（Zab，即支持事务顺序的 Paxos） ElasticSearch 用 Hash 路由算法（而非一致性 Hash） Cassandra 用 Gossip 闲话算法 Redis 用 Raft 选举算法  他们各有什么区别，为什么会如此选型？ Paxos 选举算法　Paxos 是最先解决拜占庭将军问题的算法，利用过半选举的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/algorithm/distribution.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2016-10-11T03:48:41.000Z">
+<meta property="article:modified_time" content="2020-10-29T13:44:24.894Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Apache Hadoop">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Apache Cassandra">
+<meta property="article:tag" content="Apache ZooKeeper">
+<meta property="article:tag" content="ElasticSearch">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="一致性 Hash">
+<meta property="article:tag" content="CAP">
+<meta property="article:tag" content="Paxos">
+<meta property="article:tag" content="Raft">
+<meta property="article:tag" content="Gossip">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/algorithm/distribution.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/54206/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据生态圈里的一致性算法 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/54206/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据生态圈里的一致性算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-10-11 11:48:41" itemprop="dateCreated datePublished" datetime="2016-10-11T11:48:41+08:00">2016-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="大数据生态圈中，保证一致性的方式举不胜举"><a href="#大数据生态圈中，保证一致性的方式举不胜举" class="headerlink" title="大数据生态圈中，保证一致性的方式举不胜举"></a>大数据生态圈中，保证一致性的方式举不胜举</h2><ul>
+<li><a href="https://yuzhouwan.com/posts/60504/">Hadoop</a> 用 <a href="https://yuzhouwan.com/posts/31915/">ZooKeeper</a>（Zab，即支持事务顺序的 Paxos）</li>
+<li><a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 用 <a href="https://yuzhouwan.com/posts/31130/">Hash</a> 路由算法（而非一致性 Hash）</li>
+<li><a href="https://yuzhouwan.com/posts/20644/#ElasticSearch-Connector">Cassandra</a> 用 Gossip 闲话算法</li>
+<li><a href="https://yuzhouwan.com/posts/2129/">Redis</a> 用 <a href="https://yuzhouwan.com/posts/31915/#Raft">Raft</a> 选举算法</li>
+</ul>
+<p>他们各有什么区别，为什么会如此选型？</p>
+<h3 id="Paxos-选举算法"><a href="#Paxos-选举算法" class="headerlink" title="Paxos 选举算法"></a>Paxos 选举算法</h3><p>　<strong>Paxos</strong> 是最先解决<strong>拜占庭将军问题</strong>的算法，利用<strong>过半选举</strong>的机制，保证了集群数据副本的一致性（微服务中<a href="https://yuzhouwan.com/posts/31915/#其他技术比对">服务注册与发现</a>的场景，其实已经不再适用了）</p>
+<h3 id="Raft-选举算法"><a href="#Raft-选举算法" class="headerlink" title="Raft 选举算法"></a>Raft 选举算法</h3><p>　Redis 使用 <strong>Raft</strong> 实现了自己的分布式一致性。Raft 本身和 Paxos 并没有场景上的区别。更多的是，协议上的简化、Term 概念的强化、Log 只会从 Leader 到 Follower 单向同步，使得实现起来会很方便</p>
+<h3 id="Zab-原子广播协议"><a href="#Zab-原子广播协议" class="headerlink" title="Zab 原子广播协议"></a>Zab 原子广播协议</h3><p>　Hadoop 偏向于离线的海量数据处理，利用 <a href="https://yuzhouwan.com/posts/31915/">ZooKeeper</a> 来保证<a href="https://yuzhouwan.com/posts/31915/#Paxos-的强一致性">数据副本的一致性</a>，是最为合适的</p>
+<h3 id="Hash-路由算法"><a href="#Hash-路由算法" class="headerlink" title="Hash 路由算法"></a>Hash 路由算法</h3><p>　<a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 集群接收到为文档创建索引的请求时，需要选择在哪一个 shard（完整且独立的 Lucene 索引实例）上对文档进行索引。ElasticSearch 采用的是 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cse.yorku.ca/~oz/hash.html">djb2</a> 哈希算法（俗称 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://azrael.digipen.edu/~mmead/www/Courses/CS280/HashFunctions-1.html">times33</a>），对要索引文档默认或指定的 key 进行哈希 <code>hash(key)</code>，然后再对 ElasticSearch 集群中 shard 的数量 n 进行取模，即 $hash(key) \, mod \, n$</p>
+<h3 id="一致性-Hash"><a href="#一致性-Hash" class="headerlink" title="一致性 Hash"></a>一致性 Hash</h3><p>　用于对数据存储进行<strong>负载均衡</strong>的算法。最新的进展，是在去年 Google 发表的一篇 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/abs/1608.01350">有界负载的一致性 Hash 算法</a>的论文。该算法保证了负载均衡<strong>一致性</strong>和<strong>稳定性</strong>的同时，在<strong>均匀性</strong>方面做出了实质性地改进。同时，Consistent Hashing with Bounded Loads 算法 也在 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.haproxy.org/">HaProxy</a> 开源项目中得以<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/haproxy/haproxy/blob/master/src/lb_chash.c#L244">应用</a>，有效减少了其 8 倍的缓存带宽</p>
+<h3 id="Gossip-闲话算法"><a href="#Gossip-闲话算法" class="headerlink" title="Gossip 闲话算法"></a>Gossip 闲话算法</h3><p>　<strong>Gossip</strong> 主要被 Cassandra 用于实现其分布式一致性。因为 Cassandra 框架，更看重 <strong>去中心化</strong> 和 <strong>容错</strong> 的特性，在不违背 CAP 定理的情况下，能够接受 最终一致性</p>
+<a id="more"></a>
+<h2 id="实战一致性算法"><a href="#实战一致性算法" class="headerlink" title="实战一致性算法"></a>实战一致性算法</h2><h3 id="分布式存储"><a href="#分布式存储" class="headerlink" title="分布式存储"></a>分布式存储</h3><h4 id="Key-value-Store"><a href="#Key-value-Store" class="headerlink" title="Key-value Store"></a>Key-value Store</h4><h5 id="架构思考"><a href="#架构思考" class="headerlink" title="架构思考"></a>架构思考</h5><h6 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h6><p>　HashMap 的数据是存在内存里的，一旦进程重启，会有丢数据的风险。同时，数据流一旦到了 TB / PB 级别，会存在硬件方面的瓶颈。另外，需要考虑 Key 相同的情况下，需要处理覆盖的问题</p>
+<h6 id="Berkeley-DB"><a href="#Berkeley-DB" class="headerlink" title="Berkeley DB"></a>Berkeley DB</h6><p>　实际上是一个增强版的 HashMap，从一个简单的键值对存储，进化到可以管理并行访问、支持事务、数据同步等</p>
+<h6 id="Kyoto-Cabinet"><a href="#Kyoto-Cabinet" class="headerlink" title="Kyoto Cabinet"></a>Kyoto Cabinet</h6><p>　HashTable 和 B+ Tree 的结合，不过在到达一定数量级，性能下降比较厉害</p>
+<h6 id="LevelDB-HBase"><a href="#LevelDB-HBase" class="headerlink" title="LevelDB / HBase"></a>LevelDB / HBase</h6><p>　利用 LSM Tree 实现了读写分离、顺序写入等功能</p>
+<h2 id="知识树"><a href="#知识树" class="headerlink" title="知识树"></a>知识树</h2><p><img data-src="/picture/algorithm/distribution.png" alt="分布式系统"></p>
+<center>（利用 <a href="https://www.xmind.net/" target="_blank" rel="external nofollow noopener noreferrer">XMind</a>™ 绘制而成）</center>
+
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><h3 id="Book"><a href="#Book" class="headerlink" title="Book"></a>Book</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.cn/%E4%B8%96%E7%95%8C%E8%91%97%E5%90%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E6%9D%90%E7%B2%BE%E9%80%89%E2%80%A2%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E8%8C%83%E5%9E%8B-%E7%89%B9%E5%B0%BC%E5%8D%9A%E5%A7%86/dp/B001B1PT9Y">《分布式系统：原理与范型（第2版）》</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.cn/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F-%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E5%BA%93%E9%B2%81%E9%87%8C%E6%96%AF/dp/B00BS58XAK">《分布式系统：概念与设计（原书 第5版）》</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.cn/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F-%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%9E%B6%E6%9E%84%E5%AE%9E%E6%88%98-%E6%9D%A8%E4%BC%A0%E8%BE%89/dp/B00H6X6BE8">《大规模分布式存储系统：原理解析与架构实战》</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://book.douban.com/subject/26852650/">《分布式数据库：管理系统实践》</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.cn/%E4%B8%96%E7%95%8C%E8%91%97%E5%90%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E6%9D%90%E7%B2%BE%E9%80%89-%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86-%E5%8E%84%E5%85%B9%E5%8F%99/dp/B00JW45XYI">《分布式数据库系统原理（第3版）》</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://book.mixu.net/distsys/single-page.html">《Distributed systems for fun and profit》</a></li>
+</ul>
+<h3 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/">Implementing a Key-Value Store</a></li>
+</ul>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></li>
+</ul>
+<h3 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cs162.eecs.berkeley.edu/"><strong>CS162</strong>: Operating Systems and Systems Programming</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/31915/" rel="bookmark">ZooKeeper 原理与优化</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/39683/" rel="bookmark">Apache Eagle 深度调研</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2129/" rel="bookmark">Redis 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/20644/" rel="bookmark">Apache Flink</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/60504/" rel="bookmark">Hadoop RPC 源码领略</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/54206/" title="大数据生态圈里的一致性算法">https://yuzhouwan.com/posts/54206/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Apache-Hadoop/" rel="tag"># Apache Hadoop</a>
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+              <a href="/tags/Apache-Cassandra/" rel="tag"># Apache Cassandra</a>
+              <a href="/tags/Apache-ZooKeeper/" rel="tag"># Apache ZooKeeper</a>
+              <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7-Hash/" rel="tag"># 一致性 Hash</a>
+              <a href="/tags/CAP/" rel="tag"># CAP</a>
+              <a href="/tags/Paxos/" rel="tag"># Paxos</a>
+              <a href="/tags/Raft/" rel="tag"># Raft</a>
+              <a href="/tags/Gossip/" rel="tag"># Gossip</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/27328/" rel="prev" title="如何运用 JVM 知识提高编程水平">
+      <i class="fa fa-chevron-left"></i> 如何运用 JVM 知识提高编程水平
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/5845/" rel="next" title="Apache Druid：一款高效的 OLAP 引擎">
+      Apache Druid：一款高效的 OLAP 引擎 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%94%9F%E6%80%81%E5%9C%88%E4%B8%AD%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E6%96%B9%E5%BC%8F%E4%B8%BE%E4%B8%8D%E8%83%9C%E4%B8%BE"><span class="nav-number">1.</span> <span class="nav-text">大数据生态圈中，保证一致性的方式举不胜举</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos-%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">Paxos 选举算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raft-%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Raft 选举算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zab-%E5%8E%9F%E5%AD%90%E5%B9%BF%E6%92%AD%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Zab 原子广播协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">Hash 路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7-Hash"><span class="nav-number">1.5.</span> <span class="nav-text">一致性 Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gossip-%E9%97%B2%E8%AF%9D%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.</span> <span class="nav-text">Gossip 闲话算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">实战一致性算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-number">2.1.</span> <span class="nav-text">分布式存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Key-value-Store"><span class="nav-number">2.1.1.</span> <span class="nav-text">Key-value Store</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">架构思考</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#HashMap"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Berkeley-DB"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">Berkeley DB</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Kyoto-Cabinet"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">Kyoto Cabinet</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LevelDB-HBase"><span class="nav-number">2.1.1.1.4.</span> <span class="nav-text">LevelDB &#x2F; HBase</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">知识树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Book"><span class="nav-number">4.1.</span> <span class="nav-text">Book</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog"><span class="nav-number">4.2.</span> <span class="nav-text">Blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-number">4.3.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video"><span class="nav-number">4.4.</span> <span class="nav-text">Video</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/54206/";
+    this.page.identifier = "posts/54206/";
+    this.page.title = "大数据生态圈里的一致性算法";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : 'c9a99525057acc9e8a6cdd31dec35499',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

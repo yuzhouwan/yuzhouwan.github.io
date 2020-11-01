@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序员的 Mac 高效手册">
+<meta property="og:url" content="https://yuzhouwan.com/posts/190101/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/mac/mac_soft_click_on_touch_board.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/idea/idea_debug_without_pause.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/idea/idea_only_vcs_changed_text.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/mac/mac_typroa_callout.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/mac/mac_octotree.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/mac/mac_asdf2014_on_isometric_contributions.png">
+<meta property="og:image" content="https://asciinema.org/a/246879.svg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/mac/mac_iterm2.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2019-01-01T11:58:02.000Z">
+<meta property="article:modified_time" content="2020-10-30T11:24:33.421Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Mac">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/mac/mac_soft_click_on_touch_board.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/190101/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>程序员的 Mac 高效手册 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/190101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          程序员的 Mac 高效手册
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 19:58:02" itemprop="dateCreated datePublished" datetime="2019-01-01T19:58:02+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-30 19:24:33" itemprop="dateModified" datetime="2020-10-30T19:24:33+08:00">2020-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+            <div class="post-description">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="环境相关"><a href="#环境相关" class="headerlink" title="环境相关"></a>环境相关</h2><h3 id="右键开启-Terminal"><a href="#右键开启-Terminal" class="headerlink" title="右键开启 Terminal"></a>右键开启 Terminal</h3><p>　系统偏好设置 &gt; 键盘 &gt; 快捷键 &gt; 服务，勾选 “新建位于文件夹位置的终端窗口”</p>
+<h3 id="右键创建新文件"><a href="#右键创建新文件" class="headerlink" title="右键创建新文件"></a>右键创建新文件</h3><p>　安装 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://itunes.apple.com/cn/app/new-file-menu-free/id1066302071">New File Menu</a>“</p>
+<h3 id="管理员权限打开-APP"><a href="#管理员权限打开-APP" class="headerlink" title="管理员权限打开 APP"></a>管理员权限打开 APP</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 Intellij IDEA 为例</span></span><br><span class="line">$ <span class="built_in">cd</span> /Applications</span><br><span class="line">$ sudo open -a <span class="string">'IntelliJ IDEA.app'</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="在命令行中用-Finder-打开当前目录"><a href="#在命令行中用-Finder-打开当前目录" class="headerlink" title="在命令行中用 Finder 打开当前目录"></a>在命令行中用 Finder 打开当前目录</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ open .</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="配置-PATH-环境变量"><a href="#配置-PATH-环境变量" class="headerlink" title="配置 PATH 环境变量"></a>配置 PATH 环境变量</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境变量的加载顺序是 /etc/profile /etc/paths ~/.bash_profile ~/.bash_login ~/.profile ~/.bashrc</span></span><br><span class="line"></span><br><span class="line">$ vim /etc/profile</span><br><span class="line">  <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:&lt;PATH&gt;</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="查看本机信息"><a href="#查看本机信息" class="headerlink" title="查看本机信息"></a>查看本机信息</h3><h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig | grep <span class="string">"inet "</span> | grep -v 127.0.0.1</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inet 8.8.8.8 netmask 0xfffff800 broadcast 8.8.8.8</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nslookup store.chanjet.com</span><br><span class="line">$ cat /etc/resolv.conf</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="轻点触摸板"><a href="#轻点触摸板" class="headerlink" title="轻点触摸板"></a>轻点触摸板</h3><p><img data-src="/picture/mac/mac_soft_click_on_touch_board.png" alt="Soft click on mac touch board"></p>
+<center>（对 <a href="https://www.apple.com/mac/" target="_blank" rel="external nofollow noopener noreferrer">Mac</a>™ 的截图）</center>
+
+
+
+
+<h2 id="Java-相关"><a href="#Java-相关" class="headerlink" title="Java 相关"></a>Java 相关</h2><h3 id="查看-JDK-安装目录"><a href="#查看-JDK-安装目录" class="headerlink" title="查看 JDK 安装目录"></a>查看 JDK 安装目录</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/libexec/java_home -V</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Matching Java Virtual Machines (1):</span><br><span class="line">  1.8.0_231, x86_64:  <span class="string">"Java SE 8"</span></span><br><span class="line">  /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="多-JDK-版本"><a href="#多-JDK-版本" class="headerlink" title="多 JDK 版本"></a>多 JDK 版本</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> /usr/libexec/java_home=<span class="string">'echo $JAVA_HOME'</span></span><br><span class="line"><span class="built_in">unalias</span> /usr/libexec/java_home</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)</span><br><span class="line"><span class="built_in">export</span> JAVA_12_HOME=$(/usr/libexec/java_home -v12)</span><br><span class="line"></span><br><span class="line"><span class="built_in">alias</span> java8=<span class="string">'export JAVA_HOME=$JAVA_8_HOME'</span></span><br><span class="line"><span class="built_in">alias</span> java12=<span class="string">'export JAVA_HOME=$JAVA_12_HOME'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">alias</span> /usr/libexec/java_home=<span class="string">'echo $JAVA_HOME'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="variable">$JAVA_8_HOME</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line"><span class="comment"># 默认 JDK8</span></span><br><span class="line">$ java -version</span><br><span class="line">  java version <span class="string">"1.8.0_231"</span></span><br><span class="line">  Java(TM) SE Runtime Environment (build 1.8.0_231-b11)</span><br><span class="line">  Java HotSpot(TM) 64-Bit Server VM (build 25.231-b11, mixed mode)</span><br><span class="line">$ /usr/libexec/java_home</span><br><span class="line">  /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到 JDK12</span></span><br><span class="line">$ java12</span><br><span class="line">$ java -version</span><br><span class="line">  java version <span class="string">"12.0.2"</span> 2019-07-16</span><br><span class="line">  Java(TM) SE Runtime Environment (build 12.0.2+10)</span><br><span class="line">  Java HotSpot(TM) 64-Bit Server VM (build 12.0.2+10, mixed mode, sharing)</span><br><span class="line">$ /usr/libexec/java_home</span><br><span class="line">  /Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: 更多 Java 实用技巧，详见《<a href="https://yuzhouwan.com/posts/190413/">那些绕不过去的 Java 知识点</a>》</p>
+<h2 id="Maven-相关"><a href="#Maven-相关" class="headerlink" title="Maven 相关"></a>Maven 相关</h2><h3 id="权限不足导致下载失败"><a href="#权限不足导致下载失败" class="headerlink" title="权限不足导致下载失败"></a>权限不足导致下载失败</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>　报错无法解析依赖，找不到 <code>xxx.lock</code> 文件</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>　对 Maven 的依赖文件存放目录赋权即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown -R benedictjin:wheel /data/maven/repo</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>　另外，还可以通过以下一系列命令，统一对目录下的所有文件和文件夹进行权限修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown -R benedictjin:wheel *</span><br><span class="line">$ sudo chmod -R g+rwX .</span><br><span class="line">$ sudo find . -<span class="built_in">type</span> d -<span class="built_in">exec</span> chmod 755 {} \;</span><br><span class="line">$ sudo find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> chmod 644 {} \;</span><br></pre></td></tr></tbody></table></figure>
+<p>　同理，还可以利用这个方法，删除 <code>.DS_Store</code> 文件</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看过滤出来的文件</span></span><br><span class="line">$ find . -name <span class="string">'.DS_Store'</span></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">$ find . -name <span class="string">'.DS_Store'</span> -<span class="built_in">type</span> f -<span class="built_in">exec</span> rm -f {} \;</span><br><span class="line"><span class="comment"># 再次检查</span></span><br><span class="line">$ find . -name <span class="string">'.DS_Store'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>　而如果需要执行多个命令的话，可以指定多个 <code>-exec</code> 参数</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到后缀为 .md 的文件，执行 grep 命令，如果命中规则，则执行后续的 echo 命令</span></span><br><span class="line">$ find . -name <span class="string">'*.md'</span> -<span class="built_in">type</span> f -<span class="built_in">exec</span> grep <span class="string">'##'</span> {} \; -<span class="built_in">exec</span> <span class="built_in">echo</span> {} \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以不用关心第一个命令是否执行成功，具体写法如下：</span></span><br><span class="line">$ find . -name <span class="string">'*.md'</span> -<span class="built_in">type</span> f \( -<span class="built_in">exec</span> grep <span class="string">'##'</span> {} \; -o -<span class="built_in">exec</span> <span class="literal">true</span> \; \) -<span class="built_in">exec</span> <span class="built_in">echo</span> {} \;</span><br></pre></td></tr></tbody></table></figure>
+<p>Tips: 更多 Maven 实用技巧，详见《<a href="https://yuzhouwan.com/posts/2254/">Maven 高级玩法</a>》</p>
+<h2 id="命令相关"><a href="#命令相关" class="headerlink" title="命令相关"></a>命令相关</h2><h3 id="brew"><a href="#brew" class="headerlink" title="brew"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://brew.sh/">brew</a></h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用国内的镜像</span></span><br><span class="line">$ <span class="built_in">cd</span> <span class="string">"<span class="subst">$(brew --repo)</span>"</span></span><br><span class="line">$ git remote <span class="built_in">set</span>-url origin git://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> <span class="string">"<span class="subst">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">$ git remote <span class="built_in">set</span>-url origin git://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line">$ brew update</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line">$ <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="ccat"><a href="#ccat" class="headerlink" title="ccat"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jingweno/ccat">ccat</a></h3><p>　操作类似 cat 命令，但是高亮了输出</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 brew 安装</span></span><br><span class="line">$ brew install ccat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看最后一次的代码修改</span></span><br><span class="line">$ git diff HEAD^ | ccat</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="diskutil"><a href="#diskutil" class="headerlink" title="diskutil"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.apple.com/zh-cn/HT208496">diskutil</a></h3><p>　通过命令行格式化 U 盘</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看磁盘列表</span></span><br><span class="line">$ diskutil list</span><br><span class="line"><span class="comment"># 分区 /dev/disk2 为 U 盘，将其卸载</span></span><br><span class="line">$ diskutil unmountDisk /dev/disk2</span><br><span class="line"><span class="comment"># 执行格式化命令</span></span><br><span class="line">$ diskutil eraseDisk JHFS+ raspberry disk2</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="fd"><a href="#fd" class="headerlink" title="fd"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sharkdp/fd">fd</a></h3><p>　简化了 find 命令，使用起来更加简单高效，还会自动忽略隐藏目录（如 <code>.git/</code>、<code>.deploy_git/</code> 等）</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install fd</span><br><span class="line">$ fd xml</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pom.xml</span><br><span class="line">processing/pom.xml</span><br><span class="line">server/pom.xml</span><br><span class="line">services/pom.xml</span><br><span class="line">sql/pom.xml</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="ggrep"><a href="#ggrep" class="headerlink" title="ggrep"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sharkdp/fd">ggrep</a></h3><p>　自带的 grep 命令不支持前缀匹配等操作，而 ggrep 命令可以有效地支持高阶正则表达式</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ brew install grep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 匹配 + 加号左右两边没有空格的情况</span></span><br><span class="line">$ find . -name <span class="string">'*.md'</span> -<span class="built_in">type</span> f -<span class="built_in">exec</span> ggrep -Pio <span class="string">'(?! )\+(?! )| \+(?! )|(?&lt;! )\+ '</span> {} \; -<span class="built_in">exec</span> <span class="built_in">echo</span> {} \;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="htop"><a href="#htop" class="headerlink" title="htop"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hisham.hm/htop/">htop</a></h3><p>　增强了 top 命令，展示页面更加丰富</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install htop</span><br><span class="line">$ htop</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="tldr"><a href="#tldr" class="headerlink" title="tldr"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tldr-pages/tldr">tldr</a></h3><p>　强化 man 命令，对展示的文档进行了简化，并展示了对应的例子</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 npm 安装</span></span><br><span class="line">$ npm install -g tldr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 cd 命令的使用文档</span></span><br><span class="line">$ tldr <span class="built_in">cd</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">✔ Page not found. Updating cache...</span><br><span class="line">✔ Creating index...</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span></span><br><span class="line"></span><br><span class="line">  Change the current working directory.</span><br><span class="line"></span><br><span class="line">  - Go to the given directory:</span><br><span class="line">    <span class="built_in">cd</span> path/to/directory</span><br><span class="line"></span><br><span class="line">  - Go to home directory of current user:</span><br><span class="line">    <span class="built_in">cd</span></span><br><span class="line"></span><br><span class="line">  - Go up to the parent of the current directory:</span><br><span class="line">    <span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">  - Go to the previously chosen directory:</span><br><span class="line">    <span class="built_in">cd</span> -</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 brew 安装</span></span><br><span class="line">$ brew install tree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示目录结构，这里我们以 ElasticSearch 的数据目录为例</span></span><br><span class="line">$ <span class="built_in">cd</span> <span class="variable">$ES_HOME</span>/data</span><br><span class="line">$ tree -L 5</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── nodes</span><br><span class="line">    └── 0</span><br><span class="line">        ├── _state</span><br><span class="line">        │&nbsp;&nbsp; ├── global-20.st</span><br><span class="line">        │&nbsp;&nbsp; ├── manifest-35.st</span><br><span class="line">        │&nbsp;&nbsp; └── node-3.st</span><br><span class="line">        └── node.lock</span><br><span class="line"></span><br><span class="line">3 directories, 4 files</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="工具相关"><a href="#工具相关" class="headerlink" title="工具相关"></a>工具相关</h2><h3 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.sublimetext.com/">Sublime</a></h3><h4 id="展示空格和制表符"><a href="#展示空格和制表符" class="headerlink" title="展示空格和制表符"></a>展示空格和制表符</h4><p>　使用 ⌘, 组合快捷键后，增加 <code>"draw_white_space": "all"</code> 配置项</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"color_scheme"</span>: <span class="string">"Packages/Color Scheme - Default/Mariana.sublime-color-scheme"</span>,</span><br><span class="line">  <span class="attr">"font_size"</span>: <span class="number">14</span>,</span><br><span class="line">  <span class="attr">"ignored_packages"</span>: [</span><br><span class="line">    <span class="string">"Vintage"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"word_wrap"</span>: <span class="string">"true"</span>,</span><br><span class="line">  <span class="attr">"draw_white_space"</span>: <span class="string">"all"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="删除重复行"><a href="#删除重复行" class="headerlink" title="删除重复行"></a>删除重复行</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ⌥+⌘+F 打开替换模式，并打开正则表达式的开关</span></span><br><span class="line">^(.+)$[\r\n](^\1$[\r\n]{0, 1})+</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h4><h5 id="JSON-格式化"><a href="#JSON-格式化" class="headerlink" title="JSON 格式化"></a>JSON 格式化</h5><p>　使用 ⌘⇧P 组合快捷键后，输入 <code>Pretty JSON: Validate</code> 再回车，对文件中的 JSON 进行校验；输入 <code>Pretty JSON: Format and Sort JSON</code> 再回车，对文件中的 JSON 进行格式化；输入 <code>Pretty JSON: Minify (compress) JSON</code> 再回车，将文件中的 JSON 压缩成一行</p>
+<h5 id="二进制文件可视化"><a href="#二进制文件可视化" class="headerlink" title="二进制文件可视化"></a>二进制文件可视化</h5><p>　使用 ⌘⇧P 组合快捷键后，输入 <code>HexViewer: Toggle Hex View</code> 再回车，开启二进制可视化功能</p>
+<h3 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://iterm2.com/">iTerm2</a></h3><h4 id="安装-amp-卸载-zsh"><a href="#安装-amp-卸载-zsh" class="headerlink" title="安装 &amp; 卸载 zsh"></a>安装 &amp; 卸载 zsh</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br><span class="line">$ uninstall_oh_my_zsh</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=<span class="string">"agnoster"</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a>高亮</h4><h5 id="语法高亮"><a href="#语法高亮" class="headerlink" title="语法高亮"></a>语法高亮</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zsh-syntax-highlighting</span><br><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/<span class="built_in">local</span>/Cellar/zsh-syntax-highlighting/0.6.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="vim-高亮"><a href="#vim-高亮" class="headerlink" title="vim 高亮"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ethanschoonover.com/solarized/">vim 高亮</a></h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://ethanschoonover.com/solarized/files/solarized.zip</span><br><span class="line">$ unzip solarized.zip</span><br><span class="line">$ <span class="built_in">cd</span> solarized/vim-colors-solarized/colors</span><br><span class="line">$ mkdir -p ~/.vim/colors</span><br><span class="line">$ cp solarized.vim ~/.vim/colors/</span><br><span class="line">$ vi ~/.vimrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syntax <span class="built_in">enable</span></span><br><span class="line"><span class="built_in">set</span> background=dark</span><br><span class="line">colorscheme solarized</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="ls-高亮"><a href="#ls-高亮" class="headerlink" title="ls 高亮"></a>ls 高亮</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install coreutils</span><br><span class="line">$ gdircolors --<span class="built_in">print</span>-database &gt; ~/.dir_colors</span><br><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> brew list | grep coreutils &gt; /dev/null ; <span class="keyword">then</span> PATH=<span class="string">"<span class="subst">$(brew --prefix coreutils)</span>/libexec/gnubin:<span class="variable">$PATH</span>"</span> <span class="built_in">alias</span> ls=<span class="string">'ls -F --show-control-chars --color=auto'</span> <span class="built_in">eval</span> `gdircolors -b <span class="variable">$HOME</span>/.dir_colors` <span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="加载环境变量"><a href="#加载环境变量" class="headerlink" title="加载环境变量"></a>加载环境变量</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .zshrc 的最后一行加入</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="自动补齐"><a href="#自动补齐" class="headerlink" title="自动补齐"></a>自动补齐</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions.git <span class="variable">$ZSH_CUSTOM</span>/plugins/zsh-autosuggestions</span><br><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plugins=(git)</span></span><br><span class="line"><span class="comment"># 修改为：</span></span><br><span class="line">plugins=(zsh-autosuggestions git)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="自动补全只能看到一个字符"><a href="#自动补全只能看到一个字符" class="headerlink" title="自动补全只能看到一个字符"></a>自动补全只能看到一个字符</h4><p>　如果发现自动提示的命令只能展示出一个字符，则说明 ANSI Colors 里面第一行的 Normal 和 Bright 颜色过于相近</p>
+<h4 id="scp-报错-cannot-change-locale-UTF-8"><a href="#scp-报错-cannot-change-locale-UTF-8" class="headerlink" title="scp 报错 cannot change locale (UTF-8)"></a>scp 报错 cannot change locale (UTF-8)</h4><p>　使用 zsh 替代了 Mac 上原生的 bash 之后，本地化的设置默认是没有配置的，可以通过 <a href="https://yuzhouwan.com/posts/15691/#locale">locale</a> 命令来检查。解决方法也很简单，具体操作如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LC_ALL=en_US.UTF-8</span><br><span class="line"><span class="built_in">export</span> LANG=en_US.UTF-8</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.zshrc</span><br><span class="line">$ locale</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LANG=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_COLLATE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_CTYPE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_MESSAGES=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_MONETARY=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_NUMERIC=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_TIME=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">LC_ALL=<span class="string">"en_US.UTF-8"</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="删除-zsh-历史记录"><a href="#删除-zsh-历史记录" class="headerlink" title="删除 zsh 历史记录"></a>删除 zsh 历史记录</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">""</span> &gt; ~/.zsh_history &amp; <span class="built_in">exec</span> <span class="variable">$SHELL</span> -l</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Intellij-IDEA"><a href="#Intellij-IDEA" class="headerlink" title="Intellij IDEA"></a>Intellij IDEA</h3><h4 id="不停顿地-Debug"><a href="#不停顿地-Debug" class="headerlink" title="不停顿地 Debug"></a>不停顿地 Debug</h4><p><img data-src="/picture/idea/idea_debug_without_pause.png" alt="Debug without pause in Intellij IDEA"></p>
+<center>（对 <a href="https://www.jetbrains.com/idea/" target="_blank" rel="external nofollow noopener noreferrer">IntelliJ IDEA</a>™ 的截图）</center>
+
+<h4 id="Debug-启动的时候，卡在了-Finished-saving-caches"><a href="#Debug-启动的时候，卡在了-Finished-saving-caches" class="headerlink" title="Debug 启动的时候，卡在了 Finished, saving caches"></a>Debug 启动的时候，卡在了 Finished, saving caches</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取 Mac 的 hostname</span></span><br><span class="line">$ hostname</span><br><span class="line">  BenedictJin.local</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 hosts 文件，即可解决</span></span><br><span class="line">$ sudo vim /etc/hosts</span><br><span class="line">  127.0.0.1       localhost        BenedictJin.local</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="只格式化自己修改的代码"><a href="#只格式化自己修改的代码" class="headerlink" title="只格式化自己修改的代码"></a>只格式化自己修改的代码</h4><p>　通过 <code>⌘⌥⇧L</code> 组合快捷键打开配置面板，选择 <code>Only VCS changed text</code> 后，再次使用 <code>⌘⌥L</code> 组合快捷键格式化代码，便只会影响本次修改的、尚未 commit 的代码了</p>
+<p><img data-src="/picture/idea/idea_only_vcs_changed_text.png" alt="Only VCS changed text in Intellij IDEA"></p>
+<center>（对 <a href="https://www.jetbrains.com/idea/" target="_blank" rel="external nofollow noopener noreferrer">IntelliJ IDEA</a>™ 的截图）</center>
+
+<h4 id="生成-SerialVersionUID"><a href="#生成-SerialVersionUID" class="headerlink" title="生成 SerialVersionUID"></a>生成 SerialVersionUID</h4><p>　安装 GenerateSerialVersionUID 插件后，在类文件中，使用 <code>⌘N</code> 组合快捷键，并选择 SerialVersionUID 菜单，即可生成类似如下的一行代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">90000066L</span>;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Typroa"><a href="#Typroa" class="headerlink" title="Typroa"></a>Typroa</h3><h4 id="支持-callout"><a href="#支持-callout" class="headerlink" title="支持 callout"></a>支持 callout</h4><p>　首先通过 <code>⌘,</code> 快速打开 Typroa 的控制面板，依次点击 <code>General</code> - <code>Open Theme Folder</code> 按钮，打开 <code>theme</code> 目录，并在该目录下新建 <code>base.user.css</code> 文件，填写如下内容：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span> {</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#eee</span>;</span><br><span class="line">    <span class="attribute">border-left-width</span>: <span class="number">6px</span> <span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">1em</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span> <span class="selector-tag">p</span><span class="selector-pseudo">:last-child</span> {</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span> <span class="selector-tag">code</span> {</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span>+<span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:'</span>]</span> {</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">5px</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:default'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#777</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:default'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#777</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:primary'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#428bca</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:primary'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#428bca</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:success'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#5cb85c</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:success'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#5cb85c</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:danger'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#d9534f</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:danger'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#d9534f</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style=<span class="string">'callout:warning'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#f0ad4e</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:warning'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#f0ad4e</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:info'</span>]</span> {</span><br><span class="line">    <span class="attribute">border-left-color</span>: <span class="number">#5bc0de</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[style^=<span class="string">'callout:info'</span>]</span> <span class="selector-tag">h4</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#5bc0de</span> <span class="meta">!important</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>　重启 Typroa 之后，即可使用 callout 功能：</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"callout:default"</span>&gt;</span>default<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"callout:primary"</span>&gt;</span>primary<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"callout:success"</span>&gt;</span>success<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"callout:warning"</span>&gt;</span>warning<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"callout:info"</span>&gt;</span>info<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>　效果如下：</p>
+<p><img data-src="/picture/mac/mac_typroa_callout.png" alt="Markdown Callout in Typroa"></p>
+<center>（对 <a href="https://typora.io/" target="_blank" rel="external nofollow noopener noreferrer">Typroa</a>™ 的截图）</center>
+
+
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><h4 id="Octotree-代码大纲"><a href="#Octotree-代码大纲" class="headerlink" title="Octotree 代码大纲"></a>Octotree 代码大纲</h4><p><img data-src="/picture/mac/mac_octotree.png" alt="Octotree"></p>
+<center>（对 <a href="https://github.com/asdf2014" target="_blank" rel="external nofollow noopener noreferrer">Github</a>™ 的截图）</center>
+
+<h4 id="Isometric-Contributions-可视化"><a href="#Isometric-Contributions-可视化" class="headerlink" title="Isometric Contributions 可视化"></a>Isometric Contributions 可视化</h4><p><img data-src="/picture/mac/mac_asdf2014_on_isometric_contributions.png" alt="asdf2014 on Isometric Contributions"></p>
+<center>（对 <a href="https://github.com/asdf2014" target="_blank" rel="external nofollow noopener noreferrer">Github</a>™ 的截图）</center>
+
+
+
+<h3 id="asciinema"><a href="#asciinema" class="headerlink" title="asciinema"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asciinema/asciinema">asciinema</a></h3><h4 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ brew install asciinema</span><br><span class="line">$ asciinema rec</span><br><span class="line"><span class="comment"># 录制成功后，exit 退出即可</span></span><br><span class="line"><span class="comment"># 支持保存在本地，或发布在 asciinema.org 网站上</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h4><p>　如果你担心发布在网上，存在隐私问题。你可以注册 ascinema 的账号，并设置录制内容是否公开（默认为 private）</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ asciinema rec</span><br><span class="line">$ <span class="built_in">cd</span> /tmp</span><br><span class="line">$ vim open.sh</span><br><span class="line">  open <span class="string">'https://yuzhouwan.com/'</span></span><br><span class="line">$ sh open.sh</span><br><span class="line">$ <span class="built_in">exit</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="转-gif"><a href="#转-gif" class="headerlink" title="转 gif"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asciinema/asciicast2gif">转 gif</a></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ brew install imagemagick</span><br><span class="line">$ brew install gifsicle</span><br><span class="line">$ npm install --global asciicast2gif</span><br><span class="line">$ asciicast2gif https://asciinema.org/a/246879.json 246879.gif</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://asciinema.org/a/246879"><img data-src="https://asciinema.org/a/246879.svg" alt="Asciinema Example"></a></p>
+<center>（利用 <a href="https://asciinema.org/a/246879" target="_blank" rel="external nofollow noopener noreferrer">Asciinema</a>™ 录制而成）</center>
+
+
+<h3 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h3><h4 id="使用-iTerm2-作为-Alfred-的默认命令行"><a href="#使用-iTerm2-作为-Alfred-的默认命令行" class="headerlink" title="使用 iTerm2 作为 Alfred 的默认命令行"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/vitorgalvao/custom-alfred-iterm-scripts">使用 iTerm2 作为 Alfred 的默认命令行</a></h4><p>　使用 ⌘, 组合快捷键后，进入 <code>Features</code> - <code>Terminal</code> - <code>Application</code>，选择 <code>Custom</code> 后，填入以下脚本即可：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">-- Set this property to <span class="literal">true</span> to always open <span class="keyword">in</span> a new window</span><br><span class="line">property open_in_new_window : <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">-- Handlers</span><br><span class="line">on new_window()</span><br><span class="line">  tell application <span class="string">"iTerm"</span> to create window with default profile</span><br><span class="line">end new_window</span><br><span class="line"></span><br><span class="line">on new_tab()</span><br><span class="line">  tell application <span class="string">"iTerm"</span> to tell the first window to create tab with default profile</span><br><span class="line">end new_tab</span><br><span class="line"></span><br><span class="line">on call_forward()</span><br><span class="line">  tell application <span class="string">"iTerm"</span> to activate</span><br><span class="line">end call_forward</span><br><span class="line"></span><br><span class="line">on is_running()</span><br><span class="line">  application <span class="string">"iTerm"</span> is running</span><br><span class="line">end is_running</span><br><span class="line"></span><br><span class="line">on has_windows()</span><br><span class="line">  <span class="keyword">if</span> not is_running() <span class="keyword">then</span> <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">if</span> windows of application <span class="string">"iTerm"</span> is {} <span class="keyword">then</span> <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">end has_windows</span><br><span class="line"></span><br><span class="line">on send_text(custom_text)</span><br><span class="line">  tell application <span class="string">"iTerm"</span> to tell the first window to tell current session to write text custom_text</span><br><span class="line">end send_text</span><br><span class="line"></span><br><span class="line">-- Main</span><br><span class="line">on alfred_script(query)</span><br><span class="line">  <span class="keyword">if</span> has_windows() <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> open_in_new_window <span class="keyword">then</span></span><br><span class="line">      new_window()</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      new_tab()</span><br><span class="line">    end <span class="keyword">if</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    -- If iTerm is not running and we tell it to create a new window, we get two</span><br><span class="line">    -- One from opening the application, and the other from the <span class="built_in">command</span></span><br><span class="line">    <span class="keyword">if</span> is_running() <span class="keyword">then</span></span><br><span class="line">      new_window()</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      call_forward()</span><br><span class="line">    end <span class="keyword">if</span></span><br><span class="line">  end <span class="keyword">if</span></span><br><span class="line"></span><br><span class="line">  -- Make sure a window exists before we <span class="built_in">continue</span>, or the write may fail</span><br><span class="line">  repeat until has_windows()</span><br><span class="line">    delay 0.01</span><br><span class="line">  end repeat</span><br><span class="line"></span><br><span class="line">  send_text(query)</span><br><span class="line">  call_forward()</span><br><span class="line">end alfred_script</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="Mac-键盘符号"><a href="#Mac-键盘符号" class="headerlink" title="Mac 键盘符号"></a>Mac 键盘符号</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>键盘符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘</td>
+<td>Command</td>
+</tr>
+<tr>
+<td>⇧</td>
+<td>Shift</td>
+</tr>
+<tr>
+<td>⌥</td>
+<td>Option</td>
+</tr>
+<tr>
+<td>⌃</td>
+<td>Control</td>
+</tr>
+<tr>
+<td>↩︎</td>
+<td>Return / Enter</td>
+</tr>
+<tr>
+<td>⌫</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td>⌦</td>
+<td>向前删除键（Fn + Delete）</td>
+</tr>
+<tr>
+<td>↑</td>
+<td>上箭头</td>
+</tr>
+<tr>
+<td>↓</td>
+<td>下箭头</td>
+</tr>
+<tr>
+<td>←</td>
+<td>左箭头</td>
+</tr>
+<tr>
+<td>→</td>
+<td>右箭头</td>
+</tr>
+<tr>
+<td>⇞</td>
+<td>Page Up（Fn + ↑）</td>
+</tr>
+<tr>
+<td>⇟</td>
+<td>Page Down（Fn + ↓）</td>
+</tr>
+<tr>
+<td>Fn + ←</td>
+<td>Home</td>
+</tr>
+<tr>
+<td>Fn + →</td>
+<td>End</td>
+</tr>
+<tr>
+<td>⇥</td>
+<td>右制表符（Tab 键）</td>
+</tr>
+<tr>
+<td>⇤</td>
+<td>左制表符（Shift + Tab）</td>
+</tr>
+<tr>
+<td>⎋</td>
+<td>Escape（Esc）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Mac-本身相关"><a href="#Mac-本身相关" class="headerlink" title="Mac 本身相关"></a>Mac 本身相关</h3><h4 id="访问隐藏目录"><a href="#访问隐藏目录" class="headerlink" title="访问隐藏目录"></a>访问隐藏目录</h4><p>　在 Finder 里面同时按 <code>Command + Shift + G</code> 即可输入隐藏目录，如 <code>/usr/bin/java</code></p>
+<h3 id="Vim-相关"><a href="#Vim-相关" class="headerlink" title="Vim 相关"></a>Vim 相关</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌃F</td>
+<td>下翻页</td>
+</tr>
+<tr>
+<td>⌃B</td>
+<td>上翻页</td>
+</tr>
+<tr>
+<td>⌃F</td>
+<td>下翻页</td>
+</tr>
+<tr>
+<td>⌃B</td>
+<td>上翻页</td>
+</tr>
+<tr>
+<td>⇧M</td>
+<td>将光标移动的该页中部</td>
+</tr>
+<tr>
+<td>GG</td>
+<td>回到文件顶部</td>
+</tr>
+<tr>
+<td>⇧G</td>
+<td>回到文件底部</td>
+</tr>
+<tr>
+<td>HJKL</td>
+<td>移动光标（HL: 左右；JK: 上下）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Tips: 更多 Vim 实用技巧 和 完整快捷键 详见《<a href="https://yuzhouwan.com/posts/15691">Linux 实战技巧</a>》的 <a href="https://yuzhouwan.com/posts/15691/#vim">vim</a> 和 <a href="https://yuzhouwan.com/posts/15691/#Blog">cheat sheet</a> 部分</p>
+<h3 id="Alfred-相关"><a href="#Alfred-相关" class="headerlink" title="Alfred 相关"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.alfredapp.com/">Alfred</a> 相关</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌥⌘C</td>
+<td>展示粘贴板上历史命令、图片和文件列表</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="iTerm2-相关"><a href="#iTerm2-相关" class="headerlink" title="iTerm2 相关"></a>iTerm2 相关</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘⇧I</td>
+<td>开启同时向多窗口输入命令的功能</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Intellij-Idea-相关"><a href="#Intellij-Idea-相关" class="headerlink" title="Intellij Idea 相关"></a>Intellij Idea 相关</h3><h4 id="Editing（编辑）"><a href="#Editing（编辑）" class="headerlink" title="Editing（编辑）"></a>Editing（编辑）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌃Space</td>
+<td>基本的代码补全（补全任何类、方法、变量）</td>
+</tr>
+<tr>
+<td>⌃⇧Space</td>
+<td>智能代码补全（过滤器方法列表和变量的预期类型）</td>
+</tr>
+<tr>
+<td>⌘⇧↩</td>
+<td>自动结束代码，行末自动添加分号</td>
+</tr>
+<tr>
+<td>⌘P</td>
+<td>显示方法的参数信息</td>
+</tr>
+<tr>
+<td>⌃J</td>
+<td>快速查看文档</td>
+</tr>
+<tr>
+<td>⇧F1</td>
+<td>查看外部文档（在某些代码上会触发打开浏览器显示相关文档）</td>
+</tr>
+<tr>
+<td>⌘+鼠标</td>
+<td>显示简要信息</td>
+</tr>
+<tr>
+<td>⌘F1</td>
+<td>在错误或警告处显示具体描述信息</td>
+</tr>
+<tr>
+<td>⌘N, ⌃↩</td>
+<td><strong>生成代码</strong>（<code>getter</code>、<code>setter</code>、构造函数、<code>hashCode</code> / <code>equals</code> / <code>toString</code>）</td>
+</tr>
+<tr>
+<td>⌃O</td>
+<td>覆盖方法（重写父类方法）</td>
+</tr>
+<tr>
+<td>⌃I</td>
+<td>实现方法（实现接口中的方法）</td>
+</tr>
+<tr>
+<td>⌘⌥T</td>
+<td>包围代码（使用 <code>if..else</code>, <code>try..catch</code>, <code>for</code>, <code>synchronized</code> 等包围选中的代码）</td>
+</tr>
+<tr>
+<td>⌘/</td>
+<td>注释 / 取消注释与行注释</td>
+</tr>
+<tr>
+<td>⌘⌥/</td>
+<td>注释 / 取消注释与块注释</td>
+</tr>
+<tr>
+<td>⌥↑</td>
+<td>连续选中代码块</td>
+</tr>
+<tr>
+<td>⌥↓</td>
+<td>减少当前选中的代码块</td>
+</tr>
+<tr>
+<td>⌃⇧Q</td>
+<td>显示上下文信息</td>
+</tr>
+<tr>
+<td>⌥↩</td>
+<td>显示意向动作和快速修复代码</td>
+</tr>
+<tr>
+<td>⌘⌥L</td>
+<td>格式化代码</td>
+</tr>
+<tr>
+<td>⌃⌥O</td>
+<td>优化 <code>import</code></td>
+</tr>
+<tr>
+<td>⌃⌥I</td>
+<td>自动缩进线</td>
+</tr>
+<tr>
+<td>⇥ / ⇧⇥</td>
+<td>缩进代码 / 反缩进代码</td>
+</tr>
+<tr>
+<td>⌘X</td>
+<td>剪切当前行或选定的块到剪贴板</td>
+</tr>
+<tr>
+<td>⌘C</td>
+<td>复制当前行或选定的块到剪贴板</td>
+</tr>
+<tr>
+<td>⌘V</td>
+<td>从剪贴板粘贴</td>
+</tr>
+<tr>
+<td>⌘⇧V</td>
+<td><strong>从最近的缓冲区粘贴</strong></td>
+</tr>
+<tr>
+<td>⌘D</td>
+<td>复制当前行或选定的块</td>
+</tr>
+<tr>
+<td>⌘⌫</td>
+<td>删除当前行或选定的块的行</td>
+</tr>
+<tr>
+<td>⌃⇧J</td>
+<td>智能的将代码拼接成一行</td>
+</tr>
+<tr>
+<td>⌘↩</td>
+<td>智能的拆分拼接的行</td>
+</tr>
+<tr>
+<td>⇧↩</td>
+<td>开始新的一行</td>
+</tr>
+<tr>
+<td>⌘⇧U</td>
+<td>大小写切换</td>
+</tr>
+<tr>
+<td>⌘⇧] / ⌘⇧[</td>
+<td>选择直到代码块结束 / 开始</td>
+</tr>
+<tr>
+<td>⌥⌦</td>
+<td>删除到单词的末尾</td>
+</tr>
+<tr>
+<td>⌥⌫</td>
+<td>删除到单词的开头</td>
+</tr>
+<tr>
+<td>⌘+ / ⌘-</td>
+<td>展开 / 折叠代码块</td>
+</tr>
+<tr>
+<td>⌘⇧+</td>
+<td>展开所以代码块</td>
+</tr>
+<tr>
+<td>⌘⇧-</td>
+<td>折叠所有代码块</td>
+</tr>
+<tr>
+<td>⌘W</td>
+<td>关闭活动的编辑器选项卡</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Search-Replace（查询-替换）"><a href="#Search-Replace（查询-替换）" class="headerlink" title="Search / Replace（查询 / 替换）"></a>Search / Replace（查询 / 替换）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Double ⇧</td>
+<td>查询任何东西</td>
+</tr>
+<tr>
+<td>⌘F</td>
+<td>文件内查找</td>
+</tr>
+<tr>
+<td>⌘G</td>
+<td>查找模式下，向下查找</td>
+</tr>
+<tr>
+<td>⌘⇧G</td>
+<td>查找模式下，向上查找</td>
+</tr>
+<tr>
+<td>⌘R</td>
+<td>文件内替换</td>
+</tr>
+<tr>
+<td>⌘⇧F</td>
+<td>全局查找（根据路径）</td>
+</tr>
+<tr>
+<td>⌘⇧R</td>
+<td>全局替换（根据路径）</td>
+</tr>
+<tr>
+<td>⌘⇧S</td>
+<td>查询结构（Ultimate Edition 版专用，需要在 Keymap 中设置）</td>
+</tr>
+<tr>
+<td>⌘⇧M</td>
+<td>替换结构（Ultimate Edition 版专用，需要在 Keymap 中设置）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Usage-Search（使用查询）"><a href="#Usage-Search（使用查询）" class="headerlink" title="Usage Search（使用查询）"></a>Usage Search（使用查询）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌥F7 / ⌘F7</td>
+<td>在文件中查找用法 / 在类中查找用法</td>
+</tr>
+<tr>
+<td>⌘⇧F7</td>
+<td>在文件中突出显示的用法</td>
+</tr>
+<tr>
+<td>⌘⌥F7</td>
+<td>显示用法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Compile-and-Run（编译和运行）"><a href="#Compile-and-Run（编译和运行）" class="headerlink" title="Compile and Run（编译和运行）"></a>Compile and Run（编译和运行）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘F9</td>
+<td>编译 Project</td>
+</tr>
+<tr>
+<td>⌘⇧F9</td>
+<td>编译选择的文件、包或模块</td>
+</tr>
+<tr>
+<td>⌃⌥R</td>
+<td>弹出 Run 的可选择菜单</td>
+</tr>
+<tr>
+<td>⌃⌥D</td>
+<td>弹出 Debug 的可选择菜单</td>
+</tr>
+<tr>
+<td>⌃R</td>
+<td>运行</td>
+</tr>
+<tr>
+<td>⌃D</td>
+<td>调试</td>
+</tr>
+<tr>
+<td>⌃⇧R, ⌃⇧D</td>
+<td>从编辑器运行上下文环境配置</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Debugging（调试）"><a href="#Debugging（调试）" class="headerlink" title="Debugging（调试）"></a>Debugging（调试）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F8</td>
+<td>进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
+</tr>
+<tr>
+<td>⇧F7</td>
+<td>智能步入，断点所在行上有多个方法调用，会弹出进入哪个方法</td>
+</tr>
+<tr>
+<td>⇧F8</td>
+<td>跳出</td>
+</tr>
+<tr>
+<td>⌥F9</td>
+<td>运行到光标处，如果光标前有其他断点会进入到该断点</td>
+</tr>
+<tr>
+<td>⌥F8</td>
+<td>计算表达式（可以更改变量值使其生效）</td>
+</tr>
+<tr>
+<td>⌘⌥R</td>
+<td>恢复程序运行，如果该断点下面代码还有断点则停在下一个断点上</td>
+</tr>
+<tr>
+<td>⌘F8</td>
+<td>切换断点（若光标当前行有断点则取消断点，没有则加上断点）</td>
+</tr>
+<tr>
+<td>⌘⇧F8</td>
+<td>查看断点信息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Navigation（导航）"><a href="#Navigation（导航）" class="headerlink" title="Navigation（导航）"></a>Navigation（导航）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘O</td>
+<td>查找类文件</td>
+</tr>
+<tr>
+<td>⌘F12</td>
+<td>弹出当前文件结构层，可以在弹出的层上直接输入进行筛选（可用于搜索类中的方法）</td>
+</tr>
+<tr>
+<td>⌘⇧O</td>
+<td>查找所有类型文件、打开文件、打开目录，打开目录需要在输入的内容前面或后面加一个反斜杠 /</td>
+</tr>
+<tr>
+<td>⌘⌥O</td>
+<td>前往指定的变量 / 方法</td>
+</tr>
+<tr>
+<td>⌃← / ⌃→</td>
+<td>左右切换打开的编辑 tab 页</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>返回到前一个工具窗口</td>
+</tr>
+<tr>
+<td>⎋</td>
+<td>从工具窗口进入代码文件窗口</td>
+</tr>
+<tr>
+<td>⇧⎋</td>
+<td>隐藏当前或最后一个活动的窗口，且光标进入代码文件窗口</td>
+</tr>
+<tr>
+<td>⌘⇧F4</td>
+<td>关闭活动 run / messages / find / … 的 tab 页</td>
+</tr>
+<tr>
+<td>⌘L</td>
+<td>在当前文件跳转到某一行的指定处</td>
+</tr>
+<tr>
+<td>⌘E</td>
+<td>显示最近打开的文件记录列表</td>
+</tr>
+<tr>
+<td>⌘⌥← / ⌘⌥→</td>
+<td>退回 / 前进到上一个操作的地方</td>
+</tr>
+<tr>
+<td>⌘⇧⌫</td>
+<td>跳转到最后一个编辑的地方</td>
+</tr>
+<tr>
+<td>⌥F1</td>
+<td>显示当前文件选择目标弹出层，弹出层中有很多目标可以进行选择（如在代码编辑窗口可以选择显示该文件的 Finder）</td>
+</tr>
+<tr>
+<td>⌘B / ⌘</td>
+<td>鼠标点击 进入光标所在的方法 / 变量的接口或是定义处</td>
+</tr>
+<tr>
+<td>⌘⌥B</td>
+<td>跳转到实现处，在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</td>
+</tr>
+<tr>
+<td>⌥ Space, ⌘Y</td>
+<td>快速打开光标所在方法、类的定义</td>
+</tr>
+<tr>
+<td>⌃⇧B</td>
+<td>跳转到类型声明处</td>
+</tr>
+<tr>
+<td>⌘U</td>
+<td>前往当前光标所在方法的父类的方法 / 接口定义</td>
+</tr>
+<tr>
+<td>⌃↓ / ⌃↑</td>
+<td>当前光标跳转到当前文件的前一个 / 后一个方法名位置</td>
+</tr>
+<tr>
+<td>⌘] / ⌘[</td>
+<td>移动光标到当前所在代码的花括号开始/结束位置</td>
+</tr>
+<tr>
+<td>⌃H</td>
+<td>显示当前类的层次结构</td>
+</tr>
+<tr>
+<td>⌘⇧H</td>
+<td>显示方法层次结构</td>
+</tr>
+<tr>
+<td>⌃⌥H</td>
+<td>显示调用层次结构</td>
+</tr>
+<tr>
+<td>F2 / ⇧F2</td>
+<td>跳转到下一个 / 上一个突出错误或警告的位置</td>
+</tr>
+<tr>
+<td>F4 / ⌘↓</td>
+<td>编辑 / 查看代码源</td>
+</tr>
+<tr>
+<td>⌥ Home</td>
+<td>显示到当前文件的导航条</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>选中文件 / 文件夹 / 代码行，添加 / 取消书签</td>
+</tr>
+<tr>
+<td>⌥F3</td>
+<td>选中文件 / 文件夹 / 代码行，使用助记符添加 / 取消书签</td>
+</tr>
+<tr>
+<td>⌃0…⌃9</td>
+<td>定位到对应数值的书签位置</td>
+</tr>
+<tr>
+<td>⌘F3</td>
+<td>显示所有书签</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Refactoring（重构）"><a href="#Refactoring（重构）" class="headerlink" title="Refactoring（重构）"></a>Refactoring（重构）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F5</td>
+<td>复制文件到指定目录</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>移动文件到指定目录</td>
+</tr>
+<tr>
+<td>⌘⌫</td>
+<td>在文件上为安全删除文件，弹出确认框</td>
+</tr>
+<tr>
+<td>⇧F6</td>
+<td>重命名文件</td>
+</tr>
+<tr>
+<td>⌘F6</td>
+<td><strong>更改签名</strong></td>
+</tr>
+<tr>
+<td>⌘⌥N</td>
+<td>一致性</td>
+</tr>
+<tr>
+<td>⌘⌥M</td>
+<td>将选中的代码提取为方法</td>
+</tr>
+<tr>
+<td>⌘⌥V</td>
+<td>提取变量</td>
+</tr>
+<tr>
+<td>⌘⌥F</td>
+<td>提取字段</td>
+</tr>
+<tr>
+<td>⌘⌥C</td>
+<td>提取常量</td>
+</tr>
+<tr>
+<td>⌘⌥P</td>
+<td>提取参数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="VCS（版本控制）"><a href="#VCS（版本控制）" class="headerlink" title="VCS（版本控制）"></a>VCS（版本控制）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘K</td>
+<td>提交代码到版本控制器</td>
+</tr>
+<tr>
+<td>⌘T</td>
+<td>从版本控制器更新代码</td>
+</tr>
+<tr>
+<td>⌥⇧C</td>
+<td>查看最近的变更记录</td>
+</tr>
+<tr>
+<td>⌃C</td>
+<td>快速弹出版本控制器操作面板</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Live-Templates（动态代码模板）"><a href="#Live-Templates（动态代码模板）" class="headerlink" title="Live Templates（动态代码模板）"></a>Live Templates（动态代码模板）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘⌥J</td>
+<td>弹出模板选择窗口，将选定的代码使用动态模板包住</td>
+</tr>
+<tr>
+<td>⌘J</td>
+<td>插入自定义动态代码模板</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="General（通用）"><a href="#General（通用）" class="headerlink" title="General（通用）"></a>General（通用）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘1…⌘9</td>
+<td>打开相应编号的工具窗口</td>
+</tr>
+<tr>
+<td>⌘S</td>
+<td>保存所有</td>
+</tr>
+<tr>
+<td>⌘⌥Y</td>
+<td>同步、刷新</td>
+</tr>
+<tr>
+<td>⌃⌘F</td>
+<td>切换全屏模式</td>
+</tr>
+<tr>
+<td>⌘⇧F12</td>
+<td>切换最大化编辑器</td>
+</tr>
+<tr>
+<td>⌥⇧F</td>
+<td>添加到收藏夹</td>
+</tr>
+<tr>
+<td>⌥⇧I</td>
+<td>检查当前文件与当前的配置文件</td>
+</tr>
+<tr>
+<td>§⌃, ⌃`</td>
+<td>快速切换当前的 scheme（切换主题、代码样式等）</td>
+</tr>
+<tr>
+<td>⌘,</td>
+<td>打开 IDEA 系统设置</td>
+</tr>
+<tr>
+<td>⌘;</td>
+<td>打开项目结构对话框</td>
+</tr>
+<tr>
+<td>⇧⌘A</td>
+<td>查找动作（可设置相关选项）</td>
+</tr>
+<tr>
+<td>⌃⇥</td>
+<td>编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete，则是关闭对应选中的窗口）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⌘⇧8</td>
+<td>竖编辑模式</td>
+</tr>
+<tr>
+<td>⌘`</td>
+<td>项目之间的切换</td>
+</tr>
+<tr>
+<td>⌥⇧U</td>
+<td>装上 CamelCase 插件之后，切换变量的驼峰法命名</td>
+</tr>
+<tr>
+<td>⌃⌘U</td>
+<td>装上 Translation 插件之后，可以快速翻译</td>
+</tr>
+<tr>
+<td>⌃⌘O</td>
+<td>装上 Translation 插件之后，可以翻译并替换</td>
+</tr>
+<tr>
+<td>⌥S</td>
+<td>装上 OnlineSearch 插件之后，可以配置为该快捷键</td>
+</tr>
+<tr>
+<td>⌘⌥⇧/</td>
+<td>使用 2018.3 EAP   版本时候，开启 JVM Profile 功能</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="Error-Unknown-command-services"><a href="#Error-Unknown-command-services" class="headerlink" title="Error: Unknown command: services"></a>Error: Unknown command: services</h3><h4 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew services start grafana</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Unknown <span class="built_in">command</span>: services</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://apple.stackexchange.com/questions/150300/need-help-using-homebrew-services-command">解决</a></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap homebrew/services</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="升级-Catalina-系统后根目录下文件消失"><a href="#升级-Catalina-系统后根目录下文件消失" class="headerlink" title="升级 Catalina 系统后根目录下文件消失"></a>升级 Catalina 系统后根目录下文件消失</h3><h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>　已经被移动到 <code>/Users/Shared/Relocated Items/Security</code> 目录下了</p>
+<h3 id="升级-Catalina-系统后根目录无法创建文件夹"><a href="#升级-Catalina-系统后根目录无法创建文件夹" class="headerlink" title="升级 Catalina 系统后根目录无法创建文件夹"></a>升级 Catalina 系统后根目录无法创建文件夹</h3><h4 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /</span><br><span class="line">$ sudo mkdir yuzhouwan</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir: yuzhouwan: Read-only file system</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h4><p>　确保 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.apple.com/en-us/HT204899">SIP</a>（<strong>S</strong>ystem <strong>I</strong>ntegrity <strong>P</strong>rotection）关闭的情况下，给更目录赋予写入的权限即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ csrutil status</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System Integrity Protection status: disabled.</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -uw /</span><br><span class="line">$ sudo mkdir /yuzhouwan</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="删除雷蛇应用后，仍然显示雷蛇图标"><a href="#删除雷蛇应用后，仍然显示雷蛇图标" class="headerlink" title="删除雷蛇应用后，仍然显示雷蛇图标"></a>删除雷蛇应用后，仍然显示雷蛇图标</h3><h4 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ launchctl remove com.razer.rzupdater</span><br><span class="line">$ launchctl remove com.razerzone.rzdeviceengine</span><br><span class="line">$ sudo rm /Library/LaunchAgents/com.razer.rzupdater.plist</span><br><span class="line">$ sudo rm -rf /Library/Application\ Support/Razer</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="自带的-grep-不支持-P-参数"><a href="#自带的-grep-不支持-P-参数" class="headerlink" title="自带的 grep 不支持 -P 参数"></a>自带的 grep 不支持 -P 参数</h3><h4 id="解决-5"><a href="#解决-5" class="headerlink" title="解决"></a>解决</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install grep</span><br><span class="line">$ vim tmp</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">宇宙湾</span><br><span class="line">yuzhouwan.com</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/<span class="built_in">local</span>/opt/grep/libexec/gnubin/grep -P <span class="string">'[\p{Han}]'</span> tmp</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">宇宙湾</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://meta.stackexchange.com/questions/66377/what-is-the-xy-problem">What is the XY problem?</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://mp.weixin.qq.com/s/fhqg1ntQoPYxC-5KDQk3jQ">为了效率，扎克伯格的 26 张 PPT</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://xiaozhuanlan.com/Effective-Mac">Mac 高效开发指南</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ihtcboy.com/2018/07/15/2018-07-15_%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84macOS%E7%B3%BB%E5%88%97%EF%BC%9A%E7%B2%BE%E9%80%89MacApp/">程序员的 macOS 系列：精选 Mac App</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://leohxj.gitbooks.io/a-programmer-prepares/content/software/mac/index.html">程序员的自我修养 - Mac 篇</a></li>
+</ul>
+<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><h4 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/topic/19591970/hot">Mac OS X 使用技巧</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://macpaw.com/">CleanMyMac X</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://wangchujiang.com/awesome-mac/">Awesome Mac</a></li>
+</ul>
+<h4 id="钉钉"><a href="#钉钉" class="headerlink" title="钉钉"></a>钉钉</h4><ul>
+<li>DingTalk RC: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://download.alicdn.com/dingtalk-desktop/win_installer/RC/DingTalk_v3.3.4-RC.1.exe">win</a> &amp; <a target="_blank" rel="external nofollow noopener noreferrer" href="https://download.alicdn.com/dingtalk-desktop/mac_dmg/RC/DingTalk_v3.3.4-RC.1.dmg">mac</a></li>
+</ul>
+<h4 id="iTerm2-1"><a href="#iTerm2-1" class="headerlink" title="iTerm2"></a>iTerm2</h4><ul>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/405956cdaca6">ITerm2 配置 - 让你的 mac 命令行更加丰富高效</a><br><img data-src="/picture/mac/mac_iterm2.png" alt="iTerm2"></p>
+<center>（对 <a href="https://iterm2.com/" target="_blank" rel="external nofollow noopener noreferrer">ITerm2</a>™ 的截图）</center></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://bluebiu.com/blog/iterm2-ssh-session-idle.html">iTerm2 中 ssh 保持连接不断开</a></li>
+</ul>
+<h4 id="Jump-Desktop"><a href="#Jump-Desktop" class="headerlink" title="Jump Desktop"></a>Jump Desktop</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://jumpdesktop.com/">Jump Desktop：连接远程桌面</a></li>
+</ul>
+<h4 id="Sublime-1"><a href="#Sublime-1" class="headerlink" title="Sublime"></a>Sublime</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sb2nov/mac-setup">Installing Development environment on macOS</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/dzhibas/SublimePrettyJson">Prettify / Minify / Query / Goto / Validate / Lint JSON plugin for Sublime Text 2 &amp; 3</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/a50db1f77eb9">Sublime Text：Pretty Json 插件使用技巧</a></li>
+</ul>
+<h4 id="Chrome-1"><a href="#Chrome-1" class="headerlink" title="Chrome"></a>Chrome</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/Mottie/GitHub-userscripts">Userscripts to add functionality to GitHub</a></li>
+</ul>
+<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.apple.com/zh-cn/HT204063">重置 Mac 上的 NVRAM 或 PRAM</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.apple.com/zh-cn/HT207513">如何在 Mac 上使用夜览</a></li>
+</ul>
+<h3 id="工具网站"><a href="#工具网站" class="headerlink" title="工具网站"></a>工具网站</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.bejson.com/">JSON 格式化</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://tool.chinaz.com/Tools/unixtime.aspx">时间戳转换</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.debuggex.com/">正则表达式校验</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vega.github.io/vega/examples/word-cloud/">词云生成</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.w3schools.com/colors/colors_shades.asp">HTML Color Shades</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://mermaid-js.github.io/mermaid-live-editor">Mermaid Live Editor</a></li>
+</ul>
+<h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><h4 id="素材"><a href="#素材" class="headerlink" title="素材"></a>素材</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://pixabay.com/">Pixabay</a>：免费高质量的图片素材网站</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.pexels.com/">Pexels</a>：每周定量更新，所有的图片都会显示详细的信息</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.splitshire.com/">Splitshire</a>：免费高清摄影图片下载</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://pngimg.com/">Pngimg</a>：PNG 格式的透明素材图</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/23169054">有哪些好的 PPT 素材网站，推荐下?</a></li>
+</ul>
+<h4 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://fontawesome.com/">Font Awesome gives you scalable vector icons that can instantly be customized</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.iconfont.cn/">Iconfont</a>：阿里巴巴矢量图库</li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.easyicon.net/">Easyicon</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.iconninja.com/">Iconninja</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://simpleicons.org/">Free SVG icons for popular brands</a></li>
+</ul>
+<h4 id="纹理背景"><a href="#纹理背景" class="headerlink" title="纹理背景"></a>纹理背景</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.toptal.com/designers/subtlepatterns/">Subtle patterns</a></li>
+</ul>
+<h4 id="地图图表"><a href="#地图图表" class="headerlink" title="地图图表"></a>地图图表</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://pixelmap.amcharts.com/">Pixel Map Generator</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190816/" rel="bookmark">Gradle 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2254/" rel="bookmark">Maven 高级玩法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200906/" rel="bookmark">Presto：分布式 SQL 查询引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190413/" rel="bookmark">那些绕不过去的 Java 知识点</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/190101/" title="程序员的 Mac 高效手册">https://yuzhouwan.com/posts/190101/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Mac/" rel="tag"># Mac</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/18651/" rel="prev" title="Scala 实战">
+      <i class="fa fa-chevron-left"></i> Scala 实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/190413/" rel="next" title="那些绕不过去的 Java 知识点">
+      那些绕不过去的 Java 知识点 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">环境相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E9%94%AE%E5%BC%80%E5%90%AF-Terminal"><span class="nav-number">1.1.</span> <span class="nav-text">右键开启 Terminal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E9%94%AE%E5%88%9B%E5%BB%BA%E6%96%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">右键创建新文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E6%89%93%E5%BC%80-APP"><span class="nav-number">1.3.</span> <span class="nav-text">管理员权限打开 APP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E7%94%A8-Finder-%E6%89%93%E5%BC%80%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">在命令行中用 Finder 打开当前目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-PATH-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.</span> <span class="nav-text">配置 PATH 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF"><span class="nav-number">1.6.</span> <span class="nav-text">查看本机信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP"><span class="nav-number">1.6.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS"><span class="nav-number">1.6.2.</span> <span class="nav-text">DNS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%BB%E7%82%B9%E8%A7%A6%E6%91%B8%E6%9D%BF"><span class="nav-number">1.7.</span> <span class="nav-text">轻点触摸板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">Java 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-JDK-%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">查看 JDK 安装目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-JDK-%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">多 JDK 版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-%E7%9B%B8%E5%85%B3"><span class="nav-number">3.</span> <span class="nav-text">Maven 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E4%B8%8D%E8%B6%B3%E5%AF%BC%E8%87%B4%E4%B8%8B%E8%BD%BD%E5%A4%B1%E8%B4%A5"><span class="nav-number">3.1.</span> <span class="nav-text">权限不足导致下载失败</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">3.1.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.1.3.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E7%9B%B8%E5%85%B3"><span class="nav-number">4.</span> <span class="nav-text">命令相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#brew"><span class="nav-number">4.1.</span> <span class="nav-text">brew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ccat"><span class="nav-number">4.2.</span> <span class="nav-text">ccat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diskutil"><span class="nav-number">4.3.</span> <span class="nav-text">diskutil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fd"><span class="nav-number">4.4.</span> <span class="nav-text">fd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ggrep"><span class="nav-number">4.5.</span> <span class="nav-text">ggrep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htop"><span class="nav-number">4.6.</span> <span class="nav-text">htop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tldr"><span class="nav-number">4.7.</span> <span class="nav-text">tldr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tree"><span class="nav-number">4.8.</span> <span class="nav-text">tree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3"><span class="nav-number">5.</span> <span class="nav-text">工具相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sublime"><span class="nav-number">5.1.</span> <span class="nav-text">Sublime</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E7%A9%BA%E6%A0%BC%E5%92%8C%E5%88%B6%E8%A1%A8%E7%AC%A6"><span class="nav-number">5.1.1.</span> <span class="nav-text">展示空格和制表符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">5.1.2.</span> <span class="nav-text">删除重复行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">5.1.3.</span> <span class="nav-text">常用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON-%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">5.1.3.1.</span> <span class="nav-text">JSON 格式化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">5.1.3.2.</span> <span class="nav-text">二进制文件可视化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iTerm2"><span class="nav-number">5.2.</span> <span class="nav-text">iTerm2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-amp-%E5%8D%B8%E8%BD%BD-zsh"><span class="nav-number">5.2.1.</span> <span class="nav-text">安装 &amp; 卸载 zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">5.2.2.</span> <span class="nav-text">配置主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E4%BA%AE"><span class="nav-number">5.2.3.</span> <span class="nav-text">高亮</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">语法高亮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#vim-%E9%AB%98%E4%BA%AE"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">vim 高亮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ls-%E9%AB%98%E4%BA%AE"><span class="nav-number">5.2.3.3.</span> <span class="nav-text">ls 高亮</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">5.2.4.</span> <span class="nav-text">加载环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A1%A5%E9%BD%90"><span class="nav-number">5.2.5.</span> <span class="nav-text">自动补齐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E5%8F%AA%E8%83%BD%E7%9C%8B%E5%88%B0%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">5.2.6.</span> <span class="nav-text">自动补全只能看到一个字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scp-%E6%8A%A5%E9%94%99-cannot-change-locale-UTF-8"><span class="nav-number">5.2.7.</span> <span class="nav-text">scp 报错 cannot change locale (UTF-8)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-zsh-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95"><span class="nav-number">5.2.8.</span> <span class="nav-text">删除 zsh 历史记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intellij-IDEA"><span class="nav-number">5.3.</span> <span class="nav-text">Intellij IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%81%9C%E9%A1%BF%E5%9C%B0-Debug"><span class="nav-number">5.3.1.</span> <span class="nav-text">不停顿地 Debug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Debug-%E5%90%AF%E5%8A%A8%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%8D%A1%E5%9C%A8%E4%BA%86-Finished-saving-caches"><span class="nav-number">5.3.2.</span> <span class="nav-text">Debug 启动的时候，卡在了 Finished, saving caches</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AA%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%87%AA%E5%B7%B1%E4%BF%AE%E6%94%B9%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">5.3.3.</span> <span class="nav-text">只格式化自己修改的代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90-SerialVersionUID"><span class="nav-number">5.3.4.</span> <span class="nav-text">生成 SerialVersionUID</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typroa"><span class="nav-number">5.4.</span> <span class="nav-text">Typroa</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81-callout"><span class="nav-number">5.4.1.</span> <span class="nav-text">支持 callout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome"><span class="nav-number">5.5.</span> <span class="nav-text">Chrome</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Octotree-%E4%BB%A3%E7%A0%81%E5%A4%A7%E7%BA%B2"><span class="nav-number">5.5.1.</span> <span class="nav-text">Octotree 代码大纲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isometric-Contributions-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">5.5.2.</span> <span class="nav-text">Isometric Contributions 可视化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asciinema"><span class="nav-number">5.6.</span> <span class="nav-text">asciinema</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Quick-Start"><span class="nav-number">5.6.1.</span> <span class="nav-text">Quick Start</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%89%B4%E6%9D%83"><span class="nav-number">5.6.2.</span> <span class="nav-text">鉴权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.6.3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC-gif"><span class="nav-number">5.6.4.</span> <span class="nav-text">转 gif</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">5.6.5.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alfred"><span class="nav-number">5.7.</span> <span class="nav-text">Alfred</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-iTerm2-%E4%BD%9C%E4%B8%BA-Alfred-%E7%9A%84%E9%BB%98%E8%AE%A4%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">5.7.1.</span> <span class="nav-text">使用 iTerm2 作为 Alfred 的默认命令行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">6.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-%E9%94%AE%E7%9B%98%E7%AC%A6%E5%8F%B7"><span class="nav-number">6.1.</span> <span class="nav-text">Mac 键盘符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-%E6%9C%AC%E8%BA%AB%E7%9B%B8%E5%85%B3"><span class="nav-number">6.2.</span> <span class="nav-text">Mac 本身相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E9%9A%90%E8%97%8F%E7%9B%AE%E5%BD%95"><span class="nav-number">6.2.1.</span> <span class="nav-text">访问隐藏目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim-%E7%9B%B8%E5%85%B3"><span class="nav-number">6.3.</span> <span class="nav-text">Vim 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alfred-%E7%9B%B8%E5%85%B3"><span class="nav-number">6.4.</span> <span class="nav-text">Alfred 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iTerm2-%E7%9B%B8%E5%85%B3"><span class="nav-number">6.5.</span> <span class="nav-text">iTerm2 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intellij-Idea-%E7%9B%B8%E5%85%B3"><span class="nav-number">6.6.</span> <span class="nav-text">Intellij Idea 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Editing%EF%BC%88%E7%BC%96%E8%BE%91%EF%BC%89"><span class="nav-number">6.6.1.</span> <span class="nav-text">Editing（编辑）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search-Replace%EF%BC%88%E6%9F%A5%E8%AF%A2-%E6%9B%BF%E6%8D%A2%EF%BC%89"><span class="nav-number">6.6.2.</span> <span class="nav-text">Search &#x2F; Replace（查询 &#x2F; 替换）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage-Search%EF%BC%88%E4%BD%BF%E7%94%A8%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">6.6.3.</span> <span class="nav-text">Usage Search（使用查询）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Compile-and-Run%EF%BC%88%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C%EF%BC%89"><span class="nav-number">6.6.4.</span> <span class="nav-text">Compile and Run（编译和运行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Debugging%EF%BC%88%E8%B0%83%E8%AF%95%EF%BC%89"><span class="nav-number">6.6.5.</span> <span class="nav-text">Debugging（调试）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Navigation%EF%BC%88%E5%AF%BC%E8%88%AA%EF%BC%89"><span class="nav-number">6.6.6.</span> <span class="nav-text">Navigation（导航）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Refactoring%EF%BC%88%E9%87%8D%E6%9E%84%EF%BC%89"><span class="nav-number">6.6.7.</span> <span class="nav-text">Refactoring（重构）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VCS%EF%BC%88%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">6.6.8.</span> <span class="nav-text">VCS（版本控制）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Live-Templates%EF%BC%88%E5%8A%A8%E6%80%81%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF%EF%BC%89"><span class="nav-number">6.6.9.</span> <span class="nav-text">Live Templates（动态代码模板）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#General%EF%BC%88%E9%80%9A%E7%94%A8%EF%BC%89"><span class="nav-number">6.6.10.</span> <span class="nav-text">General（通用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other"><span class="nav-number">6.6.11.</span> <span class="nav-text">Other</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91"><span class="nav-number">7.</span> <span class="nav-text">踩过的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Unknown-command-services"><span class="nav-number">7.1.</span> <span class="nav-text">Error: Unknown command: services</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">7.1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">7.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7-Catalina-%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%96%87%E4%BB%B6%E6%B6%88%E5%A4%B1"><span class="nav-number">7.2.</span> <span class="nav-text">升级 Catalina 系统后根目录下文件消失</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">7.2.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7-Catalina-%E7%B3%BB%E7%BB%9F%E5%90%8E%E6%A0%B9%E7%9B%AE%E5%BD%95%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">7.3.</span> <span class="nav-text">升级 Catalina 系统后根目录无法创建文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-2"><span class="nav-number">7.3.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-3"><span class="nav-number">7.3.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%9B%B7%E8%9B%87%E5%BA%94%E7%94%A8%E5%90%8E%EF%BC%8C%E4%BB%8D%E7%84%B6%E6%98%BE%E7%A4%BA%E9%9B%B7%E8%9B%87%E5%9B%BE%E6%A0%87"><span class="nav-number">7.4.</span> <span class="nav-text">删除雷蛇应用后，仍然显示雷蛇图标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-4"><span class="nav-number">7.4.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B8%A6%E7%9A%84-grep-%E4%B8%8D%E6%94%AF%E6%8C%81-P-%E5%8F%82%E6%95%B0"><span class="nav-number">7.5.</span> <span class="nav-text">自带的 grep 不支持 -P 参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-5"><span class="nav-number">7.5.1.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">8.</span> <span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA"><span class="nav-number">8.1.</span> <span class="nav-text">理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">8.2.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8"><span class="nav-number">8.2.1.</span> <span class="nav-text">通用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%92%89%E9%92%89"><span class="nav-number">8.2.2.</span> <span class="nav-text">钉钉</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iTerm2-1"><span class="nav-number">8.2.3.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jump-Desktop"><span class="nav-number">8.2.4.</span> <span class="nav-text">Jump Desktop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sublime-1"><span class="nav-number">8.2.5.</span> <span class="nav-text">Sublime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chrome-1"><span class="nav-number">8.2.6.</span> <span class="nav-text">Chrome</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">8.3.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99"><span class="nav-number">8.4.</span> <span class="nav-text">工具网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F"><span class="nav-number">8.5.</span> <span class="nav-text">图像</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A0%E6%9D%90"><span class="nav-number">8.5.1.</span> <span class="nav-text">素材</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E6%A0%87"><span class="nav-number">8.5.2.</span> <span class="nav-text">图标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E8%83%8C%E6%99%AF"><span class="nav-number">8.5.3.</span> <span class="nav-text">纹理背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E5%9B%BE%E8%A1%A8"><span class="nav-number">8.5.4.</span> <span class="nav-text">地图图表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">9.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/190101/";
+    this.page.identifier = "posts/190101/";
+    this.page.title = "程序员的 Mac 高效手册";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '85bbf33bef6486fe901c3845cefaae18',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

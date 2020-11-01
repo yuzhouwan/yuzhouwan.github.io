@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Apache Calcite 是什么？ Apache Calcite™ is a dynamic data management framework.   （图片来源：Pixabay™ 官网，已确认无版权）       基本概念Catelog　用于定义 SQL 语义相关的元数据与命名空间 SQL Parser　负责将 SQL 转化成 AST（Abstract Syntax Tree） SQL Va">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Calcite：一款开源 SQL 解析工具">
+<meta property="og:url" content="https://yuzhouwan.com/posts/201018/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="Apache Calcite 是什么？ Apache Calcite™ is a dynamic data management framework.   （图片来源：Pixabay™ 官网，已确认无版权）       基本概念Catelog　用于定义 SQL 语义相关的元数据与命名空间 SQL Parser　负责将 SQL 转化成 AST（Abstract Syntax Tree） SQL Va">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/calcite/calcite_mountain.jpg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/calcite/apache_calcite_architecture.jpg">
+<meta property="og:image" content="https://yuzhouwan.com/picture/calcite/apache_calcite_star_history.jpg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2020-10-17T16:02:26.000Z">
+<meta property="article:modified_time" content="2020-10-21T14:10:02.757Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Apache Calcite">
+<meta property="article:tag" content="JavaCC">
+<meta property="article:tag" content="Janino">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/calcite/calcite_mountain.jpg">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/201018/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Apache Calcite：一款开源 SQL 解析工具 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201018/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Apache Calcite：一款开源 SQL 解析工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-18 00:02:26" itemprop="dateCreated datePublished" datetime="2020-10-18T00:02:26+08:00">2020-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-21 22:10:02" itemprop="dateModified" datetime="2020-10-21T22:10:02+08:00">2020-10-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Apache-Calcite-是什么？"><a href="#Apache-Calcite-是什么？" class="headerlink" title="Apache Calcite 是什么？"></a>Apache Calcite 是什么？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/calcite">Apache Calcite</a></strong>™ is a dynamic data management framework.</p>
+</blockquote>
+<p><img data-src="/picture/calcite/calcite_mountain.jpg" alt="Calcite Mountain"></p>
+<center>（图片来源：<a href="https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/" target="_blank" rel="external nofollow noopener noreferrer">Pixabay</a>™ 官网，已确认无版权）</center>
+
+
+
+
+
+
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="Catelog"><a href="#Catelog" class="headerlink" title="Catelog"></a>Catelog</h3><p>　用于定义 SQL 语义相关的元数据与命名空间</p>
+<h3 id="SQL-Parser"><a href="#SQL-Parser" class="headerlink" title="SQL Parser"></a>SQL Parser</h3><p>　负责将 SQL 转化成 AST（<strong>A</strong>bstract <strong>S</strong>yntax <strong>T</strong>ree）</p>
+<h3 id="SQL-Validator"><a href="#SQL-Validator" class="headerlink" title="SQL Validator"></a>SQL Validator</h3><p>　负责通过 Catalog 对 AST 进行校证</p>
+<h3 id="Query-Optimizer"><a href="#Query-Optimizer" class="headerlink" title="Query Optimizer"></a>Query Optimizer</h3><p>　负责将 AST 转化成物理执行计划、优化物理执行计划</p>
+<h3 id="SQL-Generator"><a href="#SQL-Generator" class="headerlink" title="SQL Generator"></a>SQL Generator</h3><p>　负责将物理执行计划反向转化成 SQL 语句</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>支持标准 SQL 语言</li>
+<li>通过适配器（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/adapter.html">Adapter</a>）可以支持连接任何数据源</li>
+<li>支持丰富的关系代数（并集、交集、连接、笛卡尔积等）</li>
+<li>支持对逻辑规划规则进行定制（例如 Filter 下推）</li>
+<li>支持成本模型优化（<strong>CBO</strong>, <strong>C</strong>ost-<strong>B</strong>ased <strong>O</strong>ptimizer 和 <strong>RBO</strong>, <strong>R</strong>ule-<strong>B</strong>ased <strong>O</strong>ptimizer）</li>
+<li>支持管理物化视图（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/materialized_views.html">Materialized view</a>）</li>
+<li>支持查询流式数据</li>
+<li>稳定可靠（开发迭代 10 年以上）</li>
+<li>已贡献给 Apache 基金会（于 2013 年）</li>
+<li>开源社区活跃（<a href="https://yuzhouwan.com/posts/5845/">Apache Druid</a>、Apache Hive、Apache Drill、<a href="https://yuzhouwan.com/posts/20644/">Apache Flink</a>、<a href="https://yuzhouwan.com/posts/45888/#Phoenix-%E5%91%BD%E4%BB%A4">Apache Phoenix</a> 等项目均在使用）</li>
+</ul>
+<div class="note success">Apache Calcite 借助开源的 JavaCC 完成 SQL 解析，将 SQL 语句转化为 Java 代码</div>
+<div class="note success">Apache Calcite 还使用了轻量级 Janino 编译运行时 Java 代码，以便灵活地管理元数据</div>
+
+<a id="more"></a>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><p><img data-src="/picture/calcite/apache_calcite_architecture.jpg" alt="Apache Calcite Architecture"></p>
+<center>（图片来源：<a href="https://arxiv.org/pdf/1802.10233.pdf" target="_blank" rel="external nofollow noopener noreferrer">arxiv.org</a>™）</center>
+
+
+
+<h3 id="专注的层面"><a href="#专注的层面" class="headerlink" title="专注的层面"></a>专注的层面</h3><pre class="mermaid">graph TD
+
+query_language(fa:fa-language Query Language)
+query_optimization(fa:fa-fast-forward Query Optimization)
+query_execution(fa:fa-spinner Query Execution)
+data_management(fa:fa-cog Data Management)
+data_storage(fa:fa-database Data Storage)
+
+query_language ==&gt; query_optimization
+query_optimization ==&gt; query_execution
+query_execution ==&gt; data_management
+data_management ==&gt; data_storage
+
+style data_management fill:#808080
+style data_storage fill:#808080</pre>
+
+<div class="note info">其中，数据管理和存储，交由第三方计算和存储引擎实现</div>
+
+
+
+<h3 id="解析流程"><a href="#解析流程" class="headerlink" title="解析流程"></a>解析流程</h3><pre class="mermaid">graph LR
+
+SQL[SQL]
+Parser(fa:fa-align-left Parser)
+AST[AST]
+Validate(fa:fa-check-square-o Validate)
+RelNode[RelNode]
+Optimize(fa:fa-fast-forward Optimize)
+Plan[Plan]
+Execute(fa:fa-spinner Execute)
+
+SQL --&gt; Parser
+Parser --&gt; AST
+AST --&gt; Validate
+Validate --&gt; RelNode
+RelNode --&gt; Optimize
+Optimize --&gt; Plan
+Plan --&gt; Execute
+
+style Parser fill:#0099FF
+style Validate fill:#0099FF
+style Optimize fill:#0099FF
+style Execute fill:#0099FF</pre>
+
+
+
+<h3 id="RBO"><a href="#RBO" class="headerlink" title="RBO"></a>RBO</h3><h3 id="谓词下推"><a href="#谓词下推" class="headerlink" title="谓词下推"></a>谓词下推</h3><pre class="mermaid">graph BT
+
+Set1(fa:fa-table Set1)
+Set2(fa:fa-table Set2)
+Join(fa:fa-compress Join)
+Filter(fa:fa-filter Filter)
+Set1'(fa:fa-table Set1)
+Set2'(fa:fa-table Set2)
+Join'(fa:fa-compress Join)
+Filter'(fa:fa-filter Filter)
+
+Set1 --&gt; Join
+Set2 ==&gt; Join
+Join ==&gt; Filter
+
+Set1' --&gt; Join'
+Set2' ==&gt; Filter'
+Filter' ==&gt; Join'
+
+style Filter fill:#009933
+style Filter' fill:#009933</pre>
+
+<h3 id="列裁剪"><a href="#列裁剪" class="headerlink" title="列裁剪"></a>列裁剪</h3><pre class="mermaid">graph BT
+
+Set1(fa:fa-table Set1)
+Set2(fa:fa-table Set2)
+Join(fa:fa-compress Join on Set1.id == Set2.id)
+Res(fa:fa-table Set1.name, Set1.age)
+Set1'(fa:fa-table Set1)
+Set2'(fa:fa-table Set2)
+Crop'(fa:fa-cut Crop and only keep id)
+Join'(fa:fa-compress Join on Set1.id == Set2.id)
+Res'(fa:fa-table Set1.name, Set1.age)
+
+Set1 --&gt; Join
+Set2 ==&gt; Join
+Join ==&gt; Res
+
+Set1' --&gt; Join'
+Set2' ==&gt; Crop'
+Crop' ==&gt; Join'
+Join' ==&gt; Res'
+
+style Crop' fill:#009933</pre>
+
+<h3 id="常量折叠"><a href="#常量折叠" class="headerlink" title="常量折叠"></a>常量折叠</h3><pre class="mermaid">graph BT
+
+Set1(fa:fa-table Set1)
+Set2(fa:fa-table Set2)
+Join(fa:fa-compress Join)
+Res(fa:fa-table Set1.name, Set1.age, 1024 + 996)
+Set1'(fa:fa-table Set1)
+Set2'(fa:fa-table Set2)
+Join'(fa:fa-compress Join)
+Res'(fa:fa-table Set1.name, Set1.age, 2020)
+
+Set1 --&gt; Join
+Set2 --&gt; Join
+Join --&gt; Res
+
+Set1' --&gt; Join'
+Set2' --&gt; Join'
+Join' --&gt; Res'
+
+style Res' fill:#009933</pre>
+
+
+
+<h3 id="比对"><a href="#比对" class="headerlink" title="比对"></a>比对</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">查询语言</th>
+<th style="text-align:center">JDBC</th>
+<th style="text-align:center">SQL 解析与校验</th>
+<th style="text-align:center">Relational Algebra</th>
+<th style="text-align:center">Execution Engine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Apache Drill</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://yuzhouwan.com/posts/5845/"><strong>Apache Druid</strong></a></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Phoenix</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center"><a href="https://yuzhouwan.com/posts/45888/">Apache HBase</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Solr</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native, Enumerable, <a href="https://yuzhouwan.com/posts/22654/#Lucene-1">Apache Lucene</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://yuzhouwan.com/posts/25015/"><strong>Apache Storm</strong></a></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Kylin</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Enumerable, Apache HBase</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>MapD</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Lingual</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Cascading</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Hive</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Apache Tez, <a href="https://yuzhouwan.com/posts/4735/">Apache Spark</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Qubole Quark</strong></td>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Apache Hive, <a href="https://yuzhouwan.com/posts/200906/">Presto</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Apex</strong></td>
+<td style="text-align:center">Streaming SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://yuzhouwan.com/posts/20644/"><strong>Apache Flink</strong></a></td>
+<td style="text-align:center">Streaming SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Apache Samza</strong></td>
+<td style="text-align:center">Streaming SQL</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">Native</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> --depth 1 --single-branch --branch master https://github.com/apache/calcite.git</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> calcite/example/csv</span><br><span class="line">$ ./sqlline</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlline&gt; !connect jdbc:calcite:model=src/<span class="built_in">test</span>/resources/model.json admin admin</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="展示所有-Tables"><a href="#展示所有-Tables" class="headerlink" title="展示所有 Tables"></a>展示所有 Tables</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:calcite:model=src/<span class="built_in">test</span>/resources/mode&gt; !tables</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">| TABLE_CAT | TABLE_SCHEM | TABLE_NAME |  TABLE_TYPE  | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFERENCING_COL_NAME | REF_GENERATION |</span><br><span class="line">+-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">|           | SALES       | DEPTS      | TABLE        |         |          |            |           |                           |                |</span><br><span class="line">|           | SALES       | EMPS       | TABLE        |         |          |            |           |                           |                |</span><br><span class="line">|           | SALES       | SDEPTS     | TABLE        |         |          |            |           |                           |                |</span><br><span class="line">|           | metadata    | COLUMNS    | SYSTEM TABLE |         |          |            |           |                           |                |</span><br><span class="line">|           | metadata    | TABLES     | SYSTEM TABLE |         |          |            |           |                           |                |</span><br><span class="line">+-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:calcite:model=src/test/resources/mode&gt; SELECT * FROM emps;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+</span><br><span class="line">| EMPNO | NAME  | DEPTNO | GENDER |     CITY      | EMPID | AGE  | SLACKER | MANAGER |  JOINEDAT  |</span><br><span class="line">+-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+</span><br><span class="line">| 100   | Fred  | 10     |        |               | 30    | 25   | <span class="literal">true</span>    | <span class="literal">false</span>   | 1996-08-03 |</span><br><span class="line">| 110   | Eric  | 20     | M      | San Francisco | 3     | 80   |         | <span class="literal">false</span>   | 2001-01-01 |</span><br><span class="line">| 110   | John  | 40     | M      | Vancouver     | 2     | null | <span class="literal">false</span>   | <span class="literal">true</span>    | 2002-05-03 |</span><br><span class="line">| 120   | Wilma | 20     | F      |               | 1     | 5    |         | <span class="literal">true</span>    | 2005-09-07 |</span><br><span class="line">| 130   | Alice | 40     | F      | Vancouver     | 2     | null | <span class="literal">false</span>   | <span class="literal">true</span>    | 2007-01-01 |</span><br><span class="line">+-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+</span><br><span class="line">5 rows selected (1.266 seconds)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:calcite:model=src/test/resources/mode&gt; SELECT d.name, COUNT(*)</span><br><span class="line">. . . . . . . . . . . . . . . . . . semicolon&gt; FROM emps AS e</span><br><span class="line">. . . . . . . . . . . . . . . . . . semicolon&gt; JOIN depts AS d ON e.deptno = d.deptno</span><br><span class="line">. . . . . . . . . . . . . . . . . . semicolon&gt; GROUP BY d.name;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+-----------+--------+</span><br><span class="line">|   NAME    | EXPR<span class="variable">$1</span> |</span><br><span class="line">+-----------+--------+</span><br><span class="line">| Sales     | 1      |</span><br><span class="line">| Marketing | 2      |</span><br><span class="line">+-----------+--------+</span><br><span class="line">2 rows selected (0.336 seconds)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0: jdbc:calcite:model=src/test/resources/mode&gt; VALUES CHAR_LENGTH('Hello, ' || 'world!');</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+--------+</span><br><span class="line">| EXPR<span class="variable">$0</span> |</span><br><span class="line">+--------+</span><br><span class="line">| 13     |</span><br><span class="line">+--------+</span><br><span class="line">1 row selected (0.092 seconds)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="社区发展"><a href="#社区发展" class="headerlink" title="社区发展"></a>社区发展</h2><h3 id="Star-趋势"><a href="#Star-趋势" class="headerlink" title="Star 趋势"></a>Star 趋势</h3><p><img data-src="/picture/calcite/apache_calcite_star_history.jpg" alt="Apache Calcite Star History"></p>
+<center>（图片来源：<a href="https://star-history.t9t.io/#apache/calcite&amp;apache/drill&amp;prestodb/presto&amp;prestosql/presto" target="_blank" rel="external nofollow noopener noreferrer">star-history.t9t.io</a>™ 官网）</center>
+
+<h3 id="个人贡献"><a href="#个人贡献" class="headerlink" title="个人贡献"></a>个人贡献</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/calcite/pulls?q=is%3Apr+author%3Aasdf2014">Pull Request</a></li>
+</ul>
+<p>　详见：《<a href="https://yuzhouwan.com/posts/19631/">如何成为 Apache 的 PMC</a>》</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/">Apache Calcite</a></li>
+</ul>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1802.10233.pdf">Apache Calcite: A Foundational Framework for Optimized Query Processing Over Heterogeneous Data Sources</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cse.iitb.ac.in/infolab/Data/Courses/CS632/Papers/Volcano-graefe.pdf">The Volcano Optimizer Generator: Extensibility and Efficient Search</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://15721.courses.cs.cmu.edu/spring2018/papers/15-optimizer1/graefe-ieee1995.pdf">The Cascades Framework for Query Optimization</a></li>
+</ul>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/javacc/javacc">JavaCC: The most popular parser generator for use with Java applications</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/janino-compiler/janino">Janino is a super-small, super-fast Java™ compiler</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/projects/CALCITE">Apache Calcite Jira</a></li>
+</ul>
+<h3 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h3><h4 id="Apache-Calcite"><a href="#Apache-Calcite" class="headerlink" title="Apache Calcite"></a>Apache Calcite</h4><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.slideshare.net/JordanHalterman/introduction-to-apache-calcite">Introduction to Apache Calcite</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/2dfbd71b7f0f">Apache Calcite 简介</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/67560995">Apache Calcite 为什么能这么流行</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/QXC1281/article/details/89060701">Apache Calcite 教程 - 关系代数</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cnblogs.com/listenfwind/p/13192259.html">深入浅出 Calcite 与 SQL CBO（Cost-Based Optimizer）优化</a></li>
+</ul>
+<h4 id="JavaCC"><a href="#JavaCC" class="headerlink" title="JavaCC"></a>JavaCC</h4><ul>
+<li>JavaCC、解析树和 XQuery 语法，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ibm.com/developerworks/cn/xml/x-javacc/part1/index.html">第 1 部分</a> &amp; <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ibm.com/developerworks/cn/xml/x-javacc/part2/index.html">第 2 部分</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/201025/" rel="bookmark">Aapche Drill：一款分布式查询引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200906/" rel="bookmark">Presto：分布式 SQL 查询引擎</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/201018/" title="Apache Calcite：一款开源 SQL 解析工具">https://yuzhouwan.com/posts/201018/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Apache-Calcite/" rel="tag"># Apache Calcite</a>
+              <a href="/tags/JavaCC/" rel="tag"># JavaCC</a>
+              <a href="/tags/Janino/" rel="tag"># Janino</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/201008/" rel="prev" title="Apache OpenWhisk：一款高性能的开源 Serverless 云平台">
+      <i class="fa fa-chevron-left"></i> Apache OpenWhisk：一款高性能的开源 Serverless 云平台
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/201025/" rel="next" title="Aapche Drill：一款分布式查询引擎">
+      Aapche Drill：一款分布式查询引擎 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Calcite-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Apache Calcite 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Catelog"><span class="nav-number">2.1.</span> <span class="nav-text">Catelog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Parser"><span class="nav-number">2.2.</span> <span class="nav-text">SQL Parser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Validator"><span class="nav-number">2.3.</span> <span class="nav-text">SQL Validator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-Optimizer"><span class="nav-number">2.4.</span> <span class="nav-text">Query Optimizer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Generator"><span class="nav-number">2.5.</span> <span class="nav-text">SQL Generator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E6%B3%A8%E7%9A%84%E5%B1%82%E9%9D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">专注的层面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">4.3.</span> <span class="nav-text">解析流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBO"><span class="nav-number">4.4.</span> <span class="nav-text">RBO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E4%B8%8B%E6%8E%A8"><span class="nav-number">4.5.</span> <span class="nav-text">谓词下推</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A3%81%E5%89%AA"><span class="nav-number">4.6.</span> <span class="nav-text">列裁剪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%8A%98%E5%8F%A0"><span class="nav-number">4.7.</span> <span class="nav-text">常量折叠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E5%AF%B9"><span class="nav-number">4.8.</span> <span class="nav-text">比对</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">5.</span> <span class="nav-text">实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">5.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">5.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">5.3.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E6%89%80%E6%9C%89-Tables"><span class="nav-number">5.4.</span> <span class="nav-text">展示所有 Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.5.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Join"><span class="nav-number">5.6.</span> <span class="nav-text">Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">5.7.</span> <span class="nav-text">内置函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA%E5%8F%91%E5%B1%95"><span class="nav-number">6.</span> <span class="nav-text">社区发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Star-%E8%B6%8B%E5%8A%BF"><span class="nav-number">6.1.</span> <span class="nav-text">Star 趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E8%B4%A1%E7%8C%AE"><span class="nav-number">6.2.</span> <span class="nav-text">个人贡献</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Doc"><span class="nav-number">7.1.</span> <span class="nav-text">Doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-number">7.2.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github"><span class="nav-number">7.3.</span> <span class="nav-text">Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog"><span class="nav-number">7.4.</span> <span class="nav-text">Blog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Apache-Calcite"><span class="nav-number">7.4.1.</span> <span class="nav-text">Apache Calcite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaCC"><span class="nav-number">7.4.2.</span> <span class="nav-text">JavaCC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">8.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/201018/";
+    this.page.identifier = "posts/201018/";
+    this.page.title = "Apache Calcite：一款开源 SQL 解析工具";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '066d578255c476ad8468abdd155852bd',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

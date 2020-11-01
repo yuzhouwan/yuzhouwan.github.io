@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是 Golang？ Go™ is an open source programming language that makes it easy to build simple, reliable, and efficient software.  特性类别 静态语言 编译型语言  优点 语言层面支持并发 无依赖，直译机器码 内置 runtime，支持 GC 可跨平台编译 支持内嵌 C 丰富的标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重拾 Golang">
+<meta property="og:url" content="https://yuzhouwan.com/posts/191026/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="什么是 Golang？ Go™ is an open source programming language that makes it easy to build simple, reliable, and efficient software.  特性类别 静态语言 编译型语言  优点 语言层面支持并发 无依赖，直译机器码 内置 runtime，支持 GC 可跨平台编译 支持内嵌 C 丰富的标">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2019-10-25T16:06:52.000Z">
+<meta property="article:modified_time" content="2020-10-20T13:55:55.921Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="InfluxDB">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/191026/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>重拾 Golang | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/191026/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          重拾 Golang
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-26 00:06:52" itemprop="dateCreated datePublished" datetime="2019-10-26T00:06:52+08:00">2019-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-20 21:55:55" itemprop="dateModified" datetime="2020-10-20T21:55:55+08:00">2020-10-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是-Golang？"><a href="#什么是-Golang？" class="headerlink" title="什么是 Golang？"></a>什么是 Golang？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://golang.org/">Go</a></strong>™ is an open source programming language that makes it easy to build simple, reliable, and efficient software.</p>
+</blockquote>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h3><ul>
+<li>静态语言</li>
+<li>编译型语言</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>语言层面支持并发</li>
+<li>无依赖，直译机器码</li>
+<li>内置 <code>runtime</code>，支持 GC</li>
+<li>可跨平台编译</li>
+<li>支持内嵌 C</li>
+<li>丰富的标准库</li>
+<li>学习曲线低</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>接口是枚举类型</li>
+<li><code>import</code> 包不支持版本</li>
+<li><code>goroutine</code> 一旦启动，切换将不受程序控制</li>
+</ul>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>　根据操作系统，在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://golang.org/dl/">Download</a> 页面下载对应的安装包，进行安装</p>
+<h4 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装完成后，iTerm 中看到可以执行 go 命令了</span></span><br><span class="line">$ <span class="built_in">which</span> go</span><br><span class="line">  /usr/<span class="built_in">local</span>/go/bin/go</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz</span><br><span class="line">$ sudo tar -C /usr/<span class="built_in">local</span>/ -xzvf go1.14.4.linux-amd64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境变量</span></span><br><span class="line">$ vim ~/.bashrc</span><br><span class="line">  <span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">  <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 工作目录</span></span><br><span class="line"><span class="comment"># bin: 存放可执行文件</span></span><br><span class="line"><span class="comment"># pkg: 存放编译好的库文件</span></span><br><span class="line"><span class="comment"># src: 存放 go 的源文件</span></span><br><span class="line">$ mkdir -p ~/code/gopath</span><br><span class="line">$ vim ~/.bashrc</span><br><span class="line">  <span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">  <span class="built_in">export</span> GOPATH=~/code/gopath</span><br><span class="line">  <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<h3 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello world"></a>Hello world</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目目录</span></span><br><span class="line">$ mkdir -p <span class="variable">$GOPATH</span>/src/<span class="built_in">test</span>/hello</span><br><span class="line">$ <span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src/<span class="built_in">test</span>/hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编写 go 源文件</span></span><br><span class="line">$ vim hello.go</span><br><span class="line">  package main</span><br><span class="line">  import <span class="string">"fmt"</span></span><br><span class="line">  func <span class="function"><span class="title">main</span></span>() {</span><br><span class="line">      fmt.Println(<span class="string">"Hello, world!"</span>)</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行</span></span><br><span class="line">$ go run hello.go</span><br><span class="line">  Hello, world!</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">$ ll</span><br><span class="line">  total 4.0K</span><br><span class="line">  -rw-r--r-- 1 benedictjin wheel 75  1 15 11:20 hello.go</span><br><span class="line">$ go build</span><br><span class="line">$ ll</span><br><span class="line">  total 2.0M</span><br><span class="line">  -rwxr-xr-x 1 benedictjin staff 2.0M  1 15 11:20 hello*</span><br><span class="line">  -rw-r--r-- 1 benedictjin wheel   75  1 15 11:20 hello.go</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行可执行文件</span></span><br><span class="line">$ ./hello</span><br><span class="line">  Hello, world!</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理编译的中间文件</span></span><br><span class="line">$ go clean</span><br><span class="line">$ ll</span><br><span class="line">total 4.0K</span><br><span class="line">  -rw-r--r-- 1 benedictjin wheel 75  1 15 11:20 hello.go</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">$ GOPATH=~/code/gopath</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单个依赖</span></span><br><span class="line">$ /usr/<span class="built_in">local</span>/go/bin/go get -t -v github.com/golang/snappy/...</span><br><span class="line"><span class="comment"># 所有依赖</span></span><br><span class="line">$ /usr/<span class="built_in">local</span>/go/bin/go get -t -v ./...</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center"><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">init</td>
+<td style="text-align:center">在当前目录初始化新的 mod 模块</td>
+</tr>
+<tr>
+<td style="text-align:center">graph</td>
+<td style="text-align:center">打印模块依赖图</td>
+</tr>
+<tr>
+<td style="text-align:center">download</td>
+<td style="text-align:center">下载并缓存依赖包</td>
+</tr>
+<tr>
+<td style="text-align:center">vendor</td>
+<td style="text-align:center">将依赖复制到 vendor 下</td>
+</tr>
+<tr>
+<td style="text-align:center">edit</td>
+<td style="text-align:center">编辑 go.mod 文件</td>
+</tr>
+<tr>
+<td style="text-align:center">verify</td>
+<td style="text-align:center">验证依赖是否正确</td>
+</tr>
+<tr>
+<td style="text-align:center">why</td>
+<td style="text-align:center">解释为什么需要依赖</td>
+</tr>
+<tr>
+<td style="text-align:center">tidy</td>
+<td style="text-align:center">拉取缺少的模块，移除不用的模块</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &lt;常量名&gt; &lt;常量类型&gt; = &lt;常量值&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> NODES <span class="keyword">int</span> = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    NODES        <span class="keyword">int</span> = <span class="number">4</span></span><br><span class="line">    SHARDS       <span class="keyword">int</span> = <span class="number">64</span></span><br><span class="line">    REPLICATIONS <span class="keyword">int</span> = <span class="number">3</span></span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h3><h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>　Golang 并不支持三元表达式，只能用 <code>if-else</code> 来表达对应的含义</p>
+<h4 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expr {</span><br><span class="line">    n = trueYuzhouwan</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">    n = falseYuzhouwan</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var &lt;变量名&gt; [SIZE] &lt;元素类型&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="举例-2"><a href="#举例-2" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明数组变量</span></span><br><span class="line"><span class="keyword">var</span> yuzhouwan [<span class="number">10</span>] <span class="keyword">float32</span></span><br><span class="line"><span class="comment">// 初始化数组</span></span><br><span class="line"><span class="keyword">var</span> yuzhouwan = [<span class="number">3</span>]<span class="keyword">float32</span>{<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.30000000000000004</span>}</span><br><span class="line"><span class="comment">// 不指定数组长度，Golang 会根据数组内的元素，来设置数组的大小</span></span><br><span class="line"><span class="keyword">var</span> yuzhouwan = [...]<span class="keyword">float32</span>{<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.30000000000000004</span>}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历数组</span></span><br><span class="line"><span class="keyword">var</span> arr [<span class="number">3</span>]<span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> i, j <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ {</span><br><span class="line">  arr[i] = i</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ {</span><br><span class="line">  fmt.Printf(<span class="string">"%d = %d\n"</span>, j, arr[j])</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印所有元素</span></span><br><span class="line">fmt.Printf(<span class="string">"%v\n"</span>, arr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加新元素</span></span><br><span class="line"><span class="keyword">var</span> yuzhouwan [] <span class="keyword">int</span></span><br><span class="line"><span class="keyword">for</span> n := <span class="number">0</span>; n &lt; <span class="number">3</span>; n++ {</span><br><span class="line">  yuzhouwan = <span class="built_in">append</span>(yuzhouwan, n)</span><br><span class="line">}</span><br><span class="line">fmt.Printf(<span class="string">"%v"</span>, yuzhouwan)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="举例-3"><a href="#举例-3" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">l := list.New()</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ {</span><br><span class="line">  l.PushBack(i)</span><br><span class="line">}</span><br><span class="line"><span class="keyword">for</span> e := l.Front(); e != <span class="literal">nil</span>; e = e.Next() {</span><br><span class="line">  fmt.Println(e.Value)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="举例-4"><a href="#举例-4" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">site := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>{</span><br><span class="line">  <span class="string">"yuzhouwan"</span>:   <span class="number">0</span>,</span><br><span class="line">  <span class="string">"blog"</span>: <span class="number">1</span>,</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加新元素</span></span><br><span class="line">site := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">site[<span class="string">"yuzhouwan"</span>] = <span class="number">0</span></span><br><span class="line">site[<span class="string">"blog"</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断指定 key 是否存在于 map 中</span></span><br><span class="line"><span class="keyword">if</span> value, exists := site[<span class="string">"yuzhouwan"</span>]; exists {</span><br><span class="line">  fmt.Println(<span class="string">"value: "</span>, value)</span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">  fmt.Println(<span class="string">"key not found"</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line">m := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>{<span class="string">"yuzhouwan"</span>: <span class="number">1</span>, <span class="string">"blog"</span>: <span class="number">2</span>,}</span><br><span class="line"><span class="keyword">for</span> k, v := <span class="keyword">range</span> m {</span><br><span class="line">  fmt.Printf(<span class="string">"%s=%d\n"</span>, k, v)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按照 Key 排序后遍历</span></span><br><span class="line">m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line">m[<span class="number">1</span>] = <span class="string">"a"</span></span><br><span class="line">m[<span class="number">2</span>] = <span class="string">"c"</span></span><br><span class="line">m[<span class="number">0</span>] = <span class="string">"b"</span></span><br><span class="line"><span class="keyword">var</span> keys []<span class="keyword">int</span></span><br><span class="line"><span class="keyword">for</span> k := <span class="keyword">range</span> m {</span><br><span class="line">  keys = <span class="built_in">append</span>(keys, k)</span><br><span class="line">}</span><br><span class="line">sort.Ints(keys)</span><br><span class="line"><span class="keyword">for</span> _, k := <span class="keyword">range</span> keys {</span><br><span class="line">  fmt.Printf(<span class="string">"%v : %v\n"</span>, k, m[k])</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h4 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> &lt;接口名&gt; interface {</span><br><span class="line">    &lt;方法名称&gt;() &lt;方法返回值&gt;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="举例-5"><a href="#举例-5" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value <span class="keyword">interface</span> {</span><br><span class="line">    String() <span class="keyword">string</span></span><br><span class="line">    Set(<span class="keyword">string</span>) error</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="自定义数据类型"><a href="#自定义数据类型" class="headerlink" title="自定义数据类型"></a>自定义数据类型</h3><h4 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> &lt;自定义类型&gt; &lt;原始类型&gt;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="举例-6"><a href="#举例-6" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ErrorHandling <span class="keyword">int</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="给自定义数据类型扩展方法"><a href="#给自定义数据类型扩展方法" class="headerlink" title="给自定义数据类型扩展方法"></a>给自定义数据类型扩展方法</h3><h4 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a>说明</h4><p>　可以使得自定义数据类型作为某一个 interface 的实现类，只需要扩展 interface 中申明的方法即可</p>
+<h4 id="举例-7"><a href="#举例-7" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value <span class="keyword">interface</span> {</span><br><span class="line">    String() <span class="keyword">string</span></span><br><span class="line">    Set(<span class="keyword">string</span>) error</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> StringsFlag []<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *StringsFlag)</span> <span class="title">Set</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">error</span></span> {</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    *v, err = str.SplitQuotedFields(s)</span><br><span class="line">    <span class="keyword">if</span> *v == <span class="literal">nil</span> {</span><br><span class="line">        *v = []<span class="keyword">string</span>{}</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *StringsFlag)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> {</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"&lt;StringsFlag&gt;"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="初始化空的结构体"><a href="#初始化空的结构体" class="headerlink" title="初始化空的结构体"></a>初始化空的结构体</h3><h4 id="说明-6"><a href="#说明-6" class="headerlink" title="说明"></a>说明</h4><p>　<code>struct{}</code> 表示一个空的结构体，不包含任何的属性和方法，相当于 Java 中的 <code>Object</code>。而 <code>struct{}{}</code> 表示对空的结构体进行初始化，相当于 Java 中的 <code>new Object()</code></p>
+<h4 id="举例-8"><a href="#举例-8" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span>{}{}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="defer-异步"><a href="#defer-异步" class="headerlink" title="defer 异步"></a>defer 异步</h3><h4 id="说明-7"><a href="#说明-7" class="headerlink" title="说明"></a>说明</h4><p>　被 defer 关键字修饰的函数调用可以异步地执行。多次 defer 异步调用之间会以逆序的顺序执行，类似于压栈出栈的过程。并且，defer 修饰的函数会在外层函数返回之前进行调用（准确来说，是在外层函数设置返回值之后，在即将返回之前）。因此，defer 常用于资源的释放</p>
+<h4 id="举例-9"><a href="#举例-9" class="headerlink" title="举例"></a>举例</h4><figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++ {</span><br><span class="line">        <span class="comment">// noinspection GoDeferInLoop</span></span><br><span class="line">        <span class="keyword">defer</span> fmt.Println(i)</span><br><span class="line">        fmt.Println(fmt.Sprintf(<span class="string">"for %d looping..."</span>, i))</span><br><span class="line">    }</span><br><span class="line">    fmt.Println(<span class="string">"done"</span>)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 1 looping...</span><br><span class="line"><span class="keyword">for</span> 2 looping...</span><br><span class="line"><span class="keyword">for</span> 3 looping...</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="实战技巧"><a href="#实战技巧" class="headerlink" title="实战技巧"></a>实战技巧</h2><h3 id="镜像加速"><a href="#镜像加速" class="headerlink" title="镜像加速"></a>镜像加速</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ go env -w GO111MODULE=on</span><br><span class="line"></span><br><span class="line"><span class="comment"># Golang 官方</span></span><br><span class="line">$ go env -w GOPROXY=https://goproxy.io</span><br><span class="line"><span class="comment"># 阿里云镜像</span></span><br><span class="line">$ go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 私有库不走代理</span></span><br><span class="line">$ go env -w GOPRIVATE=yuzhouwan.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否生效</span></span><br><span class="line">$ go env</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="多文件编译"><a href="#多文件编译" class="headerlink" title="多文件编译"></a>多文件编译</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">$ GOPATH=/Users/benedictjin/gopath</span><br><span class="line">$ /usr/<span class="built_in">local</span>/go/bin/go build -o /Users/benedictjin/output /Users/benedictjin/yuzhouwan/main.go /Users/benedictjin/yuzhouwan/sub_process.go</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="常用框架"><a href="#常用框架" class="headerlink" title="常用框架"></a>常用框架</h2><h3 id="influxdb-comparisons"><a href="#influxdb-comparisons" class="headerlink" title="influxdb-comparisons"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/influxdata/influxdb-comparisons">influxdb-comparisons</a></h3><h4 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz</span><br><span class="line">$ tar -C /usr/<span class="built_in">local</span> -xzf go1.14.4.linux-amd64.tar.gz</span><br><span class="line">$ vim ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=~/code/gopath/</span><br><span class="line"><span class="built_in">export</span> GO_HOME=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$GO_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br><span class="line">$ go version</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go version go1.14.4 linux/amd64</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="源码编译"><a href="#源码编译" class="headerlink" title="源码编译"></a>源码编译</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/code/gopath/src/github.com/influxdata/influxdb-comparisons</span><br><span class="line">$ <span class="built_in">cd</span> ~/code/gopath/src/github.com/influxdata/influxdb-comparisons</span><br><span class="line">$ yum install git -y</span><br><span class="line">$ git init</span><br><span class="line">$ git remote add upstream git@github.com:influxdata/influxdb-comparisons.git</span><br><span class="line">$ git pull upstream master:master</span><br><span class="line">$ go get -t -v github.com/influxdata/influxdb-comparisons/...</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="生成数据"><a href="#生成数据" class="headerlink" title="生成数据"></a>生成数据</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/code/gopath/src/github.com/influxdata/influxdb-comparisons/cmd/bulk_data_gen</span><br><span class="line">$ go build github.com/influxdata/influxdb-comparisons/cmd/bulk_data_gen</span><br><span class="line">$ ./bulk_data_gen --scale-var=10 --format=opentsdb --timestamp-start=2020-01-01T00:00:00Z --timestamp-end=2020-01-01T00:01:00Z &gt; /data/opentsdb_scale10_data.json</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/code/gopath/src/github.com/influxdata/influxdb-comparisons/cmd/bulk_load_opentsdb</span><br><span class="line">$ go build github.com/influxdata/influxdb-comparisons/cmd/bulk_load_opentsdb</span><br><span class="line">$ cat /data/opentsdb_scale10_data.json | ./bulk_load_opentsdb --urls=http://yuzhouwan.com:4242 -workers=64</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="踩到的坑"><a href="#踩到的坑" class="headerlink" title="踩到的坑"></a>踩到的坑</h2><h3 id="version-go1-11-9-does-not-match-go-tool-version-go1-11-5"><a href="#version-go1-11-9-does-not-match-go-tool-version-go1-11-5" class="headerlink" title="version go1.11.9 does not match go tool version go1.11.5"></a>version go1.11.9 does not match go tool version go1.11.5</h3><h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew uninstall --ignore-dependencies go</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uninstalling /usr/<span class="built_in">local</span>/Cellar/go/1.11.5... (9,298 files, 404.3MB)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="now-Sub-last-Milliseconds-undefined-type-time-Duration-has-no-field-or-method-Milliseconds"><a href="#now-Sub-last-Milliseconds-undefined-type-time-Duration-has-no-field-or-method-Milliseconds" class="headerlink" title="now.Sub(last).Milliseconds undefined (type time.Duration has no field or method Milliseconds)"></a>now.Sub(last).Milliseconds undefined (type time.Duration has no field or method Milliseconds)</h3><h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://golang.org/dl/">解决</a></h4><p>　将升级 Golang 到 1.13 以上即可</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o golang.pkg https://dl.google.com/go/go1.13.3.darwin-amd64.pkg</span><br><span class="line">$ sudo open golang.pkg</span><br><span class="line">$ go version</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="command-line-arguments-undefined"><a href="#command-line-arguments-undefined" class="headerlink" title="command-line-arguments undefined"></a>command-line-arguments undefined</h3><h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>　不要直接右击 <code>main.go</code> 运行，需要同时选中相关的几个 go 程序，再右击运行</p>
+<h3 id="working-directory-is-not-part-of-a-module"><a href="#working-directory-is-not-part-of-a-module" class="headerlink" title="working directory is not part of a module"></a>working directory is not part of a module</h3><h4 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h4><p>　这里以 influxdb-comparisons 项目为例，关键步骤是 <code>go mod init main</code>，完整命令如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/code/gopath/src/github.com/influxdata/influxdb-comparisons/</span><br><span class="line">$ go mod init main</span><br><span class="line">$ go build github.com/influxdata/influxdb-comparisons/cmd/bulk_load_opentsdb</span><br><span class="line">$ ./bulk_load_opentsdb</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">daemon URLs: [http://localhost:8086]</span><br><span class="line">SysInfo:</span><br><span class="line">  Current GOMAXPROCS: 64</span><br><span class="line">  Num CPUs: 64</span><br><span class="line">Trend statistics using 30 samples</span><br><span class="line">Started load with 1 workers</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="verifying-module-checksum-mismatch"><a href="#verifying-module-checksum-mismatch" class="headerlink" title="verifying module: checksum mismatch"></a>verifying module: checksum mismatch</h3><h4 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a>解决</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是升级导致的，可以清理旧 mod</span></span><br><span class="line">$ go clean -modcache</span><br><span class="line"><span class="comment"># 如果是私有代码库导致的，可以直接关闭 checksum 功能</span></span><br><span class="line">$ go env -w GOSUMDB=off</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="can’t-load-package"><a href="#can’t-load-package" class="headerlink" title="can’t load package"></a>can’t load package</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go: finding module <span class="keyword">for</span> package github.com/influxdata/influxdb-comparisons/cmd/bulk_load_yuzhouwan</span><br><span class="line">can<span class="string">'t load package: package github.com/influxdata/influxdb-comparisons/cmd/bulk_load_yuzhouwan: module github.com/influxdata/influxdb-comparisons@latest found (v0.0.0-20200224230202-a75268060881), but does not contain package github.com/influxdata/influxdb-comparisons/cmd/bulk_load_yuzhouwan</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-5"><a href="#解决-5" class="headerlink" title="解决"></a>解决</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go env -w GO111MODULE=off</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><ul>
+<li>auto<br>默认判断是否启用 module 功能<ul>
+<li>当前目录在 <code>GOPATH/src</code> 之外且该目录包含 go.mod 文件</li>
+<li>当前文件在包含 go.mod 文件的目录下面</li>
+</ul>
+</li>
+<li>off<br>关闭 module 功能，寻找依赖包的方式将会沿用旧版本那种通过 <code>vendor</code> 目录或者 <code>GOPATH</code> 模式来查找</li>
+<li>on<br>开启 module 功能，完全不去 GOPATH 目录下查找</li>
+</ul>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/huwh_/column/info/24158">Golang 系列学习</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/53284649">大规模 Go 项目几乎必踏的几个坑</a></li>
+</ul>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/avelino/awesome-go#awesome-go">Awesome Go</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200315/" rel="bookmark">开源时序数据库 InfluxDB</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/5845/" rel="bookmark">Apache Druid：一款高效的 OLAP 引擎</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/191026/" title="重拾 Golang">https://yuzhouwan.com/posts/191026/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/InfluxDB/" rel="tag"># InfluxDB</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/190816/" rel="prev" title="Gradle 实战">
+      <i class="fa fa-chevron-left"></i> Gradle 实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/200307/" rel="next" title="离散数学拾遗">
+      离散数学拾遗 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Golang%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是 Golang？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">类别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MacOS"><span class="nav-number">3.1.1.</span> <span class="nav-text">MacOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux"><span class="nav-number">3.1.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-world"><span class="nav-number">3.3.</span> <span class="nav-text">Hello world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BE%9D%E8%B5%96"><span class="nav-number">3.4.</span> <span class="nav-text">下载依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-mod"><span class="nav-number">4.1.</span> <span class="nav-text">go mod</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">5.1.</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">5.1.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">三元表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">5.3.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">5.4.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-3"><span class="nav-number">5.4.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">5.5.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-4"><span class="nav-number">5.5.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.6.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-3"><span class="nav-number">5.6.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-5"><span class="nav-number">5.6.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.7.</span> <span class="nav-text">自定义数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-4"><span class="nav-number">5.7.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-6"><span class="nav-number">5.7.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95"><span class="nav-number">5.8.</span> <span class="nav-text">给自定义数据类型扩展方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-5"><span class="nav-number">5.8.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-7"><span class="nav-number">5.8.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A9%BA%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">5.9.</span> <span class="nav-text">初始化空的结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-6"><span class="nav-number">5.9.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-8"><span class="nav-number">5.9.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer-%E5%BC%82%E6%AD%A5"><span class="nav-number">5.10.</span> <span class="nav-text">defer 异步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E-7"><span class="nav-number">5.10.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-9"><span class="nav-number">5.10.2.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7"><span class="nav-number">6.</span> <span class="nav-text">实战技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="nav-number">6.1.</span> <span class="nav-text">镜像加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">6.2.</span> <span class="nav-text">多文件编译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="nav-number">7.</span> <span class="nav-text">常用框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#influxdb-comparisons"><span class="nav-number">7.1.</span> <span class="nav-text">influxdb-comparisons</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83"><span class="nav-number">7.1.1.</span> <span class="nav-text">基础环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91"><span class="nav-number">7.1.2.</span> <span class="nav-text">源码编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE"><span class="nav-number">7.1.3.</span> <span class="nav-text">生成数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">7.1.4.</span> <span class="nav-text">写入数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E5%88%B0%E7%9A%84%E5%9D%91"><span class="nav-number">8.</span> <span class="nav-text">踩到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#version-go1-11-9-does-not-match-go-tool-version-go1-11-5"><span class="nav-number">8.1.</span> <span class="nav-text">version go1.11.9 does not match go tool version go1.11.5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">8.1.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#now-Sub-last-Milliseconds-undefined-type-time-Duration-has-no-field-or-method-Milliseconds"><span class="nav-number">8.2.</span> <span class="nav-text">now.Sub(last).Milliseconds undefined (type time.Duration has no field or method Milliseconds)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">8.2.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#command-line-arguments-undefined"><span class="nav-number">8.3.</span> <span class="nav-text">command-line-arguments undefined</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">8.3.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#working-directory-is-not-part-of-a-module"><span class="nav-number">8.4.</span> <span class="nav-text">working directory is not part of a module</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-3"><span class="nav-number">8.4.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#verifying-module-checksum-mismatch"><span class="nav-number">8.5.</span> <span class="nav-text">verifying module: checksum mismatch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-4"><span class="nav-number">8.5.1.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#can%E2%80%99t-load-package"><span class="nav-number">8.6.</span> <span class="nav-text">can’t load package</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">8.6.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-5"><span class="nav-number">8.6.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">8.6.3.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">9.</span> <span class="nav-text">资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog"><span class="nav-number">9.1.</span> <span class="nav-text">Blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github"><span class="nav-number">9.2.</span> <span class="nav-text">Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">10.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/191026/";
+    this.page.identifier = "posts/191026/";
+    this.page.title = "重拾 Golang";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '02c0113246e558fe666bad478b4ad0bd',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

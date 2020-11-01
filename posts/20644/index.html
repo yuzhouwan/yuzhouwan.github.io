@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是 Flink？ Apache Flink™ is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. Flink has been designed to run in all common cluster enviro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Flink">
+<meta property="og:url" content="https://yuzhouwan.com/posts/20644/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="什么是 Flink？ Apache Flink™ is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. Flink has been designed to run in all common cluster enviro">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/flink/flink_stack.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2017-06-06T12:19:28.000Z">
+<meta property="article:modified_time" content="2020-08-29T03:34:56.856Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="Apache Cassandra">
+<meta property="article:tag" content="ElasticSearch">
+<meta property="article:tag" content="Apache Flink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/flink/flink_stack.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/20644/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Apache Flink | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/20644/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Apache Flink
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-06 20:19:28" itemprop="dateCreated datePublished" datetime="2017-06-06T20:19:28+08:00">2017-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-29 11:34:56" itemprop="dateModified" datetime="2020-08-29T11:34:56+08:00">2020-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>23k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>21 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是-Flink？"><a href="#什么是-Flink？" class="headerlink" title="什么是 Flink？"></a>什么是 Flink？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://flink.apache.org/">Apache Flink</a></strong>™ is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. Flink has been designed to run in all common cluster environments, perform computations at in-memory speed and at any scale.</p>
+</blockquote>
+<h2 id="Flink-架构"><a href="#Flink-架构" class="headerlink" title="Flink 架构"></a>Flink 架构</h2><h3 id="核心组件布局"><a href="#核心组件布局" class="headerlink" title="核心组件布局"></a>核心组件布局</h3><p><img data-src="/picture/flink/flink_stack.png" alt="Apache Flink Stack"></p>
+<center>（图片来源：<a href="https://flink.apache.org/" target="_blank" rel="external nofollow noopener noreferrer">Apache Flink</a>™ 官网）</center>
+
+<a id="more"></a>
+<h2 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h2><h3 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h3><h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><h5 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 增加用户，并赋予其密码</span></span><br><span class="line">$ adduser flink</span><br><span class="line">$ passwd flink            <span class="comment"># ur password for flink user</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予用户可以 sudo 的权限</span></span><br><span class="line">$ chmod u+w /etc/sudoers</span><br><span class="line">$ vim /etc/sudoers</span><br><span class="line">  <span class="comment"># 找到 `root ALL=(ALL) ALL` 这行，并在下面添加 flink 用户</span></span><br><span class="line">  flink    ALL=(ALL)    ALL</span><br><span class="line">$ chmod u-w /etc/sudoers</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到 flink 用户</span></span><br><span class="line">$ su - flink</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /home/flink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存放软件目录 &amp; 安装目录 &amp; 日志目录 &amp; 临时目录</span></span><br><span class="line">$ mkdir install &amp;&amp; mkdir software &amp;&amp; mkdir logs &amp;&amp; mkdir data</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><h5 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h5><p>　Download from <a target="_blank" rel="external nofollow noopener noreferrer" href="http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz">jdk-8u131-linux-x64.tar.gz</a></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/install</span><br><span class="line">$ tar zxvf jdk-8u131-linux-x64.tar.gz -C ~/software/</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> ~/software</span><br><span class="line">$ ln -s jdk-8u131-linux-x64 java</span><br><span class="line">$ vim ~/.bash_profile</span><br><span class="line">  JAVA_HOME=/home/flink/software/java</span><br><span class="line">  FLINK_HOME=/home/flink/software/flink</span><br><span class="line">  CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">  PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$FLINK_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line">  <span class="built_in">export</span> JAVA_HOME CLASSPATH PATH</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></tbody></table></figure>
+<p>　如果需要清除之前的低版本 JDK，或者重装，可以参照（没有这个需求，可跳过）:<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep -iE <span class="string">'jdk|java'</span></span><br><span class="line">  jdk-1.7.0_80-fcs.x86_64</span><br><span class="line"></span><br><span class="line">$ sudo rpm -e --nodeps jdk-1.7.0_80-fcs.x86_64</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="Local-Cluster"><a href="#Local-Cluster" class="headerlink" title="Local Cluster"></a>Local Cluster</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载安装包</span></span><br><span class="line">$ <span class="built_in">cd</span> /home/flink/install</span><br><span class="line">$ wget http://archive.apache.org/dist/flink/flink-1.3.1/flink-1.3.1-bin-hadoop2-scala_2.11.tgz</span><br><span class="line">$ wget http://archive.apache.org/dist/flink/flink-1.3.1/flink-1.3.1-bin-hadoop2-scala_2.11.tgz.md5</span><br><span class="line">$ head -n 6 flink-1.3.1-bin-hadoop2-scala_2.11.tgz.md5</span><br><span class="line">  161e51c0b78d1fdf196f1c53c112a37f  flink-1.3.1-bin-hadoop2-scala_2.11.tgz</span><br><span class="line">$ md5sum flink-1.3.1-bin-hadoop2-scala_2.11.tgz | tr <span class="string">"a-z"</span> <span class="string">"A-Z"</span></span><br><span class="line">  161E51C0B78D1FDF196F1C53C112A37F  FLINK-1.3.1-BIN-HADOOP2-SCALA_2.11.TGZ</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比 MD5 码一致后进行解压安装</span></span><br><span class="line">$ tar zxvf flink-1.3.1-bin-hadoop2-scala_2.11.tgz -C ~/software/</span><br><span class="line">$ <span class="built_in">cd</span> ~/software/ &amp;&amp; ln -s flink-1.3.1/ flink</span><br><span class="line">$ <span class="built_in">cd</span> flink/</span><br><span class="line">$ bin/flink -v</span><br><span class="line">  Version: 1.3.1, Commit ID: 1ca6e5b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 Local Cluster</span></span><br><span class="line">$ bin/start-local.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># WEB UI</span></span><br><span class="line">$ http://localhost:8081</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="分布式集群"><a href="#分布式集群" class="headerlink" title="分布式集群"></a>分布式集群</h3><h4 id="节点分发"><a href="#节点分发" class="headerlink" title="节点分发"></a>节点分发</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ssh flink@yuzhouwan00</span><br><span class="line">$ rsync -avuz -e ssh /home/flink/ flink@yuzhouwan01:/home/flink</span><br><span class="line">$ rsync -avuz -e ssh /home/flink/ flink@yuzhouwan02:/home/flink</span><br><span class="line">$ rsync -avuz -e ssh /home/flink/ flink@yuzhouwan03:/home/flink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在各个节点上，激活环境变量</span></span><br><span class="line">$ <span class="built_in">source</span> ~/.bash_profile</span><br><span class="line">$ java -version</span><br><span class="line">  java version <span class="string">"1.8.0_121"</span></span><br><span class="line">  Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</span><br><span class="line">  Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</span><br><span class="line"></span><br><span class="line">$ flink -v</span><br><span class="line">  Version: 1.3.1, Commit ID: 1ca6e5b</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 因为 Flink 集群中会用到 `sshd` 命令来管理和操作远程组件</span></span><br><span class="line">$ ssh flink@yuzhouwan01</span><br><span class="line">$ <span class="built_in">cd</span> ~/.ssh               <span class="comment"># 如果没有改目录，则需要先执行 `ssh localhost`</span></span><br><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">$ cat ./id_rsa.pub &gt;&gt; ./authorized_keys</span><br><span class="line">$ scp ~/.ssh/id_rsa.pub flink@yuzhouwan02:/home/flink</span><br><span class="line">$ scp ~/.ssh/id_rsa.pub flink@yuzhouwan03:/home/flink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 Slave 节点上依次执行以下命令</span></span><br><span class="line">$ ssh flink@yuzhouwan02</span><br><span class="line">$ mkdir ~/.ssh</span><br><span class="line">$ cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">$ rm ~/id_rsa.pub</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="配置集群"><a href="#配置集群" class="headerlink" title="配置集群"></a>配置集群</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$FLINK_HOME</span></span><br><span class="line">$ vim conf/flink-conf.yaml</span><br><span class="line">  jobmanager.rpc.address: yuzhouwan01</span><br><span class="line">  jobmanager.heap.mb: 2048</span><br><span class="line">  taskmanager.heap.mb: 2048</span><br><span class="line">  taskmanager.numberOfTaskSlots: 4</span><br><span class="line">  parallelism.default: 12</span><br><span class="line">  taskmanager.tmp.dirs: /home/flink/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 slave 列表</span></span><br><span class="line">$ vim conf/slaves</span><br><span class="line">  yuzhouwan02</span><br><span class="line">  yuzhouwan03</span><br><span class="line"></span><br><span class="line">$ scp -r /home/flink/software/flink-1.3.1/conf/ flink@yuzhouwan02:/home/flink/software/flink/conf/</span><br><span class="line">$ scp -r /home/flink/software/flink-1.3.1/conf/ flink@yuzhouwan03:/home/flink/software/flink/conf/</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ start-cluster.sh </span><br><span class="line">  Starting cluster.</span><br><span class="line">  Starting jobmanager daemon on host yuzhouwan01.</span><br><span class="line">  Starting taskmanager daemon on host yuzhouwan02.</span><br><span class="line">  Starting taskmanager daemon on host yuzhouwan03.</span><br><span class="line"></span><br><span class="line"><span class="comment"># WEB UI</span></span><br><span class="line">$ http://yuzhouwan01:8081</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h3><h4 id="Local"><a href="#Local" class="headerlink" title="Local"></a>Local</h4><p>　使用 <code>ExecutionEnvironment.createLocalEnvironment(parallelism)</code> 获取程序执行环境，本地执行 main 函数即可完成发布</p>
+<h4 id="Remote"><a href="#Remote" class="headerlink" title="Remote"></a>Remote</h4><p>　可将本机为 Client，提交任务到远程集群执行，对应获取程序执行环境的代码如下</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutionEnvironment.createRemoteEnvironment(<span class="string">"localhost"</span>, <span class="number">6123</span>, <span class="string">"target/yuzhouwan.jar"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h4><p>　还有一种方法，可以将程序提交至远程集群上，通过 <code>ExecutionEnvironment.getExecutionEnvironment()</code> 方法 获取执行环境，并通过 <code>maven-assembly-plugin</code> 插件，将程序打包成单个可执行的 jar 包，并在 WEB UI 上找到 <code>Submit new Job</code> 模块，完成上传、展示执行和最终提交任务至集群</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.yuzhouwan.process.ServerLogProcess<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">descriptorRef</span>&gt;</span>jar-with-dependencies<span class="tag">&lt;/<span class="name">descriptorRef</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<div class="note info">在 log/flink-flink-jobmanager-0-federation01.log 中可以查看任务失败的详情</div>
+
+
+
+<h2 id="实战技巧"><a href="#实战技巧" class="headerlink" title="实战技巧"></a>实战技巧</h2><h3 id="Flink-CEP"><a href="#Flink-CEP" class="headerlink" title="Flink-CEP"></a>Flink-CEP</h3><p>　当前 Flink v1.3.1 的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://ci.apache.org/projects/flink/flink-docs-release-1.3/dev/libs/cep.html">CEP</a>（Complex event processing for Flink）功能相比 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.espertech.com/esper/">Esper</a> / <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/wso2/siddhi">Siddhi</a> 之类的成熟 CEP框架，可能还是无法满足某些应用场景（如，groupby、aggregation 等聚合操作）。先前，有 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/haoch">@haoch</a> 开发的一套 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/haoch/flink-siddhi"><strong>flink-siddhi</strong></a> 将 Siddhi整合到 Flink里面，不过 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/flink/pull/2487">PR</a> 因为 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/bahir">Apache Bahir</a>的一位 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/rmetzger">Commitor</a> 提议将这个功能放到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/bahir-flink">Bahir-Flink</a> 里，导致 flink-siddhi 功能提交进度推迟了。好在，Flink目前正在参考 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.oracle.com/database/121/DWHSG/pattern.htm#DWHSG8956">Oracle’s SQL for pattern matching</a>，设计 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.google.com/document/d/1HaaO5eYI1VZjyhtVPZOi3jVzikU7iK15H0YbniTnN30/edit#heading=h.vw4618mrw6mw"><strong>CEP on  SQL</strong></a> 的方案，目前看来，还是很值得期待的</p>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><h5 id="事件流（Event-stream）"><a href="#事件流（Event-stream）" class="headerlink" title="事件流（Event stream）"></a>事件流（Event stream）</h5><h5 id="模式定义（Pattern-definition）"><a href="#模式定义（Pattern-definition）" class="headerlink" title="模式定义（Pattern definition）"></a>模式定义（Pattern definition）</h5><h6 id="单独模式"><a href="#单独模式" class="headerlink" title="单独模式"></a>单独模式</h6><ul>
+<li>Begin</li>
+<li>Filter</li>
+<li>Subtype</li>
+<li>OR</li>
+<li>Continuity</li>
+<li>Within</li>
+</ul>
+<h5 id="模式检测（Pattern-detection）"><a href="#模式检测（Pattern-detection）" class="headerlink" title="模式检测（Pattern detection）"></a>模式检测（Pattern detection）</h5><h5 id="告警生成（Alert-generation）"><a href="#告警生成（Alert-generation）" class="headerlink" title="告警生成（Alert generation）"></a>告警生成（Alert generation）</h5><h2 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h2><h3 id="G1GC"><a href="#G1GC" class="headerlink" title="G1GC"></a>G1GC</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim conf/flink-conf.yaml</span><br><span class="line">  env.java.opts: -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=45 -XX:ParallelGCThreads=8</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="ElasticSearch-Connector"><a href="#ElasticSearch-Connector" class="headerlink" title="ElasticSearch Connector"></a><a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> Connector</h3><h4 id="Failed-to-collect-dependencies-at-org-apache-flink-flink-connector-elasticsearch5-2-11-jar-1-3-1"><a href="#Failed-to-collect-dependencies-at-org-apache-flink-flink-connector-elasticsearch5-2-11-jar-1-3-1" class="headerlink" title="Failed to collect dependencies at org.apache.flink:flink-connector-elasticsearch5_2.11:jar:1.3.1"></a>Failed to collect dependencies at org.apache.flink:flink-connector-elasticsearch5_2.11:jar:1.3.1</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch --tags</span><br><span class="line">$ git checkout tags/release-1.3.1</span><br><span class="line"></span><br><span class="line">$ D:\apps\Java\jdk1.8.0_111\bin\java -Dmaven.multiModuleProjectDirectory=E:\Github\Flink\asdf2014\flink-connectors\flink-connector-elasticsearch5 -Dmaven.home=D:\apps\maven\apache-maven-3.3.9 -Dclassworlds.conf=D:\apps\maven\apache-maven-3.3.9\bin\m2.conf -Didea.launcher.port=7538 <span class="string">"-Didea.launcher.bin.path=D:\apps\JetBrains\IntelliJ IDEA 2016.2.5\bin"</span> -Dfile.encoding=UTF-8 -classpath <span class="string">"D:\apps\maven\apache-maven-3.3.9\boot\plexus-classworlds-2.5.2.jar;D:\apps\JetBrains\IntelliJ IDEA 2016.2.5\lib\idea_rt.jar"</span> com.intellij.rt.execution.application.AppMain org.codehaus.classworlds.Launcher -Didea.version=2016.2.5 -T 1C -DskipTests=<span class="literal">true</span> install -P scala-2.11,!scala-2.10,!include-yarn-tests</span><br><span class="line"></span><br><span class="line"><span class="comment"># -Dscala-2.11 指定 profile 失效，是因为 v1.3.1 里面的问题，已经将 scala version 写死了，需要修改 pom 文件，参考 1.4.0-SNAPSHOT</span></span><br><span class="line"><span class="comment"># 此时，应该能在 $MAVEN_HOME/repository 中找到 flink-connector-elasticsearch5_2.11-1.3.1.jar 了，在 maven 中使用就不再报错了；如果没能成功，就需要 install:install-file 的方式进行导入了</span></span><br><span class="line">$ mvn install:install-file -Dfile=D:\apps\maven\repository\org\apache\flink\flink-connector-elasticsearch5_2.11\1.3.1\flink-connector-elasticsearch5_2.11-1.3.1.jar -DgroupId=org.apache.flink -DartifactId=flink-connector-elasticsearch5_2.11 -Dversion=1.3.1 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span> -DpomFile=C:\yuzhouwan\Maven\pom.xml</span><br></pre></td></tr></tbody></table></figure>
+<div class="note success">同样的问题，在 Cassandra Connector 也存在，已提交 PR#4087 完成修复</div>
+
+
+
+<h3 id="Either-无法被序列化"><a href="#Either-无法被序列化" class="headerlink" title="Either 无法被序列化"></a>Either 无法被序列化</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><h5 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DataStream&lt;Either&lt;HBaseServerLog, HBaseServerLog&gt;&gt; eventsWarn = cepWarn(events);</span><br><span class="line"></span><br><span class="line">AlertEvent alertPoliceEvent = AlertEvent.getInstance();</span><br><span class="line">eventsWarn.map(log -&gt; {</span><br><span class="line">    alertPoliceEvent.alert(log);</span><br><span class="line">    <span class="keyword">return</span> log;</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> org.apache.flink.api.common.functions.InvalidTypesException: The <span class="keyword">return</span> type of function <span class="string">'main(ServerLogProcess.java:46)'</span> could not be determined automatically, due to type erasure. <span class="function">You can give type information hints by using the <span class="title">returns</span><span class="params">(...)</span> method on the result of the transformation call, or by letting your function implement the 'ResultTypeQueryable' interface.</span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.transformations.StreamTransformation.<span class="title">getOutputType</span><span class="params">(StreamTransformation.java:<span class="number">374</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.graph.StreamGraphGenerator.<span class="title">transform</span><span class="params">(StreamGraphGenerator.java:<span class="number">159</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.graph.StreamGraphGenerator.<span class="title">generateInternal</span><span class="params">(StreamGraphGenerator.java:<span class="number">129</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.graph.StreamGraphGenerator.<span class="title">generate</span><span class="params">(StreamGraphGenerator.java:<span class="number">121</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.<span class="title">getStreamGraph</span><span class="params">(StreamExecutionEnvironment.java:<span class="number">1526</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.environment.LocalStreamEnvironment.<span class="title">execute</span><span class="params">(LocalStreamEnvironment.java:<span class="number">87</span>)</span></span></span><br><span class="line"><span class="function">  at com.yuzhouwan.hbase.monitor.server.log.process.ServerLogProcess.<span class="title">main</span><span class="params">(ServerLogProcess.java:<span class="number">58</span>)</span></span></span><br><span class="line"><span class="function">  at sun.reflect.NativeMethodAccessorImpl.<span class="title">invoke0</span><span class="params">(Native Method)</span></span></span><br><span class="line"><span class="function">  at sun.reflect.NativeMethodAccessorImpl.<span class="title">invoke</span><span class="params">(NativeMethodAccessorImpl.java:<span class="number">62</span>)</span></span></span><br><span class="line"><span class="function">  at sun.reflect.DelegatingMethodAccessorImpl.<span class="title">invoke</span><span class="params">(DelegatingMethodAccessorImpl.java:<span class="number">43</span>)</span></span></span><br><span class="line"><span class="function">  at java.lang.reflect.Method.<span class="title">invoke</span><span class="params">(Method.java:<span class="number">498</span>)</span></span></span><br><span class="line"><span class="function">  at com.intellij.rt.execution.application.AppMain.<span class="title">main</span><span class="params">(AppMain.java:<span class="number">147</span>)</span></span></span><br><span class="line"><span class="function">Caused by: org.apache.flink.api.common.functions.InvalidTypesException: The generic type parameters of 'Either' are missing. </span></span><br><span class="line"><span class="function">It seems that your compiler has not stored them into the .class file. </span></span><br><span class="line"><span class="function">Currently, only the Eclipse JDT compiler preserves the type information necessary to use the lambdas feature type-safely. </span></span><br><span class="line"><span class="function">See the documentation <span class="keyword">for</span> more information about how to compile jobs containing lambda expressions.</span></span><br><span class="line"><span class="function">  at org.apache.flink.api.java.typeutils.TypeExtractor.<span class="title">validateLambdaGenericParameter</span><span class="params">(TypeExtractor.java:<span class="number">1503</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.api.java.typeutils.TypeExtractor.<span class="title">validateLambdaGenericParameters</span><span class="params">(TypeExtractor.java:<span class="number">1489</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.api.java.typeutils.TypeExtractor.<span class="title">getUnaryOperatorReturnType</span><span class="params">(TypeExtractor.java:<span class="number">426</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.api.java.typeutils.TypeExtractor.<span class="title">getUnaryOperatorReturnType</span><span class="params">(TypeExtractor.java:<span class="number">379</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.api.java.typeutils.TypeExtractor.<span class="title">getMapReturnTypes</span><span class="params">(TypeExtractor.java:<span class="number">164</span>)</span></span></span><br><span class="line"><span class="function">  at org.apache.flink.streaming.api.datastream.DataStream.<span class="title">map</span><span class="params">(DataStream.java:<span class="number">527</span>)</span></span></span><br><span class="line"><span class="function">  at com.yuzhouwan.hbase.monitor.server.log.process.ServerLogProcess.<span class="title">main</span><span class="params">(ServerLogProcess.java:<span class="number">46</span>)</span></span></span><br><span class="line"><span class="function">  ... 5 more</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>　不使用 <code>map</code> 方法去处理告警，将告警逻辑放到 <code>PatternFlatTimeoutFunction</code> 和 <code>PatternFlatSelectFunction</code> 里面</p>
+<h3 id="Cannot-retrieve-Left-value-on-a-Right"><a href="#Cannot-retrieve-Left-value-on-a-Right" class="headerlink" title="Cannot retrieve Left value on a Right"></a>Cannot retrieve Left value on a Right</h3><h4 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h4><h5 id="程序-1"><a href="#程序-1" class="headerlink" title="程序"></a>程序</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(ElasticsearchSinkFunction&lt;Either&lt;HBaseServerLog, HBaseServerLog&gt;&gt;) (element, ctx, indexer) -&gt; {</span><br><span class="line">            <span class="keyword">if</span> (IS_DEBUG &amp;&amp; IS_DEEP_DEBUG) _log.debug(<span class="string">"Message: {} in ES Sink"</span>, element);</span><br><span class="line">            <span class="keyword">if</span> (element == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">            HBaseServerLog left = element.left();</span><br><span class="line">            <span class="keyword">if</span> (left != <span class="keyword">null</span>)</span><br><span class="line">                indexer.add(indexRequest()</span><br><span class="line">                        .index(HBASE_SERVER_LOG_INDEX_NAME)</span><br><span class="line">                        .type(HBASE_SERVER_LOG_TYPE_NAME)</span><br><span class="line">                        .source(left.toJSON()));</span><br><span class="line">            HBaseServerLog right = element.right();</span><br><span class="line">            <span class="keyword">if</span> (right != <span class="keyword">null</span>)</span><br><span class="line">                indexer.add(indexRequest()</span><br><span class="line">                        .index(HBASE_SERVER_LOG_INDEX_NAME)</span><br><span class="line">                        .type(HBASE_SERVER_LOG_TYPE_NAME)</span><br><span class="line">                        .source(right.toJSON()));</span><br><span class="line">        };</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="报错-1"><a href="#报错-1" class="headerlink" title="报错"></a>报错</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Cannot retrieve Left value on a Right</span><br><span class="line">  at org.apache.flink.types.Either$Right.left(Either.java:<span class="number">172</span>) ~[flink-core-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.store.StoreData2ES.lambda$createEsSinkFunction$<span class="number">8</span>bb6efc1$<span class="number">1</span>(StoreData2ES.java:<span class="number">102</span>) ~[classes/:na]</span><br><span class="line">  at org.apache.flink.streaming.connectors.elasticsearch.ElasticsearchSinkBase.invoke(ElasticsearchSinkBase.java:<span class="number">282</span>) ~[flink-connector-elasticsearch-base_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.api.operators.StreamSink.processElement(StreamSink.java:<span class="number">41</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.pushToOperator(OperatorChain.java:<span class="number">528</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.collect(OperatorChain.java:<span class="number">503</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.collect(OperatorChain.java:<span class="number">483</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:<span class="number">891</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:<span class="number">869</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.api.operators.TimestampedCollector.collect(TimestampedCollector.java:<span class="number">51</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.cep.PatternStream$PatternFlatSelectTimeoutWrapper$RightCollector.collect(PatternStream.java:<span class="number">374</span>) ~[flink-cep_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.analyse.func.select.SelectFunctionWarn.lambda$flatSelect$<span class="number">0</span>(SelectFunctionWarn.java:<span class="number">39</span>) ~[classes/:na]</span><br><span class="line">  at java.util.ArrayList.forEach(ArrayList.java:<span class="number">1249</span>) ~[na:<span class="number">1.8</span>.<span class="number">0_111</span>]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.analyse.func.select.SelectFunctionWarn.flatSelect(SelectFunctionWarn.java:<span class="number">37</span>) ~[classes/:na]</span><br><span class="line">  at org.apache.flink.cep.PatternStream$PatternFlatSelectTimeoutWrapper.flatMap(PatternStream.java:<span class="number">341</span>) ~[flink-cep_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.cep.PatternStream$PatternFlatSelectTimeoutWrapper.flatMap(PatternStream.java:<span class="number">320</span>) ~[flink-cep_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.api.operators.StreamFlatMap.processElement(StreamFlatMap.java:<span class="number">50</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.StreamInputProcessor.processInput(StreamInputProcessor.java:<span class="number">206</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OneInputStreamTask.run(OneInputStreamTask.java:<span class="number">69</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:<span class="number">262</span>) ~[flink-streaming-java_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at org.apache.flink.runtime.taskmanager.Task.run(Task.java:<span class="number">702</span>) ~[flink-runtime_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">1.</span>jar:<span class="number">1.3</span>.<span class="number">1</span>]</span><br><span class="line">  at java.lang.Thread.run(Thread.java:<span class="number">745</span>) [na:<span class="number">1.8</span>.<span class="number">0_111</span>]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先使用 `isLeft | isRight` 方法，做一下判断，然后再做处理</span></span><br><span class="line">HBaseServerLog log = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (element.isLeft()) log = element.left();</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (element.isRight()) log = element.right();</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="ElasticsearchSinkFunction-is-not-serializable"><a href="#ElasticsearchSinkFunction-is-not-serializable" class="headerlink" title="ElasticsearchSinkFunction is not serializable"></a>ElasticsearchSinkFunction is not serializable</h3><h4 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalArgumentException: The implementation of the provided ElasticsearchSinkFunction is not serializable. The object probably contains or references non-serializable fields.</span><br><span class="line">  at org.apache.flink.util.Preconditions.checkArgument(Preconditions.java:<span class="number">139</span>) ~[flink-core-<span class="number">1.3</span>.<span class="number">0.</span>jar:<span class="number">1.3</span>.<span class="number">0</span>]</span><br><span class="line">  at org.apache.flink.streaming.connectors.elasticsearch.ElasticsearchSinkBase.&lt;init&gt;(ElasticsearchSinkBase.java:<span class="number">195</span>) ~[flink-connector-elasticsearch-base_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">0.</span>jar:<span class="number">1.3</span>.<span class="number">0</span>]</span><br><span class="line">  at org.apache.flink.streaming.connectors.elasticsearch5.ElasticsearchSink.&lt;init&gt;(ElasticsearchSink.java:<span class="number">95</span>) ~[flink-connector-elasticsearch5_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">0.</span>jar:<span class="number">1.3</span>.<span class="number">0</span>]</span><br><span class="line">  at org.apache.flink.streaming.connectors.elasticsearch5.ElasticsearchSink.&lt;init&gt;(ElasticsearchSink.java:<span class="number">78</span>) ~[flink-connector-elasticsearch5_2.<span class="number">11</span>-<span class="number">1.3</span>.<span class="number">0.</span>jar:<span class="number">1.3</span>.<span class="number">0</span>]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.store.StoreData2ES.initEsSink(StoreData2ES.java:<span class="number">89</span>) ~[classes/:na]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.store.StoreData2ES.init(StoreData2ES.java:<span class="number">85</span>) ~[classes/:na]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.store.StoreData2ES.&lt;init&gt;(StoreData2ES.java:<span class="number">50</span>) ~[classes/:na]</span><br><span class="line">  at com.yuzhouwan.hbase.monitor.server.log.process.ServerLogProcess.main(ServerLogProcess.java:<span class="number">52</span>) ~[classes/:na]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>　原因是，从外部传入两个关于 <a href="https://yuzhouwan.com/posts/22654/">ES</a> 的参数，导致 <code>ElasticSearchSinkFunction</code> 类无法被序列化。解决方法，就是实现 <code>ElasticsearchSinkFunction&lt;T&gt;</code> 接口，并标记 <code>Serializable</code>，再将外部参数，通过 <code>ElasticSearchSinkFunction</code> 子类的构造函数传入（这里还需要注意避免使用 <code>static</code> 属性）。类似的，还有 <code>PatternFlatSelectFunction&lt;IN, OUT&gt;</code> 和<code>IterativeCondition&lt;T&gt;</code>，对于外部传入的实例，如果因为序列化，也可能会出现 <code>NullPointerException</code> 异常。这时候，就算通过实现<code>Cloneable</code> 接口，对外部实例进行 <code>clone</code>，也会无法避免。因此，需要在 <code>PatternFlatSelectFunction&lt;IN, OUT&gt;</code> 或<code>IterativeCondition&lt;T&gt;</code> 内部，重新初始化实例，才能解决该问题</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElasticsearchSinkFunctionWithConf</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">ElasticsearchSinkFunction</span>&lt;<span class="title">T</span>&gt;, <span class="title">Serializable</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String hbaseServerLogIndexName;</span><br><span class="line">    <span class="keyword">private</span> String hbaseServerLogTypeName;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ElasticsearchSinkFunctionWithConf</span><span class="params">(String hbaseServerLogIndexName, String hbaseServerLogTypeName)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.hbaseServerLogIndexName = hbaseServerLogIndexName;</span><br><span class="line">        <span class="keyword">this</span>.hbaseServerLogTypeName = hbaseServerLogTypeName;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(T element, RuntimeContext ctx, RequestIndexer indexer)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (element == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (!(element <span class="keyword">instanceof</span> HBaseServerLog)) <span class="keyword">return</span>;</span><br><span class="line">        indexer.add(indexRequest()</span><br><span class="line">                .index(hbaseServerLogIndexName)</span><br><span class="line">                .type(hbaseServerLogTypeName)</span><br><span class="line">                .source(((HBaseServerLog) element).toJSON()));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="The-implementation-of-the-IterativeCondition-is-not-serializable"><a href="#The-implementation-of-the-IterativeCondition-is-not-serializable" class="headerlink" title="The implementation of the IterativeCondition is not serializable"></a>The implementation of the IterativeCondition is not serializable</h3><h4 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h4><p>　因为 <a href="https://yuzhouwan.com/posts/20644/">Flink</a> 和 <a href="https://yuzhouwan.com/posts/4735/">Spark</a> 一样，无法在集群范围内，共享一个全局变量（即便是 Spark 的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#broadcast-variables">Accumulators</a> 也只能做到全局的累加器），所以对于中间结果，一般地需要用类似 <a href="https://yuzhouwan.com/posts/2129/">Redis</a> / Memcached / MongoDB（三者的比对，详见我的另一篇<a href="https://yuzhouwan.com/posts/2129/#技术内幕">博文</a>）的第三方存储来保存中间结果</p>
+<p>　然而，JedisCluster 却无法做到序列化，因此报错 not serializable</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.apache.flink.api.common.InvalidProgramException: The implementation of the IterativeCondition is not serializable. The object probably contains or references non serializable fields.</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为，无法序列化 JedisCluster，所以不能作为 IterativeCondition 的变量保存下来</span></span><br><span class="line"><span class="comment">// 但是，又不可能在每次 event 处理的时候，都重新构建 Redis Cluster 的连接池</span></span><br><span class="line"><span class="comment">// 所以，考虑就算无法通过序列化分发到各个 task 中，但是也要做到每个 task 中，只初始化一次</span></span><br><span class="line"><span class="comment">// 因此，我们用 `Object redis` 作为一个变量，但是并不做任何赋值，作为存留第一次初始化 Reids 连接池的对象引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Object redis;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">RedisMiddleStatusStore redis;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">this</span>.redis == <span class="keyword">null</span>) {</span><br><span class="line">    redis = <span class="keyword">new</span> RedisMiddleStatusStore(DP);</span><br><span class="line">    <span class="keyword">this</span>.redis = redis;</span><br><span class="line">} <span class="keyword">else</span> redis = (RedisMiddleStatusStore) <span class="keyword">this</span>.redis;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="org-apache-flink-types-NullKeyFieldException-Unable-to-access-field-xxx-on-object-null"><a href="#org-apache-flink-types-NullKeyFieldException-Unable-to-access-field-xxx-on-object-null" class="headerlink" title="org.apache.flink.types.NullKeyFieldException: Unable to access field xxx on object null"></a>org.apache.flink.types.NullKeyFieldException: Unable to access field xxx on object null</h3><h4 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">java.lang.RuntimeException: Could not extract key from null</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.RecordWriterOutput.pushToRecordWriter(RecordWriterOutput.java:104)</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.RecordWriterOutput.collect(RecordWriterOutput.java:83)</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.RecordWriterOutput.collect(RecordWriterOutput.java:41)</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain<span class="variable">$BroadcastingOutputCollector</span>.collect(OperatorChain.java:575)</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain<span class="variable">$BroadcastingOutputCollector</span>.collect(OperatorChain.java:536)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator<span class="variable">$CountingOutput</span>.collect(AbstractStreamOperator.java:891)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator<span class="variable">$CountingOutput</span>.collect(AbstractStreamOperator.java:869)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.StreamMap.processElement(StreamMap.java:41)</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain<span class="variable">$CopyingChainingOutput</span>.pushToOperator(OperatorChain.java:528)</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain<span class="variable">$CopyingChainingOutput</span>.collect(OperatorChain.java:503)</span><br><span class="line">  at org.apache.flink.streaming.runtime.tasks.OperatorChain<span class="variable">$CopyingChainingOutput</span>.collect(OperatorChain.java:483)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator<span class="variable">$CountingOutput</span>.collect(AbstractStreamOperator.java:891)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.AbstractStreamOperator<span class="variable">$CountingOutput</span>.collect(AbstractStreamOperator.java:869)</span><br><span class="line">  at org.apache.flink.streaming.api.operators.StreamSourceContexts<span class="variable">$NonTimestampContext</span>.collect(StreamSourceContexts.java:103)</span><br><span class="line">  at org.apache.flink.streaming.connectors.kafka.internals.AbstractFetcher.emitRecord(AbstractFetcher.java:228)</span><br><span class="line">  at org.apache.flink.streaming.connectors.kafka.internals.SimpleConsumerThread.run(SimpleConsumerThread.java:385)</span><br><span class="line">Caused by: java.lang.RuntimeException: Could not extract key from null</span><br><span class="line">  at org.apache.flink.streaming.runtime.partitioner.KeyGroupStreamPartitioner.selectChannels(KeyGroupStreamPartitioner.java:61)</span><br><span class="line">  at org.apache.flink.streaming.runtime.partitioner.KeyGroupStreamPartitioner.selectChannels(KeyGroupStreamPartitioner.java:32)</span><br><span class="line">  at org.apache.flink.runtime.io.network.api.writer.RecordWriter.emit(RecordWriter.java:88)</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.StreamRecordWriter.emit(StreamRecordWriter.java:85)</span><br><span class="line">  at org.apache.flink.streaming.runtime.io.RecordWriterOutput.pushToRecordWriter(RecordWriterOutput.java:101)</span><br><span class="line">  ... 15 more</span><br><span class="line">Caused by: org.apache.flink.types.NullKeyFieldException: Unable to access field java.lang.Integer com.yuzhouwan.hbase.monitor.server.log.data.model.HBaseServerLog.flumeId on object null</span><br><span class="line">  at org.apache.flink.api.java.typeutils.runtime.PojoComparator.accessField(PojoComparator.java:181)</span><br><span class="line">  at org.apache.flink.api.java.typeutils.runtime.PojoComparator.extractKeys(PojoComparator.java:329)</span><br><span class="line">  at org.apache.flink.streaming.util.keys.KeySelectorUtil<span class="variable">$ComparableKeySelector</span>.getKey(KeySelectorUtil.java:185)</span><br><span class="line">  at org.apache.flink.streaming.util.keys.KeySelectorUtil<span class="variable">$ComparableKeySelector</span>.getKey(KeySelectorUtil.java:162)</span><br><span class="line">  at org.apache.flink.streaming.runtime.partitioner.KeyGroupStreamPartitioner.selectChannels(KeyGroupStreamPartitioner.java:59)</span><br><span class="line">  ... 19 more</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-4"><a href="#解决-4" class="headerlink" title="解决"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ci.apache.org/projects/flink/flink-docs-release-1.3/dev/stream/process_function.html">解决</a></h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用默认的 Tuple，而是自己构建 KeySelector</span></span><br><span class="line"><span class="comment">// KeyedStream&lt;HBaseServerLog, Tuple&gt; keyed = events.keyBy("flumeId");</span></span><br><span class="line">KeyedStream&lt;HBaseServerLog, Integer&gt; keyed = events.keyBy((KeySelector&lt;HBaseServerLog, Integer&gt;) log -&gt; {</span><br><span class="line">    <span class="keyword">if</span> (log == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Integer flumeId;</span><br><span class="line">    <span class="keyword">if</span> ((flumeId = log.getFlumeId()) == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> flumeId;</span><br><span class="line">  });</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Task-xxx-did-not-react-to-cancelling-signal-in-the-last-30-seconds-but-is-stuck-in-method"><a href="#Task-xxx-did-not-react-to-cancelling-signal-in-the-last-30-seconds-but-is-stuck-in-method" class="headerlink" title="Task xxx did not react to cancelling signal in the last 30 seconds, but is stuck in method"></a>Task xxx did not react to cancelling signal in the last 30 seconds, but is stuck in method</h3><h4 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">A fatal error occurred, forcing the TaskManager to shut down: Task <span class="string">'KeyedCEPPatternOperator -&gt; Flat Map -&gt; Sink: MULTI_EVENT (2/8)'</span> did not react to cancelling signal <span class="keyword">in</span> the last 30 seconds, but is stuck <span class="keyword">in</span> method:</span><br><span class="line">   java.util.regex.Pattern<span class="variable">$GroupTail</span>.match(Pattern.java:4717)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4272)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4279)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupTail</span>.match(Pattern.java:4717)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupTail</span>.match(Pattern.java:4717)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4272)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4279)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupTail</span>.match(Pattern.java:4717)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupTail</span>.match(Pattern.java:4717)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4272)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$BmpCharProperty</span>.match(Pattern.java:3798)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match0(Pattern.java:4272)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Curly</span>.match(Pattern.java:4234)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$GroupHead</span>.match(Pattern.java:4658)</span><br><span class="line">  java.util.regex.Pattern<span class="variable">$Start</span>.match(Pattern.java:3461)</span><br><span class="line">  java.util.regex.Matcher.search(Matcher.java:1248)</span><br><span class="line">  java.util.regex.Matcher.find(Matcher.java:637)</span><br><span class="line">  com.yuzhouwan.hbase.monitor.server.log.analyse.condition.IterativeConditionMultiWithDP.matchAndStore(IterativeConditionMultiWithDP.java:95)</span><br><span class="line">  com.yuzhouwan.hbase.monitor.server.log.analyse.condition.IterativeConditionMultiWithDP.filter(IterativeConditionMultiWithDP.java:79)</span><br><span class="line">  org.apache.flink.cep.nfa.NFA.checkFilterCondition(NFA.java:633)</span><br><span class="line">  org.apache.flink.cep.nfa.NFA.createDecisionGraph(NFA.java:610)</span><br><span class="line">  org.apache.flink.cep.nfa.NFA.computeNextStates(NFA.java:421)</span><br><span class="line">  org.apache.flink.cep.nfa.NFA.process(NFA.java:241)</span><br><span class="line">  org.apache.flink.cep.operator.KeyedCEPPatternOperator.processEvent(KeyedCEPPatternOperator.java:56)</span><br><span class="line">  org.apache.flink.cep.operator.AbstractKeyedCEPPatternOperator.processElement(AbstractKeyedCEPPatternOperator.java:170)</span><br><span class="line">  org.apache.flink.streaming.runtime.io.StreamInputProcessor.processInput(StreamInputProcessor.java:206)</span><br><span class="line">  org.apache.flink.streaming.runtime.tasks.OneInputStreamTask.run(OneInputStreamTask.java:69)</span><br><span class="line">  org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:263)</span><br><span class="line">  org.apache.flink.runtime.taskmanager.Task.run(Task.java:702)</span><br><span class="line">  java.lang.Thread.run(Thread.java:745)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="解决-5"><a href="#解决-5" class="headerlink" title="解决"></a>解决</h4><p>　分析日志，得知 Task 被阻塞在某一个方法里面了<br>　因为程序已经运行了一周，一直未出现这种情况，所以考虑到可能是某一条异常数据导致的<br>　因此，增加数据清理逻辑，避免过长的字符串；另外，根据当前的场景，使用 <code>Matcher.matches()</code> 替换了 <code>Matcher.find()</code> 方法，使得正则匹配的性能提高了无数倍（我们的场景下，压测结论是 5000 倍的性能提升）</p>
+<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><h5 id="Matcher-常用的三种查找方法"><a href="#Matcher-常用的三种查找方法" class="headerlink" title="Matcher 常用的三种查找方法"></a>Matcher 常用的三种查找方法</h5><ul>
+<li><p><code>Matcher.matches()</code></p>
+<p>对整个字符串进行匹配，只有整个字符串都匹配成功了，才返回 <code>true</code></p>
+</li>
+<li><p><code>Matcher.lookingAt()</code></p>
+<p>从字符串的起始部分进行匹配，只有字符串的前缀满足模式，才返回 <code>true</code></p>
+</li>
+<li><p><code>Matcher.find()</code></p>
+<p>对局部字符串进行匹配，匹配到的字符串可以在任何位置（因此，性能会有下降很多，除非特定场景，否则尽量避免使用）</p>
+</li>
+</ul>
+<h2 id="社区跟进"><a href="#社区跟进" class="headerlink" title="社区跟进"></a>社区跟进</h2><h3 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/flink/pulls?utf8=%E2%9C%93&amp;q=is%3Apr%20author%3Aasdf2014%20">Pull Request</a></h3><h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://issues.apache.org/jira/browse/FLINK-6868?jql=project%20%3D%20FLINK%20AND%20reporter%20in%20(%22benedict%20jin%22)">Issues</a></h3><p>　详见：《<a href="https://yuzhouwan.com/posts/19631/">如何成为 Apache 的 PMC</a>》</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://flink.apache.org/downloads.html#all-releases">Apache Flink Documentation</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ci.apache.org/projects/flink/flink-docs-release-1.3/dev/libs/cep.html">FlinkCEP - Complex event processing for Flink</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ci.apache.org/projects/flink/flink-docs-release-1.3/dev/connectors/kafka.html">Apache Kafka Connector</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ci.apache.org/projects/flink/flink-docs-release-1.3/dev/connectors/elasticsearch.html">Elasticsearch Connector</a></li>
+</ul>
+<h3 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://enjoyment.cool/archives/Flink/">Apache Flink 说道系列</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/18651/" rel="bookmark">Scala 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/27328/" rel="bookmark">如何运用 JVM 知识提高编程水平</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/22654/" rel="bookmark">搜索引擎 ElasticSearch</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/190413/" rel="bookmark">那些绕不过去的 Java 知识点</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/31915/" rel="bookmark">ZooKeeper 原理与优化</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/20644/" title="Apache Flink">https://yuzhouwan.com/posts/20644/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/Apache-Cassandra/" rel="tag"># Apache Cassandra</a>
+              <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
+              <a href="/tags/Apache-Flink/" rel="tag"># Apache Flink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/45888/" rel="prev" title="Apache HBase 全攻略">
+      <i class="fa fa-chevron-left"></i> Apache HBase 全攻略
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2129/" rel="next" title="Redis 实战">
+      Redis 实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Flink%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是 Flink？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink-%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">Flink 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E5%B8%83%E5%B1%80"><span class="nav-number">2.1.</span> <span class="nav-text">核心组件布局</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="nav-number">3.</span> <span class="nav-text">环境部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">基础环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux"><span class="nav-number">3.1.1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E6%88%B7"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-number">3.1.2.</span> <span class="nav-text">依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDK"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">JDK</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Cluster"><span class="nav-number">3.2.</span> <span class="nav-text">Local Cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4"><span class="nav-number">3.3.</span> <span class="nav-text">分布式集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%88%86%E5%8F%91"><span class="nav-number">3.3.1.</span> <span class="nav-text">节点分发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">免密登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9B%86%E7%BE%A4"><span class="nav-number">3.3.3.</span> <span class="nav-text">配置集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%9B%86%E7%BE%A4"><span class="nav-number">3.3.4.</span> <span class="nav-text">启动集群</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8"><span class="nav-number">3.4.</span> <span class="nav-text">发布应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Local"><span class="nav-number">3.4.1.</span> <span class="nav-text">Local</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Remote"><span class="nav-number">3.4.2.</span> <span class="nav-text">Remote</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cluster"><span class="nav-number">3.4.3.</span> <span class="nav-text">Cluster</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7"><span class="nav-number">4.</span> <span class="nav-text">实战技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flink-CEP"><span class="nav-number">4.1.</span> <span class="nav-text">Flink-CEP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">4.1.1.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81%EF%BC%88Event-stream%EF%BC%89"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">事件流（Event stream）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%AE%9A%E4%B9%89%EF%BC%88Pattern-definition%EF%BC%89"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">模式定义（Pattern definition）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.1.2.1.</span> <span class="nav-text">单独模式</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E6%A3%80%E6%B5%8B%EF%BC%88Pattern-detection%EF%BC%89"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">模式检测（Pattern detection）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%91%8A%E8%AD%A6%E7%94%9F%E6%88%90%EF%BC%88Alert-generation%EF%BC%89"><span class="nav-number">4.1.1.4.</span> <span class="nav-text">告警生成（Alert generation）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">5.</span> <span class="nav-text">性能调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#G1GC"><span class="nav-number">5.1.</span> <span class="nav-text">G1GC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">踩过的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ElasticSearch-Connector"><span class="nav-number">6.1.</span> <span class="nav-text">ElasticSearch Connector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Failed-to-collect-dependencies-at-org-apache-flink-flink-connector-elasticsearch5-2-11-jar-1-3-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">Failed to collect dependencies at org.apache.flink:flink-connector-elasticsearch5_2.11:jar:1.3.1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Either-%E6%97%A0%E6%B3%95%E8%A2%AB%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">6.2.</span> <span class="nav-text">Either 无法被序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">6.2.1.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">报错</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">6.2.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cannot-retrieve-Left-value-on-a-Right"><span class="nav-number">6.3.</span> <span class="nav-text">Cannot retrieve Left value on a Right</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">6.3.1.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F-1"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%A5%E9%94%99-1"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">报错</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-1"><span class="nav-number">6.3.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ElasticsearchSinkFunction-is-not-serializable"><span class="nav-number">6.4.</span> <span class="nav-text">ElasticsearchSinkFunction is not serializable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-2"><span class="nav-number">6.4.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-2"><span class="nav-number">6.4.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-implementation-of-the-IterativeCondition-is-not-serializable"><span class="nav-number">6.5.</span> <span class="nav-text">The implementation of the IterativeCondition is not serializable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-3"><span class="nav-number">6.5.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-3"><span class="nav-number">6.5.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#org-apache-flink-types-NullKeyFieldException-Unable-to-access-field-xxx-on-object-null"><span class="nav-number">6.6.</span> <span class="nav-text">org.apache.flink.types.NullKeyFieldException: Unable to access field xxx on object null</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-4"><span class="nav-number">6.6.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-4"><span class="nav-number">6.6.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-xxx-did-not-react-to-cancelling-signal-in-the-last-30-seconds-but-is-stuck-in-method"><span class="nav-number">6.7.</span> <span class="nav-text">Task xxx did not react to cancelling signal in the last 30 seconds, but is stuck in method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-5"><span class="nav-number">6.7.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3-5"><span class="nav-number">6.7.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">6.7.3.</span> <span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Matcher-%E5%B8%B8%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9F%A5%E6%89%BE%E6%96%B9%E6%B3%95"><span class="nav-number">6.7.3.1.</span> <span class="nav-text">Matcher 常用的三种查找方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA%E8%B7%9F%E8%BF%9B"><span class="nav-number">7.</span> <span class="nav-text">社区跟进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pull-Request"><span class="nav-number">7.1.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Issues"><span class="nav-number">7.2.</span> <span class="nav-text">Issues</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Doc"><span class="nav-number">8.1.</span> <span class="nav-text">Doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog"><span class="nav-number">8.2.</span> <span class="nav-text">Blog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">9.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/20644/";
+    this.page.identifier = "posts/20644/";
+    this.page.title = "Apache Flink";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '6f4a7004488556c6b87696c023800640',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

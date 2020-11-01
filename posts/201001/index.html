@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Serverless 是什么？ Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serverless 详解">
+<meta property="og:url" content="https://yuzhouwan.com/posts/201001/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="Serverless 是什么？ Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/serverless/serverless_cost.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/serverless/serverless_star_history.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2020-10-01T10:52:02.000Z">
+<meta property="article:modified_time" content="2020-10-29T13:48:33.137Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Apache OpenWhisk">
+<meta property="article:tag" content="Serverless">
+<meta property="article:tag" content="FaaS">
+<meta property="article:tag" content="IDC">
+<meta property="article:tag" content="IaaS">
+<meta property="article:tag" content="PaaS">
+<meta property="article:tag" content="SaaS">
+<meta property="article:tag" content="BaaS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/serverless/serverless_cost.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/201001/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Serverless 详解 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Serverless 详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-01 18:52:02" itemprop="dateCreated datePublished" datetime="2020-10-01T18:52:02+08:00">2020-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:48:33" itemprop="dateModified" datetime="2020-10-29T21:48:33+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Serverless/" itemprop="url" rel="index"><span itemprop="name">Serverless</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Serverless-是什么？"><a href="#Serverless-是什么？" class="headerlink" title="Serverless 是什么？"></a>Serverless 是什么？</h2><blockquote>
+<p>Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on the actual amount of resources consumed by an application, rather than on pre-purchased units of capacity. It can be a form of utility computing. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Serverless_computing">wikipedia.org</a></p>
+<p>Serverless architectures are application designs that incorporate third-party “Backend as a Service” (BaaS) services, and/or that include custom code run in managed, ephemeral containers on a “Functions as a Service” (FaaS) platform. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://martinfowler.com/articles/serverless.html">《Serverless Architectures》</a></p>
+<p>无服务器架构是基于互联网的系统，其中应用开发不使用常规的服务进程。相反，它们仅依赖于第三方服务（例如 AWS Lambda 服务），客户端逻辑和服务托管远程过程调用的组合。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://aws.amazon.com/cn/blogs/china/iaas-faas-serverless/">亚马逊 AWS 官方博客</a></p>
+<p>Serverless（无服务器架构）是指服务端逻辑由开发者实现，运行在无状态的计算容器中，由事件触发，完全被第三方管理，其业务层面的状态则存储在数据库或其他介质中。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bookstack.cn/read/serverless-handbook/concepts-what-is-serverless.md">《无服务架构实践手册》</a></p>
+<p>If your PaaS can efficiently start instances in 20ms that run for half a second, then call it serverless.  — Adrian Cockroft</p>
+</blockquote>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><h4 id="低成本"><a href="#低成本" class="headerlink" title="低成本"></a>低成本</h4><h5 id="运维成本"><a href="#运维成本" class="headerlink" title="运维成本"></a>运维成本</h5><p>　服务器、中间件、数据库等均托管于 BaaS/FaaS 平台，用户无需再参与基础设施及软件的维护，省去了集群的运维成本</p>
+<h5 id="开发成本"><a href="#开发成本" class="headerlink" title="开发成本"></a>开发成本</h5><p>　对比 IaaS 或者 PaaS 平台的服务器或者操作系统，Serverless 的架构中，用户操作的是服务化的组件，比如存储服务、授权服务等，可以缩短开发周期，节约时间成本</p>
+<h4 id="按需计费"><a href="#按需计费" class="headerlink" title="按需计费"></a>按需计费</h4><p>　Serverless/FaaS 区别于 IaaS/PaaS 预先分配计算资源的计费方式，其计费方式通常是按请求次数及运行时间。如此一来，不仅可以最大程度地利用资源，还能实现真正的按需计费，以降低用户的使用成本</p>
+<p><img data-src="/picture/serverless/serverless_cost.png" alt="Serverless cost"></p>
+<center>（使用 <a href="https://www.apple.com/cn/ipad/" target="_blank" rel="external nofollow noopener noreferrer">iPad</a>™ 手绘而成）</center>
+
+<h4 id="高扩展"><a href="#高扩展" class="headerlink" title="高扩展"></a>高扩展</h4><p>　自动进行横向扩展（毫秒级部署，秒级生命周期）</p>
+<h4 id="高资源利用率"><a href="#高资源利用率" class="headerlink" title="高资源利用率"></a>高资源利用率</h4><p>　提供细粒度的计算能力，最大限度满足实时需求，使得资源利用率大幅度提升</p>
+<h4 id="NoOps"><a href="#NoOps" class="headerlink" title="NoOps"></a>NoOps</h4><p>　运维的发展经历了，人肉运维、自动化运维、DevOps、AiOps 等。而 Serverless 模式下，用户只需要关心业务编码，真正实现了零运维成本</p>
+<div class="note info">从更广泛的意义上来讲，Ops 除了指服务器维护，还会包括部署、网络、安全、监控、故障恢复和水平扩展等</div>
+
+<a id="more"></a>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><h4 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h4><p>　对于有状态的服务，使用 Serverless 可能会导致灵活性降低。而在借助第三方存储媒介的时候，因为无法使用连接池，也使得创建与释放连接的成本加重</p>
+<div class="note info">第三方存储媒介包括数据库、分布式缓存和云盘等</div>
+
+<h4 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h4><p>　Serverless 应用程序是无状态、分布式、低耦合的，导致很难实现低延迟</p>
+<h4 id="资源争用"><a href="#资源争用" class="headerlink" title="资源争用"></a>资源争用</h4><p>　多租户模式下，资源隔离控制不当的话，会导致资源争用，使得某一个任务影响到其他任务的运行</p>
+<h4 id="没有统一的规范"><a href="#没有统一的规范" class="headerlink" title="没有统一的规范"></a>没有统一的规范</h4><p>　业内没有形成统一的接口和规范，导致很难跨平台地使用不同云服务厂商的 Serverless 产品</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>价格敏感场景（针对测试阶段 Demo 级别的实例输出）</li>
+<li>流式事件处理（视频流、图片流等）</li>
+<li>事件驱动架构</li>
+<li>响应式架构</li>
+<li>IoT 物联网</li>
+<li>资源利用率低的业务（大部分时间空闲，只在固定时间触发计算）</li>
+<li>流量突发场景（难以预估流量高峰的峰值或时间点）</li>
+<li>混合云场景</li>
+<li>Edge Computing 边缘计算（将应用部署至 CDN 节点，通过 CDN 触发 Lambda，在网络边缘节点直接完成计算，以提高响应速度）</li>
+</ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="Serverless-发展路线图"><a href="#Serverless-发展路线图" class="headerlink" title="Serverless 发展路线图"></a>Serverless 发展路线图</h3><pre class="mermaid">gantt
+
+dateFormat YYYY-MM-DD
+title Serverless 发展路线图
+
+section 概念提出
+《Why The Future Of Software And Apps Is Serverless?》 : done , 首次提出 Serverless 概念 , 2012-10-15 , 2014-11-13
+
+section 产品落地
+AWS Lambda 发布 : done , 从概念落地为产品 , 2014-11-13 , 2015-07-09
+
+section 完全构建
+AWS API Gateway 发布 : done , AWS Lambda 和 AWS API Gateway 的结合，使得完全构建 Serverless 成为可能 , 2015-07-09 , 2015-10-13
+
+section 成功案例
+PlayOnSports 生产级 Serverless 应用 : done , 第一例商业案例大获成功 , 2015-10-13 , 2016-05-25
+
+section 积极布道
+举办第一届 Serverless Conf : done , 第一届 Serverless Conf 在纽约成功举办 , 2016-05-25 , 2017-01-01
+
+section 厂商跟风
+众多厂商争相入市 : done, IaaS 和 PaaS 厂商跟风，包括 Google Cloud Functions、Azure Funcions、IBM OpenWhis、阿里云函数计算等 , 2017-01-01 , 2018-01-01
+
+section 蓬勃发展
+Serverless 借势迅速发展 : active , 去中心化、轻量虚拟化、细粒度计算等技术蓬勃发展 , 2018-01-01 , 2021-01-01</pre>
+
+
+
+<h3 id="云计算发展路线图"><a href="#云计算发展路线图" class="headerlink" title="云计算发展路线图"></a>云计算发展路线图</h3><pre class="mermaid">graph TD
+start[Start] --&gt; IDC(物理机房)
+IDC --&gt; IaaS(基础设施即服务)
+IaaS --&gt; PaaS(平台即服务)
+PaaS --&gt; SaaS(软件即服务)
+SaaS --&gt; Serverless(Serverless)
+Serverless --&gt; BaaS(后端即服务)
+Serverless --&gt; FaaS(函数即服务)
+BaaS --&gt; e[End?]
+FaaS --&gt; e[End?]</pre>
+
+
+
+<h4 id="IDC"><a href="#IDC" class="headerlink" title="IDC"></a>IDC</h4><p>　物理机房</p>
+<h4 id="IaaS"><a href="#IaaS" class="headerlink" title="IaaS"></a>IaaS</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>　<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Infrastructure_as_a_service">IaaS</a></strong>，全称 <strong>I</strong>nfrastructure <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice，表示<strong>基础设施即服务</strong>，也有称作 <strong>H</strong>ardware <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice</p>
+<h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><ul>
+<li><p>公有云</p>
+<p>公有云是放在公共的互联网上的，只要是平台上的用户都可以使用</p>
+</li>
+<li><p>私有云</p>
+<p>私有云是为某一个客户单独构建，可以最大程度地保证数据安全和服务质量</p>
+</li>
+<li><p>混合云</p>
+<p>混合云融合了公有云和私有云，将重要数据保存在本地私有云环境，同时将非核心数据上传公有云处理</p>
+</li>
+</ul>
+<h5 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h5><ul>
+<li><p>国内</p>
+<p>阿里云™、知名 IaaS 平台™、青云™、盛大云™、华为云™、太平洋电信™、51IDC™、UCloud™</p>
+</li>
+<li><p>国外</p>
+<p>Amazon AWS（Elastic Compute Cloud）™、Google Compute Engine™、EMC™、IBM™</p>
+</li>
+</ul>
+<h4 id="PaaS"><a href="#PaaS" class="headerlink" title="PaaS"></a>PaaS</h4><h5 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h5><p>　<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a></strong>，全称 <strong>P</strong>latform <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice，表示<strong>平台即服务</strong>。用户可以自己部署操作系统和软件</p>
+<h5 id="平台-1"><a href="#平台-1" class="headerlink" title="平台"></a>平台</h5><ul>
+<li><p>国内</p>
+<p>AppCan™、APICloud™、Testin™、Coding™、八百客™、云之讯™、追信魔盒™、机智云™</p>
+</li>
+<li><p>国外</p>
+<p>Google App Engine™、Amazon Elastic Beanstalk™、Microsoft Azure™、VMware Cloud Foundry™</p>
+</li>
+</ul>
+<h4 id="SaaS"><a href="#SaaS" class="headerlink" title="SaaS"></a>SaaS</h4><h5 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h5><p>　<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Software_as_a_service">SaaS</a></strong>，全称 <strong>S</strong>oftware <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice，表示<strong>软件即服务</strong>。软件的开发、管理、部署都交给第三方，不需要担心任何技术问题，可以拿来即用。省去技术团队，直接应用云端系统进行运营和使用即可</p>
+<h5 id="平台-2"><a href="#平台-2" class="headerlink" title="平台"></a>平台</h5><ul>
+<li><p>国内</p>
+<p>阿里钉钉™、用友超客™、明道™、今目标™、Tower™、纷享销客™、红圈营销™、小满科技™、腾腾科技™、麦客™、美洽™、销售易™、快消总管™、EC 营客通™、店小三™、逸创云客服™</p>
+</li>
+<li><p>国外</p>
+<p>Salesforce™、Sales cloud™、Zendesk™、Zoho™、IBM Lotus Live™</p>
+</li>
+</ul>
+<h4 id="BaaS"><a href="#BaaS" class="headerlink" title="BaaS"></a>BaaS</h4><h5 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h5><p>　<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Mobile_backend_as_a_service">BaaS</a></strong>，全称 <strong>B</strong>ackend <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice，表示<strong>后端即服务</strong>。为客户（开发者）提供整合云后端的服务，例如提供文件存储、数据存储、推送服务、身份验证服务等功能，以帮助开发者快速开发应用</p>
+<h4 id="FaaS"><a href="#FaaS" class="headerlink" title="FaaS"></a>FaaS</h4><h5 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h5><p>　<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Function_as_a_service">FaaS</a></strong>，全称 <strong>F</strong>unction <strong>a</strong>s <strong>a</strong> <strong>S</strong>ervice，表示<strong>函数即服务</strong>。服务商提供一个平台，允许客户开发、运行和管理应用程序功能，而无需构建和维护基础架构。按照此模型构建应用程序是实现“无服务器”体系结构的一种方式，通常在构建微服务应用程序时使用</p>
+<h2 id="社区发展"><a href="#社区发展" class="headerlink" title="社区发展"></a>社区发展</h2><h3 id="Star-趋势"><a href="#Star-趋势" class="headerlink" title="Star 趋势"></a>Star 趋势</h3><p><img data-src="/picture/serverless/serverless_star_history.png" alt="Serverless Star History"></p>
+<center>（图片来源：<a href="https://star-history.t9t.io/#openfaas/faas&amp;apache/openwhisk&amp;knative/serving" target="_blank" rel="external nofollow noopener noreferrer">star-history.t9t.io</a>™ 官网）</center>
+
+
+
+
+
+
+
+
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Wikipedia"><a href="#Wikipedia" class="headerlink" title="Wikipedia"></a>Wikipedia</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/AWS_Lambda">AWS Lambda</a></li>
+</ul>
+<h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-releases.html">AWS Lambda releases</a></li>
+</ul>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-3.pdf">A Berkeley View on Serverless Computing</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1812.03651.pdf">Serverless Computing: One Step Forward, Two Steps Back</a></li>
+</ul>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/openwhisk">Apache OpenWhisk is an open source serverless cloud platform</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/openfaas/faas">OpenFaaS - Serverless Functions Made Simple</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/kubeless/kubeless">Kubeless is a Kubernetes-native serverless framework</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/fission/fission">Fission is a fast serverless framework for Kubernetes</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/Miserlou/Zappa">Zappa makes it super easy to build and deploy server-less, event-driven Python applications on AWS Lambda + API Gateway</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/serverless/serverless">Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions &amp; more!</a></li>
+</ul>
+<h3 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://readwrite.com/2012/10/15/why-the-future-of-software-and-apps-is-serverless/">Why The Future Of Software And Apps Is Serverless</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.linkedin.com/pulse/serverless-architecture-its-challenges-veselin-pizurica/">Serverless architecture and its challenges</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://yq.aliyun.com/roundtable/66569">除了最新的区块链，AI，你知道 Serverless 吗？</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.hyprcubd.com/top-7-predictions-for-serverless-databases/">Top 7 Predictions for Serverless Databases</a></li>
+</ul>
+<h3 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.youtube.com/watch?v=U8ODkSCJpJU">AWS re:Invent 2015 | (ARC308) The Serverless Company Using AWS Lambda</a></li>
+</ul>
+<h3 id="Conf"><a href="#Conf" class="headerlink" title="Conf"></a>Conf</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://serverlessconf.io/">ServerlessConf</a></li>
+</ul>
+<h3 id="DataBase"><a href="#DataBase" class="headerlink" title="DataBase"></a>DataBase</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://aws.amazon.com/timestream/">Amazon Timestream: Fast, scalable, serverless time series database</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.hyprcubd.com/">Hyprcubd: The first serverless time series database designed to dramatically increase your productivity</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://serverless.kx.com/">Serverless kdb+</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.influxdata.com/blog/extending-influxdb-with-serverless-functions/">Extending InfluxDB with Serverless Functions</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://kubeless.io/">Prometheus monitoring of functions calls and function latency by default</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/201008/" rel="bookmark">Apache OpenWhisk：一款高性能的开源 Serverless 云平台</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/201001/" title="Serverless 详解">https://yuzhouwan.com/posts/201001/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Apache-OpenWhisk/" rel="tag"># Apache OpenWhisk</a>
+              <a href="/tags/Serverless/" rel="tag"># Serverless</a>
+              <a href="/tags/FaaS/" rel="tag"># FaaS</a>
+              <a href="/tags/IDC/" rel="tag"># IDC</a>
+              <a href="/tags/IaaS/" rel="tag"># IaaS</a>
+              <a href="/tags/PaaS/" rel="tag"># PaaS</a>
+              <a href="/tags/SaaS/" rel="tag"># SaaS</a>
+              <a href="/tags/BaaS/" rel="tag"># BaaS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/200926/" rel="prev" title="Helm 实战">
+      <i class="fa fa-chevron-left"></i> Helm 实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/201008/" rel="next" title="Apache OpenWhisk：一款高性能的开源 Serverless 云平台">
+      Apache OpenWhisk：一款高性能的开源 Serverless 云平台 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Serverless-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Serverless 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">2.1.</span> <span class="nav-text">优势</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E6%88%90%E6%9C%AC"><span class="nav-number">2.1.1.</span> <span class="nav-text">低成本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E7%BB%B4%E6%88%90%E6%9C%AC"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">运维成本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%88%90%E6%9C%AC"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">开发成本</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%9C%80%E8%AE%A1%E8%B4%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">按需计费</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E6%89%A9%E5%B1%95"><span class="nav-number">2.1.3.</span> <span class="nav-text">高扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E8%B5%84%E6%BA%90%E5%88%A9%E7%94%A8%E7%8E%87"><span class="nav-number">2.1.4.</span> <span class="nav-text">高资源利用率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NoOps"><span class="nav-number">2.1.5.</span> <span class="nav-text">NoOps</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A3%E5%8A%BF"><span class="nav-number">2.2.</span> <span class="nav-text">劣势</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">状态管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F"><span class="nav-number">2.2.2.</span> <span class="nav-text">延迟</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E4%BA%89%E7%94%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">资源争用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E7%BB%9F%E4%B8%80%E7%9A%84%E8%A7%84%E8%8C%83"><span class="nav-number">2.2.4.</span> <span class="nav-text">没有统一的规范</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serverless-%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF%E5%9B%BE"><span class="nav-number">4.1.</span> <span class="nav-text">Serverless 发展路线图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF%E5%9B%BE"><span class="nav-number">4.2.</span> <span class="nav-text">云计算发展路线图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDC"><span class="nav-number">4.2.1.</span> <span class="nav-text">IDC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IaaS"><span class="nav-number">4.2.2.</span> <span class="nav-text">IaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PaaS"><span class="nav-number">4.2.3.</span> <span class="nav-text">PaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0-1"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SaaS"><span class="nav-number">4.2.4.</span> <span class="nav-text">SaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0-2"><span class="nav-number">4.2.4.2.</span> <span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BaaS"><span class="nav-number">4.2.5.</span> <span class="nav-text">BaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="nav-number">4.2.5.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FaaS"><span class="nav-number">4.2.6.</span> <span class="nav-text">FaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-4"><span class="nav-number">4.2.6.1.</span> <span class="nav-text">定义</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA%E5%8F%91%E5%B1%95"><span class="nav-number">5.</span> <span class="nav-text">社区发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Star-%E8%B6%8B%E5%8A%BF"><span class="nav-number">5.1.</span> <span class="nav-text">Star 趋势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">资料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wikipedia"><span class="nav-number">6.1.</span> <span class="nav-text">Wikipedia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Doc"><span class="nav-number">6.2.</span> <span class="nav-text">Doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-number">6.3.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github"><span class="nav-number">6.4.</span> <span class="nav-text">Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blog"><span class="nav-number">6.5.</span> <span class="nav-text">Blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video"><span class="nav-number">6.6.</span> <span class="nav-text">Video</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conf"><span class="nav-number">6.7.</span> <span class="nav-text">Conf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataBase"><span class="nav-number">6.8.</span> <span class="nav-text">DataBase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/201001/";
+    this.page.identifier = "posts/201001/";
+    this.page.title = "Serverless 详解";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '4a3f7c74a1e1d4fd965f731f869049ef',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

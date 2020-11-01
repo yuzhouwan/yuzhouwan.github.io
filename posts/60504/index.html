@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
+  <link rel="mask-icon" href="/yuzhouwan_logo_with_copyright.jpg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="主要利用一次从 HDFS 下载文件的任务，走读了一遍 Hadoop 内关于 RPC 的源码。文章最后一章提供了一个自己实现的 RPC 框架的代码，有兴趣的读者可以看看。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop RPC 源码领略">
+<meta property="og:url" content="https://yuzhouwan.com/posts/60504/">
+<meta property="og:site_name" content="宇宙湾">
+<meta property="og:description" content="主要利用一次从 HDFS 下载文件的任务，走读了一遍 Hadoop 内关于 RPC 的源码。文章最后一章提供了一个自己实现的 RPC 框架的代码，有兴趣的读者可以看看。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_hdfs.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_host_yuzhouwan.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_file_system.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_file_systems.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_file_system_get_uri_conf_user.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_initialize.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_client.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_proxy.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_client_.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_uri_create.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_get_home_directory.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_is_ok.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_distributed_file_system.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_path.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_fs_data_input_stream.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_dfs_open.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_hdfs_data_input_stream.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_file_output_stream.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_buff_size.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_ioutils.png">
+<meta property="og:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_rpc_success.png">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
+<meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
+<meta property="article:published_time" content="2014-11-16T10:03:04.000Z">
+<meta property="article:modified_time" content="2020-04-02T14:14:56.866Z">
+<meta property="article:author" content="Benedict Jin">
+<meta property="article:tag" content="Apache Hadoop">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="RPC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_hdfs.png">
+
+<link rel="canonical" href="https://yuzhouwan.com/posts/60504/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hadoop RPC 源码领略 | 宇宙湾</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97020848-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-97020848-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">宇宙湾</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">厚积薄发</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">144</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a>
+
+  </li>
+        <li class="menu-item menu-item-书单">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-影视">
+
+    <a href="/movies/" rel="section"><i class="fa fa-film fa-fw"></i>影视</a>
+
+  </li>
+        <li class="menu-item menu-item-友链">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/60504/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hadoop RPC 源码领略
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-11-16 18:03:04" itemprop="dateCreated datePublished" datetime="2014-11-16T18:03:04+08:00">2014-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-02 22:14:56" itemprop="dateModified" datetime="2020-04-02T22:14:56+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">主要利用一次从 HDFS 下载文件的任务，走读了一遍 Hadoop 内关于 RPC 的源码。文章最后一章提供了一个自己实现的 RPC 框架的代码，有兴趣的读者可以看看。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是-RPC？"><a href="#什么是-RPC？" class="headerlink" title="什么是 RPC？"></a>什么是 RPC？</h2><p>　In distributed computing, a <strong>remote procedure call</strong> (<strong>RPC</strong>) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. That is, the programmer writes essentially the same code whether the subroutine is local to the executing program, or remote. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.</p>
+<h2 id="为什么要有-RPC？"><a href="#为什么要有-RPC？" class="headerlink" title="为什么要有 RPC？"></a>为什么要有 RPC？</h2><h3 id="地域性"><a href="#地域性" class="headerlink" title="地域性"></a>地域性</h3><p>　当主机不可达时，通过远程调用可以使得终端操作目标机器成为可能</p>
+<h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
+<h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
+<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <a id="more"></a></p>
+<h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
+<h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
+<h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>
+<h3 id="加载配置文件，并给相应属性赋值"><a href="#加载配置文件，并给相应属性赋值" class="headerlink" title="加载配置文件，并给相应属性赋值"></a>加载配置文件，并给相应属性赋值</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system_get_uri_conf_user.png" alt="FileSystem.get(uri,conf,user)"></p>
+<h3 id="反射-org-apache-hadoop-hdfs-DistributedFileSystem"><a href="#反射-org-apache-hadoop-hdfs-DistributedFileSystem" class="headerlink" title="反射 org.apache.hadoop.hdfs.DistributedFileSystem"></a>反射 org.apache.hadoop.hdfs.DistributedFileSystem</h3><p>   <img data-src="/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png" alt="ReflectionUtils.newInstance--DFS"></p>
+<h3 id="调用-initialize-uri-conf-初始化-DFS"><a href="#调用-initialize-uri-conf-初始化-DFS" class="headerlink" title="调用 initialize(uri, conf) 初始化 DFS"></a>调用 initialize(uri, conf) 初始化 DFS</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_initialize.png" alt="DFS.initialize"></p>
+<h3 id="获得-DFSClient-代理"><a href="#获得-DFSClient-代理" class="headerlink" title="获得 DFSClient 代理"></a>获得 DFSClient 代理</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_client.png" alt="DFSClient(nameNodeUri,rpcNamenode,conf,stats)"></p>
+<h3 id="创建代理"><a href="#创建代理" class="headerlink" title="创建代理"></a>创建代理</h3><p>   <img data-src="/picture/hadoop/hadoop_proxy.png" alt="Proxy"></p>
+<h3 id="让-DFSClient-持有-uri、conf、statistics"><a href="#让-DFSClient-持有-uri、conf、statistics" class="headerlink" title="让 DFSClient 持有 uri、conf、statistics"></a>让 DFSClient 持有 uri、conf、statistics</h3><p>  <img data-src="/picture/hadoop/hadoop_dfs_client_.png" alt="DFSClient"></p>
+<h3 id="解析-uri"><a href="#解析-uri" class="headerlink" title="解析 uri"></a>解析 uri</h3><p>   <img data-src="/picture/hadoop/hadoop_uri_create.png" alt="URI.create"></p>
+<h3 id="根据用户组信息中的简单用户名，获取工作路径"><a href="#根据用户组信息中的简单用户名，获取工作路径" class="headerlink" title="根据用户组信息中的简单用户名，获取工作路径"></a>根据用户组信息中的简单用户名，获取工作路径</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_get_home_directory.png" alt="DFS.getHomeDirectory"></p>
+<h3 id="FileSystem-完成初始化"><a href="#FileSystem-完成初始化" class="headerlink" title="FileSystem 完成初始化"></a>FileSystem 完成初始化</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_is_ok.png" alt="DFS-is-ok!!!"></p>
+<h3 id="利用-FS-open-path-打开读取流"><a href="#利用-FS-open-path-打开读取流" class="headerlink" title="利用 FS.open(path) 打开读取流"></a>利用 FS.open(path) 打开读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_distributed_file_system.png" alt="DistributedFileSystem"></p>
+<h3 id="解析-path"><a href="#解析-path" class="headerlink" title="解析 path"></a>解析 path</h3><p>   <img data-src="/picture/hadoop/hadoop_path.png" alt="Path"></p>
+<h3 id="装饰-open-方法"><a href="#装饰-open-方法" class="headerlink" title="装饰 open() 方法"></a>装饰 open() 方法</h3><p>   <img data-src="/picture/hadoop/hadoop_fs_data_input_stream.png" alt="FSDataInputStream--open(path)"></p>
+<h3 id="FileSystemLinkResolver-回调函数"><a href="#FileSystemLinkResolver-回调函数" class="headerlink" title="FileSystemLinkResolver 回调函数"></a>FileSystemLinkResolver 回调函数</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_open.png" alt="DFS.open(f,bufferSize)"></p>
+<h3 id="HdfsDataInputStream-读取流"><a href="#HdfsDataInputStream-读取流" class="headerlink" title="HdfsDataInputStream 读取流"></a>HdfsDataInputStream 读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs_data_input_stream.png" alt="HdfsDataInputStream"></p>
+<h3 id="FileOutputStream-写入流"><a href="#FileOutputStream-写入流" class="headerlink" title="FileOutputStream 写入流"></a>FileOutputStream 写入流</h3><p>   <img data-src="/picture/hadoop/hadoop_file_output_stream.png" alt="FileOutputStream"></p>
+<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>   <img data-src="/picture/hadoop/hadoop_buff_size.png" alt="buffSize"></p>
+<h3 id="IOUtils-封装的拷贝方法"><a href="#IOUtils-封装的拷贝方法" class="headerlink" title="IOUtils 封装的拷贝方法"></a>IOUtils 封装的拷贝方法</h3><p>   <img data-src="/picture/hadoop/hadoop_ioutils.png" alt="IOUtiles.copyBytes(in,out,buffSize)"></p>
+<h3 id="Download-over"><a href="#Download-over" class="headerlink" title="Download over!"></a>Download over!</h3><p>   <img data-src="/picture/hadoop/hadoop_rpc_success.png" alt="RPC-success"></p>
+<h2 id="自己实现一套-RPC-系统"><a href="#自己实现一套-RPC-系统" class="headerlink" title="自己实现一套 RPC 系统"></a>自己实现一套 RPC 系统</h2><p>Full code is <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-site/yuzhouwan-site-service/src/main/java/com/yuzhouwan/site/service/rpc">here</a>.</p>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/54206/" rel="bookmark">大数据生态圈里的一致性算法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/39683/" rel="bookmark">Apache Eagle 深度调研</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/31915/" rel="bookmark">ZooKeeper 原理与优化</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200926/" rel="bookmark">Helm 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/26002/" rel="bookmark">Apache Kafka 分布式消息队列框架</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Benedict Jin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yuzhouwan.com/posts/60504/" title="Hadoop RPC 源码领略">https://yuzhouwan.com/posts/60504/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Apache-Hadoop/" rel="tag"># Apache Hadoop</a>
+              <a href="/tags/HDFS/" rel="tag"># HDFS</a>
+              <a href="/tags/RPC/" rel="tag"># RPC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/5517/" rel="prev" title="SSO">
+      <i class="fa fa-chevron-left"></i> SSO
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/31130/" rel="next" title="散列表">
+      散列表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">Gitalk：可用 Github 账号登录</a></li>
+            <li class="tab"><a href="#comment-disqus">Disqus：海外</a></li>
+            <li class="tab"><a href="#comment-valine">Valine：匿名</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-RPC%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是 RPC？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-RPC%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么要有 RPC？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9F%9F%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">地域性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AB%E7%B3%96%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">含糖性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">模块化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop-%E7%9A%84-RPC-%E8%B0%83%E7%94%A8%E9%93%BE"><span class="nav-number">3.</span> <span class="nav-text">Hadoop 的 RPC 调用链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-Hadoop-%E9%9B%86%E7%BE%A4%E7%9A%84-DFS%E3%80%81YARN"><span class="nav-number">3.1.</span> <span class="nav-text">启动 Hadoop 集群的 DFS、YARN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-Explorer-%E7%9A%84-50070-%E7%AB%AF%E5%8F%A3%EF%BC%8C%E6%9F%A5%E7%9C%8B-NameNode"><span class="nav-number">3.2.</span> <span class="nav-text">可以使用 Explorer 的 50070 端口，查看 NameNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-FileSystem-%E7%9A%84-get-uri-conf-user-%E5%88%9D%E5%A7%8B%E5%8C%96-FS"><span class="nav-number">3.3.</span> <span class="nav-text">通过 FileSystem 的 get(uri, conf, user) 初始化 FS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB-FileSystem-%E6%8B%A5%E6%9C%89-13-%E4%B8%AA%E5%AD%90%E7%B1%BB"><span class="nav-number">3.4.</span> <span class="nav-text">抽象类 FileSystem 拥有 13 个子类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E7%BB%99%E7%9B%B8%E5%BA%94%E5%B1%9E%E6%80%A7%E8%B5%8B%E5%80%BC"><span class="nav-number">3.5.</span> <span class="nav-text">加载配置文件，并给相应属性赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84-org-apache-hadoop-hdfs-DistributedFileSystem"><span class="nav-number">3.6.</span> <span class="nav-text">反射 org.apache.hadoop.hdfs.DistributedFileSystem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8-initialize-uri-conf-%E5%88%9D%E5%A7%8B%E5%8C%96-DFS"><span class="nav-number">3.7.</span> <span class="nav-text">调用 initialize(uri, conf) 初始化 DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97-DFSClient-%E4%BB%A3%E7%90%86"><span class="nav-number">3.8.</span> <span class="nav-text">获得 DFSClient 代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%90%86"><span class="nav-number">3.9.</span> <span class="nav-text">创建代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A9-DFSClient-%E6%8C%81%E6%9C%89-uri%E3%80%81conf%E3%80%81statistics"><span class="nav-number">3.10.</span> <span class="nav-text">让 DFSClient 持有 uri、conf、statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90-uri"><span class="nav-number">3.11.</span> <span class="nav-text">解析 uri</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E7%BB%84%E4%BF%A1%E6%81%AF%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E7%94%A8%E6%88%B7%E5%90%8D%EF%BC%8C%E8%8E%B7%E5%8F%96%E5%B7%A5%E4%BD%9C%E8%B7%AF%E5%BE%84"><span class="nav-number">3.12.</span> <span class="nav-text">根据用户组信息中的简单用户名，获取工作路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileSystem-%E5%AE%8C%E6%88%90%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.13.</span> <span class="nav-text">FileSystem 完成初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-FS-open-path-%E6%89%93%E5%BC%80%E8%AF%BB%E5%8F%96%E6%B5%81"><span class="nav-number">3.14.</span> <span class="nav-text">利用 FS.open(path) 打开读取流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90-path"><span class="nav-number">3.15.</span> <span class="nav-text">解析 path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0-open-%E6%96%B9%E6%B3%95"><span class="nav-number">3.16.</span> <span class="nav-text">装饰 open() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileSystemLinkResolver-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.17.</span> <span class="nav-text">FileSystemLinkResolver 回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HdfsDataInputStream-%E8%AF%BB%E5%8F%96%E6%B5%81"><span class="nav-number">3.18.</span> <span class="nav-text">HdfsDataInputStream 读取流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileOutputStream-%E5%86%99%E5%85%A5%E6%B5%81"><span class="nav-number">3.19.</span> <span class="nav-text">FileOutputStream 写入流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%86%B2%E6%B1%A0"><span class="nav-number">3.20.</span> <span class="nav-text">缓冲池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOUtils-%E5%B0%81%E8%A3%85%E7%9A%84%E6%8B%B7%E8%B4%9D%E6%96%B9%E6%B3%95"><span class="nav-number">3.21.</span> <span class="nav-text">IOUtils 封装的拷贝方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Download-over"><span class="nav-number">3.22.</span> <span class="nav-text">Download over!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%A5%97-RPC-%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">自己实现一套 RPC 系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5%E6%88%91%E4%BB%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BE%A4%EF%BC%8C%E4%B8%80%E8%B5%B7%E4%BA%A4%E6%B5%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">欢迎加入我们的技术群，一起交流学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Benedict Jin" src="/yuzhouwan_logo_128x128.ico">
+  <p class="site-author-name" itemprop="name">Benedict Jin</p>
+  <div class="site-description" itemprop="description">Benedict Jin's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/asdf2014" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;asdf2014" rel="external nofollow noopener noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:asdf2014@apache.org" title="E-Mail → mailto:asdf2014@apache.org" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">苏 ICP 备 17032505号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuzhouwan.com</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.3m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19:32</span>
+</div>
+
+        
+<meta name="referrer" content="always">
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+var options = {
+  bottom: '32px', // default: '32px'
+  right: '32px', // default: '32px'
+  left: 'unset', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: false // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script>
+<style>
+button.darkmode-toggle {
+  z-index: 9999;
+}
+img, .darkmode-ignore {
+  isolation: isolate;
+  display: block;
+}
+</style>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://yuzhouwan.com/posts/60504/";
+    this.page.identifier = "posts/60504/";
+    this.page.title = "Hadoop RPC 源码领略";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yuzhouwan.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '97b09aff8155c8377e3bdb4b9860923d',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : 'BU4bnWsdAliFfk3fz7iMcFUU-gzGzoHsz',
+      appKey     : '1xVLNFSy1qGCda3wt4GiGzHG',
+      placeholder: "上述信息都不是必填的，可以直接提交评论",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

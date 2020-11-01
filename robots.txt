@@ -1,0 +1,17 @@
+User-agent: *
+
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /posts/
+Allow: /page/
+Allow: /js/
+Allow: /css/
+Allow: /fonts/
+Allow: /images/
+Allow: /vendors/
+Allow: /lib/
+
+Sitemap: https://yuzhouwan.com/sitemap.xml
+

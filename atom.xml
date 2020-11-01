@@ -567,9 +567,9 @@
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
     
@@ -787,9 +787,9 @@
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
     
@@ -1039,11 +1039,11 @@
     
     <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
     
@@ -1917,9 +1917,9 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="RPC" scheme="https://yuzhouwan.com/tags/RPC/"/>
     

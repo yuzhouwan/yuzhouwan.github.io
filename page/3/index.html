@@ -216,6 +216,115 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/54206/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/54206/" class="post-title-link" itemprop="url">大数据生态圈里的一致性算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-10-11 11:48:41" itemprop="dateCreated datePublished" datetime="2016-10-11T11:48:41+08:00">2016-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="大数据生态圈中，保证一致性的方式举不胜举"><a href="#大数据生态圈中，保证一致性的方式举不胜举" class="headerlink" title="大数据生态圈中，保证一致性的方式举不胜举"></a>大数据生态圈中，保证一致性的方式举不胜举</h2><ul>
+<li><a href="https://yuzhouwan.com/posts/60504/">Hadoop</a> 用 <a href="https://yuzhouwan.com/posts/31915/">ZooKeeper</a>（Zab，即支持事务顺序的 Paxos）</li>
+<li><a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 用 <a href="https://yuzhouwan.com/posts/31130/">Hash</a> 路由算法（而非一致性 Hash）</li>
+<li><a href="https://yuzhouwan.com/posts/20644/#ElasticSearch-Connector">Cassandra</a> 用 Gossip 闲话算法</li>
+<li><a href="https://yuzhouwan.com/posts/2129/">Redis</a> 用 <a href="https://yuzhouwan.com/posts/31915/#Raft">Raft</a> 选举算法</li>
+</ul>
+<p>他们各有什么区别，为什么会如此选型？</p>
+<h3 id="Paxos-选举算法"><a href="#Paxos-选举算法" class="headerlink" title="Paxos 选举算法"></a>Paxos 选举算法</h3><p>　<strong>Paxos</strong> 是最先解决<strong>拜占庭将军问题</strong>的算法，利用<strong>过半选举</strong>的机制，保证了集群数据副本的一致性（微服务中<a href="https://yuzhouwan.com/posts/31915/#其他技术比对">服务注册与发现</a>的场景，其实已经不再适用了）</p>
+<h3 id="Raft-选举算法"><a href="#Raft-选举算法" class="headerlink" title="Raft 选举算法"></a>Raft 选举算法</h3><p>　Redis 使用 <strong>Raft</strong> 实现了自己的分布式一致性。Raft 本身和 Paxos 并没有场景上的区别。更多的是，协议上的简化、Term 概念的强化、Log 只会从 Leader 到 Follower 单向同步，使得实现起来会很方便</p>
+<h3 id="Zab-原子广播协议"><a href="#Zab-原子广播协议" class="headerlink" title="Zab 原子广播协议"></a>Zab 原子广播协议</h3><p>　Hadoop 偏向于离线的海量数据处理，利用 <a href="https://yuzhouwan.com/posts/31915/">ZooKeeper</a> 来保证<a href="https://yuzhouwan.com/posts/31915/#Paxos-的强一致性">数据副本的一致性</a>，是最为合适的</p>
+<h3 id="Hash-路由算法"><a href="#Hash-路由算法" class="headerlink" title="Hash 路由算法"></a>Hash 路由算法</h3><p>　<a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 集群接收到为文档创建索引的请求时，需要选择在哪一个 shard（完整且独立的 Lucene 索引实例）上对文档进行索引。ElasticSearch 采用的是 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cse.yorku.ca/~oz/hash.html">djb2</a> 哈希算法（俗称 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://azrael.digipen.edu/~mmead/www/Courses/CS280/HashFunctions-1.html">times33</a>），对要索引文档默认或指定的 key 进行哈希 <code>hash(key)</code>，然后再对 ElasticSearch 集群中 shard 的数量 n 进行取模，即 $hash(key) \, mod \, n$</p>
+<h3 id="一致性-Hash"><a href="#一致性-Hash" class="headerlink" title="一致性 Hash"></a>一致性 Hash</h3><p>　用于对数据存储进行<strong>负载均衡</strong>的算法。最新的进展，是在去年 Google 发表的一篇 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/abs/1608.01350">有界负载的一致性 Hash 算法</a>的论文。该算法保证了负载均衡<strong>一致性</strong>和<strong>稳定性</strong>的同时，在<strong>均匀性</strong>方面做出了实质性地改进。同时，Consistent Hashing with Bounded Loads 算法 也在 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.haproxy.org/">HaProxy</a> 开源项目中得以<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/haproxy/haproxy/blob/master/src/lb_chash.c#L244">应用</a>，有效减少了其 8 倍的缓存带宽</p>
+<h3 id="Gossip-闲话算法"><a href="#Gossip-闲话算法" class="headerlink" title="Gossip 闲话算法"></a>Gossip 闲话算法</h3><p>　<strong>Gossip</strong> 主要被 Cassandra 用于实现其分布式一致性。因为 Cassandra 框架，更看重 <strong>去中心化</strong> 和 <strong>容错</strong> 的特性，在不违背 CAP 定理的情况下，能够接受 最终一致性</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/54206/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/31915/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -607,103 +716,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/30041/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/30041/" class="post-title-link" itemprop="url">Git 高级玩法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-11 23:36:16" itemprop="dateCreated datePublished" datetime="2017-04-11T23:36:16+08:00">2017-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>22k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>20 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Git 相关的使用技巧、常见的坑 和 Github 社区中高频的缩写。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/30041/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -845,7 +857,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:32</span>
+    <span title="站点阅读时长">19:31</span>
 </div>
 
         

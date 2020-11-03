@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-11-03T14:47:51.708Z</updated>
+  <updated>2020-11-03T14:51:04.939Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -17,36 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>程序员的 Mac 高效手册</title>
-    <link href="https://yuzhouwan.com/posts/190101/"/>
-    <id>https://yuzhouwan.com/posts/190101/</id>
-    <published>2019-01-01T11:58:02.000Z</published>
-    <updated>2020-11-03T14:47:51.708Z</updated>
-    
-    
-    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
-    
-    
-    
-    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
-    
-    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Presto：分布式 SQL 查询引擎</title>
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2020-11-03T14:47:51.707Z</updated>
+    <updated>2020-11-03T14:51:04.939Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -98,95 +73,11 @@
   </entry>
   
   <entry>
-    <title>那些绕不过去的 Java 知识点</title>
-    <link href="https://yuzhouwan.com/posts/190413/"/>
-    <id>https://yuzhouwan.com/posts/190413/</id>
-    <published>2019-04-13T07:54:52.000Z</published>
-    <updated>2020-11-02T13:10:38.561Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp;amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。&lt;/p&gt;
-&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;注解&quot;&gt;&lt;a href=&quot;#注解&quot; class=&quot;headerlink&quot; title=&quot;注解&quot;&gt;&lt;/a&gt;注解&lt;/h3&gt;&lt;h4 id=&quot;GuardedBy&quot;&gt;&lt;a href=&quot;#GuardedBy&quot; class=&quot;headerlink&quot; title=&quot;GuardedBy&quot;&gt;&lt;/a&gt;GuardedBy&lt;/h4&gt;&lt;p&gt;　&lt;code&gt;@GuardedBy&lt;/code&gt; 注解可以作用于某一个属性或者方法，约定在访问这些被注解标记的资源时，能被同步代码块保护着。简单的使用案例如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@GuardedBy(&quot;obj&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; ConcurrentMap&amp;lt;String, String&amp;gt; map = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ConcurrentHashMap&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; Object obj = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k, String v)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        map.put(k, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * If you use `error prone` tool to check this, this annotation should be `&lt;span class=&quot;doctag&quot;&gt;@SuppressWarnings&lt;/span&gt;(&quot;GuardedBy&quot;)`&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://errorprone.info/bugpattern/GuardedBy}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://github.com/apache/druid/pull/6868#discussion_r249639199}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SuppressWarnings(&quot;FieldAccessNotGuarded&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    map.remove(k);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;GuardedByExample{&quot;&lt;/span&gt; +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&quot;map=&quot;&lt;/span&gt; + map +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&#39;}&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;Tips: &lt;a href=&quot;https://github.com/apache/druid/pull/6903&quot;&gt;Code Example&lt;/a&gt; from &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;；另外，&lt;strong&gt;error-prone&lt;/strong&gt; 工具支持对&lt;a href=&quot;https://github.com/google/error-prone/blob/master/docs/bugpattern/GuardedBy.md#guardedby&quot;&gt;多种版本&lt;/a&gt;的 &lt;code&gt;@GuardedBy&lt;/code&gt; 进行检查&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
-    
-    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
-    
-    <category term="HttpRunner" scheme="https://yuzhouwan.com/tags/HttpRunner/"/>
-    
-    <category term="JMC" scheme="https://yuzhouwan.com/tags/JMC/"/>
-    
-    <category term="MAT" scheme="https://yuzhouwan.com/tags/MAT/"/>
-    
-    <category term="Arthas" scheme="https://yuzhouwan.com/tags/Arthas/"/>
-    
-    <category term="Jersey" scheme="https://yuzhouwan.com/tags/Jersey/"/>
-    
-    <category term="LogBack" scheme="https://yuzhouwan.com/tags/LogBack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何成为 Apache 的 PMC</title>
-    <link href="https://yuzhouwan.com/posts/19631/"/>
-    <id>https://yuzhouwan.com/posts/19631/</id>
-    <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2020-11-02T13:10:36.730Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
-&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
-    
-    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
-    
-    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
-    
-    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Apache Druid：一款高效的 OLAP 引擎</title>
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2020-11-02T13:04:42.684Z</updated>
+    <updated>2020-11-03T14:51:02.743Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -249,11 +140,51 @@
   </entry>
   
   <entry>
+    <title>那些绕不过去的 Java 知识点</title>
+    <link href="https://yuzhouwan.com/posts/190413/"/>
+    <id>https://yuzhouwan.com/posts/190413/</id>
+    <published>2019-04-13T07:54:52.000Z</published>
+    <updated>2020-11-03T14:50:59.519Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp;amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。&lt;/p&gt;
+&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;注解&quot;&gt;&lt;a href=&quot;#注解&quot; class=&quot;headerlink&quot; title=&quot;注解&quot;&gt;&lt;/a&gt;注解&lt;/h3&gt;&lt;h4 id=&quot;GuardedBy&quot;&gt;&lt;a href=&quot;#GuardedBy&quot; class=&quot;headerlink&quot; title=&quot;GuardedBy&quot;&gt;&lt;/a&gt;GuardedBy&lt;/h4&gt;&lt;p&gt;　&lt;code&gt;@GuardedBy&lt;/code&gt; 注解可以作用于某一个属性或者方法，约定在访问这些被注解标记的资源时，能被同步代码块保护着。简单的使用案例如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@GuardedBy(&quot;obj&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; ConcurrentMap&amp;lt;String, String&amp;gt; map = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ConcurrentHashMap&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; Object obj = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k, String v)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        map.put(k, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * If you use `error prone` tool to check this, this annotation should be `&lt;span class=&quot;doctag&quot;&gt;@SuppressWarnings&lt;/span&gt;(&quot;GuardedBy&quot;)`&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://errorprone.info/bugpattern/GuardedBy}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://github.com/apache/druid/pull/6868#discussion_r249639199}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SuppressWarnings(&quot;FieldAccessNotGuarded&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    map.remove(k);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;GuardedByExample{&quot;&lt;/span&gt; +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&quot;map=&quot;&lt;/span&gt; + map +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&#39;}&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Tips: &lt;a href=&quot;https://github.com/apache/druid/pull/6903&quot;&gt;Code Example&lt;/a&gt; from &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;；另外，&lt;strong&gt;error-prone&lt;/strong&gt; 工具支持对&lt;a href=&quot;https://github.com/google/error-prone/blob/master/docs/bugpattern/GuardedBy.md#guardedby&quot;&gt;多种版本&lt;/a&gt;的 &lt;code&gt;@GuardedBy&lt;/code&gt; 进行检查&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
+    
+    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
+    
+    <category term="HttpRunner" scheme="https://yuzhouwan.com/tags/HttpRunner/"/>
+    
+    <category term="JMC" scheme="https://yuzhouwan.com/tags/JMC/"/>
+    
+    <category term="MAT" scheme="https://yuzhouwan.com/tags/MAT/"/>
+    
+    <category term="Arthas" scheme="https://yuzhouwan.com/tags/Arthas/"/>
+    
+    <category term="Jersey" scheme="https://yuzhouwan.com/tags/Jersey/"/>
+    
+    <category term="LogBack" scheme="https://yuzhouwan.com/tags/LogBack/"/>
+    
+  </entry>
+  
+  <entry>
     <title>人工智能</title>
     <link href="https://yuzhouwan.com/posts/42737/"/>
     <id>https://yuzhouwan.com/posts/42737/</id>
     <published>2017-05-16T10:58:02.000Z</published>
-    <updated>2020-11-01T15:45:05.328Z</updated>
+    <updated>2020-11-03T14:50:51.199Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
@@ -321,7 +252,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2020-11-01T15:44:58.998Z</updated>
+    <updated>2020-11-03T14:50:49.395Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -408,6 +339,75 @@
     <category term="Flume" scheme="https://yuzhouwan.com/tags/Flume/"/>
     
     <category term="HBase" scheme="https://yuzhouwan.com/tags/HBase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员的 Mac 高效手册</title>
+    <link href="https://yuzhouwan.com/posts/190101/"/>
+    <id>https://yuzhouwan.com/posts/190101/</id>
+    <published>2019-01-01T11:58:02.000Z</published>
+    <updated>2020-11-03T14:47:51.708Z</updated>
+    
+    
+    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
+    
+    
+    
+    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
+    
+    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何成为 Apache 的 PMC</title>
+    <link href="https://yuzhouwan.com/posts/19631/"/>
+    <id>https://yuzhouwan.com/posts/19631/</id>
+    <published>2017-04-03T07:46:21.000Z</published>
+    <updated>2020-11-02T13:10:36.730Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
+&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
+    
+    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
+    
+    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
+    
+    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
     
   </entry>
   
@@ -611,9 +611,9 @@
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
     
@@ -831,9 +831,9 @@
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
     
@@ -1083,11 +1083,11 @@
     
     <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
     
@@ -1917,9 +1917,9 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="RPC" scheme="https://yuzhouwan.com/tags/RPC/"/>
     

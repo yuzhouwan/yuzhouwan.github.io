@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yuzhouwan.com/posts/190101/</loc>
+    <loc>https://yuzhouwan.com/posts/200906/</loc>
     
     <lastmod>2020-11-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/posts/200906/</loc>
+    <loc>https://yuzhouwan.com/posts/5845/</loc>
     
     <lastmod>2020-11-03</lastmod>
     
@@ -18,7 +18,28 @@
   <url>
     <loc>https://yuzhouwan.com/posts/190413/</loc>
     
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2020-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/posts/42737/</loc>
+    
+    <lastmod>2020-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/posts/22654/</loc>
+    
+    <lastmod>2020-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/posts/190101/</loc>
+    
+    <lastmod>2020-11-03</lastmod>
     
   </url>
   
@@ -26,27 +47,6 @@
     <loc>https://yuzhouwan.com/posts/19631/</loc>
     
     <lastmod>2020-11-02</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/posts/5845/</loc>
-    
-    <lastmod>2020-11-02</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/posts/42737/</loc>
-    
-    <lastmod>2020-11-01</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/posts/22654/</loc>
-    
-    <lastmod>2020-11-01</lastmod>
     
   </url>
   
@@ -578,27 +578,6 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Hadoop/</loc>
-    <lastmod>2020-11-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/HDFS/</loc>
-    <lastmod>2020-11-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/RPC/</loc>
-    <lastmod>2020-11-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/Helm/</loc>
     <lastmod>2020-11-03</lastmod>
     <changefreq>daily</changefreq>
@@ -613,7 +592,28 @@
   </url>
   
   <url>
+    <loc>https://yuzhouwan.com/tags/HDFS/</loc>
+    <lastmod>2020-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/tags/PrestoDB/</loc>
+    <lastmod>2020-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Hadoop/</loc>
+    <lastmod>2020-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/RPC/</loc>
     <lastmod>2020-11-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

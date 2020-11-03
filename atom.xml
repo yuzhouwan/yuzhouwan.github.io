@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-11-02T13:10:40.404Z</updated>
+  <updated>2020-11-03T14:47:51.708Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -17,16 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>程序员的 Mac 高效手册</title>
+    <link href="https://yuzhouwan.com/posts/190101/"/>
+    <id>https://yuzhouwan.com/posts/190101/</id>
+    <published>2019-01-01T11:58:02.000Z</published>
+    <updated>2020-11-03T14:47:51.708Z</updated>
+    
+    
+    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
+    
+    
+    
+    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
+    
+    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Presto：分布式 SQL 查询引擎</title>
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2020-11-02T13:10:40.404Z</updated>
+    <updated>2020-11-03T14:47:51.707Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://prestodb.io/&quot;&gt;Presto&lt;/a&gt;&lt;/strong&gt;™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://prestosql.io/&quot;&gt;Presto&lt;/a&gt;&lt;/strong&gt;™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
 
@@ -128,9 +153,9 @@
     <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
     
     
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
     <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
@@ -387,31 +412,6 @@
   </entry>
   
   <entry>
-    <title>程序员的 Mac 高效手册</title>
-    <link href="https://yuzhouwan.com/posts/190101/"/>
-    <id>https://yuzhouwan.com/posts/190101/</id>
-    <published>2019-01-01T11:58:02.000Z</published>
-    <updated>2020-10-30T11:24:33.421Z</updated>
-    
-    
-    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
-    
-    
-    
-    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
-    
-    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Serverless 详解</title>
     <link href="https://yuzhouwan.com/posts/201001/"/>
     <id>https://yuzhouwan.com/posts/201001/</id>
@@ -605,11 +605,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
@@ -823,11 +823,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     

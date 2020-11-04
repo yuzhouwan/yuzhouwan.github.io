@@ -459,20 +459,6 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Storm/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Kafka/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/Apache-OpenWhisk/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
@@ -502,6 +488,20 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Docker/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Storm/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Kafka/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -746,6 +746,20 @@
   </url>
   
   <url>
+    <loc>https://yuzhouwan.com/tags/JavaScript/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/V8/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/tags/Math/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
@@ -768,20 +782,6 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/LaTeX/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/JavaScript/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/V8/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1054,20 +1054,6 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Linux/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Shell/</loc>
-    <lastmod>2020-11-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/Clojure/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
@@ -1076,6 +1062,20 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Apache-Avro/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Linux/</loc>
+    <lastmod>2020-11-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Shell/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1441,14 +1441,14 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://yuzhouwan.com/categories/Serverless/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/categories/Serverless/</loc>
+    <loc>https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2020-11-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

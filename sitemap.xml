@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yuzhouwan.com/posts/19631/</loc>
+    <loc>https://yuzhouwan.com/posts/200906/</loc>
     
     <lastmod>2020-11-06</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/posts/200906/</loc>
+    <loc>https://yuzhouwan.com/posts/19631/</loc>
     
     <lastmod>2020-11-06</lastmod>
     
@@ -417,6 +417,13 @@
 
   
   <url>
+    <loc>https://yuzhouwan.com/tags/Antlr/</loc>
+    <lastmod>2020-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/tags/Apache-Calcite/</loc>
     <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
@@ -446,13 +453,6 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Aapche-Drill/</loc>
-    <lastmod>2020-11-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Antlr/</loc>
     <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1427,14 +1427,14 @@
 
   
   <url>
-    <loc>https://yuzhouwan.com/categories/SQL/</loc>
+    <loc>https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/</loc>
+    <loc>https://yuzhouwan.com/categories/SQL/</loc>
     <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

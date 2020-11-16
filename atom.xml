@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-11-15T15:59:37.988Z</updated>
+  <updated>2020-11-16T13:58:16.632Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -15,6 +15,73 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Apache Druid：一款高效的 OLAP 引擎</title>
+    <link href="https://yuzhouwan.com/posts/5845/"/>
+    <id>https://yuzhouwan.com/posts/5845/</id>
+    <published>2017-04-02T03:05:11.000Z</published>
+    <updated>2020-11-16T13:58:16.632Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：Vadim Ogievetsky 在万圣节的个人作品，已获得授权）&lt;/center&gt;
+
+
+
+&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;h4 id=&quot;分析事件流&quot;&gt;&lt;a href=&quot;#分析事件流&quot; class=&quot;headerlink&quot; title=&quot;分析事件流&quot;&gt;&lt;/a&gt;分析事件流&lt;/h4&gt;&lt;p&gt;　Druid 支持对 event-driven 数据进行快速地高并发查询。还可以实时地摄入流式数据，并提供亚秒级查询能力，以支持强大的 UI 交互&lt;/p&gt;
+&lt;h4 id=&quot;创新的架构设计&quot;&gt;&lt;a href=&quot;#创新的架构设计&quot; class=&quot;headerlink&quot; title=&quot;创新的架构设计&quot;&gt;&lt;/a&gt;创新的架构设计&lt;/h4&gt;&lt;p&gt;　Druid 是一种新型数据库，它结合了 OLAP 分析数据库、时间序列数据库 和 全文检索 的思想，以支持流式体系架构下的大部分应用场景&lt;/p&gt;
+&lt;h4 id=&quot;构建事件驱动的数据栈&quot;&gt;&lt;a href=&quot;#构建事件驱动的数据栈&quot; class=&quot;headerlink&quot; title=&quot;构建事件驱动的数据栈&quot;&gt;&lt;/a&gt;构建事件驱动的数据栈&lt;/h4&gt;&lt;p&gt;　Druid 天然集成了消息队列（Kafka、AWS Kinesis 等）和数据湖（HDFS、AWS S3 等），使得其非常适用于流式总线和流处理器的查询层&lt;/p&gt;
+&lt;h4 id=&quot;解锁新的工作流&quot;&gt;&lt;a href=&quot;#解锁新的工作流&quot; class=&quot;headerlink&quot; title=&quot;解锁新的工作流&quot;&gt;&lt;/a&gt;解锁新的工作流&lt;/h4&gt;&lt;p&gt;　Druid 旨在对实时数据和历史数据进行快速地即时分析。使用可快速更替的查询，进行趋势解释，数据探索，以响应各种分析诉求&lt;/p&gt;
+&lt;h4 id=&quot;多环境部署&quot;&gt;&lt;a href=&quot;#多环境部署&quot; class=&quot;headerlink&quot; title=&quot;多环境部署&quot;&gt;&lt;/a&gt;多环境部署&lt;/h4&gt;&lt;p&gt;　Druid 可以部署在任何的 &lt;code&gt;*NIX&lt;/code&gt; 商用硬件上，无论是在云端还是内部部署。Druid 是 cloud-native 的，这意味着集群扩容和缩容，就像添加和删除进程一样简单&lt;/p&gt;
+&lt;h4 id=&quot;多数据源摄入&quot;&gt;&lt;a href=&quot;#多数据源摄入&quot; class=&quot;headerlink&quot; title=&quot;多数据源摄入&quot;&gt;&lt;/a&gt;多数据源摄入&lt;/h4&gt;&lt;p&gt;　Druid 支持将多种外部数据系统作为数据源，进行数据摄入，包括 &lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Hadoop/&quot;&gt;Hadoop&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Storm/&quot;&gt;Storm&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt; 等&lt;/p&gt;
+&lt;h4 id=&quot;多版本控制&quot;&gt;&lt;a href=&quot;#多版本控制&quot; class=&quot;headerlink&quot; title=&quot;多版本控制&quot;&gt;&lt;/a&gt;多版本控制&lt;/h4&gt;&lt;p&gt;　多版本控制（&lt;strong&gt;MVCC&lt;/strong&gt;，&lt;strong&gt;M&lt;/strong&gt;ulti-&lt;strong&gt;V&lt;/strong&gt;ersion &lt;strong&gt;C&lt;/strong&gt;oncurrent &lt;strong&gt;C&lt;/strong&gt;ontrol），主要是为了解决多用户操作同一条记录时的并发问题。MVCC 设计思路是，在并发访问数据库时，不使用粗暴的行锁，而是在事务型操作更新数据时，生成一个新版本的数据。如此，可以保证读写分离，避免了读写操作互相阻塞，以提高并发性能。另外，约束任意时刻只有最新版本的记录是有效的，即也保证了数据的一致性&lt;/p&gt;
+&lt;p&gt;　而 Druid 中是使用数据更新时间来区分版本，历史节点只加载最新版本的数据。同时，&lt;strong&gt;实时数据索引&lt;/strong&gt;与&lt;strong&gt;离线数据批量覆盖&lt;/strong&gt;同时进行的 Lambda 架构设计，既满足了实时响应的需求，又确保了数据的准确性&lt;/p&gt;
+&lt;h4 id=&quot;易于运维&quot;&gt;&lt;a href=&quot;#易于运维&quot; class=&quot;headerlink&quot; title=&quot;易于运维&quot;&gt;&lt;/a&gt;易于运维&lt;/h4&gt;&lt;p&gt;　Druid 集群可以做到 Self-healing 和 Self-balancing。如果 Druid 服务器发生故障，系统将会自动绕过损坏的路由，直到这些机器恢复或被替换掉。在扩缩容集群的时候，只需要增加或下线服务器，集群本身会在后台自动 re-balance。Druid 在设计上保证了可以全天候工作，不会因为任何原因而停机，包括配置更改和集群升级&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
+    
+    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
+    
+    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
+    
+    <category term="PostgreSQL" scheme="https://yuzhouwan.com/tags/PostgreSQL/"/>
+    
+    <category term="Pivot" scheme="https://yuzhouwan.com/tags/Pivot/"/>
+    
+    <category term="Graphite" scheme="https://yuzhouwan.com/tags/Graphite/"/>
+    
+    <category term="OLAP" scheme="https://yuzhouwan.com/tags/OLAP/"/>
+    
+  </entry>
   
   <entry>
     <title>Presto：分布式 SQL 查询引擎</title>
@@ -113,73 +180,6 @@
     <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
     
     <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache Druid：一款高效的 OLAP 引擎</title>
-    <link href="https://yuzhouwan.com/posts/5845/"/>
-    <id>https://yuzhouwan.com/posts/5845/</id>
-    <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2020-11-03T14:51:02.743Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：Vadim Ogievetsky 在万圣节的个人作品，已获得授权）&lt;/center&gt;
-
-
-
-&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;h4 id=&quot;分析事件流&quot;&gt;&lt;a href=&quot;#分析事件流&quot; class=&quot;headerlink&quot; title=&quot;分析事件流&quot;&gt;&lt;/a&gt;分析事件流&lt;/h4&gt;&lt;p&gt;　Druid 支持对 event-driven 数据进行快速地高并发查询。还可以实时地摄入流式数据，并提供亚秒级查询能力，以支持强大的 UI 交互&lt;/p&gt;
-&lt;h4 id=&quot;创新的架构设计&quot;&gt;&lt;a href=&quot;#创新的架构设计&quot; class=&quot;headerlink&quot; title=&quot;创新的架构设计&quot;&gt;&lt;/a&gt;创新的架构设计&lt;/h4&gt;&lt;p&gt;　Druid 是一种新型数据库，它结合了 OLAP 分析数据库、时间序列数据库 和 全文检索 的思想，以支持流式体系架构下的大部分应用场景&lt;/p&gt;
-&lt;h4 id=&quot;构建事件驱动的数据栈&quot;&gt;&lt;a href=&quot;#构建事件驱动的数据栈&quot; class=&quot;headerlink&quot; title=&quot;构建事件驱动的数据栈&quot;&gt;&lt;/a&gt;构建事件驱动的数据栈&lt;/h4&gt;&lt;p&gt;　Druid 天然集成了消息队列（Kafka、AWS Kinesis 等）和数据湖（HDFS、AWS S3 等），使得其非常适用于流式总线和流处理器的查询层&lt;/p&gt;
-&lt;h4 id=&quot;解锁新的工作流&quot;&gt;&lt;a href=&quot;#解锁新的工作流&quot; class=&quot;headerlink&quot; title=&quot;解锁新的工作流&quot;&gt;&lt;/a&gt;解锁新的工作流&lt;/h4&gt;&lt;p&gt;　Druid 旨在对实时数据和历史数据进行快速地即时分析。使用可快速更替的查询，进行趋势解释，数据探索，以响应各种分析诉求&lt;/p&gt;
-&lt;h4 id=&quot;多环境部署&quot;&gt;&lt;a href=&quot;#多环境部署&quot; class=&quot;headerlink&quot; title=&quot;多环境部署&quot;&gt;&lt;/a&gt;多环境部署&lt;/h4&gt;&lt;p&gt;　Druid 可以部署在任何的 &lt;code&gt;*NIX&lt;/code&gt; 商用硬件上，无论是在云端还是内部部署。Druid 是 cloud-native 的，这意味着集群扩容和缩容，就像添加和删除进程一样简单&lt;/p&gt;
-&lt;h4 id=&quot;多数据源摄入&quot;&gt;&lt;a href=&quot;#多数据源摄入&quot; class=&quot;headerlink&quot; title=&quot;多数据源摄入&quot;&gt;&lt;/a&gt;多数据源摄入&lt;/h4&gt;&lt;p&gt;　Druid 支持将多种外部数据系统作为数据源，进行数据摄入，包括 &lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Hadoop/&quot;&gt;Hadoop&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Storm/&quot;&gt;Storm&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt; 等&lt;/p&gt;
-&lt;h4 id=&quot;多版本控制&quot;&gt;&lt;a href=&quot;#多版本控制&quot; class=&quot;headerlink&quot; title=&quot;多版本控制&quot;&gt;&lt;/a&gt;多版本控制&lt;/h4&gt;&lt;p&gt;　多版本控制（&lt;strong&gt;MVCC&lt;/strong&gt;，&lt;strong&gt;M&lt;/strong&gt;ulti-&lt;strong&gt;V&lt;/strong&gt;ersion &lt;strong&gt;C&lt;/strong&gt;oncurrent &lt;strong&gt;C&lt;/strong&gt;ontrol），主要是为了解决多用户操作同一条记录时的并发问题。MVCC 设计思路是，在并发访问数据库时，不使用粗暴的行锁，而是在事务型操作更新数据时，生成一个新版本的数据。如此，可以保证读写分离，避免了读写操作互相阻塞，以提高并发性能。另外，约束任意时刻只有最新版本的记录是有效的，即也保证了数据的一致性&lt;/p&gt;
-&lt;p&gt;　而 Druid 中是使用数据更新时间来区分版本，历史节点只加载最新版本的数据。同时，&lt;strong&gt;实时数据索引&lt;/strong&gt;与&lt;strong&gt;离线数据批量覆盖&lt;/strong&gt;同时进行的 Lambda 架构设计，既满足了实时响应的需求，又确保了数据的准确性&lt;/p&gt;
-&lt;h4 id=&quot;易于运维&quot;&gt;&lt;a href=&quot;#易于运维&quot; class=&quot;headerlink&quot; title=&quot;易于运维&quot;&gt;&lt;/a&gt;易于运维&lt;/h4&gt;&lt;p&gt;　Druid 集群可以做到 Self-healing 和 Self-balancing。如果 Druid 服务器发生故障，系统将会自动绕过损坏的路由，直到这些机器恢复或被替换掉。在扩缩容集群的时候，只需要增加或下线服务器，集群本身会在后台自动 re-balance。Druid 在设计上保证了可以全天候工作，不会因为任何原因而停机，包括配置更改和集群升级&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
-    
-    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
-    
-    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
-    
-    <category term="PostgreSQL" scheme="https://yuzhouwan.com/tags/PostgreSQL/"/>
-    
-    <category term="Pivot" scheme="https://yuzhouwan.com/tags/Pivot/"/>
-    
-    <category term="Graphite" scheme="https://yuzhouwan.com/tags/Graphite/"/>
-    
-    <category term="OLAP" scheme="https://yuzhouwan.com/tags/OLAP/"/>
     
   </entry>
   

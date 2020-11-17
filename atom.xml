@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-11-16T13:58:16.632Z</updated>
+  <updated>2020-11-17T14:09:44.293Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开源时序数据库 InfluxDB</title>
+    <link href="https://yuzhouwan.com/posts/200315/"/>
+    <id>https://yuzhouwan.com/posts/200315/</id>
+    <published>2020-03-15T10:58:02.000Z</published>
+    <updated>2020-11-17T14:09:44.293Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://docs.influxdata.com/&quot;&gt;InfluxDB&lt;/a&gt;&lt;/strong&gt;™ is a time series database designed to handle high write and query loads. It is an integral component of the TICK stack. InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;DataBase&quot;&gt;&lt;a href=&quot;#DataBase&quot; class=&quot;headerlink&quot; title=&quot;DataBase&quot;&gt;&lt;/a&gt;DataBase&lt;/h3&gt;&lt;p&gt;　类似于传统数据库中的 DataBase 概念&lt;/p&gt;
+&lt;h3 id=&quot;Measurement&quot;&gt;&lt;a href=&quot;#Measurement&quot; class=&quot;headerlink&quot; title=&quot;Measurement&quot;&gt;&lt;/a&gt;Measurement&lt;/h3&gt;&lt;p&gt;　和 OLAP 中广义上的度量概念一致，部分 OLAP 数据库中又称为 Metric&lt;/p&gt;
+&lt;h3 id=&quot;Tag&quot;&gt;&lt;a href=&quot;#Tag&quot; class=&quot;headerlink&quot; title=&quot;Tag&quot;&gt;&lt;/a&gt;Tag&lt;/h3&gt;&lt;p&gt;　和 OLAP 中广义上的维度概念一致，部分 OLAP 数据库中又称为 TagKV&lt;/p&gt;
+&lt;h3 id=&quot;Field&quot;&gt;&lt;a href=&quot;#Field&quot; class=&quot;headerlink&quot; title=&quot;Field&quot;&gt;&lt;/a&gt;Field&lt;/h3&gt;&lt;p&gt;　数值&lt;/p&gt;
+&lt;h3 id=&quot;Timestamp&quot;&gt;&lt;a href=&quot;#Timestamp&quot; class=&quot;headerlink&quot; title=&quot;Timestamp&quot;&gt;&lt;/a&gt;Timestamp&lt;/h3&gt;&lt;p&gt;　时间戳&lt;/p&gt;
+&lt;h3 id=&quot;Points&quot;&gt;&lt;a href=&quot;#Points&quot; class=&quot;headerlink&quot; title=&quot;Points&quot;&gt;&lt;/a&gt;Points&lt;/h3&gt;&lt;p&gt;　数据点&lt;/p&gt;
+&lt;h3 id=&quot;Series&quot;&gt;&lt;a href=&quot;#Series&quot; class=&quot;headerlink&quot; title=&quot;Series&quot;&gt;&lt;/a&gt;Series&lt;/h3&gt;&lt;p&gt;　数据点组成的序列&lt;/p&gt;
+&lt;h3 id=&quot;Retention-Policy&quot;&gt;&lt;a href=&quot;#Retention-Policy&quot; class=&quot;headerlink&quot; title=&quot;Retention Policy&quot;&gt;&lt;/a&gt;Retention Policy&lt;/h3&gt;&lt;p&gt;　数据过期策略，即 TTL&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
+    
+    <category term="InfluxQL" scheme="https://yuzhouwan.com/tags/InfluxQL/"/>
+    
+    <category term="Telegraf" scheme="https://yuzhouwan.com/tags/Telegraf/"/>
+    
+    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
+    
+    <category term="Golang" scheme="https://yuzhouwan.com/tags/Golang/"/>
+    
+    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
+    
+  </entry>
   
   <entry>
     <title>Apache Druid：一款高效的 OLAP 引擎</title>
@@ -457,49 +500,6 @@
     <category term="SaaS" scheme="https://yuzhouwan.com/tags/SaaS/"/>
     
     <category term="BaaS" scheme="https://yuzhouwan.com/tags/BaaS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>开源时序数据库 InfluxDB</title>
-    <link href="https://yuzhouwan.com/posts/200315/"/>
-    <id>https://yuzhouwan.com/posts/200315/</id>
-    <published>2020-03-15T10:58:02.000Z</published>
-    <updated>2020-10-29T13:44:24.896Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://docs.influxdata.com/&quot;&gt;InfluxDB&lt;/a&gt;&lt;/strong&gt;™ is a time series database designed to handle high write and query loads. It is an integral component of the TICK stack. InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;DataBase&quot;&gt;&lt;a href=&quot;#DataBase&quot; class=&quot;headerlink&quot; title=&quot;DataBase&quot;&gt;&lt;/a&gt;DataBase&lt;/h3&gt;&lt;p&gt;　类似于传统数据库中的 DataBase 概念&lt;/p&gt;
-&lt;h3 id=&quot;Measurement&quot;&gt;&lt;a href=&quot;#Measurement&quot; class=&quot;headerlink&quot; title=&quot;Measurement&quot;&gt;&lt;/a&gt;Measurement&lt;/h3&gt;&lt;p&gt;　和 OLAP 中广义上的度量概念一致，部分 OLAP 数据库中又称为 Metric&lt;/p&gt;
-&lt;h3 id=&quot;Tag&quot;&gt;&lt;a href=&quot;#Tag&quot; class=&quot;headerlink&quot; title=&quot;Tag&quot;&gt;&lt;/a&gt;Tag&lt;/h3&gt;&lt;p&gt;　和 OLAP 中广义上的维度概念一致，部分 OLAP 数据库中又称为 TagKV&lt;/p&gt;
-&lt;h3 id=&quot;Field&quot;&gt;&lt;a href=&quot;#Field&quot; class=&quot;headerlink&quot; title=&quot;Field&quot;&gt;&lt;/a&gt;Field&lt;/h3&gt;&lt;p&gt;　数值&lt;/p&gt;
-&lt;h3 id=&quot;Timestamp&quot;&gt;&lt;a href=&quot;#Timestamp&quot; class=&quot;headerlink&quot; title=&quot;Timestamp&quot;&gt;&lt;/a&gt;Timestamp&lt;/h3&gt;&lt;p&gt;　时间戳&lt;/p&gt;
-&lt;h3 id=&quot;Points&quot;&gt;&lt;a href=&quot;#Points&quot; class=&quot;headerlink&quot; title=&quot;Points&quot;&gt;&lt;/a&gt;Points&lt;/h3&gt;&lt;p&gt;　数据点&lt;/p&gt;
-&lt;h3 id=&quot;Series&quot;&gt;&lt;a href=&quot;#Series&quot; class=&quot;headerlink&quot; title=&quot;Series&quot;&gt;&lt;/a&gt;Series&lt;/h3&gt;&lt;p&gt;　数据点组成的序列&lt;/p&gt;
-&lt;h3 id=&quot;Retention-Policy&quot;&gt;&lt;a href=&quot;#Retention-Policy&quot; class=&quot;headerlink&quot; title=&quot;Retention Policy&quot;&gt;&lt;/a&gt;Retention Policy&lt;/h3&gt;&lt;p&gt;　数据过期策略，即 TTL&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
-    
-    <category term="InfluxQL" scheme="https://yuzhouwan.com/tags/InfluxQL/"/>
-    
-    <category term="Telegraf" scheme="https://yuzhouwan.com/tags/Telegraf/"/>
-    
-    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
-    
-    <category term="Golang" scheme="https://yuzhouwan.com/tags/Golang/"/>
-    
-    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
     
   </entry>
   

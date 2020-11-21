@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-11-17T14:24:11.655Z</updated>
+  <updated>2020-11-21T04:41:35.526Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>那些绕不过去的 Java 知识点</title>
+    <link href="https://yuzhouwan.com/posts/190413/"/>
+    <id>https://yuzhouwan.com/posts/190413/</id>
+    <published>2019-04-13T07:54:52.000Z</published>
+    <updated>2020-11-21T04:41:35.526Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp;amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。&lt;/p&gt;
+&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;注解&quot;&gt;&lt;a href=&quot;#注解&quot; class=&quot;headerlink&quot; title=&quot;注解&quot;&gt;&lt;/a&gt;注解&lt;/h3&gt;&lt;h4 id=&quot;GuardedBy&quot;&gt;&lt;a href=&quot;#GuardedBy&quot; class=&quot;headerlink&quot; title=&quot;GuardedBy&quot;&gt;&lt;/a&gt;GuardedBy&lt;/h4&gt;&lt;p&gt;　&lt;code&gt;@GuardedBy&lt;/code&gt; 注解可以作用于某一个属性或者方法，约定在访问这些被注解标记的资源时，能被同步代码块保护着。简单的使用案例如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@GuardedBy(&quot;obj&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; ConcurrentMap&amp;lt;String, String&amp;gt; map = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ConcurrentHashMap&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; Object obj = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k, String v)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        map.put(k, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * If you use `error prone` tool to check this, this annotation should be `&lt;span class=&quot;doctag&quot;&gt;@SuppressWarnings&lt;/span&gt;(&quot;GuardedBy&quot;)`&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://errorprone.info/bugpattern/GuardedBy}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://github.com/apache/druid/pull/6868#discussion_r249639199}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SuppressWarnings(&quot;FieldAccessNotGuarded&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    map.remove(k);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;GuardedByExample{&quot;&lt;/span&gt; +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&quot;map=&quot;&lt;/span&gt; + map +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&#39;}&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Tips: &lt;a href=&quot;https://github.com/apache/druid/pull/6903&quot;&gt;Code Example&lt;/a&gt; from &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;；另外，&lt;strong&gt;error-prone&lt;/strong&gt; 工具支持对&lt;a href=&quot;https://github.com/google/error-prone/blob/master/docs/bugpattern/GuardedBy.md#guardedby&quot;&gt;多种版本&lt;/a&gt;的 &lt;code&gt;@GuardedBy&lt;/code&gt; 进行检查&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
+    
+    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
+    
+    <category term="HttpRunner" scheme="https://yuzhouwan.com/tags/HttpRunner/"/>
+    
+    <category term="JMC" scheme="https://yuzhouwan.com/tags/JMC/"/>
+    
+    <category term="MAT" scheme="https://yuzhouwan.com/tags/MAT/"/>
+    
+    <category term="Arthas" scheme="https://yuzhouwan.com/tags/Arthas/"/>
+    
+    <category term="Jersey" scheme="https://yuzhouwan.com/tags/Jersey/"/>
+    
+    <category term="LogBack" scheme="https://yuzhouwan.com/tags/LogBack/"/>
+    
+  </entry>
   
   <entry>
     <title>Apache Druid：一款高效的 OLAP 引擎</title>
@@ -175,46 +215,6 @@
     <category term="Flume" scheme="https://yuzhouwan.com/tags/Flume/"/>
     
     <category term="HBase" scheme="https://yuzhouwan.com/tags/HBase/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>那些绕不过去的 Java 知识点</title>
-    <link href="https://yuzhouwan.com/posts/190413/"/>
-    <id>https://yuzhouwan.com/posts/190413/</id>
-    <published>2019-04-13T07:54:52.000Z</published>
-    <updated>2020-11-17T14:24:07.581Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp;amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。&lt;/p&gt;
-&lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;h3 id=&quot;注解&quot;&gt;&lt;a href=&quot;#注解&quot; class=&quot;headerlink&quot; title=&quot;注解&quot;&gt;&lt;/a&gt;注解&lt;/h3&gt;&lt;h4 id=&quot;GuardedBy&quot;&gt;&lt;a href=&quot;#GuardedBy&quot; class=&quot;headerlink&quot; title=&quot;GuardedBy&quot;&gt;&lt;/a&gt;GuardedBy&lt;/h4&gt;&lt;p&gt;　&lt;code&gt;@GuardedBy&lt;/code&gt; 注解可以作用于某一个属性或者方法，约定在访问这些被注解标记的资源时，能被同步代码块保护着。简单的使用案例如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@GuardedBy(&quot;obj&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; ConcurrentMap&amp;lt;String, String&amp;gt; map = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ConcurrentHashMap&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;final&lt;/span&gt; Object obj = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k, String v)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        map.put(k, v);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * If you use `error prone` tool to check this, this annotation should be `&lt;span class=&quot;doctag&quot;&gt;@SuppressWarnings&lt;/span&gt;(&quot;GuardedBy&quot;)`&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://errorprone.info/bugpattern/GuardedBy}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; * {&lt;span class=&quot;doctag&quot;&gt;@see&lt;/span&gt; https://github.com/apache/druid/pull/6868#discussion_r249639199}&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SuppressWarnings(&quot;FieldAccessNotGuarded&quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String k)&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    map.remove(k);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;{&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;synchronized&lt;/span&gt; (obj) {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;GuardedByExample{&quot;&lt;/span&gt; +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&quot;map=&quot;&lt;/span&gt; + map +&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;string&quot;&gt;&#39;}&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    }&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;Tips: &lt;a href=&quot;https://github.com/apache/druid/pull/6903&quot;&gt;Code Example&lt;/a&gt; from &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;；另外，&lt;strong&gt;error-prone&lt;/strong&gt; 工具支持对&lt;a href=&quot;https://github.com/google/error-prone/blob/master/docs/bugpattern/GuardedBy.md#guardedby&quot;&gt;多种版本&lt;/a&gt;的 &lt;code&gt;@GuardedBy&lt;/code&gt; 进行检查&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
-    
-    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
-    
-    <category term="HttpRunner" scheme="https://yuzhouwan.com/tags/HttpRunner/"/>
-    
-    <category term="JMC" scheme="https://yuzhouwan.com/tags/JMC/"/>
-    
-    <category term="MAT" scheme="https://yuzhouwan.com/tags/MAT/"/>
-    
-    <category term="Arthas" scheme="https://yuzhouwan.com/tags/Arthas/"/>
-    
-    <category term="Jersey" scheme="https://yuzhouwan.com/tags/Jersey/"/>
-    
-    <category term="LogBack" scheme="https://yuzhouwan.com/tags/LogBack/"/>
     
   </entry>
   
@@ -401,9 +401,9 @@
     <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
     
     
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
     <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
@@ -605,15 +605,15 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
     
     <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
     
     <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
     
@@ -823,17 +823,17 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
     
@@ -1083,11 +1083,11 @@
     
     <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
     
@@ -1279,6 +1279,33 @@
   </entry>
   
   <entry>
+    <title>Nginx：一款高性能的反向代理服务器</title>
+    <link href="https://yuzhouwan.com/posts/200321/"/>
+    <id>https://yuzhouwan.com/posts/200321/</id>
+    <published>2020-03-20T23:52:01.000Z</published>
+    <updated>2020-09-17T16:04:57.960Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Nginx-是什么？&quot;&gt;&lt;a href=&quot;#Nginx-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Nginx 是什么？&quot;&gt;&lt;/a&gt;Nginx 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://nginx.org/&quot;&gt;Nginx&lt;/a&gt;&lt;/strong&gt;™ [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;h3 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h3&gt;&lt;p&gt;　在 Nginx &lt;a href=&quot;https://nginx.org/download/&quot;&gt;Archive&lt;/a&gt; 下载页面，下载 &lt;a href=&quot;https://nginx.org/download/nginx-1.13.12.tar.gz&quot;&gt;nginx-1.13.12.tar.gz&lt;/a&gt; 安装包&lt;/p&gt;
+&lt;h3 id=&quot;安装依赖&quot;&gt;&lt;a href=&quot;#安装依赖&quot; class=&quot;headerlink&quot; title=&quot;安装依赖&quot;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install pcre-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;编译安装&quot;&gt;&lt;a href=&quot;#编译安装&quot; class=&quot;headerlink&quot; title=&quot;编译安装&quot;&gt;&lt;/a&gt;编译安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ tar zxvf nginx-1.13.12.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 必须要跳转到 nginx 安装目录下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; nginx-1.13.12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ./configure --prefix=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx --conf-path=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ make -j4 &amp;amp;&amp;amp; make -j4 install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;启动&quot;&gt;&lt;a href=&quot;#启动&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sbin/nginx -c /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ps -ef | grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root     107034      1  0 Oct31 ?        00:00:00 nginx: master process sbin/nginx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107036 107034  0 Oct31 ?        00:00:00 nginx: worker process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107266 107265  0 Oct31 ?        00:00:00 tsar --check --apache --cpu --mem --load --io --traffic --tcp --partition --nginx --swap&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root     107270  97588  0 Oct31 pts/1    00:00:00 grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Nginx" scheme="https://yuzhouwan.com/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Netty：从入门到实践</title>
     <link href="https://yuzhouwan.com/posts/200316/"/>
     <id>https://yuzhouwan.com/posts/200316/</id>
@@ -1305,33 +1332,6 @@
     <category term="Netty" scheme="https://yuzhouwan.com/tags/Netty/"/>
     
     <category term="NIO" scheme="https://yuzhouwan.com/tags/NIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Nginx：一款高性能的反向代理服务器</title>
-    <link href="https://yuzhouwan.com/posts/200321/"/>
-    <id>https://yuzhouwan.com/posts/200321/</id>
-    <published>2020-03-20T23:52:01.000Z</published>
-    <updated>2020-09-17T16:04:57.960Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Nginx-是什么？&quot;&gt;&lt;a href=&quot;#Nginx-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Nginx 是什么？&quot;&gt;&lt;/a&gt;Nginx 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://nginx.org/&quot;&gt;Nginx&lt;/a&gt;&lt;/strong&gt;™ [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;h3 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h3&gt;&lt;p&gt;　在 Nginx &lt;a href=&quot;https://nginx.org/download/&quot;&gt;Archive&lt;/a&gt; 下载页面，下载 &lt;a href=&quot;https://nginx.org/download/nginx-1.13.12.tar.gz&quot;&gt;nginx-1.13.12.tar.gz&lt;/a&gt; 安装包&lt;/p&gt;
-&lt;h3 id=&quot;安装依赖&quot;&gt;&lt;a href=&quot;#安装依赖&quot; class=&quot;headerlink&quot; title=&quot;安装依赖&quot;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install pcre-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;编译安装&quot;&gt;&lt;a href=&quot;#编译安装&quot; class=&quot;headerlink&quot; title=&quot;编译安装&quot;&gt;&lt;/a&gt;编译安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ tar zxvf nginx-1.13.12.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 必须要跳转到 nginx 安装目录下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; nginx-1.13.12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ./configure --prefix=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx --conf-path=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ make -j4 &amp;amp;&amp;amp; make -j4 install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;启动&quot;&gt;&lt;a href=&quot;#启动&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sbin/nginx -c /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ps -ef | grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root     107034      1  0 Oct31 ?        00:00:00 nginx: master process sbin/nginx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107036 107034  0 Oct31 ?        00:00:00 nginx: worker process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107266 107265  0 Oct31 ?        00:00:00 tsar --check --apache --cpu --mem --load --io --traffic --tcp --partition --nginx --swap&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root     107270  97588  0 Oct31 pts/1    00:00:00 grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="Nginx" scheme="https://yuzhouwan.com/tags/Nginx/"/>
     
   </entry>
   
@@ -1917,9 +1917,9 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="RPC" scheme="https://yuzhouwan.com/tags/RPC/"/>
     

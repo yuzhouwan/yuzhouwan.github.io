@@ -53,8 +53,8 @@
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Apache Storm">
 <meta property="article:tag" content="Apache Kafka">
-<meta property="article:tag" content="HDFS">
 <meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="HDFS">
 <meta property="article:tag" content="Apache Druid">
 <meta property="article:tag" content="ElasticSearch">
 <meta property="article:tag" content="Python">
@@ -892,8 +892,8 @@
               <a href="/tags/Docker/" rel="tag"># Docker</a>
               <a href="/tags/Apache-Storm/" rel="tag"># Apache Storm</a>
               <a href="/tags/Apache-Kafka/" rel="tag"># Apache Kafka</a>
-              <a href="/tags/HDFS/" rel="tag"># HDFS</a>
               <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+              <a href="/tags/HDFS/" rel="tag"># HDFS</a>
               <a href="/tags/Apache-Druid/" rel="tag"># Apache Druid</a>
               <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
               <a href="/tags/Python/" rel="tag"># Python</a>
@@ -1227,26 +1227,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   });
 </script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'e5da61069b94deb8ef3a',
-      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
-      repo        : 'gitment',
-      owner       : 'asdf2014',
-      admin       : ['asdf2014'],
-      id          : 'a33d7ce4657d5f70a63de8fe30437d51',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
-
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
@@ -1273,6 +1253,26 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       serverURLs : ''
     });
   }, window.Valine);
+});
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : 'a33d7ce4657d5f70a63de8fe30437d51',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 

@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -384,8 +384,7 @@
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要预先安装 tree 命令（yum install tree -y）</span></span><br><span class="line">$ tree</span><br><span class="line">  .</span><br><span class="line">  ├── bin</span><br><span class="line">  │&nbsp;&nbsp; └── yuzhouwan-cli.sh</span><br><span class="line">  └── lib</span><br><span class="line">      ├── core</span><br><span class="line">      └── plugins</span><br><span class="line">          ├── ai</span><br><span class="line">          └── bigdata</span><br></pre></td></tr></tbody></table></figure>
 <h5 id="踩过的坑-1"><a href="#踩过的坑-1" class="headerlink" title="踩过的坑"></a>踩过的坑</h5><h6 id="模块间存在版本冲突的-jar-包"><a href="#模块间存在版本冲突的-jar-包" class="headerlink" title="模块间存在版本冲突的 jar 包"></a>模块间存在版本冲突的 jar 包</h6><ul>
 <li><p>问题描述</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Currently, inclusion of module dependencies may produce unpredictable results <span class="keyword">if</span> a version conflict occurs</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Currently, inclusion of module dependencies may produce unpredictable results <span class="keyword">if</span> a version conflict occurs</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p>解决</p>
 <p>如果上述 <code>yuzhouwan-ai</code> 和 <code>yuzhouwan-bigdata</code> 模块，与 <code>yuzhouwan-common</code> 模块存在版本冲突的 jar 包，则需要将 <code>bin.xml</code> 拆解成 <code>bin-common.xml</code>、<code>bin-ai.xml</code> 和 <code>bin-bigdata.xml</code> 三个 assembly 配置文件，依次进行构建（此时需要将 id 设置成一样的，不然会被构建到不同的目录下）。否则，版本冲突的 jar 包，将只能保留其中一个版本，且具体保留哪个版本是不确定的</p>
 </li>

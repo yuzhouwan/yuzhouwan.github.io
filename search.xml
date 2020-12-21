@@ -571,6 +571,69 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
+    <title>Apache Storm 简介</title>
+    <url>/posts/13977/</url>
+    <content><![CDATA[<h2 id="Storm-是什么？"><a href="#Storm-是什么？" class="headerlink" title="Storm 是什么？"></a>Storm 是什么？</h2><p>　<strong>Apache Storm</strong>™ is a free and open source distributed realtime computation system. Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing.</p>
+<h2 id="为什么要有-Storm？"><a href="#为什么要有-Storm？" class="headerlink" title="为什么要有 Storm？"></a>为什么要有 Storm？</h2><h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>　具备经济、快速、可靠、易扩充、数据共享、设备共享、通讯方便、灵活等分布式所具备的特性</p>
+<h3 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h3><p>　计算在多线程、进程 和 服务器之间并行进行</p>
+<h3 id="高可靠性"><a href="#高可靠性" class="headerlink" title="高可靠性"></a>高可靠性</h3><p>　能管理工作进程 和 节点的故障<br>　消息处理，能得到一次完成处理的保证</p>
+<h3 id="编程模型简单"><a href="#编程模型简单" class="headerlink" title="编程模型简单"></a>编程模型简单</h3><p>　降低了并行批处理复杂性</p>
+<h3 id="高效实时"><a href="#高效实时" class="headerlink" title="高效实时"></a>高效实时</h3><p>　利用 ZeroMQ 保证了消息的快速处理</p>
+<h3 id="支持热部署"><a href="#支持热部署" class="headerlink" title="支持热部署"></a>支持热部署</h3><p>　加速应用开发</p>
+<a id="more"></a>
+<h2 id="Storm-工作机制"><a href="#Storm-工作机制" class="headerlink" title="Storm 工作机制"></a>Storm 工作机制</h2><h3 id="一些主要概念"><a href="#一些主要概念" class="headerlink" title="一些主要概念"></a>一些主要概念</h3><ul>
+<li>Topology（计算拓扑）</li>
+<li>Stream（消息流）</li>
+<li>Spout（消息源）</li>
+<li>Bolt（消息处理者）</li>
+<li>grouping（数据的分发方式）</li>
+<li>Topology（拓扑）</li>
+<li>Worker（工作进程）</li>
+<li>Task（执行具体逻辑的任务）</li>
+<li>Executor（执行 Task 的线程）</li>
+<li>Configuration（配置）</li>
+</ul>
+<div class="note info">To be continued...</div>
+
+
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>Apache Storm</tag>
+        <tag>Apache Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Apache Storm 与 Kafka 的整合应用</title>
     <url>/posts/25015/</url>
     <content><![CDATA[<p><br></p>
@@ -674,117 +737,6 @@ style Res' fill:#009933</pre>
       <tags>
         <tag>Apache Storm</tag>
         <tag>Apache Kafka</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Apache Storm 简介</title>
-    <url>/posts/13977/</url>
-    <content><![CDATA[<h2 id="Storm-是什么？"><a href="#Storm-是什么？" class="headerlink" title="Storm 是什么？"></a>Storm 是什么？</h2><p>　<strong>Apache Storm</strong>™ is a free and open source distributed realtime computation system. Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing.</p>
-<h2 id="为什么要有-Storm？"><a href="#为什么要有-Storm？" class="headerlink" title="为什么要有 Storm？"></a>为什么要有 Storm？</h2><h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>　具备经济、快速、可靠、易扩充、数据共享、设备共享、通讯方便、灵活等分布式所具备的特性</p>
-<h3 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h3><p>　计算在多线程、进程 和 服务器之间并行进行</p>
-<h3 id="高可靠性"><a href="#高可靠性" class="headerlink" title="高可靠性"></a>高可靠性</h3><p>　能管理工作进程 和 节点的故障<br>　消息处理，能得到一次完成处理的保证</p>
-<h3 id="编程模型简单"><a href="#编程模型简单" class="headerlink" title="编程模型简单"></a>编程模型简单</h3><p>　降低了并行批处理复杂性</p>
-<h3 id="高效实时"><a href="#高效实时" class="headerlink" title="高效实时"></a>高效实时</h3><p>　利用 ZeroMQ 保证了消息的快速处理</p>
-<h3 id="支持热部署"><a href="#支持热部署" class="headerlink" title="支持热部署"></a>支持热部署</h3><p>　加速应用开发</p>
-<a id="more"></a>
-<h2 id="Storm-工作机制"><a href="#Storm-工作机制" class="headerlink" title="Storm 工作机制"></a>Storm 工作机制</h2><h3 id="一些主要概念"><a href="#一些主要概念" class="headerlink" title="一些主要概念"></a>一些主要概念</h3><ul>
-<li>Topology（计算拓扑）</li>
-<li>Stream（消息流）</li>
-<li>Spout（消息源）</li>
-<li>Bolt（消息处理者）</li>
-<li>grouping（数据的分发方式）</li>
-<li>Topology（拓扑）</li>
-<li>Worker（工作进程）</li>
-<li>Task（执行具体逻辑的任务）</li>
-<li>Executor（执行 Task 的线程）</li>
-<li>Configuration（配置）</li>
-</ul>
-<div class="note info">To be continued...</div>
-
-
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>大数据</category>
-      </categories>
-      <tags>
-        <tag>Apache Storm</tag>
-        <tag>Apache Kafka</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DIRT</title>
-    <url>/posts/47609/</url>
-    <content><![CDATA[<h2 id="DIRT-是什么？"><a href="#DIRT-是什么？" class="headerlink" title="DIRT 是什么？"></a>DIRT 是什么？</h2><p>　DIRT：数据密集型实时（<strong>D</strong>ata-<strong>I</strong>ntensive <strong>R</strong>eal-<strong>T</strong>ime）</p>
-<h2 id="为什么适用于-Node-js-开发？"><a href="#为什么适用于-Node-js-开发？" class="headerlink" title="为什么适用于 Node.js 开发？"></a>为什么适用于 Node.js 开发？</h2><h3 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h3><p>　因为 <a href="https://yuzhouwan.com/posts/23363/">Node.js</a> 自身在 I/O 上非常轻量，它善于将数据从一个管道混排 或 代理到另一个管道上，这能在处理大量请求时持有很多开放的连接，并且只占用一小部分内存（如同浏览器一样，保证了响应能力）</p>
-<h3 id="Web-发展形势"><a href="#Web-发展形势" class="headerlink" title="Web 发展形势"></a>Web 发展形势</h3><p>　不管是用实时组件增强已有程序，还是打造全新的程序，Web 都在朝着响应性和协作型环境逐渐进发<br>而这种新型的 Web 应用程序需要一个能够实时相应大量并发请求的平台来支撑它们（除此之外，还有 I/O 负载较重的程序也可以用到）</p>
-<a id="more"></a>
-<h3 id="Node-js-作为-JavaScript-程序的平台"><a href="#Node-js-作为-JavaScript-程序的平台" class="headerlink" title="Node.js 作为 JavaScript 程序的平台"></a>Node.js 作为 JavaScript 程序的平台</h3><ul>
-<li>Timer API (for example, setTimeout)</li>
-<li>Console API (for example, console.log)</li>
-<li>Network and File I/O modules (HTTP, TLS, HTTPS, filesystem (POSIX), Datagram (UDP), and NET (TCP))</li>
-</ul>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>语言</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
       </tags>
   </entry>
   <entry>
@@ -976,6 +928,54 @@ style Res' fill:#009933</pre>
       </categories>
       <tags>
         <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DIRT</title>
+    <url>/posts/47609/</url>
+    <content><![CDATA[<h2 id="DIRT-是什么？"><a href="#DIRT-是什么？" class="headerlink" title="DIRT 是什么？"></a>DIRT 是什么？</h2><p>　DIRT：数据密集型实时（<strong>D</strong>ata-<strong>I</strong>ntensive <strong>R</strong>eal-<strong>T</strong>ime）</p>
+<h2 id="为什么适用于-Node-js-开发？"><a href="#为什么适用于-Node-js-开发？" class="headerlink" title="为什么适用于 Node.js 开发？"></a>为什么适用于 Node.js 开发？</h2><h3 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h3><p>　因为 <a href="https://yuzhouwan.com/posts/23363/">Node.js</a> 自身在 I/O 上非常轻量，它善于将数据从一个管道混排 或 代理到另一个管道上，这能在处理大量请求时持有很多开放的连接，并且只占用一小部分内存（如同浏览器一样，保证了响应能力）</p>
+<h3 id="Web-发展形势"><a href="#Web-发展形势" class="headerlink" title="Web 发展形势"></a>Web 发展形势</h3><p>　不管是用实时组件增强已有程序，还是打造全新的程序，Web 都在朝着响应性和协作型环境逐渐进发<br>而这种新型的 Web 应用程序需要一个能够实时相应大量并发请求的平台来支撑它们（除此之外，还有 I/O 负载较重的程序也可以用到）</p>
+<a id="more"></a>
+<h3 id="Node-js-作为-JavaScript-程序的平台"><a href="#Node-js-作为-JavaScript-程序的平台" class="headerlink" title="Node.js 作为 JavaScript 程序的平台"></a>Node.js 作为 JavaScript 程序的平台</h3><ul>
+<li>Timer API (for example, setTimeout)</li>
+<li>Console API (for example, console.log)</li>
+<li>Network and File I/O modules (HTTP, TLS, HTTPS, filesystem (POSIX), Datagram (UDP), and NET (TCP))</li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
       </tags>
   </entry>
   <entry>

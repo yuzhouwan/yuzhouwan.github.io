@@ -1028,26 +1028,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'e5da61069b94deb8ef3a',
-      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
-      repo        : 'gitment',
-      owner       : 'asdf2014',
-      admin       : ['asdf2014'],
-      id          : '066d578255c476ad8468abdd155852bd',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
-
 <script>
   var disqus_config = function() {
     this.page.url = "https://yuzhouwan.com/posts/201018/";
@@ -1067,6 +1047,26 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       (d.head || d.body).appendChild(s);
     }
   });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '066d578255c476ad8468abdd155852bd',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
 </script>
 
 

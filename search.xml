@@ -4836,9 +4836,6 @@ TSIService -&gt;&gt;- Thrift : requestStatementId_result</pre>
 <li><a href="https://github.com/apache/iotdb/pulls?q=is%3Apr+author%3Aasdf2014">Pull Request</a></li>
 </ul>
 <p>　详见：《<a href="https://yuzhouwan.com/posts/19631/">如何成为 Apache 的 PMC</a>》</p>
-<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
-<li><a href="https://docs.google.com/document/d/1VeTwVsm4CkQSVR65bWw9pKg6gRdiDYUz0lBBhWXHl5A/">Support Spinning Door Transformation (SDT) compression will benefit IoTDB in many industrial scenarios</a></li>
-</ul>
 <h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
 <table>
 <thead>

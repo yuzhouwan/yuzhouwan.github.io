@@ -2021,135 +2021,28 @@ FaaS --&gt; e[End?]</pre>
     <content><![CDATA[<h2 id="一幅持续扩展的物联网思维导图"><a href="#一幅持续扩展的物联网思维导图" class="headerlink" title="一幅持续扩展的物联网思维导图"></a>一幅持续扩展的物联网思维导图</h2><p><img data-src="/picture/iot/iot_mind_map.jpg" alt="一幅持续扩展的物联网思维导图"></p>
 <center>（利用 MindNode™ 绘制而成）</center>
 
-<p>这是一幅持续扩展的物联网思维导图（2020-12-20 初次发布）</p>
+<h2 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">日期</th>
+<th style="text-align:center">更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2020-12-20</td>
+<td style="text-align:center">初次发布，包含定义、行业、传感器、数据分析、安全、协议、机构、历史等内容</td>
+</tr>
+<tr>
+<td style="text-align:center">2020-12-21</td>
+<td style="text-align:center">扩充了 1982 年 ~ 2016 年之间关于物联网的大事件</td>
+</tr>
+</tbody>
+</table>
+</div>
 <a id="more"></a>
-<p>以下是完整的文本格式：</p>
-<p>物联网</p>
-<p>​    理论</p>
-<p>​        定义</p>
-<p>​            Thing</p>
-<p>​                物</p>
-<p>​                    一切可以联网的设备</p>
-<p>​            Internet of Things</p>
-<p>​                IoT</p>
-<p>​                    物联网</p>
-<p>​                        物与物之间通讯，并共享信息，无需人为管理便可以自主运作</p>
-<p>​        组成</p>
-<p>​            服务应用</p>
-<p>​            分析处理</p>
-<p>​            平台</p>
-<p>​            网络</p>
-<p>​            设备</p>
-<p>​        分类</p>
-<p>​            Private IoT</p>
-<p>​                私有物联网</p>
-<p>​                    单一机构内部</p>
-<p>​            Public IoT</p>
-<p>​                公有物联网</p>
-<p>​                    面向公众或大型用户群体</p>
-<p>​            Community IoT</p>
-<p>​                社区物联网</p>
-<p>​                    关联社区或机构群体</p>
-<p>​                        交通局</p>
-<p>​                        环保局</p>
-<p>​                        公安局</p>
-<p>​            Hybrid IoT</p>
-<p>​                混合物联网</p>
-<p>​                    两种以上类型物联网的组合</p>
-<p>​        作用</p>
-<p>​            提升制造业、供应链等场景的效率</p>
-<p>​            降低运营成本</p>
-<p>​            保障生产安全</p>
-<p>​                配合工人的可穿戴设备</p>
-<p>​    行业</p>
-<p>​        建筑</p>
-<p>​        智能家居</p>
-<p>​            作用</p>
-<p>​                减少碳排放</p>
-<p>​            案例</p>
-<p>​                智能灯泡</p>
-<p>​        医疗保健</p>
-<p>​            医疗资源管理</p>
-<p>​        制造业</p>
-<p>​        自动驾驶</p>
-<p>​        运输</p>
-<p>​        供应链</p>
-<p>​            RFID</p>
-<p>​                Radio Frequency Identification</p>
-<p>​                    射频识别</p>
-<p>​                        通过无线电波不接触快速信息交换与存储技术</p>
-<p>​        石油天然气</p>
-<p>​        农业</p>
-<p>​            作用</p>
-<p>​                防止作物歉收</p>
-<p>​            测点</p>
-<p>​                气候</p>
-<p>​                植物</p>
-<p>​                土壤</p>
-<p>​        机器人</p>
-<p>​        可穿戴设备</p>
-<p>​    传感器</p>
-<p>​        定义</p>
-<p>​            将物理现象用电信号的形式输出</p>
-<p>​        种类</p>
-<p>​            图像传感器</p>
-<p>​            光学传感器</p>
-<p>​            温度传感器</p>
-<p>​            湿度传感器</p>
-<p>​            风速传感器</p>
-<p>​            加速度传感器</p>
-<p>​            磁场传感器</p>
-<p>​    数据分析</p>
-<p>​        数据库</p>
-<p>​            Apache IoTDB</p>
-<p>​        可视化</p>
-<p>​            Grafana</p>
-<p>​        告警系统</p>
-<p>​        反控系统</p>
-<p>​        人工智能</p>
-<p>​            信息分析</p>
-<p>​                态势分析</p>
-<p>​            时序预测</p>
-<p>​                车辆预测性维护</p>
-<p>​    安全</p>
-<p>​        终端设备</p>
-<p>​            路由器</p>
-<p>​            交换机</p>
-<p>​            视频监控设备</p>
-<p>​            打印机</p>
-<p>​        传输通讯</p>
-<p>​        数据存储</p>
-<p>​        用户隐私</p>
-<p>​    其他</p>
-<p>​        相关机构</p>
-<p>​            CAICT</p>
-<p>​                China Academy of Information and Communications Technology</p>
-<p>​                    中国信通院</p>
-<p>​            IETE</p>
-<p>​                The Institution of Electronics and Telecommunication Engineers</p>
-<p>​                    电子与电信工程师协会</p>
-<p>​            3GPP</p>
-<p>​                Thrid Generation Partnership Project</p>
-<p>​                    第三方合作伙伴计划</p>
-<p>​            ITU</p>
-<p>​                International Telecommunication Union</p>
-<p>​                    国际电信联盟</p>
-<p>​            ISO</p>
-<p>​                International Organization for Standardization</p>
-<p>​                    国际标准化组织</p>
-<p>​        相关协议</p>
-<p>​            MQTT</p>
-<p>​                Message Queuing Telemetry Transport</p>
-<p>​                    消息队列遥测传输</p>
-<p>​            OPC-UA</p>
-<p>​                Object Linking and Embedding for Process Control Unified Architecture</p>
-<p>​                    OPC 同一架构</p>
-<p>​        相关历史</p>
-<p>​            1980s</p>
-<p>​                卡耐基梅隆大学的自动售货机首次实现物联网设备</p>
-<p>​                    检测饮料库存与温度</p>
-<p>​            1999</p>
-<p>​                首次提出 IoT 概念</p>
+<h2 id="完整的文本格式"><a href="#完整的文本格式" class="headerlink" title="完整的文本格式"></a>完整的文本格式</h2><figure class="highlight markdown"><table><tbody><tr><td class="code"><pre><span class="line">物联网</span><br><span class="line"></span><br><span class="line">​	理论</span><br><span class="line"></span><br><span class="line">​		定义</span><br><span class="line"></span><br><span class="line">​			Thing</span><br><span class="line"></span><br><span class="line">​				物</span><br><span class="line"></span><br><span class="line">​					一切可以联网的设备</span><br><span class="line"></span><br><span class="line">​			Internet of Things</span><br><span class="line"></span><br><span class="line">​				IoT</span><br><span class="line"></span><br><span class="line">​					物联网</span><br><span class="line"></span><br><span class="line">​						物与物之间通讯，并共享信息，无需人为管理便可以自主运作</span><br><span class="line"></span><br><span class="line">​		组成</span><br><span class="line"></span><br><span class="line">​			服务应用</span><br><span class="line"></span><br><span class="line">​			分析处理</span><br><span class="line"></span><br><span class="line">​			平台</span><br><span class="line"></span><br><span class="line">​			网络</span><br><span class="line"></span><br><span class="line">​			设备</span><br><span class="line"></span><br><span class="line">​		分类</span><br><span class="line"></span><br><span class="line">​			Private IoT</span><br><span class="line"></span><br><span class="line">​				私有物联网</span><br><span class="line"></span><br><span class="line">​					单一机构内部</span><br><span class="line"></span><br><span class="line">​			Public IoT</span><br><span class="line"></span><br><span class="line">​				公有物联网</span><br><span class="line"></span><br><span class="line">​					面向公众或大型用户群体</span><br><span class="line"></span><br><span class="line">​			Community IoT</span><br><span class="line"></span><br><span class="line">​				社区物联网</span><br><span class="line"></span><br><span class="line">​					关联社区或机构群体</span><br><span class="line"></span><br><span class="line">​						交通局</span><br><span class="line"></span><br><span class="line">​						环保局</span><br><span class="line"></span><br><span class="line">​						公安局</span><br><span class="line"></span><br><span class="line">​			Hybrid IoT</span><br><span class="line"></span><br><span class="line">​				混合物联网</span><br><span class="line"></span><br><span class="line">​					两种以上类型物联网的组合</span><br><span class="line"></span><br><span class="line">​		作用</span><br><span class="line"></span><br><span class="line">​			提升制造业、供应链等场景的效率</span><br><span class="line"></span><br><span class="line">​			降低运营成本</span><br><span class="line"></span><br><span class="line">​			保障生产安全</span><br><span class="line"></span><br><span class="line">​				配合工人的可穿戴设备</span><br><span class="line"></span><br><span class="line">​	行业</span><br><span class="line"></span><br><span class="line">​		建筑</span><br><span class="line"></span><br><span class="line">​		智能家居</span><br><span class="line"></span><br><span class="line">​			作用</span><br><span class="line"></span><br><span class="line">​				减少碳排放</span><br><span class="line"></span><br><span class="line">​			案例</span><br><span class="line"></span><br><span class="line">​				智能灯泡</span><br><span class="line"></span><br><span class="line">​		医疗保健</span><br><span class="line"></span><br><span class="line">​			医疗资源管理</span><br><span class="line"></span><br><span class="line">​		制造业</span><br><span class="line"></span><br><span class="line">​		自动驾驶</span><br><span class="line"></span><br><span class="line">​		运输</span><br><span class="line"></span><br><span class="line">​		供应链</span><br><span class="line"></span><br><span class="line">​			RFID</span><br><span class="line"></span><br><span class="line">​				Radio Frequency Identification</span><br><span class="line"></span><br><span class="line">​					射频识别</span><br><span class="line"></span><br><span class="line">​						通过无线电波不接触快速信息交换与存储技术</span><br><span class="line"></span><br><span class="line">​		石油天然气</span><br><span class="line"></span><br><span class="line">​		农业</span><br><span class="line"></span><br><span class="line">​			作用</span><br><span class="line"></span><br><span class="line">​				防止作物歉收</span><br><span class="line"></span><br><span class="line">​			测点</span><br><span class="line"></span><br><span class="line">​				气候</span><br><span class="line"></span><br><span class="line">​				植物</span><br><span class="line"></span><br><span class="line">​				土壤</span><br><span class="line"></span><br><span class="line">​		机器人</span><br><span class="line"></span><br><span class="line">​		可穿戴设备</span><br><span class="line"></span><br><span class="line">​	传感器</span><br><span class="line"></span><br><span class="line">​		定义</span><br><span class="line"></span><br><span class="line">​			将物理现象用电信号的形式输出</span><br><span class="line"></span><br><span class="line">​		种类</span><br><span class="line"></span><br><span class="line">​			图像传感器</span><br><span class="line"></span><br><span class="line">​			光学传感器</span><br><span class="line"></span><br><span class="line">​			温度传感器</span><br><span class="line"></span><br><span class="line">​			湿度传感器</span><br><span class="line"></span><br><span class="line">​			风速传感器</span><br><span class="line"></span><br><span class="line">​			加速度传感器</span><br><span class="line"></span><br><span class="line">​			磁场传感器</span><br><span class="line"></span><br><span class="line">​	数据分析</span><br><span class="line"></span><br><span class="line">​		数据库</span><br><span class="line"></span><br><span class="line">​			Apache IoTDB</span><br><span class="line"></span><br><span class="line">​		可视化</span><br><span class="line"></span><br><span class="line">​			Grafana</span><br><span class="line"></span><br><span class="line">​		告警系统</span><br><span class="line"></span><br><span class="line">​		反控系统</span><br><span class="line"></span><br><span class="line">​		人工智能</span><br><span class="line"></span><br><span class="line">​			信息分析</span><br><span class="line"></span><br><span class="line">​				态势分析</span><br><span class="line"></span><br><span class="line">​			时序预测</span><br><span class="line"></span><br><span class="line">​				车辆预测性维护</span><br><span class="line"></span><br><span class="line">​	安全</span><br><span class="line"></span><br><span class="line">​		终端设备</span><br><span class="line"></span><br><span class="line">​			路由器</span><br><span class="line"></span><br><span class="line">​			交换机</span><br><span class="line"></span><br><span class="line">​			视频监控设备</span><br><span class="line"></span><br><span class="line">​			打印机</span><br><span class="line"></span><br><span class="line">​		传输通讯</span><br><span class="line"></span><br><span class="line">​		数据存储</span><br><span class="line"></span><br><span class="line">​		用户隐私</span><br><span class="line"></span><br><span class="line">​	其他</span><br><span class="line"></span><br><span class="line">​		相关机构</span><br><span class="line"></span><br><span class="line">​			CAICT</span><br><span class="line"></span><br><span class="line">​				China Academy of Information and Communications Technology</span><br><span class="line"></span><br><span class="line">​					中国信通院</span><br><span class="line"></span><br><span class="line">​			IETE</span><br><span class="line"></span><br><span class="line">​				The Institution of Electronics and Telecommunication Engineers</span><br><span class="line"></span><br><span class="line">​					电子与电信工程师协会</span><br><span class="line"></span><br><span class="line">​			3GPP</span><br><span class="line"></span><br><span class="line">​				Thrid Generation Partnership Project</span><br><span class="line"></span><br><span class="line">​					第三方合作伙伴计划</span><br><span class="line"></span><br><span class="line">​			ITU</span><br><span class="line"></span><br><span class="line">​				International Telecommunication Union</span><br><span class="line"></span><br><span class="line">​					国际电信联盟</span><br><span class="line"></span><br><span class="line">​			ISO</span><br><span class="line"></span><br><span class="line">​				International Organization for Standardization</span><br><span class="line"></span><br><span class="line">​					国际标准化组织</span><br><span class="line"></span><br><span class="line">​		相关协议</span><br><span class="line"></span><br><span class="line">​			MQTT</span><br><span class="line"></span><br><span class="line">​				Message Queuing Telemetry Transport</span><br><span class="line"></span><br><span class="line">​					消息队列遥测传输</span><br><span class="line"></span><br><span class="line">​			OPC-UA</span><br><span class="line"></span><br><span class="line">​				Object Linking and Embedding for Process Control Unified Architecture</span><br><span class="line"></span><br><span class="line">​					OPC 同一架构</span><br><span class="line"></span><br><span class="line">​		相关历史</span><br><span class="line"></span><br><span class="line">​			1980s</span><br><span class="line"></span><br><span class="line">​				卡耐基梅隆大学的自动售货机首次实现物联网设备</span><br><span class="line"></span><br><span class="line">​					检测饮料库存与温度</span><br><span class="line"></span><br><span class="line">​			1999</span><br><span class="line"></span><br><span class="line">​				首次提出 IoT 概念</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
 <table>
 <thead>

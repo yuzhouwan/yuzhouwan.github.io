@@ -62,8 +62,8 @@
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Apache Storm">
 <meta property="article:tag" content="Apache Kafka">
-<meta property="article:tag" content="Apache Druid">
 <meta property="article:tag" content="Apache Hadoop">
+<meta property="article:tag" content="Apache Druid">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="Apache ZooKeeper">
 <meta property="article:tag" content="Paxos">
@@ -188,7 +188,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">146</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">147</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -198,7 +198,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">54</span></a>
 
   </li>
         <li class="menu-item menu-item-书单">
@@ -1282,8 +1282,8 @@
               <a href="/tags/Docker/" rel="tag"># Docker</a>
               <a href="/tags/Apache-Storm/" rel="tag"># Apache Storm</a>
               <a href="/tags/Apache-Kafka/" rel="tag"># Apache Kafka</a>
-              <a href="/tags/Apache-Druid/" rel="tag"># Apache Druid</a>
               <a href="/tags/Apache-Hadoop/" rel="tag"># Apache Hadoop</a>
+              <a href="/tags/Apache-Druid/" rel="tag"># Apache Druid</a>
               <a href="/tags/JVM/" rel="tag"># JVM</a>
               <a href="/tags/Apache-ZooKeeper/" rel="tag"># Apache ZooKeeper</a>
               <a href="/tags/Paxos/" rel="tag"># Paxos</a>
@@ -1411,7 +1411,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1424,7 +1424,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">146</span>
+        <span class="site-state-item-count">147</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1482,7 +1482,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:35</span>
+    <span title="站点阅读时长">20:04</span>
 </div>
 
         
@@ -1662,26 +1662,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'e5da61069b94deb8ef3a',
-      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
-      repo        : 'gitment',
-      owner       : 'asdf2014',
-      admin       : ['asdf2014'],
-      id          : '37b30c7b01cffa7eef623d5ebba349cc',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
-
 <script>
   var disqus_config = function() {
     this.page.url = "https://yuzhouwan.com/posts/31915/";
@@ -1701,6 +1681,26 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       (d.head || d.body).appendChild(s);
     }
   });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '37b30c7b01cffa7eef623d5ebba349cc',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
 </script>
 
 

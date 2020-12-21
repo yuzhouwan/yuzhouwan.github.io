@@ -59,8 +59,8 @@
 <meta property="article:published_time" content="2014-11-16T10:03:04.000Z">
 <meta property="article:modified_time" content="2020-04-02T14:14:56.866Z">
 <meta property="article:author" content="Benedict Jin">
-<meta property="article:tag" content="HDFS">
 <meta property="article:tag" content="Apache Hadoop">
+<meta property="article:tag" content="HDFS">
 <meta property="article:tag" content="RPC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yuzhouwan.com/picture/hadoop/hadoop_hdfs.png">
@@ -171,7 +171,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">146</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">147</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -181,7 +181,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">54</span></a>
 
   </li>
         <li class="menu-item menu-item-书单">
@@ -392,12 +392,6 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/200926/" rel="bookmark">Helm 实战</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/posts/26002/" rel="bookmark">Apache Kafka 分布式消息队列框架</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/54206/" rel="bookmark">大数据生态圈里的一致性算法</a></div>
     </li>
     <li class="popular-posts-item">
@@ -405,6 +399,12 @@
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/posts/31915/" rel="bookmark">ZooKeeper 原理与优化</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/200926/" rel="bookmark">Helm 实战</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/26002/" rel="bookmark">Apache Kafka 分布式消息队列框架</a></div>
     </li>
   </ul>
 
@@ -457,8 +457,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/HDFS/" rel="tag"># HDFS</a>
               <a href="/tags/Apache-Hadoop/" rel="tag"># Apache Hadoop</a>
+              <a href="/tags/HDFS/" rel="tag"># HDFS</a>
               <a href="/tags/RPC/" rel="tag"># RPC</a>
           </div>
 
@@ -572,7 +572,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -585,7 +585,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">146</span>
+        <span class="site-state-item-count">147</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -643,7 +643,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:35</span>
+    <span title="站点阅读时长">20:04</span>
 </div>
 
         
@@ -768,26 +768,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'e5da61069b94deb8ef3a',
-      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
-      repo        : 'gitment',
-      owner       : 'asdf2014',
-      admin       : ['asdf2014'],
-      id          : '97b09aff8155c8377e3bdb4b9860923d',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
-
 <script>
   var disqus_config = function() {
     this.page.url = "https://yuzhouwan.com/posts/60504/";
@@ -807,6 +787,26 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       (d.head || d.body).appendChild(s);
     }
   });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '97b09aff8155c8377e3bdb4b9860923d',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
 </script>
 
 

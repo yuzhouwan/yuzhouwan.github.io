@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-12-21T13:04:03.379Z</updated>
+  <updated>2020-12-21T13:07:09.108Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/201220/"/>
     <id>https://yuzhouwan.com/posts/201220/</id>
     <published>2020-12-20T03:50:00.000Z</published>
-    <updated>2020-12-21T13:04:03.379Z</updated>
+    <updated>2020-12-21T13:07:09.108Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.jpg&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
@@ -677,9 +677,9 @@
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
     
@@ -874,9 +874,9 @@
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
     
@@ -1126,11 +1126,11 @@
     
     <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
     
@@ -1960,9 +1960,9 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
     <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
     <category term="RPC" scheme="https://yuzhouwan.com/tags/RPC/"/>
     

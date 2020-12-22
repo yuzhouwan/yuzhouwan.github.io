@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-12-21T14:31:03.353Z</updated>
+  <updated>2020-12-22T16:25:12.510Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2020-12-21T14:31:03.353Z</updated>
+    <updated>2020-12-22T16:25:12.510Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -64,10 +64,10 @@
     <link href="https://yuzhouwan.com/posts/201220/"/>
     <id>https://yuzhouwan.com/posts/201220/</id>
     <published>2020-12-20T03:50:00.000Z</published>
-    <updated>2020-12-21T13:37:34.505Z</updated>
+    <updated>2020-12-22T16:24:33.782Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.jpg&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.png&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（利用 MindNode™ 绘制而成）&lt;/center&gt;
 
 &lt;h2 id=&quot;更新记录&quot;&gt;&lt;a href=&quot;#更新记录&quot; class=&quot;headerlink&quot; title=&quot;更新记录&quot;&gt;&lt;/a&gt;更新记录&lt;/h2&gt;&lt;div class=&quot;table-container&quot;&gt;
@@ -87,6 +87,10 @@
 &lt;td style=&quot;text-align:center&quot;&gt;2020-12-21&lt;/td&gt;
 &lt;td style=&quot;text-align:center&quot;&gt;扩充了 1982 年 ~ 2016 年之间关于物联网的大事件&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;2020-12-22&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;增加 eSIM 的应用场景&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;</summary>
@@ -99,6 +103,33 @@
     <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
     
     <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python：从入门到实践</title>
+    <link href="https://yuzhouwan.com/posts/43687/"/>
+    <id>https://yuzhouwan.com/posts/43687/</id>
+    <published>2015-02-05T16:08:40.000Z</published>
+    <updated>2020-12-22T16:23:42.331Z</updated>
+    
+    
+    <summary type="html">本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</summary>
+    
+    
+    
+    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="iPython" scheme="https://yuzhouwan.com/tags/iPython/"/>
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
   </entry>
   
@@ -776,33 +807,6 @@
     <category term="机器学习" scheme="https://yuzhouwan.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     <category term="Apache Spark" scheme="https://yuzhouwan.com/tags/Apache-Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python：从入门到实践</title>
-    <link href="https://yuzhouwan.com/posts/43687/"/>
-    <id>https://yuzhouwan.com/posts/43687/</id>
-    <published>2015-02-05T16:08:40.000Z</published>
-    <updated>2020-10-29T13:44:24.891Z</updated>
-    
-    
-    <summary type="html">本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</summary>
-    
-    
-    
-    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="iPython" scheme="https://yuzhouwan.com/tags/iPython/"/>
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
   </entry>
   

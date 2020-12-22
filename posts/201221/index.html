@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
 <meta property="article:published_time" content="2020-12-21T13:35:06.000Z">
-<meta property="article:modified_time" content="2020-12-21T14:31:03.353Z">
+<meta property="article:modified_time" content="2020-12-22T16:25:12.510Z">
 <meta property="article:author" content="Benedict Jin">
 <meta property="article:tag" content="IoT">
 <meta property="article:tag" content="物联网">
@@ -252,10 +252,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-21 21:35:06 / 修改时间：22:31:03" itemprop="dateCreated datePublished" datetime="2020-12-21T21:35:06+08:00">2020-12-21</time>
+              <time title="创建时间：2020-12-21 21:35:06" itemprop="dateCreated datePublished" datetime="2020-12-21T21:35:06+08:00">2020-12-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-23 00:25:12" itemprop="dateModified" datetime="2020-12-23T00:25:12+08:00">2020-12-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -406,17 +412,17 @@ WritableMemChunk -&gt;&gt;+ MeasurementSchema : getType
 MeasurementSchema -&gt;&gt;- WritableMemChunk : TSDataType
 
 alt BOOLEAN
-WritableMemChunk -&gt; WritableMemChunk : putBoolean
+WritableMemChunk -&gt;&gt; WritableMemChunk : putBoolean
 else INT32
-WritableMemChunk -&gt; WritableMemChunk : putInt
+WritableMemChunk -&gt;&gt; WritableMemChunk : putInt
 else INT64
-WritableMemChunk -&gt; WritableMemChunk : putLong
+WritableMemChunk -&gt;&gt; WritableMemChunk : putLong
 else FLOAT
-WritableMemChunk -&gt; WritableMemChunk : putFloat
+WritableMemChunk -&gt;&gt; WritableMemChunk : putFloat
 else DOUBLE
-WritableMemChunk -&gt; WritableMemChunk : putDouble
+WritableMemChunk -&gt;&gt; WritableMemChunk : putDouble
 else TEXT
-WritableMemChunk -&gt; WritableMemChunk : putBinary
+WritableMemChunk -&gt;&gt; WritableMemChunk : putBinary
 end
 
 WritableMemChunk -&gt;&gt; TVList : putFloat
@@ -559,7 +565,8 @@ TSIService -&gt;&gt;- Thrift : requestStatementId_result</pre>
 
 
 
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">tree</span><br><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│&nbsp;&nbsp; ├── sequence</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── root.ln</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── 0</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── 1606030145164-1-0.tsfile</span><br><span class="line">│&nbsp;&nbsp; └── unsequence</span><br><span class="line">├── system</span><br><span class="line">│&nbsp;&nbsp; ├── roles</span><br><span class="line">│&nbsp;&nbsp; ├── schema</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── mlog.txt</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── system.properties</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── tlog.txt</span><br><span class="line">│&nbsp;&nbsp; ├── storage_groups</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── root.ln</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── 0</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── Version-100</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── upgrade</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── Version-100</span><br><span class="line">│&nbsp;&nbsp; ├── upgrade</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── upgrade.txt</span><br><span class="line">│&nbsp;&nbsp; └── users</span><br><span class="line">│&nbsp;&nbsp;     └── root.profile</span><br><span class="line">└── wal</span><br><span class="line">    └── root.ln-1606030145164-1-0.tsfile</span><br><span class="line">        └── wal1</span><br><span class="line"></span><br><span class="line">16 directories, 9 files</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tree</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── data</span><br><span class="line">│&nbsp;&nbsp; ├── sequence</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── root.ln</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── 0</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── 1606030145164-1-0.tsfile</span><br><span class="line">│&nbsp;&nbsp; └── unsequence</span><br><span class="line">├── system</span><br><span class="line">│&nbsp;&nbsp; ├── roles</span><br><span class="line">│&nbsp;&nbsp; ├── schema</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── mlog.txt</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; ├── system.properties</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── tlog.txt</span><br><span class="line">│&nbsp;&nbsp; ├── storage_groups</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── root.ln</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     ├── 0</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     │&nbsp;&nbsp; └── Version-100</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;     └── upgrade</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp;         └── Version-100</span><br><span class="line">│&nbsp;&nbsp; ├── upgrade</span><br><span class="line">│&nbsp;&nbsp; │&nbsp;&nbsp; └── upgrade.txt</span><br><span class="line">│&nbsp;&nbsp; └── users</span><br><span class="line">│&nbsp;&nbsp;     └── root.profile</span><br><span class="line">└── wal</span><br><span class="line">    └── root.ln-1606030145164-1-0.tsfile</span><br><span class="line">        └── wal1</span><br><span class="line"></span><br><span class="line">16 directories, 9 files</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat system/schema/mlog.txt</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2,root.ln</span><br><span class="line">0,root.ln.wf01.wt01.status,0,2,1,,,</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat system/schema/system.properties</span><br></pre></td></tr></tbody></table></figure>

@@ -27,7 +27,7 @@
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
 
 
@@ -67,7 +67,7 @@
     <updated>2020-12-22T16:24:33.782Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.png&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img data-src=&quot;/picture/iot/iot_mind_map.png&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（利用 MindNode™ 绘制而成）&lt;/center&gt;
 
 &lt;h2 id=&quot;更新记录&quot;&gt;&lt;a href=&quot;#更新记录&quot; class=&quot;headerlink&quot; title=&quot;更新记录&quot;&gt;&lt;/a&gt;更新记录&lt;/h2&gt;&lt;div class=&quot;table-container&quot;&gt;
@@ -165,7 +165,7 @@
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（图片来源：Vadim Ogievetsky 在万圣节的个人作品，已获得授权）&lt;/center&gt;
 
 
@@ -372,7 +372,7 @@
 &lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　我们将分为三块对 AI 进行诠释&lt;/p&gt;
 &lt;p&gt;　首先，将介绍人工智能的&lt;strong&gt;主流思想&lt;/strong&gt;和&lt;strong&gt;实用技巧&lt;/strong&gt;，通过一些耳熟能详的&lt;a href=&quot;https://yuzhouwan.com/posts/4534/&quot;&gt;有趣定理&lt;/a&gt;，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大&lt;strong&gt;理论支柱&lt;/strong&gt;，由浅入深地学习 &lt;a href=&quot;https://yuzhouwan.com/posts/42737/#统计学&quot;&gt;统计学&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#微积分&quot;&gt;微积分&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#线性代数&quot;&gt;线性代数&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#概率论&quot;&gt;概率论&lt;/a&gt; 等知识体系；最后，落地到实践，我们需要紧跟人工智能的&lt;strong&gt;技术发展前沿&lt;/strong&gt;，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点&lt;/p&gt;
 &lt;p&gt;　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（&lt;a href=&quot;https://yuzhouwan.com/posts/43687/#Python-第三方库&quot;&gt;Python&lt;/a&gt;、Prolog、R、&lt;a href=&quot;https://yuzhouwan.com/posts/27328/&quot;&gt;Java&lt;/a&gt;）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/&lt;/p&gt;
-&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img data-src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
 
 
@@ -612,7 +612,7 @@
 &lt;h2 id=&quot;优缺点&quot;&gt;&lt;a href=&quot;#优缺点&quot; class=&quot;headerlink&quot; title=&quot;优缺点&quot;&gt;&lt;/a&gt;优缺点&lt;/h2&gt;&lt;h3 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h3&gt;&lt;h4 id=&quot;低成本&quot;&gt;&lt;a href=&quot;#低成本&quot; class=&quot;headerlink&quot; title=&quot;低成本&quot;&gt;&lt;/a&gt;低成本&lt;/h4&gt;&lt;h5 id=&quot;运维成本&quot;&gt;&lt;a href=&quot;#运维成本&quot; class=&quot;headerlink&quot; title=&quot;运维成本&quot;&gt;&lt;/a&gt;运维成本&lt;/h5&gt;&lt;p&gt;　服务器、中间件、数据库等均托管于 BaaS/FaaS 平台，用户无需再参与基础设施及软件的维护，省去了集群的运维成本&lt;/p&gt;
 &lt;h5 id=&quot;开发成本&quot;&gt;&lt;a href=&quot;#开发成本&quot; class=&quot;headerlink&quot; title=&quot;开发成本&quot;&gt;&lt;/a&gt;开发成本&lt;/h5&gt;&lt;p&gt;　对比 IaaS 或者 PaaS 平台的服务器或者操作系统，Serverless 的架构中，用户操作的是服务化的组件，比如存储服务、授权服务等，可以缩短开发周期，节约时间成本&lt;/p&gt;
 &lt;h4 id=&quot;按需计费&quot;&gt;&lt;a href=&quot;#按需计费&quot; class=&quot;headerlink&quot; title=&quot;按需计费&quot;&gt;&lt;/a&gt;按需计费&lt;/h4&gt;&lt;p&gt;　Serverless/FaaS 区别于 IaaS/PaaS 预先分配计算资源的计费方式，其计费方式通常是按请求次数及运行时间。如此一来，不仅可以最大程度地利用资源，还能实现真正的按需计费，以降低用户的使用成本&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/serverless/serverless_cost.png&quot; alt=&quot;Serverless cost&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/serverless/serverless_cost.png&quot; alt=&quot;Serverless cost&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（使用 &lt;a href=&quot;https://www.apple.com/cn/ipad/&quot; target=&quot;_blank&quot;&gt;iPad&lt;/a&gt;™ 手绘而成）&lt;/center&gt;
 
 &lt;h4 id=&quot;高扩展&quot;&gt;&lt;a href=&quot;#高扩展&quot; class=&quot;headerlink&quot; title=&quot;高扩展&quot;&gt;&lt;/a&gt;高扩展&lt;/h4&gt;&lt;p&gt;　自动进行横向扩展（毫秒级部署，秒级生命周期）&lt;/p&gt;
@@ -733,11 +733,11 @@
     
     <summary type="html">&lt;h2 id=&quot;ZooKeeper-是什么？&quot;&gt;&lt;a href=&quot;#ZooKeeper-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ZooKeeper 是什么？&quot;&gt;&lt;/a&gt;ZooKeeper 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;ZooKeeper&lt;/strong&gt; 是一个基于 &lt;a href=&quot;https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/chubby-osdi06.pdf&quot;&gt;Google Chubby&lt;/a&gt; 论文实现的一款解决分布式数据一致性问题的开源实现，方便了依赖 ZooKeeper 的应用实现 &lt;code&gt;数据发布 / 订阅&lt;/code&gt;、&lt;code&gt;负载均衡&lt;/code&gt;、&lt;code&gt;服务注册与发现&lt;/code&gt;、&lt;code&gt;分布式协调&lt;/code&gt;、&lt;code&gt;事件通知&lt;/code&gt;、&lt;code&gt;集群管理&lt;/code&gt;、&lt;code&gt;Leader 选举&lt;/code&gt;、 &lt;code&gt;分布式锁和队列&lt;/code&gt; 等功能&lt;/p&gt;
 &lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;集群角色&quot;&gt;&lt;a href=&quot;#集群角色&quot; class=&quot;headerlink&quot; title=&quot;集群角色&quot;&gt;&lt;/a&gt;集群角色&lt;/h3&gt;&lt;p&gt;　一般的，在分布式系统中，构成集群的每一台机器都有自己的角色，最为典型的集群模式就是 &lt;code&gt;Master / Slave&lt;/code&gt; 主备模式。在该模式中，我们把能够处理所有&lt;code&gt;写操作&lt;/code&gt;的机器称为 &lt;code&gt;Master&lt;/code&gt; 节点，并把所有通过&lt;code&gt;异步复制&lt;/code&gt;方式获取最新数据、提供&lt;code&gt;读服务&lt;/code&gt;的机器称为 &lt;code&gt;Slave&lt;/code&gt; 节点&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_master_slave.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/zk/zk_master_slave.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
 
 &lt;p&gt;　而 ZooKeeper 中，则是引入了 &lt;code&gt;领导者（Leader）&lt;/code&gt;、&lt;code&gt;跟随者（Follower）&lt;/code&gt;、&lt;code&gt;观察者（Observer）&lt;/code&gt; 三种角色 和 &lt;code&gt;领导（Leading）&lt;/code&gt;、&lt;code&gt;跟随（Following）&lt;/code&gt;、&lt;code&gt;观察（Observing）&lt;/code&gt;、&lt;code&gt;寻找（Looking）&lt;/code&gt; 等相应的&lt;a href=&quot;https://github.com/apache/zookeeper/blob/master/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java#L370&quot;&gt;状态&lt;/a&gt;。在 ZooKeeper 集群中的通过一种 &lt;code&gt;Leader 选举&lt;/code&gt;的过程，来选定某个节点作为 &lt;code&gt;Leader&lt;/code&gt; 节点，该节点为客户端提供&lt;code&gt;读&lt;/code&gt;和&lt;code&gt;写&lt;/code&gt;服务。而 &lt;code&gt;Follower&lt;/code&gt; 和 &lt;code&gt;Observer&lt;/code&gt; 节点，则都能提供&lt;code&gt;读&lt;/code&gt;服务，唯一的区别在于，&lt;code&gt;Observer&lt;/code&gt; 机器&lt;code&gt;不参与 Leader 选举&lt;/code&gt;过程 和 &lt;code&gt;写操作&lt;/code&gt;的&lt;code&gt;&quot;过半写成功&quot;&lt;/code&gt;策略，&lt;code&gt;Observer&lt;/code&gt; 只会被告知已经 commit 的 proposal。因此 &lt;code&gt;Observer&lt;/code&gt; 可以在&lt;code&gt;不影响写性能&lt;/code&gt;的情况下提升集群的&lt;code&gt;读性能&lt;/code&gt;（详见下文 “性能优化 - 优化策略 - Observer 模式” 部分）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_leader_follower_observer.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/zk/zk_leader_follower_observer.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;</summary>
     
     
@@ -992,7 +992,7 @@
     <summary type="html">&lt;h2 id=&quot;Aapche-Drill-是什么？&quot;&gt;&lt;a href=&quot;#Aapche-Drill-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Aapche Drill 是什么？&quot;&gt;&lt;/a&gt;Aapche Drill 是什么？&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/drill&quot;&gt;Apache Drill&lt;/a&gt;&lt;/strong&gt;™ is a distributed MPP query layer that supports SQL and alternative query languages against NoSQL and Hadoop data storage systems. It was inspired in part by &lt;a href=&quot;http://research.google.com/pubs/pub36632.html&quot;&gt;Google’s Dremel&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/drill/drill.jpg&quot; alt=&quot;Drill&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/drill/drill.jpg&quot; alt=&quot;Drill&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（图片来源：&lt;a href=&quot;https://www.pexels.com/zh-cn/photo/87236/&quot; target=&quot;_blank&quot;&gt;Pexels&lt;/a&gt;™ 官网，已确认无版权）&lt;/center&gt;
 
 
@@ -1039,7 +1039,7 @@
     <summary type="html">&lt;h2 id=&quot;Apache-Calcite-是什么？&quot;&gt;&lt;a href=&quot;#Apache-Calcite-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache Calcite 是什么？&quot;&gt;&lt;/a&gt;Apache Calcite 是什么？&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/calcite&quot;&gt;Apache Calcite&lt;/a&gt;&lt;/strong&gt;™ is a dynamic data management framework.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/calcite/calcite_mountain.jpg&quot; alt=&quot;Calcite Mountain&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;/picture/calcite/calcite_mountain.jpg&quot; alt=&quot;Calcite Mountain&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（图片来源：&lt;a href=&quot;https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/&quot; target=&quot;_blank&quot;&gt;Pixabay&lt;/a&gt;™ 官网，已确认无版权）&lt;/center&gt;
 
 
@@ -1273,7 +1273,7 @@
 &lt;h3 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h3&gt;&lt;p&gt;　操作 Git 时遇到问题的话，可以参考我的一篇博客《&lt;a href=&quot;https://yuzhouwan.com/posts/30041/&quot;&gt;Git 高级玩法&lt;/a&gt;》&lt;/p&gt;
 &lt;div class=&quot;note success&quot;&gt;也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴&lt;/div&gt;
 
-&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img data-src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img data-src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;note danger&quot;&gt;但是，请不要在评论区讨论入群问题的答案，避免打广告的进入&lt;/div&gt;
 
 &lt;p&gt;　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：&lt;/p&gt;
@@ -1611,7 +1611,7 @@
     <summary type="html">&lt;h2 id=&quot;什么是-Flink？&quot;&gt;&lt;a href=&quot;#什么是-Flink？&quot; class=&quot;headerlink&quot; title=&quot;什么是 Flink？&quot;&gt;&lt;/a&gt;什么是 Flink？&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://flink.apache.org/&quot;&gt;Apache Flink&lt;/a&gt;&lt;/strong&gt;™ is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. Flink has been designed to run in all common cluster environments, perform computations at in-memory speed and at any scale.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;Flink-架构&quot;&gt;&lt;a href=&quot;#Flink-架构&quot; class=&quot;headerlink&quot; title=&quot;Flink 架构&quot;&gt;&lt;/a&gt;Flink 架构&lt;/h2&gt;&lt;h3 id=&quot;核心组件布局&quot;&gt;&lt;a href=&quot;#核心组件布局&quot; class=&quot;headerlink&quot; title=&quot;核心组件布局&quot;&gt;&lt;/a&gt;核心组件布局&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/flink/flink_stack.png&quot; alt=&quot;Apache Flink Stack&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Flink-架构&quot;&gt;&lt;a href=&quot;#Flink-架构&quot; class=&quot;headerlink&quot; title=&quot;Flink 架构&quot;&gt;&lt;/a&gt;Flink 架构&lt;/h2&gt;&lt;h3 id=&quot;核心组件布局&quot;&gt;&lt;a href=&quot;#核心组件布局&quot; class=&quot;headerlink&quot; title=&quot;核心组件布局&quot;&gt;&lt;/a&gt;核心组件布局&lt;/h3&gt;&lt;p&gt;&lt;img data-src=&quot;/picture/flink/flink_stack.png&quot; alt=&quot;Apache Flink Stack&quot;&gt;&lt;/p&gt;
 &lt;center&gt;（图片来源：&lt;a href=&quot;https://flink.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache Flink&lt;/a&gt;™ 官网）&lt;/center&gt;</summary>
     
     
@@ -1980,7 +1980,7 @@
     <updated>2020-04-02T14:14:56.872Z</updated>
     
     
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/picture/people/stephen_william_hawking.jpg&quot; alt=&quot;Stephen William Hawking&quot;&gt;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;/picture/people/stephen_william_hawking.jpg&quot; alt=&quot;Stephen William Hawking&quot;&gt;&lt;/p&gt;
 &lt;p&gt;2018.3.14 他摆脱了躯壳的束缚，终自由地遨游于星辰之间&lt;/p&gt;</summary>
     
     

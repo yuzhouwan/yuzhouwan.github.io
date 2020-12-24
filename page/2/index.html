@@ -86,9 +86,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style>
+<style>.null { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .null > span { position: relative; z-index: 10; }  .null img, .null .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .null img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .null-fallback { color: inherit; } .null-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="宇宙湾" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -216,106 +216,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/190413/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/190413/" class="post-title-link" itemprop="url">那些绕不过去的 Java 知识点</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-13 15:54:52" itemprop="dateCreated datePublished" datetime="2019-04-13T15:54:52+08:00">2019-04-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-21 12:41:35" itemprop="dateModified" datetime="2020-11-21T12:41:35+08:00">2020-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>57k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>52 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。</p>
-<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><h4 id="GuardedBy"><a href="#GuardedBy" class="headerlink" title="GuardedBy"></a>GuardedBy</h4><p>　<code>@GuardedBy</code> 注解可以作用于某一个属性或者方法，约定在访问这些被注解标记的资源时，能被同步代码块保护着。简单的使用案例如下：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GuardedBy("obj")</span></span><br><span class="line"><span class="keyword">private</span> ConcurrentMap&lt;String, String&gt; map = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(String k, String v)</span> </span>{</span><br><span class="line">    <span class="keyword">synchronized</span> (obj) {</span><br><span class="line">        map.put(k, v);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If you use `error prone` tool to check this, this annotation should be `<span class="doctag">@SuppressWarnings</span>("GuardedBy")`</span></span><br><span class="line"><span class="comment"> * {<span class="doctag">@see</span> https://errorprone.info/bugpattern/GuardedBy}</span></span><br><span class="line"><span class="comment"> * {<span class="doctag">@see</span> https://github.com/apache/druid/pull/6868#discussion_r249639199}</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SuppressWarnings("FieldAccessNotGuarded")</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(String k)</span> </span>{</span><br><span class="line">    map.remove(k);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">synchronized</span> (obj) {</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"GuardedByExample{"</span> +</span><br><span class="line">                <span class="string">"map="</span> + map +</span><br><span class="line">                <span class="string">'}'</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>Tips: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/druid/pull/6903">Code Example</a> from <a href="https://yuzhouwan.com/posts/5845/">Apache Druid</a>；另外，<strong>error-prone</strong> 工具支持对<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/google/error-prone/blob/master/docs/bugpattern/GuardedBy.md#guardedby">多种版本</a>的 <code>@GuardedBy</code> 进行检查</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/190413/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/22654/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -347,7 +247,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 22:24:10" itemprop="dateModified" datetime="2020-11-17T22:24:10+08:00">2020-11-17</time>
+                <time title="修改时间：2020-12-25 00:22:46" itemprop="dateModified" datetime="2020-12-25T00:22:46+08:00">2020-12-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -367,14 +267,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>34k</span>
+              <span>31k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>31 分钟</span>
+              <span>29 分钟</span>
             </span>
 
         </div>
@@ -475,7 +375,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/42737/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/43687/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -489,7 +389,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/42737/" class="post-title-link" itemprop="url">人工智能</a>
+            <a href="/posts/43687/" class="post-title-link" itemprop="url">Python：从入门到实践</a>
         </h2>
 
         <div class="post-meta">
@@ -499,14 +399,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-05-16 18:58:02" itemprop="dateCreated datePublished" datetime="2017-05-16T18:58:02+08:00">2017-05-16</time>
+              <time title="创建时间：2015-02-06 00:08:40" itemprop="dateCreated datePublished" datetime="2015-02-06T00:08:40+08:00">2015-02-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-17 22:24:05" itemprop="dateModified" datetime="2020-11-17T22:24:05+08:00">2020-11-17</time>
+                <time title="修改时间：2020-12-25 00:21:10" itemprop="dateModified" datetime="2020-12-25T00:21:10+08:00">2020-12-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -514,7 +414,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
                 </span>
             </span>
 
@@ -526,14 +426,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>43k</span>
+              <span>33k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>39 分钟</span>
+              <span>30 分钟</span>
             </span>
 
         </div>
@@ -545,21 +445,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="什么是人工智能"><a href="#什么是人工智能" class="headerlink" title="什么是人工智能"></a>什么是人工智能</h2><p>　<strong>人工智能</strong>（<strong>A</strong>rtificial <strong>I</strong>ntelligence, <strong>AI</strong>）亦称<strong>机器智能</strong>，是指由人工制造出来的系统所表现出来的智能。 — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD">wikipedia.org</a></p>
-<p>　从 深蓝到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1712.01815.pdf">AlphaZero</a>，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；<br>　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；<br>　从 CPU / GPU 到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">TPU</a>，人工智能的计算能力正向着无法穷举的极限不断逼近 …</p>
-<p>　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的</p>
-<h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　我们将分为三块对 AI 进行诠释</p>
-<p>　首先，将介绍人工智能的<strong>主流思想</strong>和<strong>实用技巧</strong>，通过一些耳熟能详的<a href="https://yuzhouwan.com/posts/4534/">有趣定理</a>，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大<strong>理论支柱</strong>，由浅入深地学习 <a href="https://yuzhouwan.com/posts/42737/#统计学">统计学</a>、<a href="https://yuzhouwan.com/posts/42737/#微积分">微积分</a>、<a href="https://yuzhouwan.com/posts/42737/#线性代数">线性代数</a>、<a href="https://yuzhouwan.com/posts/42737/#概率论">概率论</a> 等知识体系；最后，落地到实践，我们需要紧跟人工智能的<strong>技术发展前沿</strong>，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点</p>
-<p>　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（<a href="https://yuzhouwan.com/posts/43687/#Python-第三方库">Python</a>、Prolog、R、<a href="https://yuzhouwan.com/posts/27328/">Java</a>）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/</p>
-<h2 id="主流思想"><a href="#主流思想" class="headerlink" title="主流思想"></a>主流思想</h2><h3 id="演绎法-amp-溯因法-amp-归纳法"><a href="#演绎法-amp-溯因法-amp-归纳法" class="headerlink" title="演绎法 &amp; 溯因法 &amp; 归纳法"></a>演绎法 &amp; 溯因法 &amp; 归纳法</h3><p><img data-src="/picture/ai/ai_cause_rule_effect.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-
-
-
-<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="Occam-剃刀原理"><a href="#Occam-剃刀原理" class="headerlink" title="Occam 剃刀原理"></a>Occam 剃刀原理</h3><p>　<strong>奥卡姆剃刀</strong>（Occam´s Razor），意为<strong>简约之法</strong>，是由 14 世纪<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6">逻辑学</a>家、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83">圣方济各会</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB">修士</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89">奥卡姆的威廉</a>提出的一个解决问题的法则，即<code>"切勿浪费较多资源，去做'用较少的资源，同样可以做好'的事情"</code>，相同思想见于郑板桥的<strong>删繁就简三秋树</strong></p>
+          <p>本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/42737/#more" rel="contents">
+              <a class="btn" href="/posts/43687/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/30041/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/30041/" class="post-title-link" itemprop="url">Git 高级玩法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-11 23:36:16" itemprop="dateCreated datePublished" datetime="2017-04-11T23:36:16+08:00">2017-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-20 23:52:22" itemprop="dateModified" datetime="2020-12-20T23:52:22+08:00">2020-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>22k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>20 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Git 相关的使用技巧、常见的坑 和 Github 社区中高频的缩写。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/30041/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -744,7 +730,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
+              <span>5.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -932,12 +918,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">940k</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14:15</span>
+    <span title="站点阅读时长">20:04</span>
 </div>
 
         

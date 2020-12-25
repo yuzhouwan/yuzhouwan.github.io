@@ -11,7 +11,7 @@
   <url>
     <loc>https://yuzhouwan.com/posts/201220/</loc>
     
-    <lastmod>2020-12-24</lastmod>
+    <lastmod>2020-12-25</lastmod>
     
   </url>
   
@@ -438,7 +438,21 @@
   </url>
   
   <url>
+    <loc>https://yuzhouwan.com/tags/Aapche-Drill/</loc>
+    <lastmod>2020-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/tags/Apache-Calcite/</loc>
+    <lastmod>2020-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/SQL/</loc>
     <lastmod>2020-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -453,34 +467,6 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Janino/</loc>
-    <lastmod>2020-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/SQL/</loc>
-    <lastmod>2020-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Aapche-Drill/</loc>
-    <lastmod>2020-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Storm/</loc>
-    <lastmod>2020-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Kafka/</loc>
     <lastmod>2020-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -516,6 +502,20 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Docker/</loc>
+    <lastmod>2020-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Storm/</loc>
+    <lastmod>2020-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Kafka/</loc>
     <lastmod>2020-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1476,14 +1476,14 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://yuzhouwan.com/categories/Serverless/</loc>
     <lastmod>2020-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/categories/Serverless/</loc>
+    <loc>https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2020-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

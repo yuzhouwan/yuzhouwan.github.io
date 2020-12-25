@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-12-24T16:23:00.394Z</updated>
+  <updated>2020-12-25T16:37:56.868Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Apache IoTDB：一款面向物联网的数据库</title>
+    <link href="https://yuzhouwan.com/posts/201221/"/>
+    <id>https://yuzhouwan.com/posts/201221/</id>
+    <published>2020-12-21T13:35:06.000Z</published>
+    <updated>2020-12-25T16:37:56.868Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
+
+
+
+&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高吞吐量读写&lt;/li&gt;
+&lt;li&gt;高效的目录结构&lt;/li&gt;
+&lt;li&gt;丰富的查询语义&lt;/li&gt;
+&lt;li&gt;硬件成本低&lt;/li&gt;
+&lt;li&gt;灵活的部署&lt;/li&gt;
+&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高端制造业&lt;/li&gt;
+&lt;li&gt;本地控制器服务器&lt;/li&gt;
+&lt;li&gt;云数据管理&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    
+    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
+    
+  </entry>
   
   <entry>
     <title>一幅持续扩展的物联网思维导图</title>
@@ -64,49 +107,6 @@
     <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
     
     <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache IoTDB：一款面向物联网的数据库</title>
-    <link href="https://yuzhouwan.com/posts/201221/"/>
-    <id>https://yuzhouwan.com/posts/201221/</id>
-    <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2020-12-24T16:22:58.961Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
-
-
-
-&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高吞吐量读写&lt;/li&gt;
-&lt;li&gt;高效的目录结构&lt;/li&gt;
-&lt;li&gt;丰富的查询语义&lt;/li&gt;
-&lt;li&gt;硬件成本低&lt;/li&gt;
-&lt;li&gt;灵活的部署&lt;/li&gt;
-&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高端制造业&lt;/li&gt;
-&lt;li&gt;本地控制器服务器&lt;/li&gt;
-&lt;li&gt;云数据管理&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-    
-    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
-    
-    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
     
   </entry>
   
@@ -545,9 +545,9 @@
     <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
     
     
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
     
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
@@ -749,11 +749,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
@@ -917,11 +917,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     

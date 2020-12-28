@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-12-25T16:44:23.558Z</updated>
+  <updated>2020-12-28T12:24:54.978Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2020-12-25T16:44:23.558Z</updated>
+    <updated>2020-12-28T12:24:54.978Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -64,7 +64,7 @@
     <link href="https://yuzhouwan.com/posts/201220/"/>
     <id>https://yuzhouwan.com/posts/201220/</id>
     <published>2020-12-20T03:50:00.000Z</published>
-    <updated>2020-12-25T16:44:12.087Z</updated>
+    <updated>2020-12-28T12:24:27.122Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.png&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
@@ -98,6 +98,10 @@
 &lt;tr&gt;
 &lt;td style=&quot;text-align:center&quot;&gt;2020-12-26&lt;/td&gt;
 &lt;td style=&quot;text-align:center&quot;&gt;增加物联网设备数量统计信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;2020-12-28&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;增加全球移动通讯系统协会&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1028,11 +1032,11 @@
     <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
     
     
-    <category term="Aapche Drill" scheme="https://yuzhouwan.com/tags/Aapche-Drill/"/>
-    
     <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
     
     <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
+    
+    <category term="Aapche Drill" scheme="https://yuzhouwan.com/tags/Aapche-Drill/"/>
     
   </entry>
   
@@ -1082,11 +1086,11 @@
     
     <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
     
-    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
-    
     <category term="JavaCC" scheme="https://yuzhouwan.com/tags/JavaCC/"/>
     
     <category term="Janino" scheme="https://yuzhouwan.com/tags/Janino/"/>
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
     
   </entry>
   

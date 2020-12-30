@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2020-12-28T12:24:54.978Z</updated>
+  <updated>2020-12-30T15:38:34.801Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2020-12-28T12:24:54.978Z</updated>
+    <updated>2020-12-30T15:38:34.801Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -64,7 +64,7 @@
     <link href="https://yuzhouwan.com/posts/201220/"/>
     <id>https://yuzhouwan.com/posts/201220/</id>
     <published>2020-12-20T03:50:00.000Z</published>
-    <updated>2020-12-28T12:24:27.122Z</updated>
+    <updated>2020-12-30T15:38:31.705Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;a href=&quot;#一幅持续扩展的物联网思维导图&quot; class=&quot;headerlink&quot; title=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/a&gt;一幅持续扩展的物联网思维导图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/picture/iot/iot_mind_map.png&quot; alt=&quot;一幅持续扩展的物联网思维导图&quot;&gt;&lt;/p&gt;
@@ -123,7 +123,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2020-12-24T16:22:57.183Z</updated>
+    <updated>2020-12-30T15:38:29.470Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -190,7 +190,7 @@
     <link href="https://yuzhouwan.com/posts/190413/"/>
     <id>https://yuzhouwan.com/posts/190413/</id>
     <published>2019-04-13T07:54:52.000Z</published>
-    <updated>2020-12-24T16:22:52.472Z</updated>
+    <updated>2020-12-30T15:38:26.984Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　虽然接触 Java 已经 8 年之久，可惜学习之初的笔记文档没能很好地保存下来。本文是近几年工作学习中遇到的一些零散的知识点，包括了 基础概念、实用的编程技巧、代码可读性、设计模式、性能优化（工具 &amp;amp; 编码）、测试相关、JVM 相关、常用的工具和常见问题。本着好记性不如烂笔头的初衷，在不断地踩坑和爬坑的过程中，慢慢地记录成文。期待着本文能起到抛砖引玉的作用，以看到大家的真知灼见。&lt;/p&gt;
@@ -230,7 +230,7 @@
     <link href="https://yuzhouwan.com/posts/42737/"/>
     <id>https://yuzhouwan.com/posts/42737/</id>
     <published>2017-05-16T10:58:02.000Z</published>
-    <updated>2020-12-24T16:22:49.090Z</updated>
+    <updated>2020-12-30T15:38:25.321Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
@@ -290,6 +290,122 @@
     <category term="Apache PredictionIO" scheme="https://yuzhouwan.com/tags/Apache-PredictionIO/"/>
     
     <category term="NuPIC" scheme="https://yuzhouwan.com/tags/NuPIC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 实战</title>
+    <link href="https://yuzhouwan.com/posts/2129/"/>
+    <id>https://yuzhouwan.com/posts/2129/</id>
+    <published>2017-07-19T13:16:08.000Z</published>
+    <updated>2020-12-30T15:37:37.464Z</updated>
+    
+    
+    <summary type="html">本文主要介绍了 Redis 的环境搭建、实战技巧、技术内幕 和 Jedis 客户端相关内容。</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Redis" scheme="https://yuzhouwan.com/tags/Redis/"/>
+    
+    <category term="Paxos" scheme="https://yuzhouwan.com/tags/Paxos/"/>
+    
+    <category term="Raft" scheme="https://yuzhouwan.com/tags/Raft/"/>
+    
+    <category term="Jedis" scheme="https://yuzhouwan.com/tags/Jedis/"/>
+    
+    <category term="Guava" scheme="https://yuzhouwan.com/tags/Guava/"/>
+    
+    <category term="Memcached" scheme="https://yuzhouwan.com/tags/Memcached/"/>
+    
+    <category term="MongoDB" scheme="https://yuzhouwan.com/tags/MongoDB/"/>
+    
+    <category term="缓存" scheme="https://yuzhouwan.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python：从入门到实践</title>
+    <link href="https://yuzhouwan.com/posts/43687/"/>
+    <id>https://yuzhouwan.com/posts/43687/</id>
+    <published>2015-02-05T16:08:40.000Z</published>
+    <updated>2020-12-30T15:37:37.464Z</updated>
+    
+    
+    <summary type="html">本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</summary>
+    
+    
+    
+    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="iPython" scheme="https://yuzhouwan.com/tags/iPython/"/>
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Presto：分布式 SQL 查询引擎</title>
+    <link href="https://yuzhouwan.com/posts/200906/"/>
+    <id>https://yuzhouwan.com/posts/200906/</id>
+    <published>2020-09-06T15:06:25.000Z</published>
+    <updated>2020-12-30T15:37:37.463Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
+
+
+
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;组件&quot;&gt;&lt;a href=&quot;#组件&quot; class=&quot;headerlink&quot; title=&quot;组件&quot;&gt;&lt;/a&gt;组件&lt;/h3&gt;&lt;h4 id=&quot;Coordinator&quot;&gt;&lt;a href=&quot;#Coordinator&quot; class=&quot;headerlink&quot; title=&quot;Coordinator&quot;&gt;&lt;/a&gt;Coordinator&lt;/h4&gt;&lt;p&gt;　负责管理 Worker 和 MetaStore 节点，以及接受客户端查询请求，并进行 SQL 的语法解析（Parser）、执行计划生成与优化（Planner）和查询任务的调度（Scheduler）&lt;/p&gt;
+&lt;div class=&quot;note info&quot;&gt;Coordinator 通过 RESTful 接口与 Client 和 Worker 交互&lt;/div&gt;
+
+&lt;h4 id=&quot;Worker&quot;&gt;&lt;a href=&quot;#Worker&quot; class=&quot;headerlink&quot; title=&quot;Worker&quot;&gt;&lt;/a&gt;Worker&lt;/h4&gt;&lt;p&gt;　负责具体的查询计算和数据读写&lt;/p&gt;
+&lt;h4 id=&quot;Discovery-Server&quot;&gt;&lt;a href=&quot;#Discovery-Server&quot; class=&quot;headerlink&quot; title=&quot;Discovery Server&quot;&gt;&lt;/a&gt;Discovery Server&lt;/h4&gt;&lt;p&gt;　负责发现集群的各个节点，用于节点间心跳监控&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
+    
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
+    
+    <category term="Apache Hive" scheme="https://yuzhouwan.com/tags/Apache-Hive/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
+    
+    <category term="PrestoSQL" scheme="https://yuzhouwan.com/tags/PrestoSQL/"/>
+    
+    <category term="MPP" scheme="https://yuzhouwan.com/tags/MPP/"/>
+    
+    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
     
   </entry>
   
@@ -389,33 +505,6 @@
   </entry>
   
   <entry>
-    <title>Python：从入门到实践</title>
-    <link href="https://yuzhouwan.com/posts/43687/"/>
-    <id>https://yuzhouwan.com/posts/43687/</id>
-    <published>2015-02-05T16:08:40.000Z</published>
-    <updated>2020-12-24T16:21:10.174Z</updated>
-    
-    
-    <summary type="html">本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</summary>
-    
-    
-    
-    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="iPython" scheme="https://yuzhouwan.com/tags/iPython/"/>
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Git 高级玩法</title>
     <link href="https://yuzhouwan.com/posts/30041/"/>
     <id>https://yuzhouwan.com/posts/30041/</id>
@@ -435,62 +524,6 @@
     <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
     
     <category term="CI" scheme="https://yuzhouwan.com/tags/CI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Presto：分布式 SQL 查询引擎</title>
-    <link href="https://yuzhouwan.com/posts/200906/"/>
-    <id>https://yuzhouwan.com/posts/200906/</id>
-    <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2020-11-17T14:23:58.388Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
-
-
-
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;组件&quot;&gt;&lt;a href=&quot;#组件&quot; class=&quot;headerlink&quot; title=&quot;组件&quot;&gt;&lt;/a&gt;组件&lt;/h3&gt;&lt;h4 id=&quot;Coordinator&quot;&gt;&lt;a href=&quot;#Coordinator&quot; class=&quot;headerlink&quot; title=&quot;Coordinator&quot;&gt;&lt;/a&gt;Coordinator&lt;/h4&gt;&lt;p&gt;　负责管理 Worker 和 MetaStore 节点，以及接受客户端查询请求，并进行 SQL 的语法解析（Parser）、执行计划生成与优化（Planner）和查询任务的调度（Scheduler）&lt;/p&gt;
-&lt;div class=&quot;note info&quot;&gt;Coordinator 通过 RESTful 接口与 Client 和 Worker 交互&lt;/div&gt;
-
-&lt;h4 id=&quot;Worker&quot;&gt;&lt;a href=&quot;#Worker&quot; class=&quot;headerlink&quot; title=&quot;Worker&quot;&gt;&lt;/a&gt;Worker&lt;/h4&gt;&lt;p&gt;　负责具体的查询计算和数据读写&lt;/p&gt;
-&lt;h4 id=&quot;Discovery-Server&quot;&gt;&lt;a href=&quot;#Discovery-Server&quot; class=&quot;headerlink&quot; title=&quot;Discovery Server&quot;&gt;&lt;/a&gt;Discovery Server&lt;/h4&gt;&lt;p&gt;　负责发现集群的各个节点，用于节点间心跳监控&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
-    
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
-    
-    <category term="Apache Hive" scheme="https://yuzhouwan.com/tags/Apache-Hive/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
-    
-    <category term="PrestoSQL" scheme="https://yuzhouwan.com/tags/PrestoSQL/"/>
-    
-    <category term="MPP" scheme="https://yuzhouwan.com/tags/MPP/"/>
-    
-    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
     
   </entry>
   
@@ -1549,39 +1582,6 @@
     <category term="Session" scheme="https://yuzhouwan.com/tags/Session/"/>
     
     <category term="Cookie" scheme="https://yuzhouwan.com/tags/Cookie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis 实战</title>
-    <link href="https://yuzhouwan.com/posts/2129/"/>
-    <id>https://yuzhouwan.com/posts/2129/</id>
-    <published>2017-07-19T13:16:08.000Z</published>
-    <updated>2020-09-16T16:13:47.840Z</updated>
-    
-    
-    <summary type="html">本文主要介绍了 Redis 的环境搭建、实战技巧、技术内幕 和 Jedis 客户端相关内容。</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Redis" scheme="https://yuzhouwan.com/tags/Redis/"/>
-    
-    <category term="Paxos" scheme="https://yuzhouwan.com/tags/Paxos/"/>
-    
-    <category term="Raft" scheme="https://yuzhouwan.com/tags/Raft/"/>
-    
-    <category term="Jedis" scheme="https://yuzhouwan.com/tags/Jedis/"/>
-    
-    <category term="Guava" scheme="https://yuzhouwan.com/tags/Guava/"/>
-    
-    <category term="Memcached" scheme="https://yuzhouwan.com/tags/Memcached/"/>
-    
-    <category term="MongoDB" scheme="https://yuzhouwan.com/tags/MongoDB/"/>
-    
-    <category term="缓存" scheme="https://yuzhouwan.com/tags/%E7%BC%93%E5%AD%98/"/>
     
   </entry>
   

@@ -216,6 +216,317 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/201001/" class="post-title-link" itemprop="url">Serverless 详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-01 18:52:02" itemprop="dateCreated datePublished" datetime="2020-10-01T18:52:02+08:00">2020-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:48:33" itemprop="dateModified" datetime="2020-10-29T21:48:33+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Serverless/" itemprop="url" rel="index"><span itemprop="name">Serverless</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Serverless-是什么？"><a href="#Serverless-是什么？" class="headerlink" title="Serverless 是什么？"></a>Serverless 是什么？</h2><blockquote>
+<p>Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on the actual amount of resources consumed by an application, rather than on pre-purchased units of capacity. It can be a form of utility computing. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Serverless_computing">wikipedia.org</a></p>
+<p>Serverless architectures are application designs that incorporate third-party “Backend as a Service” (BaaS) services, and/or that include custom code run in managed, ephemeral containers on a “Functions as a Service” (FaaS) platform. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://martinfowler.com/articles/serverless.html">《Serverless Architectures》</a></p>
+<p>无服务器架构是基于互联网的系统，其中应用开发不使用常规的服务进程。相反，它们仅依赖于第三方服务（例如 AWS Lambda 服务），客户端逻辑和服务托管远程过程调用的组合。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://aws.amazon.com/cn/blogs/china/iaas-faas-serverless/">亚马逊 AWS 官方博客</a></p>
+<p>Serverless（无服务器架构）是指服务端逻辑由开发者实现，运行在无状态的计算容器中，由事件触发，完全被第三方管理，其业务层面的状态则存储在数据库或其他介质中。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bookstack.cn/read/serverless-handbook/concepts-what-is-serverless.md">《无服务架构实践手册》</a></p>
+<p>If your PaaS can efficiently start instances in 20ms that run for half a second, then call it serverless.  — Adrian Cockroft</p>
+</blockquote>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><h4 id="低成本"><a href="#低成本" class="headerlink" title="低成本"></a>低成本</h4><h5 id="运维成本"><a href="#运维成本" class="headerlink" title="运维成本"></a>运维成本</h5><p>　服务器、中间件、数据库等均托管于 BaaS/FaaS 平台，用户无需再参与基础设施及软件的维护，省去了集群的运维成本</p>
+<h5 id="开发成本"><a href="#开发成本" class="headerlink" title="开发成本"></a>开发成本</h5><p>　对比 IaaS 或者 PaaS 平台的服务器或者操作系统，Serverless 的架构中，用户操作的是服务化的组件，比如存储服务、授权服务等，可以缩短开发周期，节约时间成本</p>
+<h4 id="按需计费"><a href="#按需计费" class="headerlink" title="按需计费"></a>按需计费</h4><p>　Serverless/FaaS 区别于 IaaS/PaaS 预先分配计算资源的计费方式，其计费方式通常是按请求次数及运行时间。如此一来，不仅可以最大程度地利用资源，还能实现真正的按需计费，以降低用户的使用成本</p>
+<p><img src="/picture/serverless/serverless_cost.png" alt="Serverless cost"></p>
+<center>（使用 <a href="https://www.apple.com/cn/ipad/" target="_blank" rel="external nofollow noopener noreferrer">iPad</a>™ 手绘而成）</center>
+
+<h4 id="高扩展"><a href="#高扩展" class="headerlink" title="高扩展"></a>高扩展</h4><p>　自动进行横向扩展（毫秒级部署，秒级生命周期）</p>
+<h4 id="高资源利用率"><a href="#高资源利用率" class="headerlink" title="高资源利用率"></a>高资源利用率</h4><p>　提供细粒度的计算能力，最大限度满足实时需求，使得资源利用率大幅度提升</p>
+<h4 id="NoOps"><a href="#NoOps" class="headerlink" title="NoOps"></a>NoOps</h4><p>　运维的发展经历了，人肉运维、自动化运维、DevOps、AiOps 等。而 Serverless 模式下，用户只需要关心业务编码，真正实现了零运维成本</p>
+<div class="note info">从更广泛的意义上来讲，Ops 除了指服务器维护，还会包括部署、网络、安全、监控、故障恢复和水平扩展等</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/201001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/27328/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/27328/" class="post-title-link" itemprop="url">如何运用 JVM 知识提高编程水平</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-07-16 17:38:16" itemprop="dateCreated datePublished" datetime="2016-07-16T17:38:16+08:00">2016-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM?"></a>什么是 JVM?</h2><p>　A <strong>J</strong>ava <strong>V</strong>irtual <strong>M</strong>achine（JVM）is an abstract computing machine that enables a computer to run a Java program.</p>
+<h2 id="为什么要有-JVM"><a href="#为什么要有-JVM" class="headerlink" title="为什么要有 JVM?"></a>为什么要有 JVM?</h2><h3 id="跨平台性"><a href="#跨平台性" class="headerlink" title="跨平台性"></a>跨平台性</h3><p>　JVM 的存在，使得 Java 程序 能够轻易地在多平台上移植，基本上脱离了对硬件的依赖性（这也满足了 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/David_Parnas">David Parnas</a> 的 “<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Information_hiding">信息隐藏</a>” 准则）</p>
+<h3 id="多语言性"><a href="#多语言性" class="headerlink" title="多语言性"></a>多语言性</h3><p>　因为底层 JIT 编译优化、高效 GC、JUC 对多线程并发编程的支持，以及社区中海量成熟的库 等优点，使得<a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/List_of_JVM_languages">很多语言</a>都开发出可运行在 JVM 上的版本</p>
+<p>　同时，多语言混合编程成为一种趋势，在需要快速开发、灵活部署 和 针对特定问题的 DSL 等场景下，选择恰当的 JVM-hosted language，可以最大化原有代码的价值</p>
+<p>　<strong>那么，在日常的开发过程中，究竟应该如何运用 JVM 的知识，来逐步提高实际编程水平呢？ 上下而求索后，找到了以下几个层面作为出发点</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/27328/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/2254/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/2254/" class="post-title-link" itemprop="url">Maven 高级玩法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-10 23:11:13" itemprop="dateCreated datePublished" datetime="2017-04-10T23:11:13+08:00">2017-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>34k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>31 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>介绍 Maven 工具的实用技巧，以及如何解决一些常见的问题，包括本地缓存、下载、编译、语法、依赖和相关插件等问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/2254/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/743/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -325,205 +636,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/26002/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/26002/" class="post-title-link" itemprop="url">Apache Kafka 分布式消息队列框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-05-10 12:43:42" itemprop="dateCreated datePublished" datetime="2015-05-10T12:43:42+08:00">2015-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>73k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:07</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Kafka-是什么？"><a href="#Kafka-是什么？" class="headerlink" title="Kafka 是什么？"></a>Kafka 是什么？</h2><p>　<strong>Kafka</strong> is a distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.</p>
-<h2 id="为什么要有-Kafka"><a href="#为什么要有-Kafka" class="headerlink" title="为什么要有 Kafka?"></a>为什么要有 Kafka?</h2><h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>　具备经济、快速、可靠、易扩充、数据共享、设备共享、通讯方便、灵活等，分布式所具备的特性</p>
-<h3 id="高吞吐量"><a href="#高吞吐量" class="headerlink" title="高吞吐量"></a>高吞吐量</h3><p>　同时为数据生产者和消费者提高吞吐量</p>
-<h3 id="高可靠性"><a href="#高可靠性" class="headerlink" title="高可靠性"></a>高可靠性</h3><p>　支持多个消费者，当某个消费者失败的时候，能够自动负载均衡</p>
-<h3 id="离线-amp-实时性"><a href="#离线-amp-实时性" class="headerlink" title="离线 &amp; 实时性"></a>离线 &amp; 实时性</h3><p>　能将消息持久化，进行批量处理</p>
-<h3 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h3><p>　作为各个系统连接的桥梁，避免系统之间的耦合</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/26002/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/45888/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/45888/" class="post-title-link" itemprop="url">Apache HBase 全攻略</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-05-28 13:24:10" itemprop="dateCreated datePublished" datetime="2017-05-28T13:24:10+08:00">2017-05-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>24k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>22 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>介绍 Apache HBase 的基本概念、环境部署、常用命令、实战技巧、架构设计和性能优化，并记录了一些踩过的坑，及其解决方案。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/45888/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/200919/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -598,121 +710,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/200919/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201025/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/201025/" class="post-title-link" itemprop="url">Aapche Drill：一款分布式查询引擎</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-25 00:36:00 / 修改时间：01:04:22" itemprop="dateCreated datePublished" datetime="2020-10-25T00:36:00+08:00">2020-10-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Aapche-Drill-是什么？"><a href="#Aapche-Drill-是什么？" class="headerlink" title="Aapche Drill 是什么？"></a>Aapche Drill 是什么？</h2><blockquote>
-<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/drill">Apache Drill</a></strong>™ is a distributed MPP query layer that supports SQL and alternative query languages against NoSQL and Hadoop data storage systems. It was inspired in part by <a target="_blank" rel="external nofollow noopener noreferrer" href="http://research.google.com/pubs/pub36632.html">Google’s Dremel</a>.</p>
-</blockquote>
-<p><img src="/picture/drill/drill.jpg" alt="Drill"></p>
-<center>（图片来源：<a href="https://www.pexels.com/zh-cn/photo/87236/" target="_blank" rel="external nofollow noopener noreferrer">Pexels</a>™ 官网，已确认无版权）</center>
-
-
-
-
-
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
-<li>支持自定义的嵌套数据结构</li>
-<li>兼容 Hive（包括 Hive 的 UDF，且支持自定义 UDF）</li>
-<li>高性能、低延迟的 SQL 查询</li>
-<li>支持多数据源（插件化，包括 <a href="https://yuzhouwan.com/posts/26002/">Apache Kafka</a>、<a href="https://yuzhouwan.com/posts/45888/">Apache HBase</a>、Apache Hive、OpenTSDB、S3 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://drill.apache.org/docs/connect-a-data-source-introduction/">等</a>）</li>
-</ul>
-<div class="note info">UDF（User Defined Funcation）：用户定义普通函数，只作用于单行记录</div>
-<div class="note info">UDAF（User Defined Aggregation Funcation）：用户定义聚合函数，只作用于多行记录</div>
-<div class="note info">UDTF（User Defined Table Generating Funcation）：用户定义表生成函数，可以输入一行记录输出多行记录</div>
-
-<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul>
-<li>与标准 SQL 略有不同</li>
-<li>外部依赖较多（基于 <a href="https://yuzhouwan.com/posts/31915/">Apache ZooKeeper</a> 实现分布式、基于 <a href="https://yuzhouwan.com/posts/201018/">Apache Calcite</a> 实现 SQL 解析）</li>
-<li>比较小众，相关资料缺乏</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/201025/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -995,6 +992,61 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

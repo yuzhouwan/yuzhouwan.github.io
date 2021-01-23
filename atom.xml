@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-01-17T02:58:55.469Z</updated>
+  <updated>2021-01-23T15:38:05.073Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-01-17T02:58:55.469Z</updated>
+    <updated>2021-01-23T15:38:05.073Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -1414,33 +1414,6 @@
   </entry>
   
   <entry>
-    <title>Nginx：一款高性能的反向代理服务器</title>
-    <link href="https://yuzhouwan.com/posts/200321/"/>
-    <id>https://yuzhouwan.com/posts/200321/</id>
-    <published>2020-03-20T23:52:01.000Z</published>
-    <updated>2020-09-17T16:04:57.960Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Nginx-是什么？&quot;&gt;&lt;a href=&quot;#Nginx-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Nginx 是什么？&quot;&gt;&lt;/a&gt;Nginx 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://nginx.org/&quot;&gt;Nginx&lt;/a&gt;&lt;/strong&gt;™ [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;h3 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h3&gt;&lt;p&gt;　在 Nginx &lt;a href=&quot;https://nginx.org/download/&quot;&gt;Archive&lt;/a&gt; 下载页面，下载 &lt;a href=&quot;https://nginx.org/download/nginx-1.13.12.tar.gz&quot;&gt;nginx-1.13.12.tar.gz&lt;/a&gt; 安装包&lt;/p&gt;
-&lt;h3 id=&quot;安装依赖&quot;&gt;&lt;a href=&quot;#安装依赖&quot; class=&quot;headerlink&quot; title=&quot;安装依赖&quot;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install pcre-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;编译安装&quot;&gt;&lt;a href=&quot;#编译安装&quot; class=&quot;headerlink&quot; title=&quot;编译安装&quot;&gt;&lt;/a&gt;编译安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ tar zxvf nginx-1.13.12.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 必须要跳转到 nginx 安装目录下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; nginx-1.13.12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ./configure --prefix=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx --conf-path=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ make -j4 &amp;amp;&amp;amp; make -j4 install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;启动&quot;&gt;&lt;a href=&quot;#启动&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sbin/nginx -c /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ps -ef | grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root     107034      1  0 Oct31 ?        00:00:00 nginx: master process sbin/nginx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107036 107034  0 Oct31 ?        00:00:00 nginx: worker process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107266 107265  0 Oct31 ?        00:00:00 tsar --check --apache --cpu --mem --load --io --traffic --tcp --partition --nginx --swap&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root     107270  97588  0 Oct31 pts/1    00:00:00 grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="Nginx" scheme="https://yuzhouwan.com/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Netty：从入门到实践</title>
     <link href="https://yuzhouwan.com/posts/200316/"/>
     <id>https://yuzhouwan.com/posts/200316/</id>
@@ -1467,6 +1440,33 @@
     <category term="Netty" scheme="https://yuzhouwan.com/tags/Netty/"/>
     
     <category term="NIO" scheme="https://yuzhouwan.com/tags/NIO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx：一款高性能的反向代理服务器</title>
+    <link href="https://yuzhouwan.com/posts/200321/"/>
+    <id>https://yuzhouwan.com/posts/200321/</id>
+    <published>2020-03-20T23:52:01.000Z</published>
+    <updated>2020-09-17T16:04:57.960Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Nginx-是什么？&quot;&gt;&lt;a href=&quot;#Nginx-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Nginx 是什么？&quot;&gt;&lt;/a&gt;Nginx 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://nginx.org/&quot;&gt;Nginx&lt;/a&gt;&lt;/strong&gt;™ [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h2&gt;&lt;h3 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h3&gt;&lt;p&gt;　在 Nginx &lt;a href=&quot;https://nginx.org/download/&quot;&gt;Archive&lt;/a&gt; 下载页面，下载 &lt;a href=&quot;https://nginx.org/download/nginx-1.13.12.tar.gz&quot;&gt;nginx-1.13.12.tar.gz&lt;/a&gt; 安装包&lt;/p&gt;
+&lt;h3 id=&quot;安装依赖&quot;&gt;&lt;a href=&quot;#安装依赖&quot; class=&quot;headerlink&quot; title=&quot;安装依赖&quot;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install openssl openssl-devel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ yum -y install pcre-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;编译安装&quot;&gt;&lt;a href=&quot;#编译安装&quot; class=&quot;headerlink&quot; title=&quot;编译安装&quot;&gt;&lt;/a&gt;编译安装&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ tar zxvf nginx-1.13.12.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 必须要跳转到 nginx 安装目录下&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; nginx-1.13.12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ./configure --prefix=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx --conf-path=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ make -j4 &amp;amp;&amp;amp; make -j4 install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;启动&quot;&gt;&lt;a href=&quot;#启动&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sbin/nginx -c /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/nginx/nginx.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ps -ef | grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;root     107034      1  0 Oct31 ?        00:00:00 nginx: master process sbin/nginx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107036 107034  0 Oct31 ?        00:00:00 nginx: worker process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nobody   107266 107265  0 Oct31 ?        00:00:00 tsar --check --apache --cpu --mem --load --io --traffic --tcp --partition --nginx --swap&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root     107270  97588  0 Oct31 pts/1    00:00:00 grep nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Nginx" scheme="https://yuzhouwan.com/tags/Nginx/"/>
     
   </entry>
   

@@ -4759,7 +4759,12 @@ participant Planner
 participant PhysicalPlan
 participant QueryPlan
 participant RawDataQueryPlan
+participant IPlanExecutor
+participant IQueryRouter
+participant RawDataQueryExecutor
 participant RawQueryDataSetWithoutValueFilter
+participant RawQueryDataSetWithoutValueFilter.ReadTask
+participant IBatchReader
 participant TSQueryDataSet
 participant TSExecuteStatementResp
 
@@ -4794,7 +4799,7 @@ TSServiceImpl --&gt;&gt;- TSServiceImpl : list of respColumns and list of column
 end
 
 
-alt plan instanceof  is true
+alt plan instanceof is true
 TSServiceImpl -&gt;&gt;+ RawDataQueryPlan : getDeduplicatedPaths().size()
 RawDataQueryPlan -&gt;&gt;- TSServiceImpl : long deduplicatedPathNum
 end
@@ -4803,8 +4808,30 @@ TSServiceImpl -&gt;&gt;+ TSServiceImpl : generateQueryId
 TSServiceImpl -&gt;&gt;- TSServiceImpl : long queryId
 
 TSServiceImpl -&gt;&gt;+ TSServiceImpl : createQueryDataSet
+
+alt execute query
+TSServiceImpl -&gt;&gt;+ IPlanExecutor : processQuery
+IPlanExecutor -&gt;&gt;+ IPlanExecutor : processDataQuery
+IPlanExecutor -&gt;&gt;+ IQueryRouter : rawDataQuery
+IQueryRouter -&gt;&gt;+ RawDataQueryExecutor : executeWithoutValueFilter
+RawDataQueryExecutor -&gt;&gt;+ RawQueryDataSetWithoutValueFilter : new
+RawQueryDataSetWithoutValueFilter -&gt;&gt; RawQueryDataSetWithoutValueFilter : init
+RawQueryDataSetWithoutValueFilter -&gt;&gt;+ RawQueryDataSetWithoutValueFilter.ReadTask : new
+RawQueryDataSetWithoutValueFilter.ReadTask -&gt;&gt;- RawQueryDataSetWithoutValueFilter : RawQueryDataSetWithoutValueFilter.ReadTask
+RawQueryDataSetWithoutValueFilter.ReadTask -&gt;&gt; RawQueryDataSetWithoutValueFilter.ReadTask : runMayThrow
+RawQueryDataSetWithoutValueFilter.ReadTask -&gt;&gt;+ IBatchReader : nextBatch
+IBatchReader -&gt;&gt;- RawQueryDataSetWithoutValueFilter.ReadTask : BatchData
+RawQueryDataSetWithoutValueFilter -&gt;&gt; RawQueryDataSetWithoutValueFilter : fillCache
+RawQueryDataSetWithoutValueFilter -&gt;&gt;- RawDataQueryExecutor : QueryDataSet
+RawDataQueryExecutor -&gt;&gt;- IQueryRouter : QueryDataSet
+IQueryRouter -&gt;&gt;- IPlanExecutor : QueryDataSet
+IPlanExecutor -&gt;&gt;- IPlanExecutor : QueryDataSet
+IPlanExecutor -&gt;&gt;- TSServiceImpl : QueryDataSet
+end
+
 TSServiceImpl -&gt;&gt;- TSServiceImpl : QueryDataSet
 
+alt build result
 TSServiceImpl -&gt;&gt;+ TSServiceImpl : fillRpcReturnData
 TSServiceImpl -&gt;&gt;+ RawQueryDataSetWithoutValueFilter : fillBuffer
 RawQueryDataSetWithoutValueFilter -&gt;&gt; TSQueryDataSet : setTime
@@ -4816,6 +4843,7 @@ TSServiceImpl -&gt;&gt; TSExecuteStatementResp : setQueryDataSet
 TSServiceImpl -&gt;&gt; TSExecuteStatementResp : setQueryId
 
 TSServiceImpl -&gt;&gt;- TSServiceImpl : TSQueryDataSet
+end
 
 TSServiceImpl -&gt;&gt;- TSServiceImpl : TSExecuteStatementResp
 TSServiceImpl -&gt;&gt;- TSServiceImpl : TSExecuteStatementResp
@@ -4944,7 +4972,6 @@ TSIService -&gt;&gt;- Thrift : requestStatementId_result</pre>
 <h3 id="Submit-tag"><a href="#Submit-tag" class="headerlink" title="Submit tag"></a>Submit tag</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ git push origin v0.0.2</span><br><span class="line"></span><br><span class="line"><span class="comment"># push 本地所有标签</span></span><br><span class="line">$ git push origin –tags</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="Pull-with-specific-tag"><a href="#Pull-with-specific-tag" class="headerlink" title="Pull with specific tag"></a>Pull with specific tag</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 tag 列表，并 checkout 到指定的 tag</span></span><br><span class="line">$ git tag -l</span><br><span class="line">$ git checkout tags/&lt;tag_name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># checkout 到指定的 tag，并创建一个新的 branch</span></span><br><span class="line">$ git checkout tags/&lt;tag_name&gt; -b &lt;branch_name&gt;</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="Delete-tag"><a href="#Delete-tag" class="headerlink" title="Delete tag"></a>Delete tag</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 删除本地 Tag</span></span><br><span class="line">$ git tag -d v3.4.6.0</span><br><span class="line">  Deleted tag <span class="string">'v3.4.6.0'</span> (was 0e48a03a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程 Tag</span></span><br><span class="line">$ git push origin :refs/tags/v3.4.6.0</span><br><span class="line">  To http://github.com/asdf2014/zookeeper.git</span><br><span class="line">   - [deleted]           v3.4.6.0</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Git-编辑器切换为-Notepad"><a href="#Git-编辑器切换为-Notepad" class="headerlink" title="Git 编辑器切换为 Notepad++"></a>Git 编辑器切换为 Notepad++</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 命令行设置</span></span><br><span class="line">$ git config --global core.editor <span class="string">"'D:/apps/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改配置文件</span></span><br><span class="line">$ vim ~/.gitconfig</span><br><span class="line">  [core]</span><br><span class="line">    editor = <span class="string">'D:/apps/Notepad++/notepad++.exe'</span> -multiInst -notabbar -nosession -noPlugin</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="Git-代理"><a href="#Git-代理" class="headerlink" title="Git 代理"></a>Git 代理</h2><h3 id="通过命令设置"><a href="#通过命令设置" class="headerlink" title="通过命令设置"></a>通过命令设置</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ git config --global http.proxy <span class="string">'http://192.168.1.101:8888'</span></span><br><span class="line">$ git config --global https.proxy <span class="string">'https://192.168.1.101:8888'</span></span><br><span class="line">$ git config --global http.proxy <span class="string">'socks5://127.0.0.1:1080'</span></span><br><span class="line">$ git config --global https.proxy <span class="string">'socks5://127.0.0.1:1080'</span></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="通过配置文件设置"><a href="#通过配置文件设置" class="headerlink" title="通过配置文件设置"></a>通过配置文件设置</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ vim ~/.ssh/config</span><br><span class="line">   [http]</span><br><span class="line">     proxy = http://192.168.1.101:8888</span><br><span class="line">   [https]</span><br><span class="line">     proxy = https://192.168.1.101:8888</span><br><span class="line"><span class="comment">#  [http]</span></span><br><span class="line"><span class="comment">#    proxy = socks5://127.0.0.1:1080</span></span><br><span class="line"><span class="comment">#  [https]</span></span><br><span class="line"><span class="comment">#    proxy = socks5://127.0.0.1:1080</span></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h3><h4 id="SSL-ERROR-SYSCALL-in-connection-to-git-coding-net-443"><a href="#SSL-ERROR-SYSCALL-in-connection-to-git-coding-net-443" class="headerlink" title="SSL_ERROR_SYSCALL in connection to git.coding.net:443"></a>SSL_ERROR_SYSCALL in connection to git.coding.net:443</h4><h5 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h5><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ git push origin master</span><br><span class="line">  Counting objects: 9, <span class="keyword">done</span>.</span><br><span class="line">  Delta compression using up to 4 threads.</span><br><span class="line">  Compressing objects: 100% (9/9), <span class="keyword">done</span>.</span><br><span class="line">  Writing objects: 100% (9/9), 1.05 KiB | 1.05 MiB/s, <span class="keyword">done</span>.</span><br><span class="line">  Total 9 (delta 6), reused 0 (delta 0)</span><br><span class="line">  error: RPC failed; curl 35 OpenSSL SSL_connect: SSL_ERROR_SYSCALL <span class="keyword">in</span> connection to git.coding.net:443</span><br><span class="line">  fatal: The remote end hung up unexpectedly</span><br><span class="line">  fatal: The remote end hung up unexpectedly</span><br><span class="line">  Everything up-to-date</span><br></pre></td></tr></tbody></table></figure>
@@ -4976,6 +5003,7 @@ TSIService -&gt;&gt;- Thrift : requestStatementId_result</pre>
 <p><a href="https://travis-ci.org/asdf2014/yuzhouwan"><img data-src="https://travis-ci.org/asdf2014/yuzhouwan.svg?branch=master" alt="Build Status"></a></p>
 <p>Tips: Full code is <a href="https://github.com/asdf2014/yuzhouwan/blob/master/.travis.yml">here</a>.</p>
 <h2 id="设置编辑器"><a href="#设置编辑器" class="headerlink" title="设置编辑器"></a>设置编辑器</h2><h3 id="在-Mac-下设置-sublime-作为编辑器"><a href="#在-Mac-下设置-sublime-作为编辑器" class="headerlink" title="在 Mac 下设置 sublime 作为编辑器"></a>在 Mac 下设置 sublime 作为编辑器</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 修改 git 配置文件</span></span><br><span class="line">$ vim ~/.gitconfig</span><br><span class="line">  [core]</span><br><span class="line">    editor = /Applications/Sublime\\ Text.app/Contents/SharedSupport/bin/subl -n -w</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者通过命令行配置</span></span><br><span class="line">$ git config --global core.editor <span class="string">"/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="在-Windows-下设置-Notepad-作为编辑器"><a href="#在-Windows-下设置-Notepad-作为编辑器" class="headerlink" title="在 Windows 下设置 Notepad++ 作为编辑器"></a>在 Windows 下设置 Notepad++ 作为编辑器</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># 修改 git 配置文件</span></span><br><span class="line">$ vim ~/.gitconfig</span><br><span class="line">  [core]</span><br><span class="line">    editor = <span class="string">'D:/apps/Notepad++/notepad++.exe'</span> -multiInst -notabbar -nosession -noPlugin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者通过命令行配置</span></span><br><span class="line">$ git config --global core.editor <span class="string">"'D:/apps/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</span></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="GitHub-CLI"><a href="#GitHub-CLI" class="headerlink" title="GitHub CLI"></a><a href="https://github.blog/2020-09-17-github-cli-1-0-is-now-available/">GitHub CLI</a></h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ brew install gh</span><br><span class="line">$ gh version</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">gh version 1.4.0 (2020-12-15)</span><br><span class="line">https://github.com/cli/cli/releases/latest</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ brew update</span><br><span class="line">$ brew upgrade gh</span><br></pre></td></tr></tbody></table></figure>
@@ -7139,7 +7167,101 @@ TSIService -&gt;&gt;- Thrift : requestStatementId_result</pre>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><h5 id="Book"><a href="#Book" class="headerlink" title="Book"></a>Book</h5><ul>
 <li>《<a href="https://book.douban.com/subject/2038862/">柔性字符串匹配</a>》</li>
 </ul>
-<h3 id="Sorting-Algorithm"><a href="#Sorting-Algorithm" class="headerlink" title="Sorting Algorithm"></a>Sorting Algorithm</h3><h4 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h4><ul>
+<h3 id="Sorting-Algorithm"><a href="#Sorting-Algorithm" class="headerlink" title="Sorting Algorithm"></a>Sorting Algorithm</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">排序算法</th>
+<th style="text-align:center">平均时间复杂度</th>
+<th style="text-align:center">最坏时间复杂度</th>
+<th style="text-align:center">最好时间复杂度</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>冒泡排序</strong></td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>选择排序</strong></td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>插入排序</strong></td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>堆排序</strong></td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>归并排序</strong></td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>快速排序</strong></td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n \log n)$</td>
+<td style="text-align:center">$O(\log n)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>希尔排序</strong></td>
+<td style="text-align:center">$O(n \log^2 n)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">$O(1)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>计数排序</strong></td>
+<td style="text-align:center">$O(n + m)$</td>
+<td style="text-align:center">$O(n + m)$</td>
+<td style="text-align:center">$O(n + m)$</td>
+<td style="text-align:center">$O(n + m)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>基数排序</strong></td>
+<td style="text-align:center">$O(k \times n)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(k \times n)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>均按从小到大排列</li>
+<li>k：数值中的“数位”个数</li>
+<li>n：数据规模</li>
+<li>m：数据的最大值减最小值</li>
+</ul>
+<h4 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h4><ul>
 <li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">wikipedia 排序算法</a></li>
 <li><a href="https://leetcode.com/tag/sort/">Leetcode Sort</a></li>
 </ul>
@@ -7348,7 +7470,7 @@ f(x - 1) + f(x - 2), x \ge 2, x \in N
 <li><a href="http://arganzheng.life/bloom-filter-for-distributed-system.html">Bloom filter 在分布式环境中的应用</a></li>
 <li><a href="http://shzhangji.com/cnblogs/2017/08/27/an-introduction-to-stream-lib-the-stream-processing-utilities/">实时计算工具库 stream-lib 使用指南</a></li>
 <li><a href="http://blog.codinglabs.org/tag.html#HyperLogLogCounting">解读 Cardinality Estimation 算法</a></li>
-<li><a href="https://research.neustar.biz/2012/10/25/sketch-of-the-day-hyperloglog-cornerstone-of-a-big-data-infrastructure/">Sketch of the Day：HyperLogLog — Cornerstone of a Big Data Infrastructure</a></li>
+<li><a href="http://content.research.neustar.biz/blog/hll.html">Sketch of the Day：HyperLogLog — Cornerstone of a Big Data Infrastructure</a></li>
 <li><a href="http://content.research.neustar.biz/blog/runs.html">Sketch of the Day：Probabilistic Counting with Stochastic Averaging（PCSA）</a></li>
 <li><a href="https://blog.csdn.net/u011489043/article/details/78727128">分布式缓存 Redis 之 HyperLogLog</a></li>
 <li><a href="https://soulmachine.gitbooks.io/system-design/content/cn/bigdata/heavy-hitters.html">Top K 频繁项</a></li>
@@ -7559,6 +7681,7 @@ f(x - 1) + f(x - 2), x \ge 2, x \in N
 </div>
 <h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="Blog-1"><a href="#Blog-1" class="headerlink" title="Blog"></a>Blog</h3><ul>
 <li><a href="http://codecapsule.com/2012/01/18/how-to-implement-a-paper/">How to implement an algorithm from a scientific paper</a></li>
+<li><a href="https://visualgo.net/zh">Visualgo：数据结构和算法动态可视化</a></li>
 </ul>
 <h3 id="Book-1"><a href="#Book-1" class="headerlink" title="Book"></a>Book</h3><ul>
 <li><a href="http://interactivepython.org/courselib/static/pythonds/index.html">Problem Solving with Algorithms and Data Structures using Python</a></li>

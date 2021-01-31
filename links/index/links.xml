@@ -336,4 +336,16 @@
     <avatar>/logo/yoyling.png</avatar>
     <url>https://yoyling.com/</url>
   </link>
+  <link>
+    <title>mghio</title>
+    <subtitle>Java 搬运工和终身学习者</subtitle>
+    <avatar>/logo/mghio.png</avatar>
+    <url>https://www.mghio.cn/</url>
+  </link>
+  <link>
+    <title>微欧斯机器人</title>
+    <subtitle>机器车技术开发分享网</subtitle>
+    <avatar>/logo/cvosrobot.png</avatar>
+    <url>http://blog.cvosrobot.com/</url>
+  </link>
 </links>

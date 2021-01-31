@@ -254,14 +254,14 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/posts/200321/</loc>
+    <loc>https://yuzhouwan.com/posts/200316/</loc>
     
     <lastmod>2020-09-17</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/posts/200316/</loc>
+    <loc>https://yuzhouwan.com/posts/200321/</loc>
     
     <lastmod>2020-09-17</lastmod>
     
@@ -634,13 +634,6 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Nginx/</loc>
-    <lastmod>2021-01-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/Netty/</loc>
     <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
@@ -649,6 +642,13 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/NIO/</loc>
+    <lastmod>2021-01-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Nginx/</loc>
     <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1089,20 +1089,6 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Clojure/</loc>
-    <lastmod>2021-01-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Avro/</loc>
-    <lastmod>2021-01-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/Linux/</loc>
     <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
@@ -1111,6 +1097,20 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/Shell/</loc>
+    <lastmod>2021-01-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Clojure/</loc>
+    <lastmod>2021-01-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Avro/</loc>
     <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

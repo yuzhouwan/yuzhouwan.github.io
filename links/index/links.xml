@@ -348,10 +348,4 @@
     <avatar>/logo/cvosrobot.png</avatar>
     <url>http://blog.cvosrobot.com/</url>
   </link>
-  <link>
-    <title>Keep Coding</title>
-    <subtitle>写代码的西瓜</subtitle>
-    <avatar>/logo/liujiacai.png</avatar>
-    <url>https://liujiacai.net/</url>
-  </link>
 </links>

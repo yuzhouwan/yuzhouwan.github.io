@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/22654/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/666/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -230,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/22654/" class="post-title-link" itemprop="url">搜索引擎 ElasticSearch</a>
+            <a href="/posts/666/" class="post-title-link" itemprop="url">Algorithm</a>
         </h2>
 
         <div class="post-meta">
@@ -240,14 +240,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-04-02 12:18:42" itemprop="dateCreated datePublished" datetime="2017-04-02T12:18:42+08:00">2017-04-02</time>
+              <time title="创建时间：2019-05-01 21:38:08" itemprop="dateCreated datePublished" datetime="2019-05-01T21:38:08+08:00">2019-05-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-31 12:34:06" itemprop="dateModified" datetime="2021-01-31T12:34:06+08:00">2021-01-31</time>
+                <time title="修改时间：2021-02-19 20:29:38" itemprop="dateModified" datetime="2021-02-19T20:29:38+08:00">2021-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -267,14 +267,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>31k</span>
+              <span>18k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>29 分钟</span>
+              <span>16 分钟</span>
             </span>
 
         </div>
@@ -286,72 +286,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="ElasticSearch-是什么？"><a href="#ElasticSearch-是什么？" class="headerlink" title="ElasticSearch 是什么？"></a>ElasticSearch 是什么？</h2><p>　<a href="https://yuzhouwan.com/posts/22654/"><strong>ElasticSearch</strong></a>™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力</p>
-<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
-<li>功能丰富，且开箱即用</li>
-<li>横向可扩展性</li>
-<li>分片机制更好地解决热点问题</li>
-<li>多副本有效保证了高可用</li>
-<li>精确的熔断器机制</li>
-<li>社区庞大，生态完善</li>
-</ul>
-<h2 id="主要概念"><a href="#主要概念" class="headerlink" title="主要概念"></a>主要概念</h2><h3 id="Cluster-集群"><a href="#Cluster-集群" class="headerlink" title="Cluster 集群"></a>Cluster 集群</h3><p>　在一个分布式系统里面，可以通过多个 ElasticSearch 节点组成一个<strong>集群</strong>。集群中会动态选举出一个主节点，保证了 ElasticSearch 集群不存在单点故障<br>　在同一子网内，只需要将进程设置为相同的集群名，ElasticSearch 就会把这些集群名相同的进程自动组成一个集群。集群中各节点间的通讯和数据负载均衡，全部都由 ElasticSearch 自动管理</p>
-<h3 id="Node-节点"><a href="#Node-节点" class="headerlink" title="Node 节点"></a>Node 节点</h3><p>　每一个 ElasticSearch 进程称为一个 <strong>Node 节点</strong>。在测试环境中，可以在一台服务器上运行多个 ElasticSearch 进程；但生产环境中，则建议每台服务器只运行一个 ElasticSearch 进程</p>
-<h3 id="Index-索引"><a href="#Index-索引" class="headerlink" title="Index 索引"></a>Index 索引</h3><p>　ElasticSearch 中的索引是文档数据存储的地方，相当于是传统关系数据库中的 DataBase 概念。更多逻辑上的对应关系，如下表所示：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Relational DB</th>
-<th style="text-align:center">HBase</th>
-<th style="text-align:center">ElasticSearch</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Database</td>
-<td style="text-align:center">NameSpace</td>
-<td style="text-align:center">Template</td>
-<td style="text-align:center">一组索引的模板配置</td>
-</tr>
-<tr>
-<td style="text-align:center">Table</td>
-<td style="text-align:center">Table</td>
-<td style="text-align:center">Index</td>
-<td style="text-align:center">索引</td>
-</tr>
-<tr>
-<td style="text-align:center">Row</td>
-<td style="text-align:center">RowKey</td>
-<td style="text-align:center">Document</td>
-<td style="text-align:center">文档，和 Lucene 概念一致</td>
-</tr>
-<tr>
-<td style="text-align:center">Column + Value</td>
-<td style="text-align:center">Cell</td>
-<td style="text-align:center">Field</td>
-<td style="text-align:center">如果将文档理解为 JSON，那么 Field 就是字段和值</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">Term</td>
-<td style="text-align:center">检索的基本单位，相当于是文本中的一个词</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">Token</td>
-<td style="text-align:center">Term 内容、类型，以及 Term 在文本中的起始及偏移</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="note info">目前最新的 ElasticSearch 7.x 版本里面已经废弃了 Type 的概念</div>
+          <h2 id="LeetCode-组队刷题活动"><a href="#LeetCode-组队刷题活动" class="headerlink" title="LeetCode 组队刷题活动"></a>LeetCode 组队刷题活动</h2><div class="note primary">组队刷 LeetCode</div>
+
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h4 id="代码仓库"><a href="#代码仓库" class="headerlink" title="代码仓库"></a>代码仓库</h4><p>　代码仓库的坐标：<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm">asdf2014 / algorithm</a></strong></p>
+<h4 id="报名途径"><a href="#报名途径" class="headerlink" title="报名途径"></a>报名途径</h4><p>　只需要在《<a href="https://yuzhouwan.com/posts/666/">Algorithm</a>》文末的评论区，或者在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/gitment/issues/40">issues#40</a> 中留言，即可随时参与</p>
+<div class="note success">留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激</div>
+
+<h4 id="参与方式"><a href="#参与方式" class="headerlink" title="参与方式"></a>参与方式</h4><p>　每位参与的小伙伴，都会获得代码仓库的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository">Collaborator</a> 权限，可以自由地提交代码（不限制语种）。在 <code>/Codes/${你的 Github 账号名}</code> 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/invitations">asdf2014 - algorithm - invitations</a> 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">"<span class="subst">$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="刷题频率"><a href="#刷题频率" class="headerlink" title="刷题频率"></a>刷题频率</h4><p>　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”</p>
+<h4 id="选题策略"><a href="#选题策略" class="headerlink" title="选题策略"></a>选题策略</h4><p>　<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py">选题机器人</a>会在每周五晚八点，自动地随机选定一个题目，当前题目点击<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5">这里</a>查看。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>　操作 Git 时遇到问题的话，可以参考我的一篇博客《<a href="https://yuzhouwan.com/posts/30041/">Git 高级玩法</a>》</p>
+<div class="note success">也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴</div>
+
+<p>　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img src="/picture/algorithm/algorithm_qq_group_5366753.svg" alt></a> 或者 Gitter 聊天室 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://gitter.im/yuzhouwan/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="/picture/algorithm/algorithm_gitter_community.svg" alt></a></p>
+<div class="note danger">但是，请不要在评论区讨论入群问题的答案，避免打广告的进入</div>
+
+<p>　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：</p>
+<div class="tabs" id="code"><ul class="nav-tabs"><li class="tab"><a href="#code-1">CODE 1</a></li><li class="tab"><a href="#code-2">CODE 2</a></li><li class="tab active"><a href="#code-3">CODE 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="code-1"><p><strong>迭代解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        n = n - <span class="number">1</span></span><br><span class="line">        sum_ = a + b</span><br><span class="line">        a = b</span><br><span class="line">        b = sum_</span><br><span class="line">    <span class="keyword">return</span> b</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane" id="code-2"><p><strong>递归解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> solution(n - <span class="number">1</span>) + solution(n - <span class="number">2</span>)</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane active" id="code-3"><p><strong>动态规划解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    cache = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, n + <span class="number">1</span>)]</span><br><span class="line">    cache[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        cache[i] = cache[i - <span class="number">1</span>] + cache[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> cache[n]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/22654/#more" rel="contents">
+              <a class="btn" href="/posts/666/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

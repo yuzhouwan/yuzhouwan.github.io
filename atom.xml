@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-02-19T12:29:38.032Z</updated>
+  <updated>2021-02-19T16:32:10.361Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -17,58 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Algorithm</title>
-    <link href="https://yuzhouwan.com/posts/666/"/>
-    <id>https://yuzhouwan.com/posts/666/</id>
-    <published>2019-05-01T13:38:08.000Z</published>
-    <updated>2021-02-19T12:29:38.032Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;LeetCode-组队刷题活动&quot;&gt;&lt;a href=&quot;#LeetCode-组队刷题活动&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 组队刷题活动&quot;&gt;&lt;/a&gt;LeetCode 组队刷题活动&lt;/h2&gt;&lt;div class=&quot;note primary&quot;&gt;组队刷 LeetCode&lt;/div&gt;
-
-&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;h4 id=&quot;代码仓库&quot;&gt;&lt;a href=&quot;#代码仓库&quot; class=&quot;headerlink&quot; title=&quot;代码仓库&quot;&gt;&lt;/a&gt;代码仓库&lt;/h4&gt;&lt;p&gt;　代码仓库的坐标：&lt;strong&gt;&lt;a href=&quot;https://github.com/asdf2014/algorithm&quot;&gt;asdf2014 / algorithm&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&quot;报名途径&quot;&gt;&lt;a href=&quot;#报名途径&quot; class=&quot;headerlink&quot; title=&quot;报名途径&quot;&gt;&lt;/a&gt;报名途径&lt;/h4&gt;&lt;p&gt;　只需要在《&lt;a href=&quot;https://yuzhouwan.com/posts/666/&quot;&gt;Algorithm&lt;/a&gt;》文末的评论区，或者在 &lt;a href=&quot;https://github.com/asdf2014/gitment/issues/40&quot;&gt;issues#40&lt;/a&gt; 中留言，即可随时参与&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激&lt;/div&gt;
-
-&lt;h4 id=&quot;参与方式&quot;&gt;&lt;a href=&quot;#参与方式&quot; class=&quot;headerlink&quot; title=&quot;参与方式&quot;&gt;&lt;/a&gt;参与方式&lt;/h4&gt;&lt;p&gt;　每位参与的小伙伴，都会获得代码仓库的 &lt;a href=&quot;https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository&quot;&gt;Collaborator&lt;/a&gt; 权限，可以自由地提交代码（不限制语种）。在 &lt;code&gt;/Codes/${你的 Github 账号名}&lt;/code&gt; 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 &lt;a href=&quot;https://github.com/asdf2014/algorithm/invitations&quot;&gt;asdf2014 - algorithm - invitations&lt;/a&gt; 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;bash -c &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;subst&quot;&gt;$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;刷题频率&quot;&gt;&lt;a href=&quot;#刷题频率&quot; class=&quot;headerlink&quot; title=&quot;刷题频率&quot;&gt;&lt;/a&gt;刷题频率&lt;/h4&gt;&lt;p&gt;　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”&lt;/p&gt;
-&lt;h4 id=&quot;选题策略&quot;&gt;&lt;a href=&quot;#选题策略&quot; class=&quot;headerlink&quot; title=&quot;选题策略&quot;&gt;&lt;/a&gt;选题策略&lt;/h4&gt;&lt;p&gt;　&lt;a href=&quot;https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py&quot;&gt;选题机器人&lt;/a&gt;会在每周五晚八点，自动地随机选定一个题目，当前题目点击&lt;a href=&quot;https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5&quot;&gt;这里&lt;/a&gt;查看。&lt;/p&gt;
-&lt;h3 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h3&gt;&lt;p&gt;　操作 Git 时遇到问题的话，可以参考我的一篇博客《&lt;a href=&quot;https://yuzhouwan.com/posts/30041/&quot;&gt;Git 高级玩法&lt;/a&gt;》&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴&lt;/div&gt;
-
-&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;note danger&quot;&gt;但是，请不要在评论区讨论入群问题的答案，避免打广告的进入&lt;/div&gt;
-
-&lt;p&gt;　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：&lt;/p&gt;
-&lt;div class=&quot;tabs&quot; id=&quot;code&quot;&gt;&lt;ul class=&quot;nav-tabs&quot;&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-1&quot;&gt;CODE 1&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-2&quot;&gt;CODE 2&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab active&quot;&gt;&lt;a href=&quot;#code-3&quot;&gt;CODE 3&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;tab-content&quot;&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-1&quot;&gt;&lt;p&gt;&lt;strong&gt;迭代解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        n = n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sum_ = a + b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        a = b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        b = sum_&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; b&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-2&quot;&gt;&lt;p&gt;&lt;strong&gt;递归解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; solution(n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + solution(n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane active&quot; id=&quot;code-3&quot;&gt;&lt;p&gt;&lt;strong&gt;动态规划解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache = [x &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cache[i] = cache[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + cache[i - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cache[n]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yuzhouwan.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Algorithm" scheme="https://yuzhouwan.com/tags/Algorithm/"/>
-    
-    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="LeetCode" scheme="https://yuzhouwan.com/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Apache Druid：一款高效的 OLAP 引擎</title>
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-02-13T15:13:41.451Z</updated>
+    <updated>2021-02-19T16:32:10.361Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -135,7 +88,7 @@
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-02-13T06:31:01.322Z</updated>
+    <updated>2021-02-19T16:32:02.577Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -191,7 +144,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2021-01-31T04:34:13.153Z</updated>
+    <updated>2021-02-19T16:31:57.079Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -234,7 +187,7 @@
     <link href="https://yuzhouwan.com/posts/19631/"/>
     <id>https://yuzhouwan.com/posts/19631/</id>
     <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-01-31T04:34:10.167Z</updated>
+    <updated>2021-02-19T16:31:52.437Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
@@ -278,7 +231,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-01-31T04:34:06.569Z</updated>
+    <updated>2021-02-19T16:31:30.773Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -365,6 +318,53 @@
     <category term="Flume" scheme="https://yuzhouwan.com/tags/Flume/"/>
     
     <category term="HBase" scheme="https://yuzhouwan.com/tags/HBase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Algorithm</title>
+    <link href="https://yuzhouwan.com/posts/666/"/>
+    <id>https://yuzhouwan.com/posts/666/</id>
+    <published>2019-05-01T13:38:08.000Z</published>
+    <updated>2021-02-19T12:29:38.032Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;LeetCode-组队刷题活动&quot;&gt;&lt;a href=&quot;#LeetCode-组队刷题活动&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 组队刷题活动&quot;&gt;&lt;/a&gt;LeetCode 组队刷题活动&lt;/h2&gt;&lt;div class=&quot;note primary&quot;&gt;组队刷 LeetCode&lt;/div&gt;
+
+&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;h4 id=&quot;代码仓库&quot;&gt;&lt;a href=&quot;#代码仓库&quot; class=&quot;headerlink&quot; title=&quot;代码仓库&quot;&gt;&lt;/a&gt;代码仓库&lt;/h4&gt;&lt;p&gt;　代码仓库的坐标：&lt;strong&gt;&lt;a href=&quot;https://github.com/asdf2014/algorithm&quot;&gt;asdf2014 / algorithm&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;报名途径&quot;&gt;&lt;a href=&quot;#报名途径&quot; class=&quot;headerlink&quot; title=&quot;报名途径&quot;&gt;&lt;/a&gt;报名途径&lt;/h4&gt;&lt;p&gt;　只需要在《&lt;a href=&quot;https://yuzhouwan.com/posts/666/&quot;&gt;Algorithm&lt;/a&gt;》文末的评论区，或者在 &lt;a href=&quot;https://github.com/asdf2014/gitment/issues/40&quot;&gt;issues#40&lt;/a&gt; 中留言，即可随时参与&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激&lt;/div&gt;
+
+&lt;h4 id=&quot;参与方式&quot;&gt;&lt;a href=&quot;#参与方式&quot; class=&quot;headerlink&quot; title=&quot;参与方式&quot;&gt;&lt;/a&gt;参与方式&lt;/h4&gt;&lt;p&gt;　每位参与的小伙伴，都会获得代码仓库的 &lt;a href=&quot;https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository&quot;&gt;Collaborator&lt;/a&gt; 权限，可以自由地提交代码（不限制语种）。在 &lt;code&gt;/Codes/${你的 Github 账号名}&lt;/code&gt; 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 &lt;a href=&quot;https://github.com/asdf2014/algorithm/invitations&quot;&gt;asdf2014 - algorithm - invitations&lt;/a&gt; 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;bash -c &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;subst&quot;&gt;$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;刷题频率&quot;&gt;&lt;a href=&quot;#刷题频率&quot; class=&quot;headerlink&quot; title=&quot;刷题频率&quot;&gt;&lt;/a&gt;刷题频率&lt;/h4&gt;&lt;p&gt;　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”&lt;/p&gt;
+&lt;h4 id=&quot;选题策略&quot;&gt;&lt;a href=&quot;#选题策略&quot; class=&quot;headerlink&quot; title=&quot;选题策略&quot;&gt;&lt;/a&gt;选题策略&lt;/h4&gt;&lt;p&gt;　&lt;a href=&quot;https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py&quot;&gt;选题机器人&lt;/a&gt;会在每周五晚八点，自动地随机选定一个题目，当前题目点击&lt;a href=&quot;https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5&quot;&gt;这里&lt;/a&gt;查看。&lt;/p&gt;
+&lt;h3 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h3&gt;&lt;p&gt;　操作 Git 时遇到问题的话，可以参考我的一篇博客《&lt;a href=&quot;https://yuzhouwan.com/posts/30041/&quot;&gt;Git 高级玩法&lt;/a&gt;》&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴&lt;/div&gt;
+
+&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;note danger&quot;&gt;但是，请不要在评论区讨论入群问题的答案，避免打广告的进入&lt;/div&gt;
+
+&lt;p&gt;　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：&lt;/p&gt;
+&lt;div class=&quot;tabs&quot; id=&quot;code&quot;&gt;&lt;ul class=&quot;nav-tabs&quot;&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-1&quot;&gt;CODE 1&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-2&quot;&gt;CODE 2&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab active&quot;&gt;&lt;a href=&quot;#code-3&quot;&gt;CODE 3&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;tab-content&quot;&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-1&quot;&gt;&lt;p&gt;&lt;strong&gt;迭代解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        n = n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sum_ = a + b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        a = b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        b = sum_&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; b&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-2&quot;&gt;&lt;p&gt;&lt;strong&gt;递归解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; solution(n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + solution(n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane active&quot; id=&quot;code-3&quot;&gt;&lt;p&gt;&lt;strong&gt;动态规划解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache = [x &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cache[i] = cache[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + cache[i - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cache[n]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yuzhouwan.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Algorithm" scheme="https://yuzhouwan.com/tags/Algorithm/"/>
+    
+    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="LeetCode" scheme="https://yuzhouwan.com/tags/LeetCode/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-02-19T16:32:10.361Z</updated>
+  <updated>2021-02-21T04:19:45.978Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-02-19T16:32:10.361Z</updated>
+    <updated>2021-02-21T04:19:45.978Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -88,12 +88,12 @@
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-02-19T16:32:02.577Z</updated>
+    <updated>2021-02-21T04:19:41.316Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL™, a.k.a. Trino™) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
 
@@ -144,7 +144,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2021-02-19T16:31:57.079Z</updated>
+    <updated>2021-02-21T04:19:38.118Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -187,7 +187,7 @@
     <link href="https://yuzhouwan.com/posts/19631/"/>
     <id>https://yuzhouwan.com/posts/19631/</id>
     <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-02-19T16:31:52.437Z</updated>
+    <updated>2021-02-21T04:19:32.370Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
@@ -231,7 +231,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-02-19T16:31:30.773Z</updated>
+    <updated>2021-02-21T04:19:27.561Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -322,11 +322,36 @@
   </entry>
   
   <entry>
+    <title>程序员的 Mac 高效手册</title>
+    <link href="https://yuzhouwan.com/posts/190101/"/>
+    <id>https://yuzhouwan.com/posts/190101/</id>
+    <published>2019-01-01T11:58:02.000Z</published>
+    <updated>2021-02-21T04:19:05.669Z</updated>
+    
+    
+    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
+    
+    
+    
+    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
+    
+    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Algorithm</title>
     <link href="https://yuzhouwan.com/posts/666/"/>
     <id>https://yuzhouwan.com/posts/666/</id>
     <published>2019-05-01T13:38:08.000Z</published>
-    <updated>2021-02-19T12:29:38.032Z</updated>
+    <updated>2021-02-21T04:19:05.668Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;LeetCode-组队刷题活动&quot;&gt;&lt;a href=&quot;#LeetCode-组队刷题活动&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 组队刷题活动&quot;&gt;&lt;/a&gt;LeetCode 组队刷题活动&lt;/h2&gt;&lt;div class=&quot;note primary&quot;&gt;组队刷 LeetCode&lt;/div&gt;
@@ -932,31 +957,6 @@
     <category term="Golang" scheme="https://yuzhouwan.com/tags/Golang/"/>
     
     <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>程序员的 Mac 高效手册</title>
-    <link href="https://yuzhouwan.com/posts/190101/"/>
-    <id>https://yuzhouwan.com/posts/190101/</id>
-    <published>2019-01-01T11:58:02.000Z</published>
-    <updated>2020-11-03T14:47:51.708Z</updated>
-    
-    
-    <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
-    
-    
-    
-    <category term="工具" scheme="https://yuzhouwan.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
-    
-    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
     
   </entry>
   

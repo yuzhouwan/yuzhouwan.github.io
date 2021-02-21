@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"yuzhouwan.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":5,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":{"valine":{"text":"Valine：匿名","order":-1},"disqus":{"text":"Disqus：海外","order":-2},"gitalk":{"text":"Gitalk：可用 Github 账号登录","order":-3}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Presto 是什么？ Presto™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (P">
+  <meta name="description" content="Presto 是什么？ Presto™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Presto：分布式 SQL 查询引擎">
 <meta property="og:url" content="https://yuzhouwan.com/posts/200906/">
 <meta property="og:site_name" content="宇宙湾">
-<meta property="og:description" content="Presto 是什么？ Presto™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (P">
+<meta property="og:description" content="Presto 是什么？ Presto™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes. Presto™ (">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_architecture.png">
 <meta property="og:image" content="https://yuzhouwan.com/picture/presto/presto_architecture_with_sql.png">
@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
 <meta property="article:published_time" content="2020-09-06T15:06:25.000Z">
-<meta property="article:modified_time" content="2021-02-19T16:32:02.577Z">
+<meta property="article:modified_time" content="2021-02-21T04:19:41.316Z">
 <meta property="article:author" content="Benedict Jin">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="Kubernetes">
@@ -288,7 +288,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-20 00:32:02" itemprop="dateModified" datetime="2021-02-20T00:32:02+08:00">2021-02-20</time>
+                <time title="修改时间：2021-02-21 12:19:41" itemprop="dateModified" datetime="2021-02-21T12:19:41+08:00">2021-02-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,8 +335,8 @@
 
       
         <h2 id="Presto-是什么？"><a href="#Presto-是什么？" class="headerlink" title="Presto 是什么？"></a>Presto 是什么？</h2><blockquote>
-<p><strong>Presto</strong>™ (PrestoDB) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.</p>
-<p><strong>Presto</strong>™ (PrestoSQL) is a high performance, distributed SQL query engine for big data.</p>
+<p><strong>Presto</strong>™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.</p>
+<p><strong>Presto</strong>™ (PrestoSQL™, a.k.a. Trino™) is a high performance, distributed SQL query engine for big data.</p>
 </blockquote>
 <div class="note success">下文将详细介绍二者的区别</div>
 
@@ -592,6 +592,7 @@ style PreDestroy fill:#0099FF</pre>
 <div class="note info">比对表持续更新中...</div>
 <div class="note info">PrestoDB 和 PrestoSQL 均开源于 2012 年，Martin、Dain 和 David 为主力研发</div>
 <div class="note info">在 2019 年年初，三位主力研发基于 PrestoDB 0.215 版本，创建了 PrestoSQL 这个新项目</div>
+<div class="note info">于 2020 年 12 月 27 日，Martin Traverso、Dain Sundstrom 和 David Phillips 宣布将 PrestoSQL 项目的名字正式更名为 Trino</div>
 
 
 
@@ -1313,7 +1314,7 @@ ExecutingStatementResource -&gt;&gt;- Client : Response</response></queryresults
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:05</span>
+    <span title="站点阅读时长">20:06</span>
 </div>
 
         

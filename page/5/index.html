@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/190101/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/200315/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -230,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/190101/" class="post-title-link" itemprop="url">程序员的 Mac 高效手册</a>
+            <a href="/posts/200315/" class="post-title-link" itemprop="url">开源时序数据库 InfluxDB</a>
         </h2>
 
         <div class="post-meta">
@@ -240,14 +240,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 19:58:02" itemprop="dateCreated datePublished" datetime="2019-01-01T19:58:02+08:00">2019-01-01</time>
+              <time title="创建时间：2020-03-15 18:58:02" itemprop="dateCreated datePublished" datetime="2020-03-15T18:58:02+08:00">2020-03-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-03 22:47:51" itemprop="dateModified" datetime="2020-11-03T22:47:51+08:00">2020-11-03</time>
+                <time title="修改时间：2020-11-17 22:09:44" itemprop="dateModified" datetime="2020-11-17T22:09:44+08:00">2020-11-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
                 </span>
             </span>
 
@@ -267,14 +267,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>14k</span>
+              <span>5.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -286,10 +286,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</p>
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.influxdata.com/">InfluxDB</a></strong>™ is a time series database designed to handle high write and query loads. It is an integral component of the TICK stack. InfluxDB is meant to be used as a backing store for any use case involving large amounts of timestamped data, including DevOps monitoring, application metrics, IoT sensor data, and real-time analytics.</p>
+</blockquote>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="DataBase"><a href="#DataBase" class="headerlink" title="DataBase"></a>DataBase</h3><p>　类似于传统数据库中的 DataBase 概念</p>
+<h3 id="Measurement"><a href="#Measurement" class="headerlink" title="Measurement"></a>Measurement</h3><p>　和 OLAP 中广义上的度量概念一致，部分 OLAP 数据库中又称为 Metric</p>
+<h3 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h3><p>　和 OLAP 中广义上的维度概念一致，部分 OLAP 数据库中又称为 TagKV</p>
+<h3 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h3><p>　数值</p>
+<h3 id="Timestamp"><a href="#Timestamp" class="headerlink" title="Timestamp"></a>Timestamp</h3><p>　时间戳</p>
+<h3 id="Points"><a href="#Points" class="headerlink" title="Points"></a>Points</h3><p>　数据点</p>
+<h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><p>　数据点组成的序列</p>
+<h3 id="Retention-Policy"><a href="#Retention-Policy" class="headerlink" title="Retention Policy"></a>Retention Policy</h3><p>　数据过期策略，即 TTL</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/190101/">
+              <a class="btn" href="/posts/200315/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -870,7 +880,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:05</span>
+    <span title="站点阅读时长">20:06</span>
 </div>
 
         

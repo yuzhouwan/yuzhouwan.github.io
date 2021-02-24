@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -318,7 +318,7 @@
 <h3 id="Gunicorn"><a href="#Gunicorn" class="headerlink" title="Gunicorn"></a>Gunicorn</h3><p>　Gunicorn 是一个开源的 Python WSGI HTTP 服务器，移植于 Ruby 的 Unicorn 项目的采用 pre-fork 模式的服务器</p>
 <h4 id="WSGI"><a href="#WSGI" class="headerlink" title="WSGI"></a>WSGI</h4><p>　WSGI，即 Python <strong>W</strong>eb <strong>S</strong>erver <strong>G</strong>ateway <strong>I</strong>nterface，是专门用于 Python 应用程序或框架与 Web 服务器之间的一种接口，没有官方的实现，因为 WSGI 更像一个协议，只要遵照这些协议，WSGI 应用都可以在 任何服务器上运行，反之亦然</p>
 <h4 id="Pre-Fork"><a href="#Pre-Fork" class="headerlink" title="Pre-Fork"></a>Pre-Fork</h4><p>　一个进程处理一个请求，基于 select 模型，所以最多一次创建 1024 个进程<br>　预先创建进程，pre-fork 采用的是预派生子进程方式，用子进程处理不同的请求，每个请求对应一个子进程，进程之间是彼此独立的<br>　一定程度上加快了进程的响应速度</p>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h3><p>　Django 是一个开放源代码的 Web 应用框架，由 Python 写成。采用了 MVC 的软件设计模式，使得开发复杂的、数据库驱动的网站变得简单<br>　Django 注重组件的重用性和”可插拔性”，敏捷开发和 DRY 法则（Do not Repeat Yourself）</p>
 <p>　核心组件</p>
 <ul>

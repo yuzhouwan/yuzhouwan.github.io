@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -395,7 +395,7 @@
 </div>
 <div class="note info">目前最新的 ElasticSearch 7.x 版本里面已经废弃了 Type 的概念</div>
 
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="Shard-分片"><a href="#Shard-分片" class="headerlink" title="Shard 分片"></a>Shard 分片</h3><p>　ElasticSearch 会把一个索引拆分为多个更细粒度的索引，并称之为 Shard<br>　完成分片之后，就可以把各个 Shard 分配到不同的节点中去。同时，ElasticSearch 会确保两个相同的 Shard 不会同时存在于一个 Node 上</p>
 <h3 id="Replica-副本"><a href="#Replica-副本" class="headerlink" title="Replica 副本"></a>Replica 副本</h3><p>　ElasticSearch 的每一个 Shard 分片都可以有多个<strong>副本</strong>，而每一个副本也都是分片的完整拷贝。如此设计的好处是，既可以提升查询速度，也能提高系统的容错性<br>　一旦 ElasticSearch 的某个节点数据损坏或者服务不可用的时候，那么就可以用其他节点来代替故障的节点，以达到高可用的目标</p>
 <h3 id="Recovery-故障恢复"><a href="#Recovery-故障恢复" class="headerlink" title="Recovery 故障恢复"></a>Recovery 故障恢复</h3><p>　ElasticSearch 的 Recovery 代表的是<strong>数据恢复</strong>或者称之为<strong>数据重新分布</strong><br>　当 ElasticSearch 集群中，有节点加入或退出时，它会根据机器负载对索引分片进行重新分配</p>

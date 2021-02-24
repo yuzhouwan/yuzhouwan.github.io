@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -317,7 +317,7 @@
 <li>List topics</li>
 </ul>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/kafka-topics.sh --list --zookeeper localhost:2181</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="发送-Message-往-Kafka"><a href="#发送-Message-往-Kafka" class="headerlink" title="发送 Message 往 Kafka"></a>发送 Message 往 Kafka</h2><h3 id="编写-SendMessageToKafka"><a href="#编写-SendMessageToKafka" class="headerlink" title="编写 SendMessageToKafka"></a>编写 SendMessageToKafka</h3><ul>
 <li>根据 kafka 中 cluster 的属性，定义好 Producer</li>
 <li>利用 <code>Producer.send(KeyedMessage)</code> 方法，将 <code>topic - message</code> 发送给 Kafka</li>

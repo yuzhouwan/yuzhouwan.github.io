@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -325,7 +325,7 @@
 <h3 id="Hash-路由算法"><a href="#Hash-路由算法" class="headerlink" title="Hash 路由算法"></a>Hash 路由算法</h3><p>　<a href="https://yuzhouwan.com/posts/22654/">ElasticSearch</a> 集群接收到为文档创建索引的请求时，需要选择在哪一个 shard（完整且独立的 Lucene 索引实例）上对文档进行索引。ElasticSearch 采用的是 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cse.yorku.ca/~oz/hash.html">djb2</a> 哈希算法（俗称 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://azrael.digipen.edu/~mmead/www/Courses/CS280/HashFunctions-1.html">times33</a>），对要索引文档默认或指定的 key 进行哈希 <code>hash(key)</code>，然后再对 ElasticSearch 集群中 shard 的数量 n 进行取模，即 $hash(key) \, mod \, n$</p>
 <h3 id="一致性-Hash"><a href="#一致性-Hash" class="headerlink" title="一致性 Hash"></a>一致性 Hash</h3><p>　用于对数据存储进行<strong>负载均衡</strong>的算法。最新的进展，是在去年 Google 发表的一篇 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/abs/1608.01350">有界负载的一致性 Hash 算法</a>的论文。该算法保证了负载均衡<strong>一致性</strong>和<strong>稳定性</strong>的同时，在<strong>均匀性</strong>方面做出了实质性地改进。同时，Consistent Hashing with Bounded Loads 算法 也在 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.haproxy.org/">HaProxy</a> 开源项目中得以<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/haproxy/haproxy/blob/master/src/lb_chash.c#L244">应用</a>，有效减少了其 8 倍的缓存带宽</p>
 <h3 id="Gossip-闲话算法"><a href="#Gossip-闲话算法" class="headerlink" title="Gossip 闲话算法"></a>Gossip 闲话算法</h3><p>　<strong>Gossip</strong> 主要被 Cassandra 用于实现其分布式一致性。因为 Cassandra 框架，更看重 <strong>去中心化</strong> 和 <strong>容错</strong> 的特性，在不违背 CAP 定理的情况下，能够接受 最终一致性</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="实战一致性算法"><a href="#实战一致性算法" class="headerlink" title="实战一致性算法"></a>实战一致性算法</h2><h3 id="分布式存储"><a href="#分布式存储" class="headerlink" title="分布式存储"></a>分布式存储</h3><h4 id="Key-value-Store"><a href="#Key-value-Store" class="headerlink" title="Key-value Store"></a>Key-value Store</h4><h5 id="架构思考"><a href="#架构思考" class="headerlink" title="架构思考"></a>架构思考</h5><h6 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h6><p>　HashMap 的数据是存在内存里的，一旦进程重启，会有丢数据的风险。同时，数据流一旦到了 TB / PB 级别，会存在硬件方面的瓶颈。另外，需要考虑 Key 相同的情况下，需要处理覆盖的问题</p>
 <h6 id="Berkeley-DB"><a href="#Berkeley-DB" class="headerlink" title="Berkeley DB"></a>Berkeley DB</h6><p>　实际上是一个增强版的 HashMap，从一个简单的键值对存储，进化到可以管理并行访问、支持事务、数据同步等</p>
 <h6 id="Kyoto-Cabinet"><a href="#Kyoto-Cabinet" class="headerlink" title="Kyoto Cabinet"></a>Kyoto Cabinet</h6><p>　HashTable 和 B+ Tree 的结合，不过在到达一定数量级，性能下降比较厉害</p>

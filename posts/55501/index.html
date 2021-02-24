@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -306,7 +306,7 @@
         <h2 id="什么是-Antlr"><a href="#什么是-Antlr" class="headerlink" title="什么是 Antlr?"></a>什么是 Antlr?</h2><p>　<strong>ANTLR</strong>™ (<strong>AN</strong>other <strong>T</strong>ool for <strong>L</strong>anguage <strong>R</strong>ecognition) is a powerful parser generator for reading, processing, executing, or translating structured text or binary files. It’s widely used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.</p>
 <h2 id="为什么要有-Antlr"><a href="#为什么要有-Antlr" class="headerlink" title="为什么要有 Antlr?"></a>为什么要有 Antlr?</h2><h3 id="简易性"><a href="#简易性" class="headerlink" title="简易性"></a>简易性</h3><p>　可以通过断言（Predicate）解决识别冲突<br>　支持动作（Action）和返回值（Return Value）<br>　它可以根据输入自动生成语法树，并可视化的展示出来</p>
 <h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　复杂情况下，需要基于语法树遍历（walking the tree）生成目标代码<br>　Embeded action 将处理代码跟语法描述混合起来，语法复杂时使语法文件臃肿<br>　语法可能经常需要修改，而语法的主要表达式却不会变动，因此，Antlr 将语法识别与转换、生成（目标代码）的处理分离</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="Antlr-工作机制"><a href="#Antlr-工作机制" class="headerlink" title="Antlr 工作机制"></a>Antlr 工作机制</h2><h3 id="词法分析器（Lexer）"><a href="#词法分析器（Lexer）" class="headerlink" title="词法分析器（Lexer）"></a>词法分析器（Lexer）</h3><p>　分析量化字符流，翻译成离散的字符组（也就是一堆 Token）, 包括关键字，标识符，符号（symbols）和操作符，以供语法分析器使用</p>
 <h3 id="语法分析器（Parser）"><a href="#语法分析器（Parser）" class="headerlink" title="语法分析器（Parser）"></a>语法分析器（Parser）</h3><p>　将 Tokens 组织起来，并转换成为目标语言语法（默认是 <a href="https://yuzhouwan.com/posts/27328/">Java</a>）定义所允许的序列</p>
 <h3 id="树分析器（Tree-Parser）"><a href="#树分析器（Tree-Parser）" class="headerlink" title="树分析器（Tree Parser）"></a>树分析器（Tree Parser）</h3><p>　用于对语法分析生成的抽象语法树进行遍历，并在先序经过每个树节点的时候，进行一些定制操作</p>

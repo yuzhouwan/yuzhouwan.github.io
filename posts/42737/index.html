@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -356,7 +356,7 @@
 
 
 <h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="Occam-剃刀原理"><a href="#Occam-剃刀原理" class="headerlink" title="Occam 剃刀原理"></a>Occam 剃刀原理</h3><p>　<strong>奥卡姆剃刀</strong>（Occam´s Razor），意为<strong>简约之法</strong>，是由 14 世纪<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6">逻辑学</a>家、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83">圣方济各会</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB">修士</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89">奥卡姆的威廉</a>提出的一个解决问题的法则，即<code>"切勿浪费较多资源，去做'用较少的资源，同样可以做好'的事情"</code>，相同思想见于郑板桥的<strong>删繁就简三秋树</strong></p>
-<a id="more"></a>
+<span id="more"></span>
 <p>　在机器学习中的解释，就是 <code>在所有可能选择的模型中，能够很好地解释已知数据且十分简单的才是最好的模型</code>。并由此引入了<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/20924039">正则化</a></strong>的理念。<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/jianxinzhou/p/4083921.html">正则化</a>方法的思想是，处理最优化函数问题时，在目标函数中加入对参数的<strong>约束惩罚项</strong>，从而达到<strong>简化模型</strong>的目的。其中，<a target="_blank" rel="external nofollow noopener noreferrer" href="http://blog.csdn.net/zouxy09/article/details/24971995">L0，L1 和 L2</a> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%8C%83%E6%95%B0">范数</a> 指的就是三种不同惩罚函数的形式，用数学公式来表达就是 $L_p$ = $\mid\mid\beta\mid\mid_p$ = $(\mid \beta_1 \mid ^p + \mid \beta_2 \mid^p$ $+ \ldots +$ $\mid\,\beta_n \mid^p)^{\frac1p}$</p>
 <ul>
 <li><strong>L0 范数</strong> 是指向量中非 0 元素的个数（如果我们用 L0 范数来规则化一个参数矩阵 W 的话，就是希望 W 的大部分元素都是 0，即让参数矩阵 W 是稀疏的）</li>

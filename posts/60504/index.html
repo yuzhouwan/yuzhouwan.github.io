@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -331,7 +331,7 @@
 <h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
 <h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
 <h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
-<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <a id="more"></a></p>
+<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <span id="more"></span></p>
 <h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
 <h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
 <h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>

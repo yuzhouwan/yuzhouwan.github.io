@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/yuzhouwan_logo_with_copyright.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="/yuzhouwan_logo_32x32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/yuzhouwan_logo_16x16.ico">
@@ -349,7 +349,7 @@
 <h4 id="Discovery-Server"><a href="#Discovery-Server" class="headerlink" title="Discovery Server"></a>Discovery Server</h4><p>　负责发现集群的各个节点，用于节点间心跳监控</p>
 <div class="note success">一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署</div>
 
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><h4 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h4><p>　负责访问不同的数据源，相当于访问数据库的驱动</p>
 <h4 id="Catalog"><a href="#Catalog" class="headerlink" title="Catalog"></a>Catalog</h4><p>　负责记录 Schema 信息和 DataSource 的引用。Presto 中一个完整的表名通过 <code>&lt;Catalog&gt;.&lt;Schema&gt;.&lt;Table&gt;</code> 组合表示。例如 <code>hive.test_data.test</code>，则表示：</p>
 <ul>

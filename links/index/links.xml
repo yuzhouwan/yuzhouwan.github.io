@@ -43,12 +43,6 @@
     <url>https://yizibi.github.io/</url>
   </link>
   <link>
-    <title>鸭吉吉</title>
-    <subtitle>PHP 程序员、从零开始做萌新</subtitle>
-    <avatar>/logo/yajiji.jpg</avatar>
-    <url>http://www.yajiji.cc/</url>
-  </link>
-  <link>
     <title>iHTCboy</title>
     <subtitle>破得迷，了得知，方能学海无边</subtitle>
     <avatar>/logo/ihtcboy.jpg</avatar>
@@ -199,12 +193,6 @@
     <url>https://dayday.plus/</url>
   </link>
   <link>
-    <title>五块蛋糕</title>
-    <subtitle>机器学习相关</subtitle>
-    <avatar>/logo/fivecakes.jpeg</avatar>
-    <url>https://fivecakes.com/</url>
-  </link>
-  <link>
     <title>Quinn Tian´s Blog</title>
     <subtitle>一个专注于学习、记录和分享的个人网站</subtitle>
     <avatar>/logo/quinntian.jpg</avatar>
@@ -241,18 +229,6 @@
     <url>https://easyai.tech/</url>
   </link>
   <link>
-    <title>谭升的博客</title>
-    <subtitle>算法，编程，人工智能</subtitle>
-    <avatar>/logo/face2ai.png</avatar>
-    <url>https://face2ai.com/</url>
-  </link>
-  <link>
-    <title>梦魇小栈</title>
-    <subtitle>心，若没有栖息的地方，到哪里都是流浪</subtitle>
-    <avatar>/logo/ihoey.png</avatar>
-    <url>https://blog.ihoey.com/</url>
-  </link>
-  <link>
     <title>marsCatXDU</title>
     <subtitle>区块链爱好者</subtitle>
     <avatar>/logo/marscatxdu.png</avatar>
@@ -269,12 +245,6 @@
     <subtitle>算法学习笔记</subtitle>
     <avatar>/logo/ccyh.png</avatar>
     <url>https://www.ccyh.xyz/</url>
-  </link>
-  <link>
-    <title>Ruke</title>
-    <subtitle>技术宅男子</subtitle>
-    <avatar>/logo/itruke.png</avatar>
-    <url>https://itruke.com/</url>
   </link>
   <link>
     <title>AngelNI</title>
@@ -299,12 +269,6 @@
     <subtitle>android display/graphics developer</subtitle>
     <avatar>/logo/wizzie.png</avatar>
     <url>https://wizzie.top/</url>
-  </link>
-  <link>
-    <title>周末</title>
-    <subtitle>一个新手的进阶之旅</subtitle>
-    <avatar>/logo/zhouwenzhen.jpg</avatar>
-    <url>https://www.zhouwenzhen.top/</url>
   </link>
   <link>
     <title>探花需拔根</title>

@@ -1707,96 +1707,6 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
-    <title>Session</title>
-    <url>/posts/48905/</url>
-    <content><![CDATA[<h2 id="Session-是什么？"><a href="#Session-是什么？" class="headerlink" title="Session 是什么？"></a>Session 是什么？</h2><p>　代表服务器与浏览器之间的一次会话过程，这个过程可以是连续的，也可以是时断时续的。而在 Web 开发语境下，则指一类用来在客户端与服务器之间保持状态的解决方案</p>
-<h2 id="多样的存在形式"><a href="#多样的存在形式" class="headerlink" title="多样的存在形式"></a>多样的存在形式</h2><ul>
-<li><a href="https://yuzhouwan.com/posts/190413/">Java</a></li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">javax.servlet.http.HttpSession</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li><a href="https://yuzhouwan.com/posts/43687/">Python</a></li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">s = requests.session()</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>PHP</li>
-</ul>
-<figure class="highlight php"><table><tbody><tr><td class="code"><pre><span class="line">$_session</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>Hibernate</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">org.hibernate <span class="class"><span class="keyword">interface</span> <span class="title">Session</span></span></span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>WebLogic</li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Weblogic Server session</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>JSP</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">HttpSession</span><br></pre></td></tr></tbody></table></figure>
-<span id="more"></span>
-<h2 id="为什么要有-Session"><a href="#为什么要有-Session" class="headerlink" title="为什么要有 Session ?"></a>为什么要有 Session ?</h2><p>　HTTP 本身是无状态的，这与 HTTP 协议本身的目的是相符的<br>　当客户每次访问 Web 页面，服务器重新打开新的会话时，为了维护其上下文信息（记住同一个用户）<br>　由于此类种种场景，需要让 HTTP 协议成为有状态的</p>
-<h2 id="Session-工作原理"><a href="#Session-工作原理" class="headerlink" title="Session 工作原理"></a>Session 工作原理</h2><p>　Session 机制是一种服务器端的机制，服务器使用一种类似于散列表的结构来保存信息</p>
-<p><img data-src="/picture/session/session.png" alt="Session"></p>
-<center>（利用 <a href="https://www.wps.com/mac/" target="_blank">WPS</a>™ 绘制而成）</center>
-
-
-
-<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="Session-的创建"><a href="#Session-的创建" class="headerlink" title="Session 的创建"></a>Session 的创建</h3><p>　不是在客户端访问 Server 的时候就创建，而是在服务器的某个构建 Session 的语句被调用时</p>
-<ul>
-<li>PHP</li>
-</ul>
-<figure class="highlight php"><table><tbody><tr><td class="code"><pre><span class="line">session_start()</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>JSP</li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">内置对象 Session</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>Java</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">HttpServletRequest.getSession(<span class="keyword">true</span>)</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>Hibernate</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Configuration.configure(<span class="string">"hibernate.cfg.xml"</span>).buildSessionFactory().openSesssion()</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="SSO（Single-Sign-on）"><a href="#SSO（Single-Sign-on）" class="headerlink" title="SSO（Single Sign-on）"></a><a href="https://yuzhouwan.com/posts/5517/">SSO</a>（<strong>S</strong>ingle <strong>S</strong>ign-<strong>o</strong>n）</h3><p>　按照 Servlet 规范，Session 的作用域应该仅仅限于当前应用程序下，不同的应用程序之间是不能够相互访问对方的 Session 的<br>　各个应用服务器从实际效果上都遵守了这一规范，但是实现的细节却可能各有不同，因此解决跨应用程序 Session 共享的方法也不尽相同<br>　可以借助于第三方的力量，比如使用文件、数据库、JMS 或者客户端 cookie，URL 参数或者隐藏字段等手段<br>　还有一种较为方便的做法，就是把一个应用程序的 Session 放到 ServletContext 中取得前一个应用程序的引用</p>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>后端开发</category>
-      </categories>
-      <tags>
-        <tag>Session</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Serverless 详解</title>
     <url>/posts/201001/</url>
     <content><![CDATA[<h2 id="Serverless-是什么？"><a href="#Serverless-是什么？" class="headerlink" title="Serverless 是什么？"></a>Serverless 是什么？</h2><blockquote>
@@ -2005,6 +1915,96 @@ FaaS --&gt; e[End?]</pre>
         <tag>PaaS</tag>
         <tag>SaaS</tag>
         <tag>BaaS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Session</title>
+    <url>/posts/48905/</url>
+    <content><![CDATA[<h2 id="Session-是什么？"><a href="#Session-是什么？" class="headerlink" title="Session 是什么？"></a>Session 是什么？</h2><p>　代表服务器与浏览器之间的一次会话过程，这个过程可以是连续的，也可以是时断时续的。而在 Web 开发语境下，则指一类用来在客户端与服务器之间保持状态的解决方案</p>
+<h2 id="多样的存在形式"><a href="#多样的存在形式" class="headerlink" title="多样的存在形式"></a>多样的存在形式</h2><ul>
+<li><a href="https://yuzhouwan.com/posts/190413/">Java</a></li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">javax.servlet.http.HttpSession</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><a href="https://yuzhouwan.com/posts/43687/">Python</a></li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line">s = requests.session()</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>PHP</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="code"><pre><span class="line">$_session</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Hibernate</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">org.hibernate <span class="class"><span class="keyword">interface</span> <span class="title">Session</span></span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>WebLogic</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Weblogic Server session</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>JSP</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">HttpSession</span><br></pre></td></tr></tbody></table></figure>
+<span id="more"></span>
+<h2 id="为什么要有-Session"><a href="#为什么要有-Session" class="headerlink" title="为什么要有 Session ?"></a>为什么要有 Session ?</h2><p>　HTTP 本身是无状态的，这与 HTTP 协议本身的目的是相符的<br>　当客户每次访问 Web 页面，服务器重新打开新的会话时，为了维护其上下文信息（记住同一个用户）<br>　由于此类种种场景，需要让 HTTP 协议成为有状态的</p>
+<h2 id="Session-工作原理"><a href="#Session-工作原理" class="headerlink" title="Session 工作原理"></a>Session 工作原理</h2><p>　Session 机制是一种服务器端的机制，服务器使用一种类似于散列表的结构来保存信息</p>
+<p><img data-src="/picture/session/session.png" alt="Session"></p>
+<center>（利用 <a href="https://www.wps.com/mac/" target="_blank">WPS</a>™ 绘制而成）</center>
+
+
+
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="Session-的创建"><a href="#Session-的创建" class="headerlink" title="Session 的创建"></a>Session 的创建</h3><p>　不是在客户端访问 Server 的时候就创建，而是在服务器的某个构建 Session 的语句被调用时</p>
+<ul>
+<li>PHP</li>
+</ul>
+<figure class="highlight php"><table><tbody><tr><td class="code"><pre><span class="line">session_start()</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>JSP</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">内置对象 Session</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Java</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">HttpServletRequest.getSession(<span class="keyword">true</span>)</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Hibernate</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Configuration.configure(<span class="string">"hibernate.cfg.xml"</span>).buildSessionFactory().openSesssion()</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="SSO（Single-Sign-on）"><a href="#SSO（Single-Sign-on）" class="headerlink" title="SSO（Single Sign-on）"></a><a href="https://yuzhouwan.com/posts/5517/">SSO</a>（<strong>S</strong>ingle <strong>S</strong>ign-<strong>o</strong>n）</h3><p>　按照 Servlet 规范，Session 的作用域应该仅仅限于当前应用程序下，不同的应用程序之间是不能够相互访问对方的 Session 的<br>　各个应用服务器从实际效果上都遵守了这一规范，但是实现的细节却可能各有不同，因此解决跨应用程序 Session 共享的方法也不尽相同<br>　可以借助于第三方的力量，比如使用文件、数据库、JMS 或者客户端 cookie，URL 参数或者隐藏字段等手段<br>　还有一种较为方便的做法，就是把一个应用程序的 Session 放到 ServletContext 中取得前一个应用程序的引用</p>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>后端开发</category>
+      </categories>
+      <tags>
+        <tag>Session</tag>
       </tags>
   </entry>
   <entry>

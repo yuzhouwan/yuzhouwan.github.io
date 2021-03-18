@@ -231,9 +231,9 @@
     <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
     
     
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
     <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
     <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
     
@@ -448,11 +448,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
     
@@ -673,11 +673,11 @@
     <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
     <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
     
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     

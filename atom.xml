@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-03-28T14:03:11.074Z</updated>
+  <updated>2021-04-06T03:59:07.592Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-03-28T14:03:11.074Z</updated>
+    <updated>2021-04-06T03:59:07.592Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -88,7 +88,7 @@
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-03-28T14:03:06.269Z</updated>
+    <updated>2021-04-06T03:58:55.679Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -133,96 +133,11 @@
     
     <category term="PrestoSQL" scheme="https://yuzhouwan.com/tags/PrestoSQL/"/>
     
+    <category term="Trino" scheme="https://yuzhouwan.com/tags/Trino/"/>
+    
     <category term="MPP" scheme="https://yuzhouwan.com/tags/MPP/"/>
     
     <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache IoTDB：一款面向物联网的数据库</title>
-    <link href="https://yuzhouwan.com/posts/201221/"/>
-    <id>https://yuzhouwan.com/posts/201221/</id>
-    <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2021-03-28T14:03:02.311Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
-
-
-
-&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高吞吐量读写&lt;/li&gt;
-&lt;li&gt;高效的目录结构&lt;/li&gt;
-&lt;li&gt;丰富的查询语义&lt;/li&gt;
-&lt;li&gt;硬件成本低&lt;/li&gt;
-&lt;li&gt;灵活的部署&lt;/li&gt;
-&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高端制造业&lt;/li&gt;
-&lt;li&gt;本地控制器服务器&lt;/li&gt;
-&lt;li&gt;云数据管理&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-    
-    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
-    
-    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何成为 Apache 的 PMC</title>
-    <link href="https://yuzhouwan.com/posts/19631/"/>
-    <id>https://yuzhouwan.com/posts/19631/</id>
-    <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-03-28T14:02:57.426Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
-&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
-    
-    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
-    
-    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
-    
-    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
     
   </entry>
   
@@ -231,7 +146,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-03-28T14:02:52.105Z</updated>
+    <updated>2021-04-06T03:49:44.409Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -322,11 +237,98 @@
   </entry>
   
   <entry>
+    <title>如何成为 Apache 的 PMC</title>
+    <link href="https://yuzhouwan.com/posts/19631/"/>
+    <id>https://yuzhouwan.com/posts/19631/</id>
+    <published>2017-04-03T07:46:21.000Z</published>
+    <updated>2021-04-06T03:49:36.634Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
+&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
+    
+    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
+    
+    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
+    
+    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache IoTDB：一款面向物联网的数据库</title>
+    <link href="https://yuzhouwan.com/posts/201221/"/>
+    <id>https://yuzhouwan.com/posts/201221/</id>
+    <published>2020-12-21T13:35:06.000Z</published>
+    <updated>2021-04-06T03:49:33.055Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
+
+
+
+&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高吞吐量读写&lt;/li&gt;
+&lt;li&gt;高效的目录结构&lt;/li&gt;
+&lt;li&gt;丰富的查询语义&lt;/li&gt;
+&lt;li&gt;硬件成本低&lt;/li&gt;
+&lt;li&gt;灵活的部署&lt;/li&gt;
+&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高端制造业&lt;/li&gt;
+&lt;li&gt;本地控制器服务器&lt;/li&gt;
+&lt;li&gt;云数据管理&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    
+    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>程序员的 Mac 高效手册</title>
     <link href="https://yuzhouwan.com/posts/190101/"/>
     <id>https://yuzhouwan.com/posts/190101/</id>
     <published>2019-01-01T11:58:02.000Z</published>
-    <updated>2021-03-28T14:02:28.098Z</updated>
+    <updated>2021-04-06T03:48:29.152Z</updated>
     
     
     <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>

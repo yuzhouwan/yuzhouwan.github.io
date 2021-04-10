@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg">
 <meta property="og:image" content="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg">
 <meta property="article:published_time" content="2015-02-05T16:08:40.000Z">
-<meta property="article:modified_time" content="2020-12-30T15:37:37.464Z">
+<meta property="article:modified_time" content="2021-04-09T02:37:31.916Z">
 <meta property="article:author" content="Benedict Jin">
 <meta property="article:tag" content="Apache Superset">
 <meta property="article:tag" content="TensorFlow">
@@ -266,7 +266,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 23:37:37" itemprop="dateModified" datetime="2020-12-30T23:37:37+08:00">2020-12-30</time>
+                <time title="修改时间：2021-04-09 10:37:31" itemprop="dateModified" datetime="2021-04-09T10:37:31+08:00">2021-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>33k</span>
+              <span>34k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -423,6 +423,12 @@
 <center>（对 <a href="https://matplotlib.org/" target="_blank" rel="external nofollow noopener noreferrer">Matplotlib</a>™ 输出界面的截图）</center>
 
 <h4 id="Seaborn"><a href="#Seaborn" class="headerlink" title="Seaborn"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://seaborn.pydata.org/">Seaborn</a></h4><h4 id="Bokeh"><a href="#Bokeh" class="headerlink" title="Bokeh"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="http://bokeh.pydata.org/en/latest/">Bokeh</a></h4><h4 id="Plotly"><a href="#Plotly" class="headerlink" title="Plotly"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://plot.ly/python/">Plotly</a></h4><h3 id="地图"><a href="#地图" class="headerlink" title="地图"></a>地图</h3><h4 id="GeoplotLib"><a href="#GeoplotLib" class="headerlink" title="GeoplotLib"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/andrea-cuttone/geoplotlib">GeoplotLib</a></h4><h4 id="MapBox"><a href="#MapBox" class="headerlink" title="MapBox"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.mapbox.com/">MapBox</a></h4><h3 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h3><h4 id="PIL"><a href="#PIL" class="headerlink" title="PIL"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://pillow.readthedocs.io/">PIL</a></h4><h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="lxml"><a href="#lxml" class="headerlink" title="lxml"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="http://lxml.de/tutorial.html">lxml</a></h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ide_id</span>(<span class="params">job_id, tag_name</span>):</span></span><br><span class="line">    <span class="comment"># view-source:http://historyserver-yuzhouwan:19888/jobhistory/conf/job_1010101010101_0101010</span></span><br><span class="line">    url = <span class="string">"http://historyserver-yuzhouwan:19888/jobhistory/conf/"</span> + job_id</span><br><span class="line">    page = requests.get(url)</span><br><span class="line">    html = page.text</span><br><span class="line">    selector = etree.HTML(html)</span><br><span class="line">    tds = selector.xpath(<span class="string">"//*[@id='conf']//tbody//tr//td//text()"</span>)</span><br><span class="line">    exist = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> td <span class="keyword">in</span> tds:</span><br><span class="line">        <span class="keyword">if</span> tag_name <span class="keyword">in</span> td:</span><br><span class="line">            exist = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> exist:</span><br><span class="line">            <span class="keyword">return</span> td.strip()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(get_ide_id(<span class="string">"job_1010101010101_0101010"</span>, <span class="string">"hive.ide.job.id"</span>))</span><br></pre></td></tr></tbody></table></figure>
+<div class="note info">如果未指定 requests#get 方法中的 timeout 参数，则默认会一直阻塞着</div>
+
+
+
+
+
 <h2 id="科学分析工具"><a href="#科学分析工具" class="headerlink" title="科学分析工具"></a>科学分析工具</h2><h3 id="IPython-Notebook"><a href="#IPython-Notebook" class="headerlink" title="IPython Notebook"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ipython.org/notebook.html">IPython Notebook</a></h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><h5 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装之前需要确定 pip 版本足够高，以及环境变量中加入了 %PYTHON_HOME%/Script</span></span><br><span class="line">$ python -m pip install --upgrade pip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 Enthought Canopy 套件 (https://www.enthought.com/canopy-subscriptions/)</span></span><br><span class="line"><span class="comment"># 安装后，配置环境变量</span></span><br><span class="line">$ PATH=D:\apps\Enthought\Canopy\App;%PATH%</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ pip install <span class="string">"ipython[all]"</span></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">$ mkdir ipython</span><br><span class="line">$ <span class="built_in">cd</span> ipython</span><br><span class="line">$ ipython notebook</span><br><span class="line">$ ipython notebook --pylab             <span class="comment"># pylab 模式</span></span><br><span class="line">$ ipython notebook --pylab inline      <span class="comment"># Matplotlib 生成的图片嵌入网页内显示</span></span><br></pre></td></tr></tbody></table></figure>
 <h5 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install notebook</span><br><span class="line">$ jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建默认配置文件</span></span><br><span class="line">$ jupyter notebook --generate-config</span><br><span class="line">  Writing default config to: C:\Users\BenedictJin\.jupyter\jupyter_notebook_config.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改默认工作区</span></span><br><span class="line">$ vim ~/.jupyter/jupyter_notebook_config.py</span><br><span class="line">  c.NotebookApp.notebook_dir = <span class="string">'F:\Github\_draft\ipython'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启，验证</span></span><br><span class="line">$ ipython notebook</span><br></pre></td></tr></tbody></table></figure>
@@ -796,7 +802,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:13</span>
+    <span title="站点阅读时长">20:14</span>
 </div>
 
         
@@ -942,6 +948,26 @@ if (document.querySelectorAll('pre.mermaid').length) {
   });
 </script>
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'e5da61069b94deb8ef3a',
+      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
+      repo        : 'gitment',
+      owner       : 'asdf2014',
+      admin       : ['asdf2014'],
+      id          : '77909a28cb452463470d9f81b204ae9f',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
@@ -968,26 +994,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       serverURLs : ''
     });
   }, window.Valine);
-});
-</script>
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'e5da61069b94deb8ef3a',
-      clientSecret: 'c60ad4e430be258b705027a036eeee3d71cb934b',
-      repo        : 'gitment',
-      owner       : 'asdf2014',
-      admin       : ['asdf2014'],
-      id          : '77909a28cb452463470d9f81b204ae9f',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
 });
 </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 

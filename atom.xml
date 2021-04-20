@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-04-19T02:12:44.381Z</updated>
+  <updated>2021-04-20T09:40:30.131Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-04-19T02:12:44.381Z</updated>
+    <updated>2021-04-20T09:40:30.131Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -88,7 +88,7 @@
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-04-19T02:12:37.949Z</updated>
+    <updated>2021-04-20T09:40:24.067Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -146,7 +146,7 @@
     <link href="https://yuzhouwan.com/posts/19631/"/>
     <id>https://yuzhouwan.com/posts/19631/</id>
     <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-04-19T02:12:03.475Z</updated>
+    <updated>2021-04-20T09:40:21.374Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
@@ -190,7 +190,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-04-10T08:53:59.032Z</updated>
+    <updated>2021-04-20T09:40:18.491Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -285,7 +285,7 @@
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
     <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2021-04-10T08:53:47.046Z</updated>
+    <updated>2021-04-20T09:40:12.694Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -328,7 +328,7 @@
     <link href="https://yuzhouwan.com/posts/190101/"/>
     <id>https://yuzhouwan.com/posts/190101/</id>
     <published>2019-01-01T11:58:02.000Z</published>
-    <updated>2021-04-09T02:37:31.917Z</updated>
+    <updated>2021-04-20T09:39:33.710Z</updated>
     
     
     <summary type="html">如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</summary>
@@ -345,6 +345,54 @@
     <category term="Mac" scheme="https://yuzhouwan.com/tags/Mac/"/>
     
     <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux 实战技巧</title>
+    <link href="https://yuzhouwan.com/posts/15691/"/>
+    <id>https://yuzhouwan.com/posts/15691/</id>
+    <published>2017-04-07T12:30:58.000Z</published>
+    <updated>2021-04-20T09:39:33.708Z</updated>
+    
+    
+    <summary type="html">介绍 Linux 相关的命令、Shell 编程、实用技巧、优化实战和系统架构相关知识。</summary>
+    
+    
+    
+    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
+    
+    <category term="Shell" scheme="https://yuzhouwan.com/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes 实战</title>
+    <link href="https://yuzhouwan.com/posts/200919/"/>
+    <id>https://yuzhouwan.com/posts/200919/</id>
+    <published>2020-09-19T00:25:16.000Z</published>
+    <updated>2021-04-20T09:39:33.705Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="云原生" scheme="https://yuzhouwan.com/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="OpenTSDB" scheme="https://yuzhouwan.com/tags/OpenTSDB/"/>
     
   </entry>
   
@@ -800,27 +848,6 @@
   </entry>
   
   <entry>
-    <title>Linux 实战技巧</title>
-    <link href="https://yuzhouwan.com/posts/15691/"/>
-    <id>https://yuzhouwan.com/posts/15691/</id>
-    <published>2017-04-07T12:30:58.000Z</published>
-    <updated>2021-01-17T02:52:56.178Z</updated>
-    
-    
-    <summary type="html">介绍 Linux 相关的命令、Shell 编程、实用技巧、优化实战和系统架构相关知识。</summary>
-    
-    
-    
-    <category term="语言" scheme="https://yuzhouwan.com/categories/%E8%AF%AD%E8%A8%80/"/>
-    
-    
-    <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
-    
-    <category term="Shell" scheme="https://yuzhouwan.com/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
     <title>一幅持续扩展的物联网思维导图</title>
     <link href="https://yuzhouwan.com/posts/201220/"/>
     <id>https://yuzhouwan.com/posts/201220/</id>
@@ -1132,33 +1159,6 @@
     <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
     
     <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kubernetes 实战</title>
-    <link href="https://yuzhouwan.com/posts/200919/"/>
-    <id>https://yuzhouwan.com/posts/200919/</id>
-    <published>2020-09-19T00:25:16.000Z</published>
-    <updated>2020-10-28T12:10:27.442Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="云原生" scheme="https://yuzhouwan.com/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="OpenTSDB" scheme="https://yuzhouwan.com/tags/OpenTSDB/"/>
     
   </entry>
   

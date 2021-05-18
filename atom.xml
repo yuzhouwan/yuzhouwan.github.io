@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-04-26T10:37:37.845Z</updated>
+  <updated>2021-05-18T08:46:36.305Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-04-26T10:37:37.845Z</updated>
+    <updated>2021-05-18T08:46:36.305Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -88,7 +88,7 @@
     <link href="https://yuzhouwan.com/posts/200906/"/>
     <id>https://yuzhouwan.com/posts/200906/</id>
     <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-04-26T10:37:34.843Z</updated>
+    <updated>2021-05-18T08:46:31.596Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
@@ -142,11 +142,54 @@
   </entry>
   
   <entry>
+    <title>Apache IoTDB：一款面向物联网的数据库</title>
+    <link href="https://yuzhouwan.com/posts/201221/"/>
+    <id>https://yuzhouwan.com/posts/201221/</id>
+    <published>2020-12-21T13:35:06.000Z</published>
+    <updated>2021-05-18T08:46:29.499Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
+
+
+
+&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高吞吐量读写&lt;/li&gt;
+&lt;li&gt;高效的目录结构&lt;/li&gt;
+&lt;li&gt;丰富的查询语义&lt;/li&gt;
+&lt;li&gt;硬件成本低&lt;/li&gt;
+&lt;li&gt;灵活的部署&lt;/li&gt;
+&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;高端制造业&lt;/li&gt;
+&lt;li&gt;本地控制器服务器&lt;/li&gt;
+&lt;li&gt;云数据管理&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    
+    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
+    
+    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    
+    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>如何成为 Apache 的 PMC</title>
     <link href="https://yuzhouwan.com/posts/19631/"/>
     <id>https://yuzhouwan.com/posts/19631/</id>
     <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-04-26T10:37:28.964Z</updated>
+    <updated>2021-05-18T08:46:24.910Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
@@ -190,7 +233,7 @@
     <link href="https://yuzhouwan.com/posts/22654/"/>
     <id>https://yuzhouwan.com/posts/22654/</id>
     <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-04-26T10:37:22.981Z</updated>
+    <updated>2021-05-18T08:46:20.277Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
@@ -281,45 +324,190 @@
   </entry>
   
   <entry>
-    <title>Apache IoTDB：一款面向物联网的数据库</title>
-    <link href="https://yuzhouwan.com/posts/201221/"/>
-    <id>https://yuzhouwan.com/posts/201221/</id>
-    <published>2020-12-21T13:35:06.000Z</published>
-    <updated>2021-04-26T10:37:16.179Z</updated>
+    <title>人工智能</title>
+    <link href="https://yuzhouwan.com/posts/42737/"/>
+    <id>https://yuzhouwan.com/posts/42737/</id>
+    <published>2017-05-16T10:58:02.000Z</published>
+    <updated>2021-05-18T08:45:34.192Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;Apache-IoTDB-是什么？&quot;&gt;&lt;a href=&quot;#Apache-IoTDB-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache IoTDB 是什么？&quot;&gt;&lt;/a&gt;Apache IoTDB 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/iotdb&quot;&gt;Apache IoTDB&lt;/a&gt;&lt;/strong&gt;™ (Database for Internet of Things) is an IoT native database with high performance for data management and analysis, deployable on the edge and the cloud.&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　从 深蓝到 &lt;a href=&quot;https://arxiv.org/pdf/1712.01815.pdf&quot;&gt;AlphaZero&lt;/a&gt;，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；&lt;br&gt;　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；&lt;br&gt;　从 CPU / GPU 到 &lt;a href=&quot;https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu&quot;&gt;TPU&lt;/a&gt;，人工智能的计算能力正向着无法穷举的极限不断逼近 …&lt;/p&gt;
+&lt;p&gt;　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的&lt;/p&gt;
+&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　我们将分为三块对 AI 进行诠释&lt;/p&gt;
+&lt;p&gt;　首先，将介绍人工智能的&lt;strong&gt;主流思想&lt;/strong&gt;和&lt;strong&gt;实用技巧&lt;/strong&gt;，通过一些耳熟能详的&lt;a href=&quot;https://yuzhouwan.com/posts/4534/&quot;&gt;有趣定理&lt;/a&gt;，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大&lt;strong&gt;理论支柱&lt;/strong&gt;，由浅入深地学习 &lt;a href=&quot;https://yuzhouwan.com/posts/42737/#统计学&quot;&gt;统计学&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#微积分&quot;&gt;微积分&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#线性代数&quot;&gt;线性代数&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#概率论&quot;&gt;概率论&lt;/a&gt; 等知识体系；最后，落地到实践，我们需要紧跟人工智能的&lt;strong&gt;技术发展前沿&lt;/strong&gt;，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点&lt;/p&gt;
+&lt;p&gt;　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（&lt;a href=&quot;https://yuzhouwan.com/posts/43687/#Python-第三方库&quot;&gt;Python&lt;/a&gt;、Prolog、R、&lt;a href=&quot;https://yuzhouwan.com/posts/27328/&quot;&gt;Java&lt;/a&gt;）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/&lt;/p&gt;
+&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
+
+
+
+&lt;h2 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h2&gt;&lt;h3 id=&quot;Occam-剃刀原理&quot;&gt;&lt;a href=&quot;#Occam-剃刀原理&quot; class=&quot;headerlink&quot; title=&quot;Occam 剃刀原理&quot;&gt;&lt;/a&gt;Occam 剃刀原理&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;奥卡姆剃刀&lt;/strong&gt;（Occam´s Razor），意为&lt;strong&gt;简约之法&lt;/strong&gt;，是由 14 世纪&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6&quot;&gt;逻辑学&lt;/a&gt;家、&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83&quot;&gt;圣方济各会&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB&quot;&gt;修士&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89&quot;&gt;奥卡姆的威廉&lt;/a&gt;提出的一个解决问题的法则，即&lt;code&gt;&quot;切勿浪费较多资源，去做&#39;用较少的资源，同样可以做好&#39;的事情&quot;&lt;/code&gt;，相同思想见于郑板桥的&lt;strong&gt;删繁就简三秋树&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="机器学习" scheme="https://yuzhouwan.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+    <category term="微积分" scheme="https://yuzhouwan.com/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="MP Model" scheme="https://yuzhouwan.com/tags/MP-Model/"/>
+    
+    <category term="Perceptron" scheme="https://yuzhouwan.com/tags/Perceptron/"/>
+    
+    <category term="MLP" scheme="https://yuzhouwan.com/tags/MLP/"/>
+    
+    <category term="DNN" scheme="https://yuzhouwan.com/tags/DNN/"/>
+    
+    <category term="CNN" scheme="https://yuzhouwan.com/tags/CNN/"/>
+    
+    <category term="RNN" scheme="https://yuzhouwan.com/tags/RNN/"/>
+    
+    <category term="LSTM" scheme="https://yuzhouwan.com/tags/LSTM/"/>
+    
+    <category term="统计学" scheme="https://yuzhouwan.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+    <category term="线性代数" scheme="https://yuzhouwan.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    
+    <category term="概率论" scheme="https://yuzhouwan.com/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+    
+    <category term="深度学习" scheme="https://yuzhouwan.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="PyTorch" scheme="https://yuzhouwan.com/tags/PyTorch/"/>
+    
+    <category term="Caffe" scheme="https://yuzhouwan.com/tags/Caffe/"/>
+    
+    <category term="xgboost" scheme="https://yuzhouwan.com/tags/xgboost/"/>
+    
+    <category term="Apache PredictionIO" scheme="https://yuzhouwan.com/tags/Apache-PredictionIO/"/>
+    
+    <category term="NuPIC" scheme="https://yuzhouwan.com/tags/NuPIC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Superset 二次开发</title>
+    <link href="https://yuzhouwan.com/posts/743/"/>
+    <id>https://yuzhouwan.com/posts/743/</id>
+    <published>2017-04-03T12:59:57.000Z</published>
+    <updated>2021-05-18T08:45:34.180Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Apache-Superset-是什么？&quot;&gt;&lt;a href=&quot;#Apache-Superset-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache Superset 是什么？&quot;&gt;&lt;/a&gt;Apache Superset 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://superset.apache.org/&quot;&gt;Apache Superset&lt;/a&gt;&lt;/strong&gt;™ is a modern data exploration and visualization platform.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/iotdb/apache_iotdb_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：&lt;a href=&quot;https://iotdb.apache.org/&quot; target=&quot;_blank&quot;&gt;Apache IoTDB&lt;/a&gt;™ 官网）&lt;/center&gt;
-
-
-
-&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高吞吐量读写&lt;/li&gt;
-&lt;li&gt;高效的目录结构&lt;/li&gt;
-&lt;li&gt;丰富的查询语义&lt;/li&gt;
-&lt;li&gt;硬件成本低&lt;/li&gt;
-&lt;li&gt;灵活的部署&lt;/li&gt;
-&lt;li&gt;与开源生态系统的紧密集成&lt;/li&gt;
+&lt;h2 id=&quot;基础组件&quot;&gt;&lt;a href=&quot;#基础组件&quot; class=&quot;headerlink&quot; title=&quot;基础组件&quot;&gt;&lt;/a&gt;基础组件&lt;/h2&gt;&lt;h3 id=&quot;Flask&quot;&gt;&lt;a href=&quot;#Flask&quot; class=&quot;headerlink&quot; title=&quot;Flask&quot;&gt;&lt;/a&gt;Flask&lt;/h3&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/43687/&quot;&gt;Python&lt;/a&gt; 几大著名 Web 框架之一，以其轻量级，高可扩展性而著名&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Jinja2&lt;br&gt;  模板引擎&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Werkzeug&lt;br&gt;  WSGI 工具集&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;应用场景&quot;&gt;&lt;a href=&quot;#应用场景&quot; class=&quot;headerlink&quot; title=&quot;应用场景&quot;&gt;&lt;/a&gt;应用场景&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;高端制造业&lt;/li&gt;
-&lt;li&gt;本地控制器服务器&lt;/li&gt;
-&lt;li&gt;云数据管理&lt;/li&gt;
-&lt;/ul&gt;</summary>
+&lt;h3 id=&quot;Gunicorn&quot;&gt;&lt;a href=&quot;#Gunicorn&quot; class=&quot;headerlink&quot; title=&quot;Gunicorn&quot;&gt;&lt;/a&gt;Gunicorn&lt;/h3&gt;&lt;p&gt;　Gunicorn 是一个开源的 Python WSGI HTTP 服务器，移植于 Ruby 的 Unicorn 项目的采用 pre-fork 模式的服务器&lt;/p&gt;
+&lt;h4 id=&quot;WSGI&quot;&gt;&lt;a href=&quot;#WSGI&quot; class=&quot;headerlink&quot; title=&quot;WSGI&quot;&gt;&lt;/a&gt;WSGI&lt;/h4&gt;&lt;p&gt;　WSGI，即 Python &lt;strong&gt;W&lt;/strong&gt;eb &lt;strong&gt;S&lt;/strong&gt;erver &lt;strong&gt;G&lt;/strong&gt;ateway &lt;strong&gt;I&lt;/strong&gt;nterface，是专门用于 Python 应用程序或框架与 Web 服务器之间的一种接口，没有官方的实现，因为 WSGI 更像一个协议，只要遵照这些协议，WSGI 应用都可以在 任何服务器上运行，反之亦然&lt;/p&gt;
+&lt;h4 id=&quot;Pre-Fork&quot;&gt;&lt;a href=&quot;#Pre-Fork&quot; class=&quot;headerlink&quot; title=&quot;Pre-Fork&quot;&gt;&lt;/a&gt;Pre-Fork&lt;/h4&gt;&lt;p&gt;　一个进程处理一个请求，基于 select 模型，所以最多一次创建 1024 个进程&lt;br&gt;　预先创建进程，pre-fork 采用的是预派生子进程方式，用子进程处理不同的请求，每个请求对应一个子进程，进程之间是彼此独立的&lt;br&gt;　一定程度上加快了进程的响应速度&lt;/p&gt;</summary>
     
     
     
-    <category term="物联网" scheme="https://yuzhouwan.com/categories/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     
-    <category term="IoT" scheme="https://yuzhouwan.com/tags/IoT/"/>
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
     
-    <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
     
-    <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Eagle 深度调研</title>
+    <link href="https://yuzhouwan.com/posts/39683/"/>
+    <id>https://yuzhouwan.com/posts/39683/</id>
+    <published>2017-04-05T13:38:04.000Z</published>
+    <updated>2021-05-18T08:45:34.179Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;Apache Eagle&lt;/a&gt; 是一个&lt;code&gt;高度可扩展&lt;/code&gt;的监控警报平台，采用了&lt;code&gt;设计灵活&lt;/code&gt;的应用框架和&lt;code&gt;经过实践考验&lt;/code&gt;的大数据技术，如 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt;，&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/13977/&quot;&gt;Storm&lt;/a&gt;。它提供了丰富的大数据平台监控程序，例如 &lt;a href=&quot;https://yuzhouwan.com/posts/60504/&quot;&gt;HDFS&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;HBase&lt;/a&gt; / YARN 服务&lt;code&gt;运行状况检查&lt;/code&gt;，&lt;code&gt;JMX 指标&lt;/code&gt;，&lt;code&gt;守护进程日志&lt;/code&gt;，&lt;code&gt;审核日志&lt;/code&gt; 和 &lt;code&gt;Yarn&lt;/code&gt; 应用程序。外部 Eagle 开发人员可以&lt;code&gt;自定义应用&lt;/code&gt;来监视其 NoSQL 数据库或 Web 服务器，可以自己决定是否共享到 &lt;code&gt;Eagle 应用程序存储库&lt;/code&gt;。它还提供最先进的&lt;code&gt;警报引擎&lt;/code&gt;来报告&lt;code&gt;安全漏洞&lt;/code&gt;，&lt;code&gt;服务故障&lt;/code&gt;和&lt;code&gt;应用程序异常&lt;/code&gt;，由警报策略定义&lt;code&gt;高度可定制&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&quot;Site&quot;&gt;&lt;a href=&quot;#Site&quot; class=&quot;headerlink&quot; title=&quot;Site&quot;&gt;&lt;/a&gt;Site&lt;/h3&gt;&lt;p&gt;　管理一组&lt;code&gt;应用程序&lt;/code&gt;实例，用来区别某些被多次安装的应用程序&lt;/p&gt;
+&lt;h3 id=&quot;Application&quot;&gt;&lt;a href=&quot;#Application&quot; class=&quot;headerlink&quot; title=&quot;Application&quot;&gt;&lt;/a&gt;Application&lt;/h3&gt;&lt;p&gt;　应用程序（或监控应用程序）是 Apache Eagle 中的一级公民，它代表&lt;code&gt;端到端&lt;/code&gt;的&lt;code&gt;监控&lt;/code&gt; / &lt;code&gt;警报&lt;/code&gt;解决方案，通常包含&lt;code&gt;监控源&lt;/code&gt;入站，源的 &lt;code&gt;schema&lt;/code&gt;规范，&lt;code&gt;警报策略&lt;/code&gt;和 &lt;code&gt;仪表板定义&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Stream&quot;&gt;&lt;a href=&quot;#Stream&quot; class=&quot;headerlink&quot; title=&quot;Stream&quot;&gt;&lt;/a&gt;Stream&lt;/h3&gt;&lt;p&gt;　Stream 是 Alert Engine 的输入，每个&lt;code&gt;应用程序&lt;/code&gt;应该有自己的由开发人员定义的流。通常，流定义里面包含了一个类似 &lt;code&gt;POJO&lt;/code&gt; 的结构。一旦定义完成，&lt;code&gt;应用程序&lt;/code&gt;就有了将数据写入&lt;code&gt;Kafka&lt;/code&gt; 的逻辑&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
+    
+    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
+    
+    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
+    
+    <category term="Apache Yarn" scheme="https://yuzhouwan.com/tags/Apache-Yarn/"/>
+    
+    <category term="LogStash" scheme="https://yuzhouwan.com/tags/LogStash/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Algorithm</title>
+    <link href="https://yuzhouwan.com/posts/666/"/>
+    <id>https://yuzhouwan.com/posts/666/</id>
+    <published>2019-05-01T13:38:08.000Z</published>
+    <updated>2021-05-18T08:45:34.173Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;LeetCode-组队刷题活动&quot;&gt;&lt;a href=&quot;#LeetCode-组队刷题活动&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 组队刷题活动&quot;&gt;&lt;/a&gt;LeetCode 组队刷题活动&lt;/h2&gt;&lt;div class=&quot;note primary&quot;&gt;组队刷 LeetCode&lt;/div&gt;
+
+&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;h4 id=&quot;代码仓库&quot;&gt;&lt;a href=&quot;#代码仓库&quot; class=&quot;headerlink&quot; title=&quot;代码仓库&quot;&gt;&lt;/a&gt;代码仓库&lt;/h4&gt;&lt;p&gt;　代码仓库的坐标：&lt;strong&gt;&lt;a href=&quot;https://github.com/asdf2014/algorithm&quot;&gt;asdf2014 / algorithm&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;报名途径&quot;&gt;&lt;a href=&quot;#报名途径&quot; class=&quot;headerlink&quot; title=&quot;报名途径&quot;&gt;&lt;/a&gt;报名途径&lt;/h4&gt;&lt;p&gt;　只需要在《&lt;a href=&quot;https://yuzhouwan.com/posts/666/&quot;&gt;Algorithm&lt;/a&gt;》文末的评论区，或者在 &lt;a href=&quot;https://github.com/asdf2014/gitment/issues/40&quot;&gt;issues#40&lt;/a&gt; 中留言，即可随时参与&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激&lt;/div&gt;
+
+&lt;h4 id=&quot;参与方式&quot;&gt;&lt;a href=&quot;#参与方式&quot; class=&quot;headerlink&quot; title=&quot;参与方式&quot;&gt;&lt;/a&gt;参与方式&lt;/h4&gt;&lt;p&gt;　每位参与的小伙伴，都会获得代码仓库的 &lt;a href=&quot;https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository&quot;&gt;Collaborator&lt;/a&gt; 权限，可以自由地提交代码（不限制语种）。在 &lt;code&gt;/Codes/${你的 Github 账号名}&lt;/code&gt; 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 &lt;a href=&quot;https://github.com/asdf2014/algorithm/invitations&quot;&gt;asdf2014 - algorithm - invitations&lt;/a&gt; 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;bash -c &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;subst&quot;&gt;$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;刷题频率&quot;&gt;&lt;a href=&quot;#刷题频率&quot; class=&quot;headerlink&quot; title=&quot;刷题频率&quot;&gt;&lt;/a&gt;刷题频率&lt;/h4&gt;&lt;p&gt;　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”&lt;/p&gt;
+&lt;h4 id=&quot;选题策略&quot;&gt;&lt;a href=&quot;#选题策略&quot; class=&quot;headerlink&quot; title=&quot;选题策略&quot;&gt;&lt;/a&gt;选题策略&lt;/h4&gt;&lt;p&gt;　&lt;a href=&quot;https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py&quot;&gt;选题机器人&lt;/a&gt;会在每周五晚八点，自动地随机选定一个题目，当前题目点击&lt;a href=&quot;https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5&quot;&gt;这里&lt;/a&gt;查看。&lt;/p&gt;
+&lt;h3 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h3&gt;&lt;p&gt;　操作 Git 时遇到问题的话，可以参考我的一篇博客《&lt;a href=&quot;https://yuzhouwan.com/posts/30041/&quot;&gt;Git 高级玩法&lt;/a&gt;》&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴&lt;/div&gt;
+
+&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;note danger&quot;&gt;但是，请不要在评论区讨论入群问题的答案，避免打广告的进入&lt;/div&gt;
+
+&lt;p&gt;　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：&lt;/p&gt;
+&lt;div class=&quot;tabs&quot; id=&quot;code&quot;&gt;&lt;ul class=&quot;nav-tabs&quot;&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-1&quot;&gt;CODE 1&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-2&quot;&gt;CODE 2&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab active&quot;&gt;&lt;a href=&quot;#code-3&quot;&gt;CODE 3&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;tab-content&quot;&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-1&quot;&gt;&lt;p&gt;&lt;strong&gt;迭代解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        n = n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sum_ = a + b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        a = b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        b = sum_&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; b&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-2&quot;&gt;&lt;p&gt;&lt;strong&gt;递归解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; solution(n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + solution(n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane active&quot; id=&quot;code-3&quot;&gt;&lt;p&gt;&lt;strong&gt;动态规划解&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache = [x &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;range&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;range&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cache[i] = cache[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + cache[i - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cache[n]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="https://yuzhouwan.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Algorithm" scheme="https://yuzhouwan.com/tags/Algorithm/"/>
+    
+    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="LeetCode" scheme="https://yuzhouwan.com/tags/LeetCode/"/>
     
   </entry>
   
@@ -560,74 +748,6 @@
   </entry>
   
   <entry>
-    <title>人工智能</title>
-    <link href="https://yuzhouwan.com/posts/42737/"/>
-    <id>https://yuzhouwan.com/posts/42737/</id>
-    <published>2017-05-16T10:58:02.000Z</published>
-    <updated>2021-03-28T14:02:16.551Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;　从 深蓝到 &lt;a href=&quot;https://arxiv.org/pdf/1712.01815.pdf&quot;&gt;AlphaZero&lt;/a&gt;，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；&lt;br&gt;　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；&lt;br&gt;　从 CPU / GPU 到 &lt;a href=&quot;https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu&quot;&gt;TPU&lt;/a&gt;，人工智能的计算能力正向着无法穷举的极限不断逼近 …&lt;/p&gt;
-&lt;p&gt;　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的&lt;/p&gt;
-&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　我们将分为三块对 AI 进行诠释&lt;/p&gt;
-&lt;p&gt;　首先，将介绍人工智能的&lt;strong&gt;主流思想&lt;/strong&gt;和&lt;strong&gt;实用技巧&lt;/strong&gt;，通过一些耳熟能详的&lt;a href=&quot;https://yuzhouwan.com/posts/4534/&quot;&gt;有趣定理&lt;/a&gt;，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大&lt;strong&gt;理论支柱&lt;/strong&gt;，由浅入深地学习 &lt;a href=&quot;https://yuzhouwan.com/posts/42737/#统计学&quot;&gt;统计学&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#微积分&quot;&gt;微积分&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#线性代数&quot;&gt;线性代数&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#概率论&quot;&gt;概率论&lt;/a&gt; 等知识体系；最后，落地到实践，我们需要紧跟人工智能的&lt;strong&gt;技术发展前沿&lt;/strong&gt;，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点&lt;/p&gt;
-&lt;p&gt;　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（&lt;a href=&quot;https://yuzhouwan.com/posts/43687/#Python-第三方库&quot;&gt;Python&lt;/a&gt;、Prolog、R、&lt;a href=&quot;https://yuzhouwan.com/posts/27328/&quot;&gt;Java&lt;/a&gt;）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/&lt;/p&gt;
-&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
-
-
-
-&lt;h2 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h2&gt;&lt;h3 id=&quot;Occam-剃刀原理&quot;&gt;&lt;a href=&quot;#Occam-剃刀原理&quot; class=&quot;headerlink&quot; title=&quot;Occam 剃刀原理&quot;&gt;&lt;/a&gt;Occam 剃刀原理&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;奥卡姆剃刀&lt;/strong&gt;（Occam´s Razor），意为&lt;strong&gt;简约之法&lt;/strong&gt;，是由 14 世纪&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6&quot;&gt;逻辑学&lt;/a&gt;家、&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83&quot;&gt;圣方济各会&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB&quot;&gt;修士&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89&quot;&gt;奥卡姆的威廉&lt;/a&gt;提出的一个解决问题的法则，即&lt;code&gt;&quot;切勿浪费较多资源，去做&#39;用较少的资源，同样可以做好&#39;的事情&quot;&lt;/code&gt;，相同思想见于郑板桥的&lt;strong&gt;删繁就简三秋树&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    
-    <category term="机器学习" scheme="https://yuzhouwan.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-    <category term="微积分" scheme="https://yuzhouwan.com/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="MP Model" scheme="https://yuzhouwan.com/tags/MP-Model/"/>
-    
-    <category term="Perceptron" scheme="https://yuzhouwan.com/tags/Perceptron/"/>
-    
-    <category term="MLP" scheme="https://yuzhouwan.com/tags/MLP/"/>
-    
-    <category term="DNN" scheme="https://yuzhouwan.com/tags/DNN/"/>
-    
-    <category term="CNN" scheme="https://yuzhouwan.com/tags/CNN/"/>
-    
-    <category term="RNN" scheme="https://yuzhouwan.com/tags/RNN/"/>
-    
-    <category term="LSTM" scheme="https://yuzhouwan.com/tags/LSTM/"/>
-    
-    <category term="统计学" scheme="https://yuzhouwan.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
-    
-    <category term="线性代数" scheme="https://yuzhouwan.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="概率论" scheme="https://yuzhouwan.com/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
-    
-    <category term="深度学习" scheme="https://yuzhouwan.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="PyTorch" scheme="https://yuzhouwan.com/tags/PyTorch/"/>
-    
-    <category term="Caffe" scheme="https://yuzhouwan.com/tags/Caffe/"/>
-    
-    <category term="xgboost" scheme="https://yuzhouwan.com/tags/xgboost/"/>
-    
-    <category term="Apache PredictionIO" scheme="https://yuzhouwan.com/tags/Apache-PredictionIO/"/>
-    
-    <category term="NuPIC" scheme="https://yuzhouwan.com/tags/NuPIC/"/>
-    
-  </entry>
-  
-  <entry>
     <title>架构方法论大合集</title>
     <link href="https://yuzhouwan.com/posts/210313/"/>
     <id>https://yuzhouwan.com/posts/210313/</id>
@@ -657,53 +777,6 @@
     <category term="架构重构" scheme="https://yuzhouwan.com/tags/%E6%9E%B6%E6%9E%84%E9%87%8D%E6%9E%84/"/>
     
     <category term="架构演进" scheme="https://yuzhouwan.com/tags/%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Algorithm</title>
-    <link href="https://yuzhouwan.com/posts/666/"/>
-    <id>https://yuzhouwan.com/posts/666/</id>
-    <published>2019-05-01T13:38:08.000Z</published>
-    <updated>2021-02-21T04:19:05.668Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;LeetCode-组队刷题活动&quot;&gt;&lt;a href=&quot;#LeetCode-组队刷题活动&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 组队刷题活动&quot;&gt;&lt;/a&gt;LeetCode 组队刷题活动&lt;/h2&gt;&lt;div class=&quot;note primary&quot;&gt;组队刷 LeetCode&lt;/div&gt;
-
-&lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;h4 id=&quot;代码仓库&quot;&gt;&lt;a href=&quot;#代码仓库&quot; class=&quot;headerlink&quot; title=&quot;代码仓库&quot;&gt;&lt;/a&gt;代码仓库&lt;/h4&gt;&lt;p&gt;　代码仓库的坐标：&lt;strong&gt;&lt;a href=&quot;https://github.com/asdf2014/algorithm&quot;&gt;asdf2014 / algorithm&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&quot;报名途径&quot;&gt;&lt;a href=&quot;#报名途径&quot; class=&quot;headerlink&quot; title=&quot;报名途径&quot;&gt;&lt;/a&gt;报名途径&lt;/h4&gt;&lt;p&gt;　只需要在《&lt;a href=&quot;https://yuzhouwan.com/posts/666/&quot;&gt;Algorithm&lt;/a&gt;》文末的评论区，或者在 &lt;a href=&quot;https://github.com/asdf2014/gitment/issues/40&quot;&gt;issues#40&lt;/a&gt; 中留言，即可随时参与&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激&lt;/div&gt;
-
-&lt;h4 id=&quot;参与方式&quot;&gt;&lt;a href=&quot;#参与方式&quot; class=&quot;headerlink&quot; title=&quot;参与方式&quot;&gt;&lt;/a&gt;参与方式&lt;/h4&gt;&lt;p&gt;　每位参与的小伙伴，都会获得代码仓库的 &lt;a href=&quot;https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository&quot;&gt;Collaborator&lt;/a&gt; 权限，可以自由地提交代码（不限制语种）。在 &lt;code&gt;/Codes/${你的 Github 账号名}&lt;/code&gt; 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 &lt;a href=&quot;https://github.com/asdf2014/algorithm/invitations&quot;&gt;asdf2014 - algorithm - invitations&lt;/a&gt; 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;bash -c &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;subst&quot;&gt;$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)&lt;/span&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;刷题频率&quot;&gt;&lt;a href=&quot;#刷题频率&quot; class=&quot;headerlink&quot; title=&quot;刷题频率&quot;&gt;&lt;/a&gt;刷题频率&lt;/h4&gt;&lt;p&gt;　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”&lt;/p&gt;
-&lt;h4 id=&quot;选题策略&quot;&gt;&lt;a href=&quot;#选题策略&quot; class=&quot;headerlink&quot; title=&quot;选题策略&quot;&gt;&lt;/a&gt;选题策略&lt;/h4&gt;&lt;p&gt;　&lt;a href=&quot;https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py&quot;&gt;选题机器人&lt;/a&gt;会在每周五晚八点，自动地随机选定一个题目，当前题目点击&lt;a href=&quot;https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5&quot;&gt;这里&lt;/a&gt;查看。&lt;/p&gt;
-&lt;h3 id=&quot;其他&quot;&gt;&lt;a href=&quot;#其他&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h3&gt;&lt;p&gt;　操作 Git 时遇到问题的话，可以参考我的一篇博客《&lt;a href=&quot;https://yuzhouwan.com/posts/30041/&quot;&gt;Git 高级玩法&lt;/a&gt;》&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴&lt;/div&gt;
-
-&lt;p&gt;　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 &lt;a href=&quot;https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_qq_group_5366753.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt; 或者 Gitter 聊天室 &lt;a href=&quot;https://gitter.im/yuzhouwan/community?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&quot;&gt;&lt;img src=&quot;/picture/algorithm/algorithm_gitter_community.svg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;note danger&quot;&gt;但是，请不要在评论区讨论入群问题的答案，避免打广告的进入&lt;/div&gt;
-
-&lt;p&gt;　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：&lt;/p&gt;
-&lt;div class=&quot;tabs&quot; id=&quot;code&quot;&gt;&lt;ul class=&quot;nav-tabs&quot;&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-1&quot;&gt;CODE 1&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab&quot;&gt;&lt;a href=&quot;#code-2&quot;&gt;CODE 2&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;tab active&quot;&gt;&lt;a href=&quot;#code-3&quot;&gt;CODE 3&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&quot;tab-content&quot;&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-1&quot;&gt;&lt;p&gt;&lt;strong&gt;迭代解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    a = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    b = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; n &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        n = n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sum_ = a + b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        a = b&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        b = sum_&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; b&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane&quot; id=&quot;code-2&quot;&gt;&lt;p&gt;&lt;strong&gt;递归解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; solution(n - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) + solution(n - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class=&quot;tab-pane active&quot; id=&quot;code-3&quot;&gt;&lt;p&gt;&lt;strong&gt;动态规划解&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;solution&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;n&lt;/span&gt;):&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; n &amp;lt;= &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; n&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache = [x &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cache[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; range(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, n + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        cache[i] = cache[i - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;] + cache[i - &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; cache[n]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="https://yuzhouwan.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Algorithm" scheme="https://yuzhouwan.com/tags/Algorithm/"/>
-    
-    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="LeetCode" scheme="https://yuzhouwan.com/tags/LeetCode/"/>
     
   </entry>
   
@@ -1128,41 +1201,6 @@
   </entry>
   
   <entry>
-    <title>Apache Superset 二次开发</title>
-    <link href="https://yuzhouwan.com/posts/743/"/>
-    <id>https://yuzhouwan.com/posts/743/</id>
-    <published>2017-04-03T12:59:57.000Z</published>
-    <updated>2020-10-29T13:44:24.887Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Apache-Superset-是什么？&quot;&gt;&lt;a href=&quot;#Apache-Superset-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache Superset 是什么？&quot;&gt;&lt;/a&gt;Apache Superset 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://superset.apache.org/&quot;&gt;Apache Superset&lt;/a&gt;&lt;/strong&gt;™ is a modern data exploration and visualization platform.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;基础组件&quot;&gt;&lt;a href=&quot;#基础组件&quot; class=&quot;headerlink&quot; title=&quot;基础组件&quot;&gt;&lt;/a&gt;基础组件&lt;/h2&gt;&lt;h3 id=&quot;Flask&quot;&gt;&lt;a href=&quot;#Flask&quot; class=&quot;headerlink&quot; title=&quot;Flask&quot;&gt;&lt;/a&gt;Flask&lt;/h3&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/43687/&quot;&gt;Python&lt;/a&gt; 几大著名 Web 框架之一，以其轻量级，高可扩展性而著名&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Jinja2&lt;br&gt;  模板引擎&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Werkzeug&lt;br&gt;  WSGI 工具集&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;Gunicorn&quot;&gt;&lt;a href=&quot;#Gunicorn&quot; class=&quot;headerlink&quot; title=&quot;Gunicorn&quot;&gt;&lt;/a&gt;Gunicorn&lt;/h3&gt;&lt;p&gt;　Gunicorn 是一个开源的 Python WSGI HTTP 服务器，移植于 Ruby 的 Unicorn 项目的采用 pre-fork 模式的服务器&lt;/p&gt;
-&lt;h4 id=&quot;WSGI&quot;&gt;&lt;a href=&quot;#WSGI&quot; class=&quot;headerlink&quot; title=&quot;WSGI&quot;&gt;&lt;/a&gt;WSGI&lt;/h4&gt;&lt;p&gt;　WSGI，即 Python &lt;strong&gt;W&lt;/strong&gt;eb &lt;strong&gt;S&lt;/strong&gt;erver &lt;strong&gt;G&lt;/strong&gt;ateway &lt;strong&gt;I&lt;/strong&gt;nterface，是专门用于 Python 应用程序或框架与 Web 服务器之间的一种接口，没有官方的实现，因为 WSGI 更像一个协议，只要遵照这些协议，WSGI 应用都可以在 任何服务器上运行，反之亦然&lt;/p&gt;
-&lt;h4 id=&quot;Pre-Fork&quot;&gt;&lt;a href=&quot;#Pre-Fork&quot; class=&quot;headerlink&quot; title=&quot;Pre-Fork&quot;&gt;&lt;/a&gt;Pre-Fork&lt;/h4&gt;&lt;p&gt;　一个进程处理一个请求，基于 select 模型，所以最多一次创建 1024 个进程&lt;br&gt;　预先创建进程，pre-fork 采用的是预派生子进程方式，用子进程处理不同的请求，每个请求对应一个子进程，进程之间是彼此独立的&lt;br&gt;　一定程度上加快了进程的响应速度&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Aapche Drill：一款分布式查询引擎</title>
     <link href="https://yuzhouwan.com/posts/201025/"/>
     <id>https://yuzhouwan.com/posts/201025/</id>
@@ -1334,44 +1372,6 @@
     <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
     
     <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache Eagle 深度调研</title>
-    <link href="https://yuzhouwan.com/posts/39683/"/>
-    <id>https://yuzhouwan.com/posts/39683/</id>
-    <published>2017-04-05T13:38:04.000Z</published>
-    <updated>2020-09-30T14:20:11.903Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;Apache Eagle&lt;/a&gt; 是一个&lt;code&gt;高度可扩展&lt;/code&gt;的监控警报平台，采用了&lt;code&gt;设计灵活&lt;/code&gt;的应用框架和&lt;code&gt;经过实践考验&lt;/code&gt;的大数据技术，如 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt;，&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/13977/&quot;&gt;Storm&lt;/a&gt;。它提供了丰富的大数据平台监控程序，例如 &lt;a href=&quot;https://yuzhouwan.com/posts/60504/&quot;&gt;HDFS&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;HBase&lt;/a&gt; / YARN 服务&lt;code&gt;运行状况检查&lt;/code&gt;，&lt;code&gt;JMX 指标&lt;/code&gt;，&lt;code&gt;守护进程日志&lt;/code&gt;，&lt;code&gt;审核日志&lt;/code&gt; 和 &lt;code&gt;Yarn&lt;/code&gt; 应用程序。外部 Eagle 开发人员可以&lt;code&gt;自定义应用&lt;/code&gt;来监视其 NoSQL 数据库或 Web 服务器，可以自己决定是否共享到 &lt;code&gt;Eagle 应用程序存储库&lt;/code&gt;。它还提供最先进的&lt;code&gt;警报引擎&lt;/code&gt;来报告&lt;code&gt;安全漏洞&lt;/code&gt;，&lt;code&gt;服务故障&lt;/code&gt;和&lt;code&gt;应用程序异常&lt;/code&gt;，由警报策略定义&lt;code&gt;高度可定制&lt;/code&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;Site&quot;&gt;&lt;a href=&quot;#Site&quot; class=&quot;headerlink&quot; title=&quot;Site&quot;&gt;&lt;/a&gt;Site&lt;/h3&gt;&lt;p&gt;　管理一组&lt;code&gt;应用程序&lt;/code&gt;实例，用来区别某些被多次安装的应用程序&lt;/p&gt;
-&lt;h3 id=&quot;Application&quot;&gt;&lt;a href=&quot;#Application&quot; class=&quot;headerlink&quot; title=&quot;Application&quot;&gt;&lt;/a&gt;Application&lt;/h3&gt;&lt;p&gt;　应用程序（或监控应用程序）是 Apache Eagle 中的一级公民，它代表&lt;code&gt;端到端&lt;/code&gt;的&lt;code&gt;监控&lt;/code&gt; / &lt;code&gt;警报&lt;/code&gt;解决方案，通常包含&lt;code&gt;监控源&lt;/code&gt;入站，源的 &lt;code&gt;schema&lt;/code&gt;规范，&lt;code&gt;警报策略&lt;/code&gt;和 &lt;code&gt;仪表板定义&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Stream&quot;&gt;&lt;a href=&quot;#Stream&quot; class=&quot;headerlink&quot; title=&quot;Stream&quot;&gt;&lt;/a&gt;Stream&lt;/h3&gt;&lt;p&gt;　Stream 是 Alert Engine 的输入，每个&lt;code&gt;应用程序&lt;/code&gt;应该有自己的由开发人员定义的流。通常，流定义里面包含了一个类似 &lt;code&gt;POJO&lt;/code&gt; 的结构。一旦定义完成，&lt;code&gt;应用程序&lt;/code&gt;就有了将数据写入&lt;code&gt;Kafka&lt;/code&gt; 的逻辑&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
-    
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
-    
-    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
-    
-    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
-    
-    <category term="Apache Yarn" scheme="https://yuzhouwan.com/tags/Apache-Yarn/"/>
-    
-    <category term="LogStash" scheme="https://yuzhouwan.com/tags/LogStash/"/>
     
   </entry>
   
@@ -1569,7 +1569,7 @@
 &lt;ul&gt;
 &lt;li&gt;PHP&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$_session&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$_session&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;ul&gt;
 &lt;li&gt;Hibernate&lt;/li&gt;
 &lt;/ul&gt;

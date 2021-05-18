@@ -216,6 +216,440 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/42737/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/42737/" class="post-title-link" itemprop="url">人工智能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-16 18:58:02" itemprop="dateCreated datePublished" datetime="2017-05-16T18:58:02+08:00">2017-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-18 16:45:34" itemprop="dateModified" datetime="2021-05-18T16:45:34+08:00">2021-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>42k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>39 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是人工智能"><a href="#什么是人工智能" class="headerlink" title="什么是人工智能"></a>什么是人工智能</h2><p>　<strong>人工智能</strong>（<strong>A</strong>rtificial <strong>I</strong>ntelligence, <strong>AI</strong>）亦称<strong>机器智能</strong>，是指由人工制造出来的系统所表现出来的智能。 — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD">wikipedia.org</a></p>
+<p>　从 深蓝到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1712.01815.pdf">AlphaZero</a>，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；<br>　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；<br>　从 CPU / GPU 到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">TPU</a>，人工智能的计算能力正向着无法穷举的极限不断逼近 …</p>
+<p>　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的</p>
+<h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　我们将分为三块对 AI 进行诠释</p>
+<p>　首先，将介绍人工智能的<strong>主流思想</strong>和<strong>实用技巧</strong>，通过一些耳熟能详的<a href="https://yuzhouwan.com/posts/4534/">有趣定理</a>，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大<strong>理论支柱</strong>，由浅入深地学习 <a href="https://yuzhouwan.com/posts/42737/#统计学">统计学</a>、<a href="https://yuzhouwan.com/posts/42737/#微积分">微积分</a>、<a href="https://yuzhouwan.com/posts/42737/#线性代数">线性代数</a>、<a href="https://yuzhouwan.com/posts/42737/#概率论">概率论</a> 等知识体系；最后，落地到实践，我们需要紧跟人工智能的<strong>技术发展前沿</strong>，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点</p>
+<p>　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（<a href="https://yuzhouwan.com/posts/43687/#Python-第三方库">Python</a>、Prolog、R、<a href="https://yuzhouwan.com/posts/27328/">Java</a>）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/</p>
+<h2 id="主流思想"><a href="#主流思想" class="headerlink" title="主流思想"></a>主流思想</h2><h3 id="演绎法-amp-溯因法-amp-归纳法"><a href="#演绎法-amp-溯因法-amp-归纳法" class="headerlink" title="演绎法 &amp; 溯因法 &amp; 归纳法"></a>演绎法 &amp; 溯因法 &amp; 归纳法</h3><p><img src="/picture/ai/ai_cause_rule_effect.png" alt></p>
+<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
+
+
+
+<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="Occam-剃刀原理"><a href="#Occam-剃刀原理" class="headerlink" title="Occam 剃刀原理"></a>Occam 剃刀原理</h3><p>　<strong>奥卡姆剃刀</strong>（Occam´s Razor），意为<strong>简约之法</strong>，是由 14 世纪<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6">逻辑学</a>家、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83">圣方济各会</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB">修士</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89">奥卡姆的威廉</a>提出的一个解决问题的法则，即<code>"切勿浪费较多资源，去做'用较少的资源，同样可以做好'的事情"</code>，相同思想见于郑板桥的<strong>删繁就简三秋树</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/42737/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/743/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/743/" class="post-title-link" itemprop="url">Apache Superset 二次开发</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-03 20:59:57" itemprop="dateCreated datePublished" datetime="2017-04-03T20:59:57+08:00">2017-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-18 16:45:34" itemprop="dateModified" datetime="2021-05-18T16:45:34+08:00">2021-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>43k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>39 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Apache-Superset-是什么？"><a href="#Apache-Superset-是什么？" class="headerlink" title="Apache Superset 是什么？"></a>Apache Superset 是什么？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://superset.apache.org/">Apache Superset</a></strong>™ is a modern data exploration and visualization platform.</p>
+</blockquote>
+<h2 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h2><h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><p>　<a href="https://yuzhouwan.com/posts/43687/">Python</a> 几大著名 Web 框架之一，以其轻量级，高可扩展性而著名</p>
+<ul>
+<li><p>Jinja2<br>  模板引擎</p>
+</li>
+<li><p>Werkzeug<br>  WSGI 工具集</p>
+</li>
+</ul>
+<h3 id="Gunicorn"><a href="#Gunicorn" class="headerlink" title="Gunicorn"></a>Gunicorn</h3><p>　Gunicorn 是一个开源的 Python WSGI HTTP 服务器，移植于 Ruby 的 Unicorn 项目的采用 pre-fork 模式的服务器</p>
+<h4 id="WSGI"><a href="#WSGI" class="headerlink" title="WSGI"></a>WSGI</h4><p>　WSGI，即 Python <strong>W</strong>eb <strong>S</strong>erver <strong>G</strong>ateway <strong>I</strong>nterface，是专门用于 Python 应用程序或框架与 Web 服务器之间的一种接口，没有官方的实现，因为 WSGI 更像一个协议，只要遵照这些协议，WSGI 应用都可以在 任何服务器上运行，反之亦然</p>
+<h4 id="Pre-Fork"><a href="#Pre-Fork" class="headerlink" title="Pre-Fork"></a>Pre-Fork</h4><p>　一个进程处理一个请求，基于 select 模型，所以最多一次创建 1024 个进程<br>　预先创建进程，pre-fork 采用的是预派生子进程方式，用子进程处理不同的请求，每个请求对应一个子进程，进程之间是彼此独立的<br>　一定程度上加快了进程的响应速度</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/743/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/39683/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/39683/" class="post-title-link" itemprop="url">Apache Eagle 深度调研</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-05 21:38:04" itemprop="dateCreated datePublished" datetime="2017-04-05T21:38:04+08:00">2017-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-18 16:45:34" itemprop="dateModified" datetime="2021-05-18T16:45:34+08:00">2021-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>42k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>38 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>　<a href="https://yuzhouwan.com/posts/39683/">Apache Eagle</a> 是一个<code>高度可扩展</code>的监控警报平台，采用了<code>设计灵活</code>的应用框架和<code>经过实践考验</code>的大数据技术，如 <a href="https://yuzhouwan.com/posts/26002/">Kafka</a>，<a href="https://yuzhouwan.com/posts/4735/">Spark</a> 和 <a href="https://yuzhouwan.com/posts/13977/">Storm</a>。它提供了丰富的大数据平台监控程序，例如 <a href="https://yuzhouwan.com/posts/60504/">HDFS</a> / <a href="https://yuzhouwan.com/posts/45888/">HBase</a> / YARN 服务<code>运行状况检查</code>，<code>JMX 指标</code>，<code>守护进程日志</code>，<code>审核日志</code> 和 <code>Yarn</code> 应用程序。外部 Eagle 开发人员可以<code>自定义应用</code>来监视其 NoSQL 数据库或 Web 服务器，可以自己决定是否共享到 <code>Eagle 应用程序存储库</code>。它还提供最先进的<code>警报引擎</code>来报告<code>安全漏洞</code>，<code>服务故障</code>和<code>应用程序异常</code>，由警报策略定义<code>高度可定制</code>。</p>
+<h3 id="Site"><a href="#Site" class="headerlink" title="Site"></a>Site</h3><p>　管理一组<code>应用程序</code>实例，用来区别某些被多次安装的应用程序</p>
+<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><p>　应用程序（或监控应用程序）是 Apache Eagle 中的一级公民，它代表<code>端到端</code>的<code>监控</code> / <code>警报</code>解决方案，通常包含<code>监控源</code>入站，源的 <code>schema</code>规范，<code>警报策略</code>和 <code>仪表板定义</code></p>
+<h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><p>　Stream 是 Alert Engine 的输入，每个<code>应用程序</code>应该有自己的由开发人员定义的流。通常，流定义里面包含了一个类似 <code>POJO</code> 的结构。一旦定义完成，<code>应用程序</code>就有了将数据写入<code>Kafka</code> 的逻辑</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/39683/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/666/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/666/" class="post-title-link" itemprop="url">Algorithm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-01 21:38:08" itemprop="dateCreated datePublished" datetime="2019-05-01T21:38:08+08:00">2019-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-18 16:45:34" itemprop="dateModified" datetime="2021-05-18T16:45:34+08:00">2021-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="LeetCode-组队刷题活动"><a href="#LeetCode-组队刷题活动" class="headerlink" title="LeetCode 组队刷题活动"></a>LeetCode 组队刷题活动</h2><div class="note primary">组队刷 LeetCode</div>
+
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><h4 id="代码仓库"><a href="#代码仓库" class="headerlink" title="代码仓库"></a>代码仓库</h4><p>　代码仓库的坐标：<strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm">asdf2014 / algorithm</a></strong></p>
+<h4 id="报名途径"><a href="#报名途径" class="headerlink" title="报名途径"></a>报名途径</h4><p>　只需要在《<a href="https://yuzhouwan.com/posts/666/">Algorithm</a>》文末的评论区，或者在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/gitment/issues/40">issues#40</a> 中留言，即可随时参与</p>
+<div class="note success">留言内容的话，可以是任意的。另外，也可以说明下自己能接受的刷题频率、希望的选题策略，亦或者，对算法知识沉淀的模式有好的建议，都可以提出，不胜感激</div>
+
+<h4 id="参与方式"><a href="#参与方式" class="headerlink" title="参与方式"></a>参与方式</h4><p>　每位参与的小伙伴，都会获得代码仓库的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/permission-levels-for-a-user-account-repository">Collaborator</a> 权限，可以自由地提交代码（不限制语种）。在 <code>/Codes/${你的 Github 账号名}</code> 目录下，每人都将拥有一个自己的代码库。留下 Github 名称后，将很快会收到邀请函，大家可以在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/invitations">asdf2014 - algorithm - invitations</a> 链接中认领（当然，也欢迎直接通过提交 Pull Request 参与进来）。随后，可以在任意目录下（不需要是空目录），使用如下命令，一键完成您的第一次代码提交：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">"<span class="subst">$(curl -L https://raw.githubusercontent.com/asdf2014/algorithm/master/first_commit.sh)</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="刷题频率"><a href="#刷题频率" class="headerlink" title="刷题频率"></a>刷题频率</h4><p>　考虑到可能大家的闲暇时间并不多，我们暂定刷题频率为“一周一题”</p>
+<h4 id="选题策略"><a href="#选题策略" class="headerlink" title="选题策略"></a>选题策略</h4><p>　<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm/blob/master/Picker/random_picker.py">选题机器人</a>会在每周五晚八点，自动地随机选定一个题目，当前题目点击<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/asdf2014/algorithm#%E9%80%89%E9%A2%98%E7%AD%96%E7%95%A5">这里</a>查看。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>　操作 Git 时遇到问题的话，可以参考我的一篇博客《<a href="https://yuzhouwan.com/posts/30041/">Git 高级玩法</a>》</p>
+<div class="note success">也可以直接在文章最后留言。目前，支持 Gitalk + Disqus 两种留言系统，以便更好地服务于国内和海外的小伙伴</div>
+
+<p>　同时，为了大家更加方便地交流，也欢迎加入算法 QQ 群 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img src="/picture/algorithm/algorithm_qq_group_5366753.svg" alt></a> 或者 Gitter 聊天室 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://gitter.im/yuzhouwan/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="/picture/algorithm/algorithm_gitter_community.svg" alt></a></p>
+<div class="note danger">但是，请不要在评论区讨论入群问题的答案，避免打广告的进入</div>
+
+<p>　另外，因为大部分算法都会有很多实现思路，我们会尽可能地展现所有可能的解题方法。但为了文章的排版更加地紧凑，我们会将同一算法的不同实现，通过选项卡的形式展现。且默认展示的选项卡将会是最优解。这样的话，如果您想要快速阅读本文，则可以不用翻看其他的选项卡。实际效果如下：</p>
+<div class="tabs" id="code"><ul class="nav-tabs"><li class="tab"><a href="#code-1">CODE 1</a></li><li class="tab"><a href="#code-2">CODE 2</a></li><li class="tab active"><a href="#code-3">CODE 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="code-1"><p><strong>迭代解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        n = n - <span class="number">1</span></span><br><span class="line">        sum_ = a + b</span><br><span class="line">        a = b</span><br><span class="line">        b = sum_</span><br><span class="line">    <span class="keyword">return</span> b</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane" id="code-2"><p><strong>递归解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> solution(n - <span class="number">1</span>) + solution(n - <span class="number">2</span>)</span><br></pre></td></tr></tbody></table></figure></div><div class="tab-pane active" id="code-3"><p><strong>动态规划解</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    cache = [x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n + <span class="number">1</span>)]</span><br><span class="line">    cache[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        cache[i] = cache[i - <span class="number">1</span>] + cache[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> cache[n]</span><br></pre></td></tr></tbody></table></figure></div></div></div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/666/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/190101/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -290,401 +724,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/190101/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/15691/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/15691/" class="post-title-link" itemprop="url">Linux 实战技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-07 20:30:58" itemprop="dateCreated datePublished" datetime="2017-04-07T20:30:58+08:00">2017-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-20 17:39:33" itemprop="dateModified" datetime="2021-04-20T17:39:33+08:00">2021-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>27k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>25 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>介绍 Linux 相关的命令、Shell 编程、实用技巧、优化实战和系统架构相关知识。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/15691/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/200919/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/200919/" class="post-title-link" itemprop="url">Kubernetes 实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 08:25:16" itemprop="dateCreated datePublished" datetime="2020-09-19T08:25:16+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-20 17:39:33" itemprop="dateModified" datetime="2021-04-20T17:39:33+08:00">2021-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>245k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3:43</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/200919/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/43687/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/43687/" class="post-title-link" itemprop="url">Python：从入门到实践</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-02-06 00:08:40" itemprop="dateCreated datePublished" datetime="2015-02-06T00:08:40+08:00">2015-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-09 10:37:31" itemprop="dateModified" datetime="2021-04-09T10:37:31+08:00">2021-04-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>34k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>30 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要介绍 Python 的概念与特性、环境部署、基本语法、标准库、第三方库、科学分析工具、Python 工程工具、实战技巧和踩过的一些坑。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/43687/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/31915/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/31915/" class="post-title-link" itemprop="url">ZooKeeper 原理与优化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-22 08:38:04" itemprop="dateCreated datePublished" datetime="2017-04-22T08:38:04+08:00">2017-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-28 22:02:26" itemprop="dateModified" datetime="2021-03-28T22:02:26+08:00">2021-03-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>82k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:15</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ZooKeeper-是什么？"><a href="#ZooKeeper-是什么？" class="headerlink" title="ZooKeeper 是什么？"></a>ZooKeeper 是什么？</h2><p>　<strong>ZooKeeper</strong> 是一个基于 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/chubby-osdi06.pdf">Google Chubby</a> 论文实现的一款解决分布式数据一致性问题的开源实现，方便了依赖 ZooKeeper 的应用实现 <code>数据发布 / 订阅</code>、<code>负载均衡</code>、<code>服务注册与发现</code>、<code>分布式协调</code>、<code>事件通知</code>、<code>集群管理</code>、<code>Leader 选举</code>、 <code>分布式锁和队列</code> 等功能</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h3><p>　一般的，在分布式系统中，构成集群的每一台机器都有自己的角色，最为典型的集群模式就是 <code>Master / Slave</code> 主备模式。在该模式中，我们把能够处理所有<code>写操作</code>的机器称为 <code>Master</code> 节点，并把所有通过<code>异步复制</code>方式获取最新数据、提供<code>读服务</code>的机器称为 <code>Slave</code> 节点</p>
-<p><img src="/picture/zk/zk_master_slave.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-
-<p>　而 ZooKeeper 中，则是引入了 <code>领导者（Leader）</code>、<code>跟随者（Follower）</code>、<code>观察者（Observer）</code> 三种角色 和 <code>领导（Leading）</code>、<code>跟随（Following）</code>、<code>观察（Observing）</code>、<code>寻找（Looking）</code> 等相应的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/blob/master/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java#L370">状态</a>。在 ZooKeeper 集群中的通过一种 <code>Leader 选举</code>的过程，来选定某个节点作为 <code>Leader</code> 节点，该节点为客户端提供<code>读</code>和<code>写</code>服务。而 <code>Follower</code> 和 <code>Observer</code> 节点，则都能提供<code>读</code>服务，唯一的区别在于，<code>Observer</code> 机器<code>不参与 Leader 选举</code>过程 和 <code>写操作</code>的<code>"过半写成功"</code>策略，<code>Observer</code> 只会被告知已经 commit 的 proposal。因此 <code>Observer</code> 可以在<code>不影响写性能</code>的情况下提升集群的<code>读性能</code>（详见下文 “性能优化 - 优化策略 - Observer 模式” 部分）</p>
-<p><img src="/picture/zk/zk_leader_follower_observer.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/31915/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -840,12 +879,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.4m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:18</span>
+    <span title="站点阅读时长">20:51</span>
 </div>
 
         

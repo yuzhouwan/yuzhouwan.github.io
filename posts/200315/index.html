@@ -375,9 +375,9 @@
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; use yuzhouwan;</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Using database yuzhouwan</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; insert blog,protocol=https,name=yuzhouwan value=666</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="明细查询"><a href="#明细查询" class="headerlink" title="明细查询"></a>明细查询</h4><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; select * from blog</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="明细查询"><a href="#明细查询" class="headerlink" title="明细查询"></a>明细查询</h4><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> blog</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: blog</span><br><span class="line">time                name      protocol value</span><br><span class="line">----                ----      -------- -----</span><br><span class="line">1556438552229094000 yuzhouwan https    666</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h4><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; select mean(value) from blog</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h4><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> <span class="keyword">select</span> mean(<span class="keyword">value</span>) <span class="keyword">from</span> blog</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: blog</span><br><span class="line">time mean</span><br><span class="line">---- ----</span><br><span class="line">0    666</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; select * from blog WHERE time &gt; <span class="string">'2019-04-01T00:00:00Z'</span> OR time &lt; <span class="string">'2019-05-01T00:00:00Z'</span></span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name: blog</span><br><span class="line">time                name      protocol value</span><br><span class="line">----                ----      -------- -----</span><br><span class="line">1556438552229094000 yuzhouwan https    666</span><br></pre></td></tr></tbody></table></figure>
@@ -712,12 +712,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.4m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:18</span>
+    <span title="站点阅读时长">20:51</span>
 </div>
 
         

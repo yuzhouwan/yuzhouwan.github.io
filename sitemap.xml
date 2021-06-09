@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuzhouwan.com/about/</loc>
+    
+    <lastmod>2021-06-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/posts/5845/</loc>
     
     <lastmod>2021-06-09</lastmod>
@@ -138,13 +145,6 @@
     <loc>https://yuzhouwan.com/posts/30041/</loc>
     
     <lastmod>2021-01-31</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/about/</loc>
-    
-    <lastmod>2021-01-17</lastmod>
     
   </url>
   
@@ -655,14 +655,14 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Nginx/</loc>
+    <loc>https://yuzhouwan.com/tags/Module/</loc>
     <lastmod>2021-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/Module/</loc>
+    <loc>https://yuzhouwan.com/tags/Nginx/</loc>
     <lastmod>2021-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

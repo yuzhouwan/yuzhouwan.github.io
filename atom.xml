@@ -829,9 +829,9 @@
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
-    
     <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
+    
+    <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
     
@@ -912,11 +912,11 @@
     
     <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
     
+    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
+    
     <category term="JavaCC" scheme="https://yuzhouwan.com/tags/JavaCC/"/>
     
     <category term="Janino" scheme="https://yuzhouwan.com/tags/Janino/"/>
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
     
   </entry>
   
@@ -1239,11 +1239,11 @@
     <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
     
     
+    <category term="Aapche Drill" scheme="https://yuzhouwan.com/tags/Aapche-Drill/"/>
+    
     <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
     
     <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
-    
-    <category term="Aapche Drill" scheme="https://yuzhouwan.com/tags/Aapche-Drill/"/>
     
   </entry>
   

@@ -79,6 +79,121 @@
       </tags>
   </entry>
   <entry>
+    <title>Aapche Drill：一款分布式查询引擎</title>
+    <url>/posts/201025/</url>
+    <content><![CDATA[<h2 id="Aapche-Drill-是什么？"><a href="#Aapche-Drill-是什么？" class="headerlink" title="Aapche Drill 是什么？"></a>Aapche Drill 是什么？</h2><blockquote>
+<p><strong><a href="https://github.com/apache/drill">Apache Drill</a></strong>™ is a distributed MPP query layer that supports SQL and alternative query languages against NoSQL and Hadoop data storage systems. It was inspired in part by <a href="http://research.google.com/pubs/pub36632.html">Google’s Dremel</a>.</p>
+</blockquote>
+<p><img data-src="/picture/drill/drill.jpg" alt="Drill"></p>
+<center>（图片来源：<a href="https://www.pexels.com/zh-cn/photo/87236/" target="_blank">Pexels</a>™ 官网，已确认无版权）</center>
+
+
+
+
+
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li>支持自定义的嵌套数据结构</li>
+<li>兼容 Hive（包括 Hive 的 UDF，且支持自定义 UDF）</li>
+<li>高性能、低延迟的 SQL 查询</li>
+<li>支持多数据源（插件化，包括 <a href="https://yuzhouwan.com/posts/26002/">Apache Kafka</a>、<a href="https://yuzhouwan.com/posts/45888/">Apache HBase</a>、Apache Hive、OpenTSDB、S3 <a href="https://drill.apache.org/docs/connect-a-data-source-introduction/">等</a>）</li>
+</ul>
+<div class="note info">UDF（User Defined Funcation）：用户定义普通函数，只作用于单行记录</div>
+<div class="note info">UDAF（User Defined Aggregation Funcation）：用户定义聚合函数，只作用于多行记录</div>
+<div class="note info">UDTF（User Defined Table Generating Funcation）：用户定义表生成函数，可以输入一行记录输出多行记录</div>
+
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul>
+<li>与标准 SQL 略有不同</li>
+<li>外部依赖较多（基于 <a href="https://yuzhouwan.com/posts/31915/">Apache ZooKeeper</a> 实现分布式、基于 <a href="https://yuzhouwan.com/posts/201018/">Apache Calcite</a> 实现 SQL 解析）</li>
+<li>比较小众，相关资料缺乏</li>
+</ul>
+<span id="more"></span>
+<h2 id="比对"><a href="#比对" class="headerlink" title="比对"></a>比对</h2><h3 id="Apache-Drill-vs-Presto"><a href="#Apache-Drill-vs-Presto" class="headerlink" title="Apache Drill vs Presto"></a>Apache Drill vs Presto</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Apache Drill</th>
+<th style="text-align:center">Presto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>针对领域</strong></td>
+<td style="text-align:center">非关系型数据库</td>
+<td style="text-align:center">分布式数据库</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>企业级</strong></td>
+<td style="text-align:center">✔</td>
+<td style="text-align:center">✔</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>成功案例</strong></td>
+<td style="text-align:center">MapR™</td>
+<td style="text-align:center">Teradata™</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>部署</strong></td>
+<td style="text-align:center">较繁琐</td>
+<td style="text-align:center">较快捷</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a><a href="https://www.apache.org/dyn/closer.cgi?path=/drill/drill-1.18.0/apache-drill-1.18.0.tar.gz">下载</a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ wget https://mirror.bit.edu.cn/apache/drill/drill-1.18.0/apache-drill-1.18.0.tar.gz</span><br><span class="line">$ tar zxvf apache-drill-1.18.0.tar.gz</span><br><span class="line">$ ln -s apache-drill-1.18.0 drill</span><br><span class="line">$ <span class="built_in">cd</span> drill</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ bin/drill-embedded</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Apache Drill 1.18.0</span><br><span class="line"><span class="string">"In Drill We Trust."</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="展示所有-Tables"><a href="#展示所有-Tables" class="headerlink" title="展示所有 Tables"></a>展示所有 Tables</h3><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line">apache drill<span class="operator">&gt;</span> <span class="operator">!</span>tables</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">| TABLE_CAT |    TABLE_SCHEM     |      TABLE_NAME      |  TABLE_TYPE  | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFERENCING_COL_NAME | REF_GENERATION |</span><br><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">| DRILL     | information_schema | CATALOGS             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | COLUMNS              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | FILES                | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | PARTITIONS           | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | SCHEMATA             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | TABLES               | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | VIEWS                | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | boot                 | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | connections          | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | drillbits            | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | <span class="built_in">functions</span>            | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | internal_options     | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | internal_options_old | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | memory               | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | options              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | options_old          | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | profiles             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | profiles_json        | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | threads              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | version              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line">apache drill<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> cp.`employee.json` limit <span class="number">2</span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">| employee_id |    full_name    | first_name | last_name | position_id |   position_title   | store_id | department_id | birth_date |       hire_date       | salary  | supervisor_id | education_level | marital_status | gender |  management_role  |</span><br><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">| 1           | Sheri Nowmer    | Sheri      | Nowmer    | 1           | President          | 0        | 1             | 1961-08-26 | 1994-12-01 00:00:00.0 | 80000.0 | 0             | Graduate Degree | S              | F      | Senior Management |</span><br><span class="line">| 2           | Derrick Whelply | Derrick    | Whelply   | 2           | VP Country Manager | 0        | 1             | 1915-07-03 | 1994-12-01 00:00:00.0 | 40000.0 | 1             | Graduate Degree | M              | M      | Senior Management |</span><br><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">2 rows selected (0.281 seconds)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">apache drill&gt; !quit</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="默认时区是-UTC"><a href="#默认时区是-UTC" class="headerlink" title="默认时区是 UTC"></a><a href="https://drill.apache.org/docs/data-type-conversion/#time-zone-limitation">默认时区是 UTC</a></h3><h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> to_timestamp(CONCAT(`<span class="type">timestamp</span>`, <span class="string">' +0800'</span>), <span class="string">'YYYY-MM-dd HH:mm:ss.SSS Z'</span>) <span class="keyword">AS</span> tm <span class="keyword">FROM</span> `yuzhouwan`.`blog`</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
+<li><a href="https://drill.apache.org/docs/drill-introduction/">Apache Drill Introduction</a></li>
+<li><a href="https://drill.apache.org/docs/drill-query-execution/">Apache Drill Query Execution</a></li>
+<li><a href="https://drill.apache.org/docs/reserved-keywords/">Apache Drill Keywords</a></li>
+<li><a href="https://www.bookstack.cn/read/apache-drill-cn-1.4/README.md">Apache Drill 1.4 参考手册</a></li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>Aapche Drill</tag>
+        <tag>Apache Calcite</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Apache Calcite：一款开源 SQL 解析工具</title>
     <url>/posts/201018/</url>
     <content><![CDATA[<h2 id="Apache-Calcite-是什么？"><a href="#Apache-Calcite-是什么？" class="headerlink" title="Apache Calcite 是什么？"></a>Apache Calcite 是什么？</h2><blockquote>
@@ -427,124 +542,9 @@ style Res' fill:#009933</pre>
       </categories>
       <tags>
         <tag>Apache Calcite</tag>
+        <tag>SQL</tag>
         <tag>JavaCC</tag>
         <tag>Janino</tag>
-        <tag>SQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Aapche Drill：一款分布式查询引擎</title>
-    <url>/posts/201025/</url>
-    <content><![CDATA[<h2 id="Aapche-Drill-是什么？"><a href="#Aapche-Drill-是什么？" class="headerlink" title="Aapche Drill 是什么？"></a>Aapche Drill 是什么？</h2><blockquote>
-<p><strong><a href="https://github.com/apache/drill">Apache Drill</a></strong>™ is a distributed MPP query layer that supports SQL and alternative query languages against NoSQL and Hadoop data storage systems. It was inspired in part by <a href="http://research.google.com/pubs/pub36632.html">Google’s Dremel</a>.</p>
-</blockquote>
-<p><img data-src="/picture/drill/drill.jpg" alt="Drill"></p>
-<center>（图片来源：<a href="https://www.pexels.com/zh-cn/photo/87236/" target="_blank">Pexels</a>™ 官网，已确认无版权）</center>
-
-
-
-
-
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
-<li>支持自定义的嵌套数据结构</li>
-<li>兼容 Hive（包括 Hive 的 UDF，且支持自定义 UDF）</li>
-<li>高性能、低延迟的 SQL 查询</li>
-<li>支持多数据源（插件化，包括 <a href="https://yuzhouwan.com/posts/26002/">Apache Kafka</a>、<a href="https://yuzhouwan.com/posts/45888/">Apache HBase</a>、Apache Hive、OpenTSDB、S3 <a href="https://drill.apache.org/docs/connect-a-data-source-introduction/">等</a>）</li>
-</ul>
-<div class="note info">UDF（User Defined Funcation）：用户定义普通函数，只作用于单行记录</div>
-<div class="note info">UDAF（User Defined Aggregation Funcation）：用户定义聚合函数，只作用于多行记录</div>
-<div class="note info">UDTF（User Defined Table Generating Funcation）：用户定义表生成函数，可以输入一行记录输出多行记录</div>
-
-<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul>
-<li>与标准 SQL 略有不同</li>
-<li>外部依赖较多（基于 <a href="https://yuzhouwan.com/posts/31915/">Apache ZooKeeper</a> 实现分布式、基于 <a href="https://yuzhouwan.com/posts/201018/">Apache Calcite</a> 实现 SQL 解析）</li>
-<li>比较小众，相关资料缺乏</li>
-</ul>
-<span id="more"></span>
-<h2 id="比对"><a href="#比对" class="headerlink" title="比对"></a>比对</h2><h3 id="Apache-Drill-vs-Presto"><a href="#Apache-Drill-vs-Presto" class="headerlink" title="Apache Drill vs Presto"></a>Apache Drill vs Presto</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Apache Drill</th>
-<th style="text-align:center">Presto</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>针对领域</strong></td>
-<td style="text-align:center">非关系型数据库</td>
-<td style="text-align:center">分布式数据库</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>企业级</strong></td>
-<td style="text-align:center">✔</td>
-<td style="text-align:center">✔</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>成功案例</strong></td>
-<td style="text-align:center">MapR™</td>
-<td style="text-align:center">Teradata™</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>部署</strong></td>
-<td style="text-align:center">较繁琐</td>
-<td style="text-align:center">较快捷</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a><a href="https://www.apache.org/dyn/closer.cgi?path=/drill/drill-1.18.0/apache-drill-1.18.0.tar.gz">下载</a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ wget https://mirror.bit.edu.cn/apache/drill/drill-1.18.0/apache-drill-1.18.0.tar.gz</span><br><span class="line">$ tar zxvf apache-drill-1.18.0.tar.gz</span><br><span class="line">$ ln -s apache-drill-1.18.0 drill</span><br><span class="line">$ <span class="built_in">cd</span> drill</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ bin/drill-embedded</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Apache Drill 1.18.0</span><br><span class="line"><span class="string">"In Drill We Trust."</span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="展示所有-Tables"><a href="#展示所有-Tables" class="headerlink" title="展示所有 Tables"></a>展示所有 Tables</h3><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line">apache drill<span class="operator">&gt;</span> <span class="operator">!</span>tables</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">| TABLE_CAT |    TABLE_SCHEM     |      TABLE_NAME      |  TABLE_TYPE  | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFERENCING_COL_NAME | REF_GENERATION |</span><br><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br><span class="line">| DRILL     | information_schema | CATALOGS             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | COLUMNS              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | FILES                | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | PARTITIONS           | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | SCHEMATA             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | TABLES               | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | information_schema | VIEWS                | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | boot                 | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | connections          | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | drillbits            | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | <span class="built_in">functions</span>            | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | internal_options     | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | internal_options_old | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | memory               | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | options              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | options_old          | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | profiles             | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | profiles_json        | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | threads              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">| DRILL     | sys                | version              | SYSTEM TABLE | null    | null     | null       | null      | null                      | null           |</span><br><span class="line">+-----------+--------------------+----------------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line">apache drill<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> cp.`employee.json` limit <span class="number">2</span>;</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">| employee_id |    full_name    | first_name | last_name | position_id |   position_title   | store_id | department_id | birth_date |       hire_date       | salary  | supervisor_id | education_level | marital_status | gender |  management_role  |</span><br><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">| 1           | Sheri Nowmer    | Sheri      | Nowmer    | 1           | President          | 0        | 1             | 1961-08-26 | 1994-12-01 00:00:00.0 | 80000.0 | 0             | Graduate Degree | S              | F      | Senior Management |</span><br><span class="line">| 2           | Derrick Whelply | Derrick    | Whelply   | 2           | VP Country Manager | 0        | 1             | 1915-07-03 | 1994-12-01 00:00:00.0 | 40000.0 | 1             | Graduate Degree | M              | M      | Senior Management |</span><br><span class="line">+-------------+-----------------+------------+-----------+-------------+--------------------+----------+---------------+------------+-----------------------+---------+---------------+-----------------+----------------+--------+-------------------+</span><br><span class="line">2 rows selected (0.281 seconds)</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">apache drill&gt; !quit</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><h3 id="默认时区是-UTC"><a href="#默认时区是-UTC" class="headerlink" title="默认时区是 UTC"></a><a href="https://drill.apache.org/docs/data-type-conversion/#time-zone-limitation">默认时区是 UTC</a></h3><h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> to_timestamp(CONCAT(`<span class="type">timestamp</span>`, <span class="string">' +0800'</span>), <span class="string">'YYYY-MM-dd HH:mm:ss.SSS Z'</span>) <span class="keyword">AS</span> tm <span class="keyword">FROM</span> `yuzhouwan`.`blog`</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><h3 id="Doc"><a href="#Doc" class="headerlink" title="Doc"></a>Doc</h3><ul>
-<li><a href="https://drill.apache.org/docs/drill-introduction/">Apache Drill Introduction</a></li>
-<li><a href="https://drill.apache.org/docs/drill-query-execution/">Apache Drill Query Execution</a></li>
-<li><a href="https://drill.apache.org/docs/reserved-keywords/">Apache Drill Keywords</a></li>
-<li><a href="https://www.bookstack.cn/read/apache-drill-cn-1.4/README.md">Apache Drill 1.4 参考手册</a></li>
-</ul>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>SQL</category>
-      </categories>
-      <tags>
-        <tag>Apache Calcite</tag>
-        <tag>SQL</tag>
-        <tag>Aapche Drill</tag>
       </tags>
   </entry>
   <entry>
@@ -743,6 +743,54 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
+    <title>DIRT</title>
+    <url>/posts/47609/</url>
+    <content><![CDATA[<h2 id="DIRT-是什么？"><a href="#DIRT-是什么？" class="headerlink" title="DIRT 是什么？"></a>DIRT 是什么？</h2><p>　DIRT：数据密集型实时（<strong>D</strong>ata-<strong>I</strong>ntensive <strong>R</strong>eal-<strong>T</strong>ime）</p>
+<h2 id="为什么适用于-Node-js-开发？"><a href="#为什么适用于-Node-js-开发？" class="headerlink" title="为什么适用于 Node.js 开发？"></a>为什么适用于 Node.js 开发？</h2><h3 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h3><p>　因为 <a href="https://yuzhouwan.com/posts/23363/">Node.js</a> 自身在 I/O 上非常轻量，它善于将数据从一个管道混排 或 代理到另一个管道上，这能在处理大量请求时持有很多开放的连接，并且只占用一小部分内存（如同浏览器一样，保证了响应能力）</p>
+<h3 id="Web-发展形势"><a href="#Web-发展形势" class="headerlink" title="Web 发展形势"></a>Web 发展形势</h3><p>　不管是用实时组件增强已有程序，还是打造全新的程序，Web 都在朝着响应性和协作型环境逐渐进发<br>而这种新型的 Web 应用程序需要一个能够实时相应大量并发请求的平台来支撑它们（除此之外，还有 I/O 负载较重的程序也可以用到）</p>
+<span id="more"></span>
+<h3 id="Node-js-作为-JavaScript-程序的平台"><a href="#Node-js-作为-JavaScript-程序的平台" class="headerlink" title="Node.js 作为 JavaScript 程序的平台"></a>Node.js 作为 JavaScript 程序的平台</h3><ul>
+<li>Timer API (for example, setTimeout)</li>
+<li>Console API (for example, console.log)</li>
+<li>Network and File I/O modules (HTTP, TLS, HTTPS, filesystem (POSIX), Datagram (UDP), and NET (TCP))</li>
+</ul>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Benedict Jin&#39;s Blog</title>
     <url>/posts/18517/</url>
     <content><![CDATA[<h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><p>　<strong>Welcome to My Blog!</strong></p>
@@ -934,17 +982,36 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
-    <title>DIRT</title>
-    <url>/posts/47609/</url>
-    <content><![CDATA[<h2 id="DIRT-是什么？"><a href="#DIRT-是什么？" class="headerlink" title="DIRT 是什么？"></a>DIRT 是什么？</h2><p>　DIRT：数据密集型实时（<strong>D</strong>ata-<strong>I</strong>ntensive <strong>R</strong>eal-<strong>T</strong>ime）</p>
-<h2 id="为什么适用于-Node-js-开发？"><a href="#为什么适用于-Node-js-开发？" class="headerlink" title="为什么适用于 Node.js 开发？"></a>为什么适用于 Node.js 开发？</h2><h3 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h3><p>　因为 <a href="https://yuzhouwan.com/posts/23363/">Node.js</a> 自身在 I/O 上非常轻量，它善于将数据从一个管道混排 或 代理到另一个管道上，这能在处理大量请求时持有很多开放的连接，并且只占用一小部分内存（如同浏览器一样，保证了响应能力）</p>
-<h3 id="Web-发展形势"><a href="#Web-发展形势" class="headerlink" title="Web 发展形势"></a>Web 发展形势</h3><p>　不管是用实时组件增强已有程序，还是打造全新的程序，Web 都在朝着响应性和协作型环境逐渐进发<br>而这种新型的 Web 应用程序需要一个能够实时相应大量并发请求的平台来支撑它们（除此之外，还有 I/O 负载较重的程序也可以用到）</p>
-<span id="more"></span>
-<h3 id="Node-js-作为-JavaScript-程序的平台"><a href="#Node-js-作为-JavaScript-程序的平台" class="headerlink" title="Node.js 作为 JavaScript 程序的平台"></a>Node.js 作为 JavaScript 程序的平台</h3><ul>
-<li>Timer API (for example, setTimeout)</li>
-<li>Console API (for example, console.log)</li>
-<li>Network and File I/O modules (HTTP, TLS, HTTPS, filesystem (POSIX), Datagram (UDP), and NET (TCP))</li>
-</ul>
+    <title>Hadoop RPC 源码领略</title>
+    <url>/posts/60504/</url>
+    <content><![CDATA[<h2 id="什么是-RPC？"><a href="#什么是-RPC？" class="headerlink" title="什么是 RPC？"></a>什么是 RPC？</h2><p>　In distributed computing, a <strong>remote procedure call</strong> (<strong>RPC</strong>) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. That is, the programmer writes essentially the same code whether the subroutine is local to the executing program, or remote. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.</p>
+<h2 id="为什么要有-RPC？"><a href="#为什么要有-RPC？" class="headerlink" title="为什么要有 RPC？"></a>为什么要有 RPC？</h2><h3 id="地域性"><a href="#地域性" class="headerlink" title="地域性"></a>地域性</h3><p>　当主机不可达时，通过远程调用可以使得终端操作目标机器成为可能</p>
+<h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
+<h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
+<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <span id="more"></span></p>
+<h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
+<h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
+<h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>
+<h3 id="加载配置文件，并给相应属性赋值"><a href="#加载配置文件，并给相应属性赋值" class="headerlink" title="加载配置文件，并给相应属性赋值"></a>加载配置文件，并给相应属性赋值</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system_get_uri_conf_user.png" alt="FileSystem.get(uri,conf,user)"></p>
+<h3 id="反射-org-apache-hadoop-hdfs-DistributedFileSystem"><a href="#反射-org-apache-hadoop-hdfs-DistributedFileSystem" class="headerlink" title="反射 org.apache.hadoop.hdfs.DistributedFileSystem"></a>反射 org.apache.hadoop.hdfs.DistributedFileSystem</h3><p>   <img data-src="/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png" alt="ReflectionUtils.newInstance--DFS"></p>
+<h3 id="调用-initialize-uri-conf-初始化-DFS"><a href="#调用-initialize-uri-conf-初始化-DFS" class="headerlink" title="调用 initialize(uri, conf) 初始化 DFS"></a>调用 initialize(uri, conf) 初始化 DFS</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_initialize.png" alt="DFS.initialize"></p>
+<h3 id="获得-DFSClient-代理"><a href="#获得-DFSClient-代理" class="headerlink" title="获得 DFSClient 代理"></a>获得 DFSClient 代理</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_client.png" alt="DFSClient(nameNodeUri,rpcNamenode,conf,stats)"></p>
+<h3 id="创建代理"><a href="#创建代理" class="headerlink" title="创建代理"></a>创建代理</h3><p>   <img data-src="/picture/hadoop/hadoop_proxy.png" alt="Proxy"></p>
+<h3 id="让-DFSClient-持有-uri、conf、statistics"><a href="#让-DFSClient-持有-uri、conf、statistics" class="headerlink" title="让 DFSClient 持有 uri、conf、statistics"></a>让 DFSClient 持有 uri、conf、statistics</h3><p>  <img data-src="/picture/hadoop/hadoop_dfs_client_.png" alt="DFSClient"></p>
+<h3 id="解析-uri"><a href="#解析-uri" class="headerlink" title="解析 uri"></a>解析 uri</h3><p>   <img data-src="/picture/hadoop/hadoop_uri_create.png" alt="URI.create"></p>
+<h3 id="根据用户组信息中的简单用户名，获取工作路径"><a href="#根据用户组信息中的简单用户名，获取工作路径" class="headerlink" title="根据用户组信息中的简单用户名，获取工作路径"></a>根据用户组信息中的简单用户名，获取工作路径</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_get_home_directory.png" alt="DFS.getHomeDirectory"></p>
+<h3 id="FileSystem-完成初始化"><a href="#FileSystem-完成初始化" class="headerlink" title="FileSystem 完成初始化"></a>FileSystem 完成初始化</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_is_ok.png" alt="DFS-is-ok!!!"></p>
+<h3 id="利用-FS-open-path-打开读取流"><a href="#利用-FS-open-path-打开读取流" class="headerlink" title="利用 FS.open(path) 打开读取流"></a>利用 FS.open(path) 打开读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_distributed_file_system.png" alt="DistributedFileSystem"></p>
+<h3 id="解析-path"><a href="#解析-path" class="headerlink" title="解析 path"></a>解析 path</h3><p>   <img data-src="/picture/hadoop/hadoop_path.png" alt="Path"></p>
+<h3 id="装饰-open-方法"><a href="#装饰-open-方法" class="headerlink" title="装饰 open() 方法"></a>装饰 open() 方法</h3><p>   <img data-src="/picture/hadoop/hadoop_fs_data_input_stream.png" alt="FSDataInputStream--open(path)"></p>
+<h3 id="FileSystemLinkResolver-回调函数"><a href="#FileSystemLinkResolver-回调函数" class="headerlink" title="FileSystemLinkResolver 回调函数"></a>FileSystemLinkResolver 回调函数</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_open.png" alt="DFS.open(f,bufferSize)"></p>
+<h3 id="HdfsDataInputStream-读取流"><a href="#HdfsDataInputStream-读取流" class="headerlink" title="HdfsDataInputStream 读取流"></a>HdfsDataInputStream 读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs_data_input_stream.png" alt="HdfsDataInputStream"></p>
+<h3 id="FileOutputStream-写入流"><a href="#FileOutputStream-写入流" class="headerlink" title="FileOutputStream 写入流"></a>FileOutputStream 写入流</h3><p>   <img data-src="/picture/hadoop/hadoop_file_output_stream.png" alt="FileOutputStream"></p>
+<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>   <img data-src="/picture/hadoop/hadoop_buff_size.png" alt="buffSize"></p>
+<h3 id="IOUtils-封装的拷贝方法"><a href="#IOUtils-封装的拷贝方法" class="headerlink" title="IOUtils 封装的拷贝方法"></a>IOUtils 封装的拷贝方法</h3><p>   <img data-src="/picture/hadoop/hadoop_ioutils.png" alt="IOUtiles.copyBytes(in,out,buffSize)"></p>
+<h3 id="Download-over"><a href="#Download-over" class="headerlink" title="Download over!"></a>Download over!</h3><p>   <img data-src="/picture/hadoop/hadoop_rpc_success.png" alt="RPC-success"></p>
+<h2 id="自己实现一套-RPC-系统"><a href="#自己实现一套-RPC-系统" class="headerlink" title="自己实现一套 RPC 系统"></a>自己实现一套 RPC 系统</h2><p>Full code is <a href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-site/yuzhouwan-site-service/src/main/java/com/yuzhouwan/site/service/rpc">here</a>.</p>
 <h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
 <table>
 <thead>
@@ -975,10 +1042,12 @@ style Res' fill:#009933</pre>
 </div>
 ]]></content>
       <categories>
-        <category>语言</category>
+        <category>大数据</category>
       </categories>
       <tags>
-        <tag>Node.js</tag>
+        <tag>Apache Hadoop</tag>
+        <tag>HDFS</tag>
+        <tag>RPC</tag>
       </tags>
   </entry>
   <entry>
@@ -1071,75 +1140,6 @@ style Res' fill:#009933</pre>
         <tag>Scala</tag>
         <tag>Windows</tag>
         <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hadoop RPC 源码领略</title>
-    <url>/posts/60504/</url>
-    <content><![CDATA[<h2 id="什么是-RPC？"><a href="#什么是-RPC？" class="headerlink" title="什么是 RPC？"></a>什么是 RPC？</h2><p>　In distributed computing, a <strong>remote procedure call</strong> (<strong>RPC</strong>) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. That is, the programmer writes essentially the same code whether the subroutine is local to the executing program, or remote. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.</p>
-<h2 id="为什么要有-RPC？"><a href="#为什么要有-RPC？" class="headerlink" title="为什么要有 RPC？"></a>为什么要有 RPC？</h2><h3 id="地域性"><a href="#地域性" class="headerlink" title="地域性"></a>地域性</h3><p>　当主机不可达时，通过远程调用可以使得终端操作目标机器成为可能</p>
-<h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
-<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
-<h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
-<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <span id="more"></span></p>
-<h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
-<h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
-<h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>
-<h3 id="加载配置文件，并给相应属性赋值"><a href="#加载配置文件，并给相应属性赋值" class="headerlink" title="加载配置文件，并给相应属性赋值"></a>加载配置文件，并给相应属性赋值</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system_get_uri_conf_user.png" alt="FileSystem.get(uri,conf,user)"></p>
-<h3 id="反射-org-apache-hadoop-hdfs-DistributedFileSystem"><a href="#反射-org-apache-hadoop-hdfs-DistributedFileSystem" class="headerlink" title="反射 org.apache.hadoop.hdfs.DistributedFileSystem"></a>反射 org.apache.hadoop.hdfs.DistributedFileSystem</h3><p>   <img data-src="/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png" alt="ReflectionUtils.newInstance--DFS"></p>
-<h3 id="调用-initialize-uri-conf-初始化-DFS"><a href="#调用-initialize-uri-conf-初始化-DFS" class="headerlink" title="调用 initialize(uri, conf) 初始化 DFS"></a>调用 initialize(uri, conf) 初始化 DFS</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_initialize.png" alt="DFS.initialize"></p>
-<h3 id="获得-DFSClient-代理"><a href="#获得-DFSClient-代理" class="headerlink" title="获得 DFSClient 代理"></a>获得 DFSClient 代理</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_client.png" alt="DFSClient(nameNodeUri,rpcNamenode,conf,stats)"></p>
-<h3 id="创建代理"><a href="#创建代理" class="headerlink" title="创建代理"></a>创建代理</h3><p>   <img data-src="/picture/hadoop/hadoop_proxy.png" alt="Proxy"></p>
-<h3 id="让-DFSClient-持有-uri、conf、statistics"><a href="#让-DFSClient-持有-uri、conf、statistics" class="headerlink" title="让 DFSClient 持有 uri、conf、statistics"></a>让 DFSClient 持有 uri、conf、statistics</h3><p>  <img data-src="/picture/hadoop/hadoop_dfs_client_.png" alt="DFSClient"></p>
-<h3 id="解析-uri"><a href="#解析-uri" class="headerlink" title="解析 uri"></a>解析 uri</h3><p>   <img data-src="/picture/hadoop/hadoop_uri_create.png" alt="URI.create"></p>
-<h3 id="根据用户组信息中的简单用户名，获取工作路径"><a href="#根据用户组信息中的简单用户名，获取工作路径" class="headerlink" title="根据用户组信息中的简单用户名，获取工作路径"></a>根据用户组信息中的简单用户名，获取工作路径</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_get_home_directory.png" alt="DFS.getHomeDirectory"></p>
-<h3 id="FileSystem-完成初始化"><a href="#FileSystem-完成初始化" class="headerlink" title="FileSystem 完成初始化"></a>FileSystem 完成初始化</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_is_ok.png" alt="DFS-is-ok!!!"></p>
-<h3 id="利用-FS-open-path-打开读取流"><a href="#利用-FS-open-path-打开读取流" class="headerlink" title="利用 FS.open(path) 打开读取流"></a>利用 FS.open(path) 打开读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_distributed_file_system.png" alt="DistributedFileSystem"></p>
-<h3 id="解析-path"><a href="#解析-path" class="headerlink" title="解析 path"></a>解析 path</h3><p>   <img data-src="/picture/hadoop/hadoop_path.png" alt="Path"></p>
-<h3 id="装饰-open-方法"><a href="#装饰-open-方法" class="headerlink" title="装饰 open() 方法"></a>装饰 open() 方法</h3><p>   <img data-src="/picture/hadoop/hadoop_fs_data_input_stream.png" alt="FSDataInputStream--open(path)"></p>
-<h3 id="FileSystemLinkResolver-回调函数"><a href="#FileSystemLinkResolver-回调函数" class="headerlink" title="FileSystemLinkResolver 回调函数"></a>FileSystemLinkResolver 回调函数</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_open.png" alt="DFS.open(f,bufferSize)"></p>
-<h3 id="HdfsDataInputStream-读取流"><a href="#HdfsDataInputStream-读取流" class="headerlink" title="HdfsDataInputStream 读取流"></a>HdfsDataInputStream 读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs_data_input_stream.png" alt="HdfsDataInputStream"></p>
-<h3 id="FileOutputStream-写入流"><a href="#FileOutputStream-写入流" class="headerlink" title="FileOutputStream 写入流"></a>FileOutputStream 写入流</h3><p>   <img data-src="/picture/hadoop/hadoop_file_output_stream.png" alt="FileOutputStream"></p>
-<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>   <img data-src="/picture/hadoop/hadoop_buff_size.png" alt="buffSize"></p>
-<h3 id="IOUtils-封装的拷贝方法"><a href="#IOUtils-封装的拷贝方法" class="headerlink" title="IOUtils 封装的拷贝方法"></a>IOUtils 封装的拷贝方法</h3><p>   <img data-src="/picture/hadoop/hadoop_ioutils.png" alt="IOUtiles.copyBytes(in,out,buffSize)"></p>
-<h3 id="Download-over"><a href="#Download-over" class="headerlink" title="Download over!"></a>Download over!</h3><p>   <img data-src="/picture/hadoop/hadoop_rpc_success.png" alt="RPC-success"></p>
-<h2 id="自己实现一套-RPC-系统"><a href="#自己实现一套-RPC-系统" class="headerlink" title="自己实现一套 RPC 系统"></a>自己实现一套 RPC 系统</h2><p>Full code is <a href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-site/yuzhouwan-site-service/src/main/java/com/yuzhouwan/site/service/rpc">here</a>.</p>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>大数据</category>
-      </categories>
-      <tags>
-        <tag>Apache Hadoop</tag>
-        <tag>HDFS</tag>
-        <tag>RPC</tag>
       </tags>
   </entry>
   <entry>
@@ -1309,69 +1309,6 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
-    <title>Node 模块</title>
-    <url>/posts/23363/</url>
-    <content><![CDATA[<h2 id="Node-js-是什么？"><a href="#Node-js-是什么？" class="headerlink" title="Node.js 是什么？"></a>Node.js 是什么？</h2><blockquote>
-<p><a href="https://nodejs.org/en/">Node.js</a>® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</p>
-</blockquote>
-<h2 id="为什么要有-Node-模块？"><a href="#为什么要有-Node-模块？" class="headerlink" title="为什么要有 Node 模块？"></a>为什么要有 Node 模块？</h2><p>　模块，是 Node 让代码易于重用的一种组织和包装方式</p>
-<span id="more"></span>
-<h2 id="模块创建流程"><a href="#模块创建流程" class="headerlink" title="模块创建流程"></a>模块创建流程</h2><h3 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'a'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>{</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">}</span><br><span class="line"><span class="built_in">exports</span>.printA = A;</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="引入模块"><a href="#引入模块" class="headerlink" title="引入模块"></a>引入模块</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./module_'</span>);</span><br><span class="line">a.printA();</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="模块暴露构造函数"><a href="#模块暴露构造函数" class="headerlink" title="模块暴露构造函数"></a>模块暴露构造函数</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//定义</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span> (<span class="params">input</span>) </span>{</span><br><span class="line">    <span class="built_in">this</span>.input = input;</span><br><span class="line">}</span><br><span class="line">B.prototype.printB = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.input);</span><br><span class="line">}</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">exports</span> = B;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="built_in">require</span>(<span class="string">'./module_'</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B(<span class="string">'asdf'</span>);</span><br><span class="line">b.printB();</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li><p>exports</p>
-<p>只是对 module.exports 的一个全局引用，最初被定义为一个可以添加属性的空对象</p>
-</li>
-<li><p>exports.printA</p>
-<p>是 module.exports.printA 的简写</p>
-</li>
-<li><p>exports = B</p>
-<p>将会打破 module.exports 和 exports 之间的引用关系</p>
-</li>
-<li><p>module.exports = exports</p>
-<p>可以修复链接</p>
-</li>
-</ul>
-<h2 id="Monkey-Patching"><a href="#Monkey-Patching" class="headerlink" title="Monkey Patching"></a>Monkey Patching</h2><p>　Node 将模块作为对象缓存起来。第一个文件会将模块返回的数据存到程序的内存中，第二个文件就不用再去访问和计算模块的源文件了。并且，第二次引入有机会修改缓存的数据</p>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>语言</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>Module</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Nginx：一款高性能的反向代理服务器</title>
     <url>/posts/200321/</url>
     <content><![CDATA[<h2 id="Nginx-是什么？"><a href="#Nginx-是什么？" class="headerlink" title="Nginx 是什么？"></a>Nginx 是什么？</h2><blockquote>
@@ -1486,6 +1423,69 @@ style Res' fill:#009933</pre>
       </categories>
       <tags>
         <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node 模块</title>
+    <url>/posts/23363/</url>
+    <content><![CDATA[<h2 id="Node-js-是什么？"><a href="#Node-js-是什么？" class="headerlink" title="Node.js 是什么？"></a>Node.js 是什么？</h2><blockquote>
+<p><a href="https://nodejs.org/en/">Node.js</a>® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</p>
+</blockquote>
+<h2 id="为什么要有-Node-模块？"><a href="#为什么要有-Node-模块？" class="headerlink" title="为什么要有 Node 模块？"></a>为什么要有 Node 模块？</h2><p>　模块，是 Node 让代码易于重用的一种组织和包装方式</p>
+<span id="more"></span>
+<h2 id="模块创建流程"><a href="#模块创建流程" class="headerlink" title="模块创建流程"></a>模块创建流程</h2><h3 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'a'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>{</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">}</span><br><span class="line"><span class="built_in">exports</span>.printA = A;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="引入模块"><a href="#引入模块" class="headerlink" title="引入模块"></a>引入模块</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./module_'</span>);</span><br><span class="line">a.printA();</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="模块暴露构造函数"><a href="#模块暴露构造函数" class="headerlink" title="模块暴露构造函数"></a>模块暴露构造函数</h3><figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//定义</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span> (<span class="params">input</span>) </span>{</span><br><span class="line">    <span class="built_in">this</span>.input = input;</span><br><span class="line">}</span><br><span class="line">B.prototype.printB = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.input);</span><br><span class="line">}</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">exports</span> = B;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="keyword">var</span> B = <span class="built_in">require</span>(<span class="string">'./module_'</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B(<span class="string">'asdf'</span>);</span><br><span class="line">b.printB();</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>exports</p>
+<p>只是对 module.exports 的一个全局引用，最初被定义为一个可以添加属性的空对象</p>
+</li>
+<li><p>exports.printA</p>
+<p>是 module.exports.printA 的简写</p>
+</li>
+<li><p>exports = B</p>
+<p>将会打破 module.exports 和 exports 之间的引用关系</p>
+</li>
+<li><p>module.exports = exports</p>
+<p>可以修复链接</p>
+</li>
+</ul>
+<h2 id="Monkey-Patching"><a href="#Monkey-Patching" class="headerlink" title="Monkey Patching"></a>Monkey Patching</h2><p>　Node 将模块作为对象缓存起来。第一个文件会将模块返回的数据存到程序的内存中，第二个文件就不用再去访问和计算模块的源文件了。并且，第二次引入有机会修改缓存的数据</p>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Module</tag>
       </tags>
   </entry>
   <entry>
@@ -12074,8 +12074,8 @@ lstm --&gt; e[End?]</pre>
         <tag>Docker</tag>
         <tag>Apache Storm</tag>
         <tag>Apache Kafka</tag>
-        <tag>Gradle</tag>
         <tag>HDFS</tag>
+        <tag>Gradle</tag>
         <tag>Apache Druid</tag>
         <tag>ElasticSearch</tag>
         <tag>Python</tag>

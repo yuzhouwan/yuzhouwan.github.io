@@ -982,6 +982,75 @@ style Res' fill:#009933</pre>
       </tags>
   </entry>
   <entry>
+    <title>Hadoop RPC 源码领略</title>
+    <url>/posts/60504/</url>
+    <content><![CDATA[<h2 id="什么是-RPC？"><a href="#什么是-RPC？" class="headerlink" title="什么是 RPC？"></a>什么是 RPC？</h2><p>　In distributed computing, a <strong>remote procedure call</strong> (<strong>RPC</strong>) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. That is, the programmer writes essentially the same code whether the subroutine is local to the executing program, or remote. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.</p>
+<h2 id="为什么要有-RPC？"><a href="#为什么要有-RPC？" class="headerlink" title="为什么要有 RPC？"></a>为什么要有 RPC？</h2><h3 id="地域性"><a href="#地域性" class="headerlink" title="地域性"></a>地域性</h3><p>　当主机不可达时，通过远程调用可以使得终端操作目标机器成为可能</p>
+<h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
+<h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
+<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <span id="more"></span></p>
+<h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
+<h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
+<h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>
+<h3 id="加载配置文件，并给相应属性赋值"><a href="#加载配置文件，并给相应属性赋值" class="headerlink" title="加载配置文件，并给相应属性赋值"></a>加载配置文件，并给相应属性赋值</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system_get_uri_conf_user.png" alt="FileSystem.get(uri,conf,user)"></p>
+<h3 id="反射-org-apache-hadoop-hdfs-DistributedFileSystem"><a href="#反射-org-apache-hadoop-hdfs-DistributedFileSystem" class="headerlink" title="反射 org.apache.hadoop.hdfs.DistributedFileSystem"></a>反射 org.apache.hadoop.hdfs.DistributedFileSystem</h3><p>   <img data-src="/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png" alt="ReflectionUtils.newInstance--DFS"></p>
+<h3 id="调用-initialize-uri-conf-初始化-DFS"><a href="#调用-initialize-uri-conf-初始化-DFS" class="headerlink" title="调用 initialize(uri, conf) 初始化 DFS"></a>调用 initialize(uri, conf) 初始化 DFS</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_initialize.png" alt="DFS.initialize"></p>
+<h3 id="获得-DFSClient-代理"><a href="#获得-DFSClient-代理" class="headerlink" title="获得 DFSClient 代理"></a>获得 DFSClient 代理</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_client.png" alt="DFSClient(nameNodeUri,rpcNamenode,conf,stats)"></p>
+<h3 id="创建代理"><a href="#创建代理" class="headerlink" title="创建代理"></a>创建代理</h3><p>   <img data-src="/picture/hadoop/hadoop_proxy.png" alt="Proxy"></p>
+<h3 id="让-DFSClient-持有-uri、conf、statistics"><a href="#让-DFSClient-持有-uri、conf、statistics" class="headerlink" title="让 DFSClient 持有 uri、conf、statistics"></a>让 DFSClient 持有 uri、conf、statistics</h3><p>  <img data-src="/picture/hadoop/hadoop_dfs_client_.png" alt="DFSClient"></p>
+<h3 id="解析-uri"><a href="#解析-uri" class="headerlink" title="解析 uri"></a>解析 uri</h3><p>   <img data-src="/picture/hadoop/hadoop_uri_create.png" alt="URI.create"></p>
+<h3 id="根据用户组信息中的简单用户名，获取工作路径"><a href="#根据用户组信息中的简单用户名，获取工作路径" class="headerlink" title="根据用户组信息中的简单用户名，获取工作路径"></a>根据用户组信息中的简单用户名，获取工作路径</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_get_home_directory.png" alt="DFS.getHomeDirectory"></p>
+<h3 id="FileSystem-完成初始化"><a href="#FileSystem-完成初始化" class="headerlink" title="FileSystem 完成初始化"></a>FileSystem 完成初始化</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_is_ok.png" alt="DFS-is-ok!!!"></p>
+<h3 id="利用-FS-open-path-打开读取流"><a href="#利用-FS-open-path-打开读取流" class="headerlink" title="利用 FS.open(path) 打开读取流"></a>利用 FS.open(path) 打开读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_distributed_file_system.png" alt="DistributedFileSystem"></p>
+<h3 id="解析-path"><a href="#解析-path" class="headerlink" title="解析 path"></a>解析 path</h3><p>   <img data-src="/picture/hadoop/hadoop_path.png" alt="Path"></p>
+<h3 id="装饰-open-方法"><a href="#装饰-open-方法" class="headerlink" title="装饰 open() 方法"></a>装饰 open() 方法</h3><p>   <img data-src="/picture/hadoop/hadoop_fs_data_input_stream.png" alt="FSDataInputStream--open(path)"></p>
+<h3 id="FileSystemLinkResolver-回调函数"><a href="#FileSystemLinkResolver-回调函数" class="headerlink" title="FileSystemLinkResolver 回调函数"></a>FileSystemLinkResolver 回调函数</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_open.png" alt="DFS.open(f,bufferSize)"></p>
+<h3 id="HdfsDataInputStream-读取流"><a href="#HdfsDataInputStream-读取流" class="headerlink" title="HdfsDataInputStream 读取流"></a>HdfsDataInputStream 读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs_data_input_stream.png" alt="HdfsDataInputStream"></p>
+<h3 id="FileOutputStream-写入流"><a href="#FileOutputStream-写入流" class="headerlink" title="FileOutputStream 写入流"></a>FileOutputStream 写入流</h3><p>   <img data-src="/picture/hadoop/hadoop_file_output_stream.png" alt="FileOutputStream"></p>
+<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>   <img data-src="/picture/hadoop/hadoop_buff_size.png" alt="buffSize"></p>
+<h3 id="IOUtils-封装的拷贝方法"><a href="#IOUtils-封装的拷贝方法" class="headerlink" title="IOUtils 封装的拷贝方法"></a>IOUtils 封装的拷贝方法</h3><p>   <img data-src="/picture/hadoop/hadoop_ioutils.png" alt="IOUtiles.copyBytes(in,out,buffSize)"></p>
+<h3 id="Download-over"><a href="#Download-over" class="headerlink" title="Download over!"></a>Download over!</h3><p>   <img data-src="/picture/hadoop/hadoop_rpc_success.png" alt="RPC-success"></p>
+<h2 id="自己实现一套-RPC-系统"><a href="#自己实现一套-RPC-系统" class="headerlink" title="自己实现一套 RPC 系统"></a>自己实现一套 RPC 系统</h2><p>Full code is <a href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-site/yuzhouwan-site-service/src/main/java/com/yuzhouwan/site/service/rpc">here</a>.</p>
+<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">群名称</th>
+<th style="text-align:center">群号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">人工智能（高级）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">人工智能（进阶）</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">BigData</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align:center">算法</td>
+<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>Apache Hadoop</tag>
+        <tag>HDFS</tag>
+        <tag>RPC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Gradle 实战</title>
     <url>/posts/190816/</url>
     <content><![CDATA[<h2 id="Gradle-是什么？"><a href="#Gradle-是什么？" class="headerlink" title="Gradle 是什么？"></a>Gradle 是什么？</h2><p>　Gradle™ 是一个基于 Apache Ant 和 Apache <a href="https://yuzhouwan.com/posts/2254/">Maven</a> 概念的项目自动化建构工具。它使用一种基于 Groovy 的特定领域语言来声明项目设置，而不是传统的 XML。当前其支持的语言限于 <a href="https://yuzhouwan.com/posts/27328/">Java</a>、<a href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-hacker/src/main/groovy/com/yuzhouwan/hacker/dsl">Groovy</a> 和 <a href="https://yuzhouwan.com/posts/18651/">Scala</a>，计划未来将支持更多的语言。  — <a href="https://zh.wikipedia.org/wiki/Gradle">wikipedia.org</a></p>
@@ -1071,75 +1140,6 @@ style Res' fill:#009933</pre>
         <tag>Scala</tag>
         <tag>Windows</tag>
         <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hadoop RPC 源码领略</title>
-    <url>/posts/60504/</url>
-    <content><![CDATA[<h2 id="什么是-RPC？"><a href="#什么是-RPC？" class="headerlink" title="什么是 RPC？"></a>什么是 RPC？</h2><p>　In distributed computing, a <strong>remote procedure call</strong> (<strong>RPC</strong>) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. That is, the programmer writes essentially the same code whether the subroutine is local to the executing program, or remote. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.</p>
-<h2 id="为什么要有-RPC？"><a href="#为什么要有-RPC？" class="headerlink" title="为什么要有 RPC？"></a>为什么要有 RPC？</h2><h3 id="地域性"><a href="#地域性" class="headerlink" title="地域性"></a>地域性</h3><p>　当主机不可达时，通过远程调用可以使得终端操作目标机器成为可能</p>
-<h3 id="含糖性"><a href="#含糖性" class="headerlink" title="含糖性"></a>含糖性</h3><p>　底层的网络通信细节封装入 API，方便网络分布式系统的开发</p>
-<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>　在 Hadoop 分布式系统中，上层的分布式子系统（MapReduce、YARN、HDFS …）能够共用这个网络通信模块</p>
-<h2 id="Hadoop-的-RPC-调用链"><a href="#Hadoop-的-RPC-调用链" class="headerlink" title="Hadoop 的 RPC 调用链"></a>Hadoop 的 RPC 调用链</h2><p>　这里我们以 “从 HDFS 下载一个文件” 为例</p>
-<h3 id="启动-Hadoop-集群的-DFS、YARN"><a href="#启动-Hadoop-集群的-DFS、YARN" class="headerlink" title="启动 Hadoop 集群的 DFS、YARN"></a>启动 Hadoop 集群的 DFS、YARN</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs.png" alt="hdfs"><br>   <span id="more"></span></p>
-<h3 id="可以使用-Explorer-的-50070-端口，查看-NameNode"><a href="#可以使用-Explorer-的-50070-端口，查看-NameNode" class="headerlink" title="可以使用 Explorer 的 50070 端口，查看 NameNode"></a>可以使用 Explorer 的 50070 端口，查看 NameNode</h3><p>   <img data-src="/picture/hadoop/hadoop_host_yuzhouwan.png" alt="host - yuzhouwan"></p>
-<h3 id="通过-FileSystem-的-get-uri-conf-user-初始化-FS"><a href="#通过-FileSystem-的-get-uri-conf-user-初始化-FS" class="headerlink" title="通过 FileSystem 的 get(uri, conf, user) 初始化 FS"></a>通过 FileSystem 的 get(uri, conf, user) 初始化 FS</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system.png" alt="FileSystem"></p>
-<h3 id="抽象类-FileSystem-拥有-13-个子类"><a href="#抽象类-FileSystem-拥有-13-个子类" class="headerlink" title="抽象类 FileSystem 拥有 13 个子类"></a>抽象类 FileSystem 拥有 13 个子类</h3><p>   <img data-src="/picture/hadoop/hadoop_file_systems.png" alt="FileSystems"></p>
-<h3 id="加载配置文件，并给相应属性赋值"><a href="#加载配置文件，并给相应属性赋值" class="headerlink" title="加载配置文件，并给相应属性赋值"></a>加载配置文件，并给相应属性赋值</h3><p>   <img data-src="/picture/hadoop/hadoop_file_system_get_uri_conf_user.png" alt="FileSystem.get(uri,conf,user)"></p>
-<h3 id="反射-org-apache-hadoop-hdfs-DistributedFileSystem"><a href="#反射-org-apache-hadoop-hdfs-DistributedFileSystem" class="headerlink" title="反射 org.apache.hadoop.hdfs.DistributedFileSystem"></a>反射 org.apache.hadoop.hdfs.DistributedFileSystem</h3><p>   <img data-src="/picture/hadoop/hadoop_reflection_utils_new_instance_dfs.png" alt="ReflectionUtils.newInstance--DFS"></p>
-<h3 id="调用-initialize-uri-conf-初始化-DFS"><a href="#调用-initialize-uri-conf-初始化-DFS" class="headerlink" title="调用 initialize(uri, conf) 初始化 DFS"></a>调用 initialize(uri, conf) 初始化 DFS</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_initialize.png" alt="DFS.initialize"></p>
-<h3 id="获得-DFSClient-代理"><a href="#获得-DFSClient-代理" class="headerlink" title="获得 DFSClient 代理"></a>获得 DFSClient 代理</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_client.png" alt="DFSClient(nameNodeUri,rpcNamenode,conf,stats)"></p>
-<h3 id="创建代理"><a href="#创建代理" class="headerlink" title="创建代理"></a>创建代理</h3><p>   <img data-src="/picture/hadoop/hadoop_proxy.png" alt="Proxy"></p>
-<h3 id="让-DFSClient-持有-uri、conf、statistics"><a href="#让-DFSClient-持有-uri、conf、statistics" class="headerlink" title="让 DFSClient 持有 uri、conf、statistics"></a>让 DFSClient 持有 uri、conf、statistics</h3><p>  <img data-src="/picture/hadoop/hadoop_dfs_client_.png" alt="DFSClient"></p>
-<h3 id="解析-uri"><a href="#解析-uri" class="headerlink" title="解析 uri"></a>解析 uri</h3><p>   <img data-src="/picture/hadoop/hadoop_uri_create.png" alt="URI.create"></p>
-<h3 id="根据用户组信息中的简单用户名，获取工作路径"><a href="#根据用户组信息中的简单用户名，获取工作路径" class="headerlink" title="根据用户组信息中的简单用户名，获取工作路径"></a>根据用户组信息中的简单用户名，获取工作路径</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_get_home_directory.png" alt="DFS.getHomeDirectory"></p>
-<h3 id="FileSystem-完成初始化"><a href="#FileSystem-完成初始化" class="headerlink" title="FileSystem 完成初始化"></a>FileSystem 完成初始化</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_is_ok.png" alt="DFS-is-ok!!!"></p>
-<h3 id="利用-FS-open-path-打开读取流"><a href="#利用-FS-open-path-打开读取流" class="headerlink" title="利用 FS.open(path) 打开读取流"></a>利用 FS.open(path) 打开读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_distributed_file_system.png" alt="DistributedFileSystem"></p>
-<h3 id="解析-path"><a href="#解析-path" class="headerlink" title="解析 path"></a>解析 path</h3><p>   <img data-src="/picture/hadoop/hadoop_path.png" alt="Path"></p>
-<h3 id="装饰-open-方法"><a href="#装饰-open-方法" class="headerlink" title="装饰 open() 方法"></a>装饰 open() 方法</h3><p>   <img data-src="/picture/hadoop/hadoop_fs_data_input_stream.png" alt="FSDataInputStream--open(path)"></p>
-<h3 id="FileSystemLinkResolver-回调函数"><a href="#FileSystemLinkResolver-回调函数" class="headerlink" title="FileSystemLinkResolver 回调函数"></a>FileSystemLinkResolver 回调函数</h3><p>   <img data-src="/picture/hadoop/hadoop_dfs_open.png" alt="DFS.open(f,bufferSize)"></p>
-<h3 id="HdfsDataInputStream-读取流"><a href="#HdfsDataInputStream-读取流" class="headerlink" title="HdfsDataInputStream 读取流"></a>HdfsDataInputStream 读取流</h3><p>   <img data-src="/picture/hadoop/hadoop_hdfs_data_input_stream.png" alt="HdfsDataInputStream"></p>
-<h3 id="FileOutputStream-写入流"><a href="#FileOutputStream-写入流" class="headerlink" title="FileOutputStream 写入流"></a>FileOutputStream 写入流</h3><p>   <img data-src="/picture/hadoop/hadoop_file_output_stream.png" alt="FileOutputStream"></p>
-<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>   <img data-src="/picture/hadoop/hadoop_buff_size.png" alt="buffSize"></p>
-<h3 id="IOUtils-封装的拷贝方法"><a href="#IOUtils-封装的拷贝方法" class="headerlink" title="IOUtils 封装的拷贝方法"></a>IOUtils 封装的拷贝方法</h3><p>   <img data-src="/picture/hadoop/hadoop_ioutils.png" alt="IOUtiles.copyBytes(in,out,buffSize)"></p>
-<h3 id="Download-over"><a href="#Download-over" class="headerlink" title="Download over!"></a>Download over!</h3><p>   <img data-src="/picture/hadoop/hadoop_rpc_success.png" alt="RPC-success"></p>
-<h2 id="自己实现一套-RPC-系统"><a href="#自己实现一套-RPC-系统" class="headerlink" title="自己实现一套 RPC 系统"></a>自己实现一套 RPC 系统</h2><p>Full code is <a href="https://github.com/asdf2014/yuzhouwan/tree/master/yuzhouwan-site/yuzhouwan-site-service/src/main/java/com/yuzhouwan/site/service/rpc">here</a>.</p>
-<h2 id="欢迎加入我们的技术群，一起交流学习"><a href="#欢迎加入我们的技术群，一起交流学习" class="headerlink" title="欢迎加入我们的技术群，一起交流学习"></a><a href="https://github.com/asdf2014/yuzhouwan#technical-discussion-group">欢迎加入我们的技术群，一起交流学习</a></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">群名称</th>
-<th style="text-align:center">群号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">人工智能（高级）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=71c6bd3fb0ff01d93abca654140387d99d3be752f92a53c1fbfd27f2dd4b4247"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1020982-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">人工智能（进阶）</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=deb268f65589a1a0a1dbaf7b72c849ed45298697805bef81e0c613dea40cd05e"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1217710-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">BigData</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=f86b3c8de20da1658a3bb42df17a2fc4eee0d75c4a130a63585fdd257e3565ed"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-1670647-blue.svg" alt=""></a></td>
-</tr>
-<tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center"><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbcf1453371a0810fd6be235ace47147f6fb9d262fb768b497c861f50af0af4"><img data-src="https://img.shields.io/badge/QQ%E7%BE%A4-5366753-blue.svg" alt=""></a></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>大数据</category>
-      </categories>
-      <tags>
-        <tag>Apache Hadoop</tag>
-        <tag>HDFS</tag>
-        <tag>RPC</tag>
       </tags>
   </entry>
   <entry>
@@ -12074,8 +12074,8 @@ lstm --&gt; e[End?]</pre>
         <tag>Docker</tag>
         <tag>Apache Storm</tag>
         <tag>Apache Kafka</tag>
-        <tag>Gradle</tag>
         <tag>HDFS</tag>
+        <tag>Gradle</tag>
         <tag>Apache Druid</tag>
         <tag>ElasticSearch</tag>
         <tag>Python</tag>

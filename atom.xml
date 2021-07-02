@@ -829,9 +829,9 @@
     
     <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
     
-    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
-    
     <category term="Gradle" scheme="https://yuzhouwan.com/tags/Gradle/"/>
+    
+    <category term="HDFS" scheme="https://yuzhouwan.com/tags/HDFS/"/>
     
     <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
     

@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-06-29T12:48:43.110Z</updated>
+  <updated>2021-07-11T15:18:44.320Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -17,11 +17,133 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>人工智能</title>
+    <link href="https://yuzhouwan.com/posts/42737/"/>
+    <id>https://yuzhouwan.com/posts/42737/</id>
+    <published>2017-05-16T10:58:02.000Z</published>
+    <updated>2021-07-11T15:18:44.320Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　从 深蓝到 &lt;a href=&quot;https://arxiv.org/pdf/1712.01815.pdf&quot;&gt;AlphaZero&lt;/a&gt;，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；&lt;br&gt;　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；&lt;br&gt;　从 CPU / GPU 到 &lt;a href=&quot;https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu&quot;&gt;TPU&lt;/a&gt;，人工智能的计算能力正向着无法穷举的极限不断逼近 …&lt;/p&gt;
+&lt;p&gt;　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的&lt;/p&gt;
+&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　我们将分为三块对 AI 进行诠释&lt;/p&gt;
+&lt;p&gt;　首先，将介绍人工智能的&lt;strong&gt;主流思想&lt;/strong&gt;和&lt;strong&gt;实用技巧&lt;/strong&gt;，通过一些耳熟能详的&lt;a href=&quot;https://yuzhouwan.com/posts/4534/&quot;&gt;有趣定理&lt;/a&gt;，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大&lt;strong&gt;理论支柱&lt;/strong&gt;，由浅入深地学习 &lt;a href=&quot;https://yuzhouwan.com/posts/42737/#统计学&quot;&gt;统计学&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#微积分&quot;&gt;微积分&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#线性代数&quot;&gt;线性代数&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#概率论&quot;&gt;概率论&lt;/a&gt; 等知识体系；最后，落地到实践，我们需要紧跟人工智能的&lt;strong&gt;技术发展前沿&lt;/strong&gt;，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点&lt;/p&gt;
+&lt;p&gt;　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（&lt;a href=&quot;https://yuzhouwan.com/posts/43687/#Python-第三方库&quot;&gt;Python&lt;/a&gt;、Prolog、R、&lt;a href=&quot;https://yuzhouwan.com/posts/27328/&quot;&gt;Java&lt;/a&gt;）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/&lt;/p&gt;
+&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
+
+
+
+&lt;h2 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h2&gt;&lt;h3 id=&quot;Occam-剃刀原理&quot;&gt;&lt;a href=&quot;#Occam-剃刀原理&quot; class=&quot;headerlink&quot; title=&quot;Occam 剃刀原理&quot;&gt;&lt;/a&gt;Occam 剃刀原理&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;奥卡姆剃刀&lt;/strong&gt;（Occam´s Razor），意为&lt;strong&gt;简约之法&lt;/strong&gt;，是由 14 世纪&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6&quot;&gt;逻辑学&lt;/a&gt;家、&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83&quot;&gt;圣方济各会&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB&quot;&gt;修士&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89&quot;&gt;奥卡姆的威廉&lt;/a&gt;提出的一个解决问题的法则，即&lt;code&gt;&quot;切勿浪费较多资源，去做&#39;用较少的资源，同样可以做好&#39;的事情&quot;&lt;/code&gt;，相同思想见于郑板桥的&lt;strong&gt;删繁就简三秋树&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="机器学习" scheme="https://yuzhouwan.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+    <category term="微积分" scheme="https://yuzhouwan.com/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
+    
+    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="MP Model" scheme="https://yuzhouwan.com/tags/MP-Model/"/>
+    
+    <category term="Perceptron" scheme="https://yuzhouwan.com/tags/Perceptron/"/>
+    
+    <category term="MLP" scheme="https://yuzhouwan.com/tags/MLP/"/>
+    
+    <category term="DNN" scheme="https://yuzhouwan.com/tags/DNN/"/>
+    
+    <category term="CNN" scheme="https://yuzhouwan.com/tags/CNN/"/>
+    
+    <category term="RNN" scheme="https://yuzhouwan.com/tags/RNN/"/>
+    
+    <category term="LSTM" scheme="https://yuzhouwan.com/tags/LSTM/"/>
+    
+    <category term="统计学" scheme="https://yuzhouwan.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+    <category term="线性代数" scheme="https://yuzhouwan.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    
+    <category term="概率论" scheme="https://yuzhouwan.com/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+    
+    <category term="深度学习" scheme="https://yuzhouwan.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="PyTorch" scheme="https://yuzhouwan.com/tags/PyTorch/"/>
+    
+    <category term="Caffe" scheme="https://yuzhouwan.com/tags/Caffe/"/>
+    
+    <category term="xgboost" scheme="https://yuzhouwan.com/tags/xgboost/"/>
+    
+    <category term="Apache PredictionIO" scheme="https://yuzhouwan.com/tags/Apache-PredictionIO/"/>
+    
+    <category term="NuPIC" scheme="https://yuzhouwan.com/tags/NuPIC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Calcite：一款开源 SQL 解析工具</title>
+    <link href="https://yuzhouwan.com/posts/201018/"/>
+    <id>https://yuzhouwan.com/posts/201018/</id>
+    <published>2020-10-17T16:02:26.000Z</published>
+    <updated>2021-07-11T15:18:44.319Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Apache-Calcite-是什么？&quot;&gt;&lt;a href=&quot;#Apache-Calcite-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache Calcite 是什么？&quot;&gt;&lt;/a&gt;Apache Calcite 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/calcite&quot;&gt;Apache Calcite&lt;/a&gt;&lt;/strong&gt;™ is a dynamic data management framework.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/calcite/calcite_mountain.jpg&quot; alt=&quot;Calcite Mountain&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：&lt;a href=&quot;https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/&quot; target=&quot;_blank&quot;&gt;Pixabay&lt;/a&gt;™ 官网，已确认无版权）&lt;/center&gt;
+
+
+
+
+
+
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;Catelog&quot;&gt;&lt;a href=&quot;#Catelog&quot; class=&quot;headerlink&quot; title=&quot;Catelog&quot;&gt;&lt;/a&gt;Catelog&lt;/h3&gt;&lt;p&gt;　用于定义 SQL 语义相关的元数据与命名空间&lt;/p&gt;
+&lt;h3 id=&quot;SQL-Parser&quot;&gt;&lt;a href=&quot;#SQL-Parser&quot; class=&quot;headerlink&quot; title=&quot;SQL Parser&quot;&gt;&lt;/a&gt;SQL Parser&lt;/h3&gt;&lt;p&gt;　负责将 SQL 转化成 AST（&lt;strong&gt;A&lt;/strong&gt;bstract &lt;strong&gt;S&lt;/strong&gt;yntax &lt;strong&gt;T&lt;/strong&gt;ree）&lt;/p&gt;
+&lt;h3 id=&quot;SQL-Validator&quot;&gt;&lt;a href=&quot;#SQL-Validator&quot; class=&quot;headerlink&quot; title=&quot;SQL Validator&quot;&gt;&lt;/a&gt;SQL Validator&lt;/h3&gt;&lt;p&gt;　负责通过 Catalog 对 AST 进行校证&lt;/p&gt;
+&lt;h3 id=&quot;Query-Optimizer&quot;&gt;&lt;a href=&quot;#Query-Optimizer&quot; class=&quot;headerlink&quot; title=&quot;Query Optimizer&quot;&gt;&lt;/a&gt;Query Optimizer&lt;/h3&gt;&lt;p&gt;　负责将 AST 转化成物理执行计划、优化物理执行计划&lt;/p&gt;
+&lt;h3 id=&quot;SQL-Generator&quot;&gt;&lt;a href=&quot;#SQL-Generator&quot; class=&quot;headerlink&quot; title=&quot;SQL Generator&quot;&gt;&lt;/a&gt;SQL Generator&lt;/h3&gt;&lt;p&gt;　负责将物理执行计划反向转化成 SQL 语句&lt;/p&gt;
+&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;支持标准 SQL 语言&lt;/li&gt;
+&lt;li&gt;通过适配器（&lt;a href=&quot;https://calcite.apache.org/docs/adapter.html&quot;&gt;Adapter&lt;/a&gt;）可以支持连接任何数据源&lt;/li&gt;
+&lt;li&gt;支持丰富的关系代数（并集、交集、连接、笛卡尔积等）&lt;/li&gt;
+&lt;li&gt;支持对逻辑规划规则进行定制（例如 Filter 下推）&lt;/li&gt;
+&lt;li&gt;支持成本模型优化（&lt;strong&gt;CBO&lt;/strong&gt;, &lt;strong&gt;C&lt;/strong&gt;ost-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;O&lt;/strong&gt;ptimizer 和 &lt;strong&gt;RBO&lt;/strong&gt;, &lt;strong&gt;R&lt;/strong&gt;ule-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;O&lt;/strong&gt;ptimizer）&lt;/li&gt;
+&lt;li&gt;支持管理物化视图（&lt;a href=&quot;https://calcite.apache.org/docs/materialized_views.html&quot;&gt;Materialized view&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;支持查询流式数据&lt;/li&gt;
+&lt;li&gt;稳定可靠（开发迭代 10 年以上）&lt;/li&gt;
+&lt;li&gt;已贡献给 Apache 基金会（于 2013 年）&lt;/li&gt;
+&lt;li&gt;开源社区活跃（&lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;、Apache Hive、Apache Drill、&lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;Apache Flink&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/45888/#Phoenix-%E5%91%BD%E4%BB%A4&quot;&gt;Apache Phoenix&lt;/a&gt; 等项目均在使用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;note success&quot;&gt;Apache Calcite 借助开源的 JavaCC 完成 SQL 解析，将 SQL 语句转化为 Java 代码&lt;/div&gt;
+&lt;div class=&quot;note success&quot;&gt;Apache Calcite 还使用了轻量级 Janino 编译运行时 Java 代码，以便灵活地管理元数据&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
+    
+    
+    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
+    
+    <category term="JavaCC" scheme="https://yuzhouwan.com/tags/JavaCC/"/>
+    
+    <category term="Janino" scheme="https://yuzhouwan.com/tags/Janino/"/>
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Apache Druid：一款高效的 OLAP 引擎</title>
     <link href="https://yuzhouwan.com/posts/5845/"/>
     <id>https://yuzhouwan.com/posts/5845/</id>
     <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-06-29T12:48:43.110Z</updated>
+    <updated>2021-07-11T15:18:21.596Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
@@ -297,74 +419,6 @@
     <category term="Registrator" scheme="https://yuzhouwan.com/tags/Registrator/"/>
     
     <category term="Confd" scheme="https://yuzhouwan.com/tags/Confd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人工智能</title>
-    <link href="https://yuzhouwan.com/posts/42737/"/>
-    <id>https://yuzhouwan.com/posts/42737/</id>
-    <published>2017-05-16T10:58:02.000Z</published>
-    <updated>2021-06-11T15:51:47.522Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;什么是人工智能&quot;&gt;&lt;a href=&quot;#什么是人工智能&quot; class=&quot;headerlink&quot; title=&quot;什么是人工智能&quot;&gt;&lt;/a&gt;什么是人工智能&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;人工智能&lt;/strong&gt;（&lt;strong&gt;A&lt;/strong&gt;rtificial &lt;strong&gt;I&lt;/strong&gt;ntelligence, &lt;strong&gt;AI&lt;/strong&gt;）亦称&lt;strong&gt;机器智能&lt;/strong&gt;，是指由人工制造出来的系统所表现出来的智能。 — &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD&quot;&gt;wikipedia.org&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;　从 深蓝到 &lt;a href=&quot;https://arxiv.org/pdf/1712.01815.pdf&quot;&gt;AlphaZero&lt;/a&gt;，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；&lt;br&gt;　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；&lt;br&gt;　从 CPU / GPU 到 &lt;a href=&quot;https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu&quot;&gt;TPU&lt;/a&gt;，人工智能的计算能力正向着无法穷举的极限不断逼近 …&lt;/p&gt;
-&lt;p&gt;　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的&lt;/p&gt;
-&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　我们将分为三块对 AI 进行诠释&lt;/p&gt;
-&lt;p&gt;　首先，将介绍人工智能的&lt;strong&gt;主流思想&lt;/strong&gt;和&lt;strong&gt;实用技巧&lt;/strong&gt;，通过一些耳熟能详的&lt;a href=&quot;https://yuzhouwan.com/posts/4534/&quot;&gt;有趣定理&lt;/a&gt;，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大&lt;strong&gt;理论支柱&lt;/strong&gt;，由浅入深地学习 &lt;a href=&quot;https://yuzhouwan.com/posts/42737/#统计学&quot;&gt;统计学&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#微积分&quot;&gt;微积分&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#线性代数&quot;&gt;线性代数&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/42737/#概率论&quot;&gt;概率论&lt;/a&gt; 等知识体系；最后，落地到实践，我们需要紧跟人工智能的&lt;strong&gt;技术发展前沿&lt;/strong&gt;，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点&lt;/p&gt;
-&lt;p&gt;　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（&lt;a href=&quot;https://yuzhouwan.com/posts/43687/#Python-第三方库&quot;&gt;Python&lt;/a&gt;、Prolog、R、&lt;a href=&quot;https://yuzhouwan.com/posts/27328/&quot;&gt;Java&lt;/a&gt;）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/&lt;/p&gt;
-&lt;h2 id=&quot;主流思想&quot;&gt;&lt;a href=&quot;#主流思想&quot; class=&quot;headerlink&quot; title=&quot;主流思想&quot;&gt;&lt;/a&gt;主流思想&lt;/h2&gt;&lt;h3 id=&quot;演绎法-amp-溯因法-amp-归纳法&quot;&gt;&lt;a href=&quot;#演绎法-amp-溯因法-amp-归纳法&quot; class=&quot;headerlink&quot; title=&quot;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&quot;&gt;&lt;/a&gt;演绎法 &amp;amp; 溯因法 &amp;amp; 归纳法&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/picture/ai/ai_cause_rule_effect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
-
-
-
-&lt;h2 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h2&gt;&lt;h3 id=&quot;Occam-剃刀原理&quot;&gt;&lt;a href=&quot;#Occam-剃刀原理&quot; class=&quot;headerlink&quot; title=&quot;Occam 剃刀原理&quot;&gt;&lt;/a&gt;Occam 剃刀原理&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;奥卡姆剃刀&lt;/strong&gt;（Occam´s Razor），意为&lt;strong&gt;简约之法&lt;/strong&gt;，是由 14 世纪&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6&quot;&gt;逻辑学&lt;/a&gt;家、&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83&quot;&gt;圣方济各会&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB&quot;&gt;修士&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89&quot;&gt;奥卡姆的威廉&lt;/a&gt;提出的一个解决问题的法则，即&lt;code&gt;&quot;切勿浪费较多资源，去做&#39;用较少的资源，同样可以做好&#39;的事情&quot;&lt;/code&gt;，相同思想见于郑板桥的&lt;strong&gt;删繁就简三秋树&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    
-    <category term="机器学习" scheme="https://yuzhouwan.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
-    
-    <category term="微积分" scheme="https://yuzhouwan.com/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
-    
-    <category term="人工智能" scheme="https://yuzhouwan.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="MP Model" scheme="https://yuzhouwan.com/tags/MP-Model/"/>
-    
-    <category term="Perceptron" scheme="https://yuzhouwan.com/tags/Perceptron/"/>
-    
-    <category term="MLP" scheme="https://yuzhouwan.com/tags/MLP/"/>
-    
-    <category term="DNN" scheme="https://yuzhouwan.com/tags/DNN/"/>
-    
-    <category term="CNN" scheme="https://yuzhouwan.com/tags/CNN/"/>
-    
-    <category term="RNN" scheme="https://yuzhouwan.com/tags/RNN/"/>
-    
-    <category term="LSTM" scheme="https://yuzhouwan.com/tags/LSTM/"/>
-    
-    <category term="统计学" scheme="https://yuzhouwan.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
-    
-    <category term="线性代数" scheme="https://yuzhouwan.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="概率论" scheme="https://yuzhouwan.com/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
-    
-    <category term="深度学习" scheme="https://yuzhouwan.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    <category term="PyTorch" scheme="https://yuzhouwan.com/tags/PyTorch/"/>
-    
-    <category term="Caffe" scheme="https://yuzhouwan.com/tags/Caffe/"/>
-    
-    <category term="xgboost" scheme="https://yuzhouwan.com/tags/xgboost/"/>
-    
-    <category term="Apache PredictionIO" scheme="https://yuzhouwan.com/tags/Apache-PredictionIO/"/>
-    
-    <category term="NuPIC" scheme="https://yuzhouwan.com/tags/NuPIC/"/>
     
   </entry>
   
@@ -863,60 +917,6 @@
     <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
     
     <category term="CI" scheme="https://yuzhouwan.com/tags/CI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Apache Calcite：一款开源 SQL 解析工具</title>
-    <link href="https://yuzhouwan.com/posts/201018/"/>
-    <id>https://yuzhouwan.com/posts/201018/</id>
-    <published>2020-10-17T16:02:26.000Z</published>
-    <updated>2021-01-17T02:58:09.024Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Apache-Calcite-是什么？&quot;&gt;&lt;a href=&quot;#Apache-Calcite-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Apache Calcite 是什么？&quot;&gt;&lt;/a&gt;Apache Calcite 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/apache/calcite&quot;&gt;Apache Calcite&lt;/a&gt;&lt;/strong&gt;™ is a dynamic data management framework.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/calcite/calcite_mountain.jpg&quot; alt=&quot;Calcite Mountain&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：&lt;a href=&quot;https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/&quot; target=&quot;_blank&quot;&gt;Pixabay&lt;/a&gt;™ 官网，已确认无版权）&lt;/center&gt;
-
-
-
-
-
-
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;Catelog&quot;&gt;&lt;a href=&quot;#Catelog&quot; class=&quot;headerlink&quot; title=&quot;Catelog&quot;&gt;&lt;/a&gt;Catelog&lt;/h3&gt;&lt;p&gt;　用于定义 SQL 语义相关的元数据与命名空间&lt;/p&gt;
-&lt;h3 id=&quot;SQL-Parser&quot;&gt;&lt;a href=&quot;#SQL-Parser&quot; class=&quot;headerlink&quot; title=&quot;SQL Parser&quot;&gt;&lt;/a&gt;SQL Parser&lt;/h3&gt;&lt;p&gt;　负责将 SQL 转化成 AST（&lt;strong&gt;A&lt;/strong&gt;bstract &lt;strong&gt;S&lt;/strong&gt;yntax &lt;strong&gt;T&lt;/strong&gt;ree）&lt;/p&gt;
-&lt;h3 id=&quot;SQL-Validator&quot;&gt;&lt;a href=&quot;#SQL-Validator&quot; class=&quot;headerlink&quot; title=&quot;SQL Validator&quot;&gt;&lt;/a&gt;SQL Validator&lt;/h3&gt;&lt;p&gt;　负责通过 Catalog 对 AST 进行校证&lt;/p&gt;
-&lt;h3 id=&quot;Query-Optimizer&quot;&gt;&lt;a href=&quot;#Query-Optimizer&quot; class=&quot;headerlink&quot; title=&quot;Query Optimizer&quot;&gt;&lt;/a&gt;Query Optimizer&lt;/h3&gt;&lt;p&gt;　负责将 AST 转化成物理执行计划、优化物理执行计划&lt;/p&gt;
-&lt;h3 id=&quot;SQL-Generator&quot;&gt;&lt;a href=&quot;#SQL-Generator&quot; class=&quot;headerlink&quot; title=&quot;SQL Generator&quot;&gt;&lt;/a&gt;SQL Generator&lt;/h3&gt;&lt;p&gt;　负责将物理执行计划反向转化成 SQL 语句&lt;/p&gt;
-&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;支持标准 SQL 语言&lt;/li&gt;
-&lt;li&gt;通过适配器（&lt;a href=&quot;https://calcite.apache.org/docs/adapter.html&quot;&gt;Adapter&lt;/a&gt;）可以支持连接任何数据源&lt;/li&gt;
-&lt;li&gt;支持丰富的关系代数（并集、交集、连接、笛卡尔积等）&lt;/li&gt;
-&lt;li&gt;支持对逻辑规划规则进行定制（例如 Filter 下推）&lt;/li&gt;
-&lt;li&gt;支持成本模型优化（&lt;strong&gt;CBO&lt;/strong&gt;, &lt;strong&gt;C&lt;/strong&gt;ost-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;O&lt;/strong&gt;ptimizer 和 &lt;strong&gt;RBO&lt;/strong&gt;, &lt;strong&gt;R&lt;/strong&gt;ule-&lt;strong&gt;B&lt;/strong&gt;ased &lt;strong&gt;O&lt;/strong&gt;ptimizer）&lt;/li&gt;
-&lt;li&gt;支持管理物化视图（&lt;a href=&quot;https://calcite.apache.org/docs/materialized_views.html&quot;&gt;Materialized view&lt;/a&gt;）&lt;/li&gt;
-&lt;li&gt;支持查询流式数据&lt;/li&gt;
-&lt;li&gt;稳定可靠（开发迭代 10 年以上）&lt;/li&gt;
-&lt;li&gt;已贡献给 Apache 基金会（于 2013 年）&lt;/li&gt;
-&lt;li&gt;开源社区活跃（&lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;Apache Druid&lt;/a&gt;、Apache Hive、Apache Drill、&lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;Apache Flink&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/45888/#Phoenix-%E5%91%BD%E4%BB%A4&quot;&gt;Apache Phoenix&lt;/a&gt; 等项目均在使用）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;note success&quot;&gt;Apache Calcite 借助开源的 JavaCC 完成 SQL 解析，将 SQL 语句转化为 Java 代码&lt;/div&gt;
-&lt;div class=&quot;note success&quot;&gt;Apache Calcite 还使用了轻量级 Janino 编译运行时 Java 代码，以便灵活地管理元数据&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
-    
-    
-    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
-    
-    <category term="JavaCC" scheme="https://yuzhouwan.com/tags/JavaCC/"/>
-    
-    <category term="Janino" scheme="https://yuzhouwan.com/tags/Janino/"/>
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
     
   </entry>
   

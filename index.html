@@ -216,6 +216,240 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/42737/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/42737/" class="post-title-link" itemprop="url">人工智能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-16 18:58:02" itemprop="dateCreated datePublished" datetime="2017-05-16T18:58:02+08:00">2017-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-11 23:18:44" itemprop="dateModified" datetime="2021-07-11T23:18:44+08:00">2021-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>42k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>39 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是人工智能"><a href="#什么是人工智能" class="headerlink" title="什么是人工智能"></a>什么是人工智能</h2><p>　<strong>人工智能</strong>（<strong>A</strong>rtificial <strong>I</strong>ntelligence, <strong>AI</strong>）亦称<strong>机器智能</strong>，是指由人工制造出来的系统所表现出来的智能。 — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD">wikipedia.org</a></p>
+<p>　从 深蓝到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1712.01815.pdf">AlphaZero</a>，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；<br>　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；<br>　从 CPU / GPU 到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">TPU</a>，人工智能的计算能力正向着无法穷举的极限不断逼近 …</p>
+<p>　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的</p>
+<h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　我们将分为三块对 AI 进行诠释</p>
+<p>　首先，将介绍人工智能的<strong>主流思想</strong>和<strong>实用技巧</strong>，通过一些耳熟能详的<a href="https://yuzhouwan.com/posts/4534/">有趣定理</a>，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大<strong>理论支柱</strong>，由浅入深地学习 <a href="https://yuzhouwan.com/posts/42737/#统计学">统计学</a>、<a href="https://yuzhouwan.com/posts/42737/#微积分">微积分</a>、<a href="https://yuzhouwan.com/posts/42737/#线性代数">线性代数</a>、<a href="https://yuzhouwan.com/posts/42737/#概率论">概率论</a> 等知识体系；最后，落地到实践，我们需要紧跟人工智能的<strong>技术发展前沿</strong>，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点</p>
+<p>　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（<a href="https://yuzhouwan.com/posts/43687/#Python-第三方库">Python</a>、Prolog、R、<a href="https://yuzhouwan.com/posts/27328/">Java</a>）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/</p>
+<h2 id="主流思想"><a href="#主流思想" class="headerlink" title="主流思想"></a>主流思想</h2><h3 id="演绎法-amp-溯因法-amp-归纳法"><a href="#演绎法-amp-溯因法-amp-归纳法" class="headerlink" title="演绎法 &amp; 溯因法 &amp; 归纳法"></a>演绎法 &amp; 溯因法 &amp; 归纳法</h3><p><img src="/picture/ai/ai_cause_rule_effect.png" alt></p>
+<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
+
+
+
+<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="Occam-剃刀原理"><a href="#Occam-剃刀原理" class="headerlink" title="Occam 剃刀原理"></a>Occam 剃刀原理</h3><p>　<strong>奥卡姆剃刀</strong>（Occam´s Razor），意为<strong>简约之法</strong>，是由 14 世纪<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6">逻辑学</a>家、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83">圣方济各会</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB">修士</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89">奥卡姆的威廉</a>提出的一个解决问题的法则，即<code>"切勿浪费较多资源，去做'用较少的资源，同样可以做好'的事情"</code>，相同思想见于郑板桥的<strong>删繁就简三秋树</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/42737/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201018/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/201018/" class="post-title-link" itemprop="url">Apache Calcite：一款开源 SQL 解析工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-18 00:02:26" itemprop="dateCreated datePublished" datetime="2020-10-18T00:02:26+08:00">2020-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-11 23:18:44" itemprop="dateModified" datetime="2021-07-11T23:18:44+08:00">2021-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Apache-Calcite-是什么？"><a href="#Apache-Calcite-是什么？" class="headerlink" title="Apache Calcite 是什么？"></a>Apache Calcite 是什么？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/calcite">Apache Calcite</a></strong>™ is a dynamic data management framework.</p>
+</blockquote>
+<p><img src="/picture/calcite/calcite_mountain.jpg" alt="Calcite Mountain"></p>
+<center>（图片来源：<a href="https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/" target="_blank" rel="external nofollow noopener noreferrer">Pixabay</a>™ 官网，已确认无版权）</center>
+
+
+
+
+
+
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="Catelog"><a href="#Catelog" class="headerlink" title="Catelog"></a>Catelog</h3><p>　用于定义 SQL 语义相关的元数据与命名空间</p>
+<h3 id="SQL-Parser"><a href="#SQL-Parser" class="headerlink" title="SQL Parser"></a>SQL Parser</h3><p>　负责将 SQL 转化成 AST（<strong>A</strong>bstract <strong>S</strong>yntax <strong>T</strong>ree）</p>
+<h3 id="SQL-Validator"><a href="#SQL-Validator" class="headerlink" title="SQL Validator"></a>SQL Validator</h3><p>　负责通过 Catalog 对 AST 进行校证</p>
+<h3 id="Query-Optimizer"><a href="#Query-Optimizer" class="headerlink" title="Query Optimizer"></a>Query Optimizer</h3><p>　负责将 AST 转化成物理执行计划、优化物理执行计划</p>
+<h3 id="SQL-Generator"><a href="#SQL-Generator" class="headerlink" title="SQL Generator"></a>SQL Generator</h3><p>　负责将物理执行计划反向转化成 SQL 语句</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>支持标准 SQL 语言</li>
+<li>通过适配器（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/adapter.html">Adapter</a>）可以支持连接任何数据源</li>
+<li>支持丰富的关系代数（并集、交集、连接、笛卡尔积等）</li>
+<li>支持对逻辑规划规则进行定制（例如 Filter 下推）</li>
+<li>支持成本模型优化（<strong>CBO</strong>, <strong>C</strong>ost-<strong>B</strong>ased <strong>O</strong>ptimizer 和 <strong>RBO</strong>, <strong>R</strong>ule-<strong>B</strong>ased <strong>O</strong>ptimizer）</li>
+<li>支持管理物化视图（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/materialized_views.html">Materialized view</a>）</li>
+<li>支持查询流式数据</li>
+<li>稳定可靠（开发迭代 10 年以上）</li>
+<li>已贡献给 Apache 基金会（于 2013 年）</li>
+<li>开源社区活跃（<a href="https://yuzhouwan.com/posts/5845/">Apache Druid</a>、Apache Hive、Apache Drill、<a href="https://yuzhouwan.com/posts/20644/">Apache Flink</a>、<a href="https://yuzhouwan.com/posts/45888/#Phoenix-%E5%91%BD%E4%BB%A4">Apache Phoenix</a> 等项目均在使用）</li>
+</ul>
+<div class="note success">Apache Calcite 借助开源的 JavaCC 完成 SQL 解析，将 SQL 语句转化为 Java 代码</div>
+<div class="note success">Apache Calcite 还使用了轻量级 Janino 编译运行时 Java 代码，以便灵活地管理元数据</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/201018/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/5845/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -247,7 +481,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-29 20:48:43" itemprop="dateModified" datetime="2021-06-29T20:48:43+08:00">2021-06-29</time>
+                <time title="修改时间：2021-07-11 23:18:21" itemprop="dateModified" datetime="2021-07-11T23:18:21+08:00">2021-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -573,218 +807,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/200906/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/31915/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/31915/" class="post-title-link" itemprop="url">ZooKeeper 原理与优化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-22 08:38:04" itemprop="dateCreated datePublished" datetime="2017-04-22T08:38:04+08:00">2017-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-11 23:51:52" itemprop="dateModified" datetime="2021-06-11T23:51:52+08:00">2021-06-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>82k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:15</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ZooKeeper-是什么？"><a href="#ZooKeeper-是什么？" class="headerlink" title="ZooKeeper 是什么？"></a>ZooKeeper 是什么？</h2><p>　<strong>ZooKeeper</strong> 是一个基于 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/chubby-osdi06.pdf">Google Chubby</a> 论文实现的一款解决分布式数据一致性问题的开源实现，方便了依赖 ZooKeeper 的应用实现 <code>数据发布 / 订阅</code>、<code>负载均衡</code>、<code>服务注册与发现</code>、<code>分布式协调</code>、<code>事件通知</code>、<code>集群管理</code>、<code>Leader 选举</code>、 <code>分布式锁和队列</code> 等功能</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h3><p>　一般的，在分布式系统中，构成集群的每一台机器都有自己的角色，最为典型的集群模式就是 <code>Master / Slave</code> 主备模式。在该模式中，我们把能够处理所有<code>写操作</code>的机器称为 <code>Master</code> 节点，并把所有通过<code>异步复制</code>方式获取最新数据、提供<code>读服务</code>的机器称为 <code>Slave</code> 节点</p>
-<p><img src="/picture/zk/zk_master_slave.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-
-<p>　而 ZooKeeper 中，则是引入了 <code>领导者（Leader）</code>、<code>跟随者（Follower）</code>、<code>观察者（Observer）</code> 三种角色 和 <code>领导（Leading）</code>、<code>跟随（Following）</code>、<code>观察（Observing）</code>、<code>寻找（Looking）</code> 等相应的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/zookeeper/blob/master/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java#L370">状态</a>。在 ZooKeeper 集群中的通过一种 <code>Leader 选举</code>的过程，来选定某个节点作为 <code>Leader</code> 节点，该节点为客户端提供<code>读</code>和<code>写</code>服务。而 <code>Follower</code> 和 <code>Observer</code> 节点，则都能提供<code>读</code>服务，唯一的区别在于，<code>Observer</code> 机器<code>不参与 Leader 选举</code>过程 和 <code>写操作</code>的<code>"过半写成功"</code>策略，<code>Observer</code> 只会被告知已经 commit 的 proposal。因此 <code>Observer</code> 可以在<code>不影响写性能</code>的情况下提升集群的<code>读性能</code>（详见下文 “性能优化 - 优化策略 - Observer 模式” 部分）</p>
-<p><img src="/picture/zk/zk_leader_follower_observer.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/31915/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/42737/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/42737/" class="post-title-link" itemprop="url">人工智能</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-05-16 18:58:02" itemprop="dateCreated datePublished" datetime="2017-05-16T18:58:02+08:00">2017-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-11 23:51:47" itemprop="dateModified" datetime="2021-06-11T23:51:47+08:00">2021-06-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>42k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>39 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是人工智能"><a href="#什么是人工智能" class="headerlink" title="什么是人工智能"></a>什么是人工智能</h2><p>　<strong>人工智能</strong>（<strong>A</strong>rtificial <strong>I</strong>ntelligence, <strong>AI</strong>）亦称<strong>机器智能</strong>，是指由人工制造出来的系统所表现出来的智能。 — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD">wikipedia.org</a></p>
-<p>　从 深蓝到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://arxiv.org/pdf/1712.01815.pdf">AlphaZero</a>，人工智能的智力水平、普适性、学习能力 正在以爆炸式地速度快速发展；<br>　从 棋类到 医学，人工智能开始在各类应用领域，都在大展身手；<br>　从 CPU / GPU 到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.google.com/blog/big-data/2017/05/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu">TPU</a>，人工智能的计算能力正向着无法穷举的极限不断逼近 …</p>
-<p>　但是，我们并不浮躁，踏踏实实地点亮 AI 知识树的每个枝叶，才是我们每位富有科学精神的人所应该做的</p>
-<h2 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h2><p>　我们将分为三块对 AI 进行诠释</p>
-<p>　首先，将介绍人工智能的<strong>主流思想</strong>和<strong>实用技巧</strong>，通过一些耳熟能详的<a href="https://yuzhouwan.com/posts/4534/">有趣定理</a>，我们可以对人工智能有些直观、初步的认识；随后，言归正传，我们将开始接触 AI 领域的几大<strong>理论支柱</strong>，由浅入深地学习 <a href="https://yuzhouwan.com/posts/42737/#统计学">统计学</a>、<a href="https://yuzhouwan.com/posts/42737/#微积分">微积分</a>、<a href="https://yuzhouwan.com/posts/42737/#线性代数">线性代数</a>、<a href="https://yuzhouwan.com/posts/42737/#概率论">概率论</a> 等知识体系；最后，落地到实践，我们需要紧跟人工智能的<strong>技术发展前沿</strong>，对重大的突破性项目进行了解、学习，以及运用。如此，对人工智能领域进行横向分层，可以很方便地找到我们学习的突破点</p>
-<p>　不过，出于文章编排的考虑，可能部分编码就要放在其他博文中了，如有不便，还望见谅（<a href="https://yuzhouwan.com/posts/43687/#Python-第三方库">Python</a>、Prolog、R、<a href="https://yuzhouwan.com/posts/27328/">Java</a>）。本文持续更新中，若有不妥之处，还请不吝赐教哈 (^o^)/</p>
-<h2 id="主流思想"><a href="#主流思想" class="headerlink" title="主流思想"></a>主流思想</h2><h3 id="演绎法-amp-溯因法-amp-归纳法"><a href="#演绎法-amp-溯因法-amp-归纳法" class="headerlink" title="演绎法 &amp; 溯因法 &amp; 归纳法"></a>演绎法 &amp; 溯因法 &amp; 归纳法</h3><p><img src="/picture/ai/ai_cause_rule_effect.png" alt></p>
-<center>（利用 <a href="https://www.axure.com.cn/" target="_blank" rel="external nofollow noopener noreferrer">Axure</a>™ 绘制而成）</center>
-
-
-
-<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="Occam-剃刀原理"><a href="#Occam-剃刀原理" class="headerlink" title="Occam 剃刀原理"></a>Occam 剃刀原理</h3><p>　<strong>奥卡姆剃刀</strong>（Occam´s Razor），意为<strong>简约之法</strong>，是由 14 世纪<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%AD%A6">逻辑学</a>家、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E8%81%96%E6%96%B9%E6%BF%9F%E5%90%84%E6%9C%83">圣方济各会</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E4%BF%AE%E5%A3%AB">修士</a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89">奥卡姆的威廉</a>提出的一个解决问题的法则，即<code>"切勿浪费较多资源，去做'用较少的资源，同样可以做好'的事情"</code>，相同思想见于郑板桥的<strong>删繁就简三秋树</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/42737/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

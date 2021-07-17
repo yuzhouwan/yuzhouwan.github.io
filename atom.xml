@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-07-16T16:16:36.401Z</updated>
+  <updated>2021-07-17T08:03:04.192Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yuzhouwan.com/posts/210313/"/>
     <id>https://yuzhouwan.com/posts/210313/</id>
     <published>2021-03-13T14:02:55.000Z</published>
-    <updated>2021-07-16T16:16:36.401Z</updated>
+    <updated>2021-07-17T08:03:04.192Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -46,6 +46,16 @@
     <category term="架构重构" scheme="https://yuzhouwan.com/tags/%E6%9E%B6%E6%9E%84%E9%87%8D%E6%9E%84/"/>
     
     <category term="架构演进" scheme="https://yuzhouwan.com/tags/%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/"/>
+    
+    <category term="异地多活" scheme="https://yuzhouwan.com/tags/%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB/"/>
+    
+    <category term="全球化" scheme="https://yuzhouwan.com/tags/%E5%85%A8%E7%90%83%E5%8C%96/"/>
+    
+    <category term="云边端一体化" scheme="https://yuzhouwan.com/tags/%E4%BA%91%E8%BE%B9%E7%AB%AF%E4%B8%80%E4%BD%93%E5%8C%96/"/>
+    
+    <category term="弹性架构" scheme="https://yuzhouwan.com/tags/%E5%BC%B9%E6%80%A7%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="网格计算" scheme="https://yuzhouwan.com/tags/%E7%BD%91%E6%A0%BC%E8%AE%A1%E7%AE%97/"/>
     
   </entry>
   

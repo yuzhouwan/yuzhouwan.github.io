@@ -6,7 +6,7 @@
   <link href="https://yuzhouwan.com/atom.xml" rel="self"/>
   
   <link href="https://yuzhouwan.com/"/>
-  <updated>2021-07-17T08:03:04.192Z</updated>
+  <updated>2021-07-17T08:33:58.538Z</updated>
   <id>https://yuzhouwan.com/</id>
   
   <author>
@@ -17,11 +17,339 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Apache Druid：一款高效的 OLAP 引擎</title>
+    <link href="https://yuzhouwan.com/posts/5845/"/>
+    <id>https://yuzhouwan.com/posts/5845/</id>
+    <published>2017-04-02T03:05:11.000Z</published>
+    <updated>2021-07-17T08:33:58.538Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（图片来源：Vadim Ogievetsky 在万圣节的个人作品，已获得授权）&lt;/center&gt;
+
+
+
+&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;h4 id=&quot;分析事件流&quot;&gt;&lt;a href=&quot;#分析事件流&quot; class=&quot;headerlink&quot; title=&quot;分析事件流&quot;&gt;&lt;/a&gt;分析事件流&lt;/h4&gt;&lt;p&gt;　Druid 支持对 event-driven 数据进行快速地高并发查询。还可以实时地摄入流式数据，并提供亚秒级查询能力，以支持强大的 UI 交互&lt;/p&gt;
+&lt;h4 id=&quot;创新的架构设计&quot;&gt;&lt;a href=&quot;#创新的架构设计&quot; class=&quot;headerlink&quot; title=&quot;创新的架构设计&quot;&gt;&lt;/a&gt;创新的架构设计&lt;/h4&gt;&lt;p&gt;　Druid 是一种新型数据库，它结合了 OLAP 分析数据库、时间序列数据库 和 全文检索 的思想，以支持流式体系架构下的大部分应用场景&lt;/p&gt;
+&lt;h4 id=&quot;构建事件驱动的数据栈&quot;&gt;&lt;a href=&quot;#构建事件驱动的数据栈&quot; class=&quot;headerlink&quot; title=&quot;构建事件驱动的数据栈&quot;&gt;&lt;/a&gt;构建事件驱动的数据栈&lt;/h4&gt;&lt;p&gt;　Druid 天然集成了消息队列（Kafka、AWS Kinesis 等）和数据湖（HDFS、AWS S3 等），使得其非常适用于流式总线和流处理器的查询层&lt;/p&gt;
+&lt;h4 id=&quot;解锁新的工作流&quot;&gt;&lt;a href=&quot;#解锁新的工作流&quot; class=&quot;headerlink&quot; title=&quot;解锁新的工作流&quot;&gt;&lt;/a&gt;解锁新的工作流&lt;/h4&gt;&lt;p&gt;　Druid 旨在对实时数据和历史数据进行快速地即时分析。使用可快速更替的查询，进行趋势解释，数据探索，以响应各种分析诉求&lt;/p&gt;
+&lt;h4 id=&quot;多环境部署&quot;&gt;&lt;a href=&quot;#多环境部署&quot; class=&quot;headerlink&quot; title=&quot;多环境部署&quot;&gt;&lt;/a&gt;多环境部署&lt;/h4&gt;&lt;p&gt;　Druid 可以部署在任何的 &lt;code&gt;*NIX&lt;/code&gt; 商用硬件上，无论是在云端还是内部部署。Druid 是 cloud-native 的，这意味着集群扩容和缩容，就像添加和删除进程一样简单&lt;/p&gt;
+&lt;h4 id=&quot;多数据源摄入&quot;&gt;&lt;a href=&quot;#多数据源摄入&quot; class=&quot;headerlink&quot; title=&quot;多数据源摄入&quot;&gt;&lt;/a&gt;多数据源摄入&lt;/h4&gt;&lt;p&gt;　Druid 支持将多种外部数据系统作为数据源，进行数据摄入，包括 &lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Hadoop/&quot;&gt;Hadoop&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Storm/&quot;&gt;Storm&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt; 等&lt;/p&gt;
+&lt;h4 id=&quot;多版本控制&quot;&gt;&lt;a href=&quot;#多版本控制&quot; class=&quot;headerlink&quot; title=&quot;多版本控制&quot;&gt;&lt;/a&gt;多版本控制&lt;/h4&gt;&lt;p&gt;　多版本控制（&lt;strong&gt;MVCC&lt;/strong&gt;，&lt;strong&gt;M&lt;/strong&gt;ulti-&lt;strong&gt;V&lt;/strong&gt;ersion &lt;strong&gt;C&lt;/strong&gt;oncurrent &lt;strong&gt;C&lt;/strong&gt;ontrol），主要是为了解决多用户操作同一条记录时的并发问题。MVCC 设计思路是，在并发访问数据库时，不使用粗暴的行锁，而是在事务型操作更新数据时，生成一个新版本的数据。如此，可以保证读写分离，避免了读写操作互相阻塞，以提高并发性能。另外，约束任意时刻只有最新版本的记录是有效的，即也保证了数据的一致性&lt;/p&gt;
+&lt;p&gt;　而 Druid 中是使用数据更新时间来区分版本，历史节点只加载最新版本的数据。同时，&lt;strong&gt;实时数据索引&lt;/strong&gt;与&lt;strong&gt;离线数据批量覆盖&lt;/strong&gt;同时进行的 Lambda 架构设计，既满足了实时响应的需求，又确保了数据的准确性&lt;/p&gt;
+&lt;h4 id=&quot;易于运维&quot;&gt;&lt;a href=&quot;#易于运维&quot; class=&quot;headerlink&quot; title=&quot;易于运维&quot;&gt;&lt;/a&gt;易于运维&lt;/h4&gt;&lt;p&gt;　Druid 集群可以做到 Self-healing 和 Self-balancing。如果 Druid 服务器发生故障，系统将会自动绕过损坏的路由，直到这些机器恢复或被替换掉。在扩缩容集群的时候，只需要增加或下线服务器，集群本身会在后台自动 re-balance。Druid 在设计上保证了可以全天候工作，不会因为任何原因而停机，包括配置更改和集群升级&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
+    
+    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
+    
+    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
+    
+    <category term="PostgreSQL" scheme="https://yuzhouwan.com/tags/PostgreSQL/"/>
+    
+    <category term="Pivot" scheme="https://yuzhouwan.com/tags/Pivot/"/>
+    
+    <category term="Graphite" scheme="https://yuzhouwan.com/tags/Graphite/"/>
+    
+    <category term="OLAP" scheme="https://yuzhouwan.com/tags/OLAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Presto：分布式 SQL 查询引擎</title>
+    <link href="https://yuzhouwan.com/posts/200906/"/>
+    <id>https://yuzhouwan.com/posts/200906/</id>
+    <published>2020-09-06T15:06:25.000Z</published>
+    <updated>2021-07-17T08:33:51.503Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL™, a.k.a. Trino™) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
+
+
+
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;组件&quot;&gt;&lt;a href=&quot;#组件&quot; class=&quot;headerlink&quot; title=&quot;组件&quot;&gt;&lt;/a&gt;组件&lt;/h3&gt;&lt;h4 id=&quot;Coordinator&quot;&gt;&lt;a href=&quot;#Coordinator&quot; class=&quot;headerlink&quot; title=&quot;Coordinator&quot;&gt;&lt;/a&gt;Coordinator&lt;/h4&gt;&lt;p&gt;　负责管理 Worker 和 MetaStore 节点，以及接受客户端查询请求，并进行 SQL 的语法解析（Parser）、执行计划生成与优化（Planner）和查询任务的调度（Scheduler）&lt;/p&gt;
+&lt;div class=&quot;note info&quot;&gt;Coordinator 通过 RESTful 接口与 Client 和 Worker 交互&lt;/div&gt;
+
+&lt;h4 id=&quot;Worker&quot;&gt;&lt;a href=&quot;#Worker&quot; class=&quot;headerlink&quot; title=&quot;Worker&quot;&gt;&lt;/a&gt;Worker&lt;/h4&gt;&lt;p&gt;　负责具体的查询计算和数据读写&lt;/p&gt;
+&lt;h4 id=&quot;Discovery-Server&quot;&gt;&lt;a href=&quot;#Discovery-Server&quot; class=&quot;headerlink&quot; title=&quot;Discovery Server&quot;&gt;&lt;/a&gt;Discovery Server&lt;/h4&gt;&lt;p&gt;　负责发现集群的各个节点，用于节点间心跳监控&lt;/p&gt;
+&lt;div class=&quot;note success&quot;&gt;一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
+    
+    
+    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
+    
+    <category term="Apache Hive" scheme="https://yuzhouwan.com/tags/Apache-Hive/"/>
+    
+    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
+    
+    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
+    
+    <category term="PrestoSQL" scheme="https://yuzhouwan.com/tags/PrestoSQL/"/>
+    
+    <category term="Trino" scheme="https://yuzhouwan.com/tags/Trino/"/>
+    
+    <category term="MPP" scheme="https://yuzhouwan.com/tags/MPP/"/>
+    
+    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搜索引擎 ElasticSearch</title>
+    <link href="https://yuzhouwan.com/posts/22654/"/>
+    <id>https://yuzhouwan.com/posts/22654/</id>
+    <published>2017-04-02T04:18:42.000Z</published>
+    <updated>2021-07-17T08:33:40.255Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
+&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;功能丰富，且开箱即用&lt;/li&gt;
+&lt;li&gt;横向可扩展性&lt;/li&gt;
+&lt;li&gt;分片机制更好地解决热点问题&lt;/li&gt;
+&lt;li&gt;多副本有效保证了高可用&lt;/li&gt;
+&lt;li&gt;精确的熔断器机制&lt;/li&gt;
+&lt;li&gt;社区庞大，生态完善&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;主要概念&quot;&gt;&lt;a href=&quot;#主要概念&quot; class=&quot;headerlink&quot; title=&quot;主要概念&quot;&gt;&lt;/a&gt;主要概念&lt;/h2&gt;&lt;h3 id=&quot;Cluster-集群&quot;&gt;&lt;a href=&quot;#Cluster-集群&quot; class=&quot;headerlink&quot; title=&quot;Cluster 集群&quot;&gt;&lt;/a&gt;Cluster 集群&lt;/h3&gt;&lt;p&gt;　在一个分布式系统里面，可以通过多个 ElasticSearch 节点组成一个&lt;strong&gt;集群&lt;/strong&gt;。集群中会动态选举出一个主节点，保证了 ElasticSearch 集群不存在单点故障&lt;br&gt;　在同一子网内，只需要将进程设置为相同的集群名，ElasticSearch 就会把这些集群名相同的进程自动组成一个集群。集群中各节点间的通讯和数据负载均衡，全部都由 ElasticSearch 自动管理&lt;/p&gt;
+&lt;h3 id=&quot;Node-节点&quot;&gt;&lt;a href=&quot;#Node-节点&quot; class=&quot;headerlink&quot; title=&quot;Node 节点&quot;&gt;&lt;/a&gt;Node 节点&lt;/h3&gt;&lt;p&gt;　每一个 ElasticSearch 进程称为一个 &lt;strong&gt;Node 节点&lt;/strong&gt;。在测试环境中，可以在一台服务器上运行多个 ElasticSearch 进程；但生产环境中，则建议每台服务器只运行一个 ElasticSearch 进程&lt;/p&gt;
+&lt;h3 id=&quot;Index-索引&quot;&gt;&lt;a href=&quot;#Index-索引&quot; class=&quot;headerlink&quot; title=&quot;Index 索引&quot;&gt;&lt;/a&gt;Index 索引&lt;/h3&gt;&lt;p&gt;　ElasticSearch 中的索引是文档数据存储的地方，相当于是传统关系数据库中的 DataBase 概念。更多逻辑上的对应关系，如下表所示：&lt;/p&gt;
+&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Relational DB&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;HBase&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;ElasticSearch&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Database&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;NameSpace&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Template&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;一组索引的模板配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Table&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Table&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Index&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Row&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;RowKey&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Document&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;文档，和 Lucene 概念一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Column + Value&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Cell&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Field&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;如果将文档理解为 JSON，那么 Field 就是字段和值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Term&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;检索的基本单位，相当于是文本中的一个词&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Token&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Term 内容、类型，以及 Term 在文本中的起始及偏移&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;note info&quot;&gt;目前最新的 ElasticSearch 7.x 版本里面已经废弃了 Type 的概念&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
+    
+    <category term="Lucene" scheme="https://yuzhouwan.com/tags/Lucene/"/>
+    
+    <category term="Kafka" scheme="https://yuzhouwan.com/tags/Kafka/"/>
+    
+    <category term="Flume" scheme="https://yuzhouwan.com/tags/Flume/"/>
+    
+    <category term="HBase" scheme="https://yuzhouwan.com/tags/HBase/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何成为 Apache 的 PMC</title>
+    <link href="https://yuzhouwan.com/posts/19631/"/>
+    <id>https://yuzhouwan.com/posts/19631/</id>
+    <published>2017-04-03T07:46:21.000Z</published>
+    <updated>2021-07-17T08:33:31.359Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
+&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
+    
+    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
+    
+    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
+    
+    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
+    
+    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
+    
+    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
+    
+    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
+    
+    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZooKeeper 原理与优化</title>
+    <link href="https://yuzhouwan.com/posts/31915/"/>
+    <id>https://yuzhouwan.com/posts/31915/</id>
+    <published>2017-04-22T00:38:04.000Z</published>
+    <updated>2021-07-17T08:33:23.071Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;ZooKeeper-是什么？&quot;&gt;&lt;a href=&quot;#ZooKeeper-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ZooKeeper 是什么？&quot;&gt;&lt;/a&gt;ZooKeeper 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;ZooKeeper&lt;/strong&gt; 是一个基于 &lt;a href=&quot;https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/chubby-osdi06.pdf&quot;&gt;Google Chubby&lt;/a&gt; 论文实现的一款解决分布式数据一致性问题的开源实现，方便了依赖 ZooKeeper 的应用实现 &lt;code&gt;数据发布 / 订阅&lt;/code&gt;、&lt;code&gt;负载均衡&lt;/code&gt;、&lt;code&gt;服务注册与发现&lt;/code&gt;、&lt;code&gt;分布式协调&lt;/code&gt;、&lt;code&gt;事件通知&lt;/code&gt;、&lt;code&gt;集群管理&lt;/code&gt;、&lt;code&gt;Leader 选举&lt;/code&gt;、 &lt;code&gt;分布式锁和队列&lt;/code&gt; 等功能&lt;/p&gt;
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;集群角色&quot;&gt;&lt;a href=&quot;#集群角色&quot; class=&quot;headerlink&quot; title=&quot;集群角色&quot;&gt;&lt;/a&gt;集群角色&lt;/h3&gt;&lt;p&gt;　一般的，在分布式系统中，构成集群的每一台机器都有自己的角色，最为典型的集群模式就是 &lt;code&gt;Master / Slave&lt;/code&gt; 主备模式。在该模式中，我们把能够处理所有&lt;code&gt;写操作&lt;/code&gt;的机器称为 &lt;code&gt;Master&lt;/code&gt; 节点，并把所有通过&lt;code&gt;异步复制&lt;/code&gt;方式获取最新数据、提供&lt;code&gt;读服务&lt;/code&gt;的机器称为 &lt;code&gt;Slave&lt;/code&gt; 节点&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_master_slave.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
+
+&lt;p&gt;　而 ZooKeeper 中，则是引入了 &lt;code&gt;领导者（Leader）&lt;/code&gt;、&lt;code&gt;跟随者（Follower）&lt;/code&gt;、&lt;code&gt;观察者（Observer）&lt;/code&gt; 三种角色 和 &lt;code&gt;领导（Leading）&lt;/code&gt;、&lt;code&gt;跟随（Following）&lt;/code&gt;、&lt;code&gt;观察（Observing）&lt;/code&gt;、&lt;code&gt;寻找（Looking）&lt;/code&gt; 等相应的&lt;a href=&quot;https://github.com/apache/zookeeper/blob/master/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java#L370&quot;&gt;状态&lt;/a&gt;。在 ZooKeeper 集群中的通过一种 &lt;code&gt;Leader 选举&lt;/code&gt;的过程，来选定某个节点作为 &lt;code&gt;Leader&lt;/code&gt; 节点，该节点为客户端提供&lt;code&gt;读&lt;/code&gt;和&lt;code&gt;写&lt;/code&gt;服务。而 &lt;code&gt;Follower&lt;/code&gt; 和 &lt;code&gt;Observer&lt;/code&gt; 节点，则都能提供&lt;code&gt;读&lt;/code&gt;服务，唯一的区别在于，&lt;code&gt;Observer&lt;/code&gt; 机器&lt;code&gt;不参与 Leader 选举&lt;/code&gt;过程 和 &lt;code&gt;写操作&lt;/code&gt;的&lt;code&gt;&quot;过半写成功&quot;&lt;/code&gt;策略，&lt;code&gt;Observer&lt;/code&gt; 只会被告知已经 commit 的 proposal。因此 &lt;code&gt;Observer&lt;/code&gt; 可以在&lt;code&gt;不影响写性能&lt;/code&gt;的情况下提升集群的&lt;code&gt;读性能&lt;/code&gt;（详见下文 “性能优化 - 优化策略 - Observer 模式” 部分）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_leader_follower_observer.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;</summary>
+    
+    
+    
+    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
+    
+    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
+    
+    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
+    
+    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
+    
+    <category term="Paxos" scheme="https://yuzhouwan.com/tags/Paxos/"/>
+    
+    <category term="Raft" scheme="https://yuzhouwan.com/tags/Raft/"/>
+    
+    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
+    
+    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
+    
+    <category term="Apache Yarn" scheme="https://yuzhouwan.com/tags/Apache-Yarn/"/>
+    
+    <category term="ZAB" scheme="https://yuzhouwan.com/tags/ZAB/"/>
+    
+    <category term="Chubby" scheme="https://yuzhouwan.com/tags/Chubby/"/>
+    
+    <category term="HyperTable" scheme="https://yuzhouwan.com/tags/HyperTable/"/>
+    
+    <category term="Fourinone" scheme="https://yuzhouwan.com/tags/Fourinone/"/>
+    
+    <category term="Consul" scheme="https://yuzhouwan.com/tags/Consul/"/>
+    
+    <category term="Etcd" scheme="https://yuzhouwan.com/tags/Etcd/"/>
+    
+    <category term="Registrator" scheme="https://yuzhouwan.com/tags/Registrator/"/>
+    
+    <category term="Confd" scheme="https://yuzhouwan.com/tags/Confd/"/>
+    
+  </entry>
+  
+  <entry>
     <title>架构方法论大合集</title>
     <link href="https://yuzhouwan.com/posts/210313/"/>
     <id>https://yuzhouwan.com/posts/210313/</id>
     <published>2021-03-13T14:02:55.000Z</published>
-    <updated>2021-07-17T08:03:04.192Z</updated>
+    <updated>2021-07-17T08:30:51.130Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -56,6 +384,33 @@
     <category term="弹性架构" scheme="https://yuzhouwan.com/tags/%E5%BC%B9%E6%80%A7%E6%9E%B6%E6%9E%84/"/>
     
     <category term="网格计算" scheme="https://yuzhouwan.com/tags/%E7%BD%91%E6%A0%BC%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes 实战</title>
+    <link href="https://yuzhouwan.com/posts/200919/"/>
+    <id>https://yuzhouwan.com/posts/200919/</id>
+    <published>2020-09-19T00:25:16.000Z</published>
+    <updated>2021-07-17T08:30:51.129Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="云原生" scheme="https://yuzhouwan.com/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
+    
+    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
+    
+    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
+    
+    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
+    
+    <category term="OpenTSDB" scheme="https://yuzhouwan.com/tags/OpenTSDB/"/>
     
   </entry>
   
@@ -182,290 +537,6 @@
   </entry>
   
   <entry>
-    <title>Apache Druid：一款高效的 OLAP 引擎</title>
-    <link href="https://yuzhouwan.com/posts/5845/"/>
-    <id>https://yuzhouwan.com/posts/5845/</id>
-    <published>2017-04-02T03:05:11.000Z</published>
-    <updated>2021-07-11T15:18:21.596Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;　&lt;strong&gt;Apache Druid&lt;/strong&gt;™ 是目前非常流行的高性能的，分布式列存储的 &lt;strong&gt;OLAP&lt;/strong&gt; 引擎（准确来说是 &lt;strong&gt;MOLAP&lt;/strong&gt;）。它是一款可以快速（实时）访问大量的、很少变化的数据的系统。并被设计为，在面对代码部署、机器故障和生产系统的其他可能性问题时，依旧能 100％ 地正常提供服务&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/druid/druid_pumpkin_compressed.png&quot; alt=&quot;Apache Druid Pumpkin&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（图片来源：Vadim Ogievetsky 在万圣节的个人作品，已获得授权）&lt;/center&gt;
-
-
-
-&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;h4 id=&quot;分析事件流&quot;&gt;&lt;a href=&quot;#分析事件流&quot; class=&quot;headerlink&quot; title=&quot;分析事件流&quot;&gt;&lt;/a&gt;分析事件流&lt;/h4&gt;&lt;p&gt;　Druid 支持对 event-driven 数据进行快速地高并发查询。还可以实时地摄入流式数据，并提供亚秒级查询能力，以支持强大的 UI 交互&lt;/p&gt;
-&lt;h4 id=&quot;创新的架构设计&quot;&gt;&lt;a href=&quot;#创新的架构设计&quot; class=&quot;headerlink&quot; title=&quot;创新的架构设计&quot;&gt;&lt;/a&gt;创新的架构设计&lt;/h4&gt;&lt;p&gt;　Druid 是一种新型数据库，它结合了 OLAP 分析数据库、时间序列数据库 和 全文检索 的思想，以支持流式体系架构下的大部分应用场景&lt;/p&gt;
-&lt;h4 id=&quot;构建事件驱动的数据栈&quot;&gt;&lt;a href=&quot;#构建事件驱动的数据栈&quot; class=&quot;headerlink&quot; title=&quot;构建事件驱动的数据栈&quot;&gt;&lt;/a&gt;构建事件驱动的数据栈&lt;/h4&gt;&lt;p&gt;　Druid 天然集成了消息队列（Kafka、AWS Kinesis 等）和数据湖（HDFS、AWS S3 等），使得其非常适用于流式总线和流处理器的查询层&lt;/p&gt;
-&lt;h4 id=&quot;解锁新的工作流&quot;&gt;&lt;a href=&quot;#解锁新的工作流&quot; class=&quot;headerlink&quot; title=&quot;解锁新的工作流&quot;&gt;&lt;/a&gt;解锁新的工作流&lt;/h4&gt;&lt;p&gt;　Druid 旨在对实时数据和历史数据进行快速地即时分析。使用可快速更替的查询，进行趋势解释，数据探索，以响应各种分析诉求&lt;/p&gt;
-&lt;h4 id=&quot;多环境部署&quot;&gt;&lt;a href=&quot;#多环境部署&quot; class=&quot;headerlink&quot; title=&quot;多环境部署&quot;&gt;&lt;/a&gt;多环境部署&lt;/h4&gt;&lt;p&gt;　Druid 可以部署在任何的 &lt;code&gt;*NIX&lt;/code&gt; 商用硬件上，无论是在云端还是内部部署。Druid 是 cloud-native 的，这意味着集群扩容和缩容，就像添加和删除进程一样简单&lt;/p&gt;
-&lt;h4 id=&quot;多数据源摄入&quot;&gt;&lt;a href=&quot;#多数据源摄入&quot; class=&quot;headerlink&quot; title=&quot;多数据源摄入&quot;&gt;&lt;/a&gt;多数据源摄入&lt;/h4&gt;&lt;p&gt;　Druid 支持将多种外部数据系统作为数据源，进行数据摄入，包括 &lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Hadoop/&quot;&gt;Hadoop&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/posts/4735/&quot;&gt;Spark&lt;/a&gt;、&lt;a href=&quot;https://yuzhouwan.com/tags/Apache-Storm/&quot;&gt;Storm&lt;/a&gt; 和 &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;Kafka&lt;/a&gt; 等&lt;/p&gt;
-&lt;h4 id=&quot;多版本控制&quot;&gt;&lt;a href=&quot;#多版本控制&quot; class=&quot;headerlink&quot; title=&quot;多版本控制&quot;&gt;&lt;/a&gt;多版本控制&lt;/h4&gt;&lt;p&gt;　多版本控制（&lt;strong&gt;MVCC&lt;/strong&gt;，&lt;strong&gt;M&lt;/strong&gt;ulti-&lt;strong&gt;V&lt;/strong&gt;ersion &lt;strong&gt;C&lt;/strong&gt;oncurrent &lt;strong&gt;C&lt;/strong&gt;ontrol），主要是为了解决多用户操作同一条记录时的并发问题。MVCC 设计思路是，在并发访问数据库时，不使用粗暴的行锁，而是在事务型操作更新数据时，生成一个新版本的数据。如此，可以保证读写分离，避免了读写操作互相阻塞，以提高并发性能。另外，约束任意时刻只有最新版本的记录是有效的，即也保证了数据的一致性&lt;/p&gt;
-&lt;p&gt;　而 Druid 中是使用数据更新时间来区分版本，历史节点只加载最新版本的数据。同时，&lt;strong&gt;实时数据索引&lt;/strong&gt;与&lt;strong&gt;离线数据批量覆盖&lt;/strong&gt;同时进行的 Lambda 架构设计，既满足了实时响应的需求，又确保了数据的准确性&lt;/p&gt;
-&lt;h4 id=&quot;易于运维&quot;&gt;&lt;a href=&quot;#易于运维&quot; class=&quot;headerlink&quot; title=&quot;易于运维&quot;&gt;&lt;/a&gt;易于运维&lt;/h4&gt;&lt;p&gt;　Druid 集群可以做到 Self-healing 和 Self-balancing。如果 Druid 服务器发生故障，系统将会自动绕过损坏的路由，直到这些机器恢复或被替换掉。在扩缩容集群的时候，只需要增加或下线服务器，集群本身会在后台自动 re-balance。Druid 在设计上保证了可以全天候工作，不会因为任何原因而停机，包括配置更改和集群升级&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Apache Calcite" scheme="https://yuzhouwan.com/tags/Apache-Calcite/"/>
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="InfluxDB" scheme="https://yuzhouwan.com/tags/InfluxDB/"/>
-    
-    <category term="Grafana" scheme="https://yuzhouwan.com/tags/Grafana/"/>
-    
-    <category term="TSDB" scheme="https://yuzhouwan.com/tags/TSDB/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
-    
-    <category term="PostgreSQL" scheme="https://yuzhouwan.com/tags/PostgreSQL/"/>
-    
-    <category term="Pivot" scheme="https://yuzhouwan.com/tags/Pivot/"/>
-    
-    <category term="Graphite" scheme="https://yuzhouwan.com/tags/Graphite/"/>
-    
-    <category term="OLAP" scheme="https://yuzhouwan.com/tags/OLAP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搜索引擎 ElasticSearch</title>
-    <link href="https://yuzhouwan.com/posts/22654/"/>
-    <id>https://yuzhouwan.com/posts/22654/</id>
-    <published>2017-04-02T04:18:42.000Z</published>
-    <updated>2021-06-11T15:52:01.355Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;ElasticSearch-是什么？&quot;&gt;&lt;a href=&quot;#ElasticSearch-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch 是什么？&quot;&gt;&lt;/a&gt;ElasticSearch 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;a href=&quot;https://yuzhouwan.com/posts/22654/&quot;&gt;&lt;strong&gt;ElasticSearch&lt;/strong&gt;&lt;/a&gt;™ 是一款基于 Lucene 的搜索引擎，不但稳定、可靠、快速，同时具备良好的水平扩展能力&lt;/p&gt;
-&lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;功能丰富，且开箱即用&lt;/li&gt;
-&lt;li&gt;横向可扩展性&lt;/li&gt;
-&lt;li&gt;分片机制更好地解决热点问题&lt;/li&gt;
-&lt;li&gt;多副本有效保证了高可用&lt;/li&gt;
-&lt;li&gt;精确的熔断器机制&lt;/li&gt;
-&lt;li&gt;社区庞大，生态完善&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;主要概念&quot;&gt;&lt;a href=&quot;#主要概念&quot; class=&quot;headerlink&quot; title=&quot;主要概念&quot;&gt;&lt;/a&gt;主要概念&lt;/h2&gt;&lt;h3 id=&quot;Cluster-集群&quot;&gt;&lt;a href=&quot;#Cluster-集群&quot; class=&quot;headerlink&quot; title=&quot;Cluster 集群&quot;&gt;&lt;/a&gt;Cluster 集群&lt;/h3&gt;&lt;p&gt;　在一个分布式系统里面，可以通过多个 ElasticSearch 节点组成一个&lt;strong&gt;集群&lt;/strong&gt;。集群中会动态选举出一个主节点，保证了 ElasticSearch 集群不存在单点故障&lt;br&gt;　在同一子网内，只需要将进程设置为相同的集群名，ElasticSearch 就会把这些集群名相同的进程自动组成一个集群。集群中各节点间的通讯和数据负载均衡，全部都由 ElasticSearch 自动管理&lt;/p&gt;
-&lt;h3 id=&quot;Node-节点&quot;&gt;&lt;a href=&quot;#Node-节点&quot; class=&quot;headerlink&quot; title=&quot;Node 节点&quot;&gt;&lt;/a&gt;Node 节点&lt;/h3&gt;&lt;p&gt;　每一个 ElasticSearch 进程称为一个 &lt;strong&gt;Node 节点&lt;/strong&gt;。在测试环境中，可以在一台服务器上运行多个 ElasticSearch 进程；但生产环境中，则建议每台服务器只运行一个 ElasticSearch 进程&lt;/p&gt;
-&lt;h3 id=&quot;Index-索引&quot;&gt;&lt;a href=&quot;#Index-索引&quot; class=&quot;headerlink&quot; title=&quot;Index 索引&quot;&gt;&lt;/a&gt;Index 索引&lt;/h3&gt;&lt;p&gt;　ElasticSearch 中的索引是文档数据存储的地方，相当于是传统关系数据库中的 DataBase 概念。更多逻辑上的对应关系，如下表所示：&lt;/p&gt;
-&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;Relational DB&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;HBase&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;ElasticSearch&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Database&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;NameSpace&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Template&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;一组索引的模板配置&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Table&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Table&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Index&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;索引&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Row&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;RowKey&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Document&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;文档，和 Lucene 概念一致&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Column + Value&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Cell&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Field&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;如果将文档理解为 JSON，那么 Field 就是字段和值&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Term&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;检索的基本单位，相当于是文本中的一个词&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;-&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Token&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;Term 内容、类型，以及 Term 在文本中的起始及偏移&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;note info&quot;&gt;目前最新的 ElasticSearch 7.x 版本里面已经废弃了 Type 的概念&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="ElasticSearch" scheme="https://yuzhouwan.com/tags/ElasticSearch/"/>
-    
-    <category term="Lucene" scheme="https://yuzhouwan.com/tags/Lucene/"/>
-    
-    <category term="Kafka" scheme="https://yuzhouwan.com/tags/Kafka/"/>
-    
-    <category term="Flume" scheme="https://yuzhouwan.com/tags/Flume/"/>
-    
-    <category term="HBase" scheme="https://yuzhouwan.com/tags/HBase/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Presto：分布式 SQL 查询引擎</title>
-    <link href="https://yuzhouwan.com/posts/200906/"/>
-    <id>https://yuzhouwan.com/posts/200906/</id>
-    <published>2020-09-06T15:06:25.000Z</published>
-    <updated>2021-06-11T15:51:56.633Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;Presto-是什么？&quot;&gt;&lt;a href=&quot;#Presto-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Presto 是什么？&quot;&gt;&lt;/a&gt;Presto 是什么？&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoDB™) is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Presto&lt;/strong&gt;™ (PrestoSQL™, a.k.a. Trino™) is a high performance, distributed SQL query engine for big data.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;note success&quot;&gt;下文将详细介绍二者的区别&lt;/div&gt;
-
-
-
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;组件&quot;&gt;&lt;a href=&quot;#组件&quot; class=&quot;headerlink&quot; title=&quot;组件&quot;&gt;&lt;/a&gt;组件&lt;/h3&gt;&lt;h4 id=&quot;Coordinator&quot;&gt;&lt;a href=&quot;#Coordinator&quot; class=&quot;headerlink&quot; title=&quot;Coordinator&quot;&gt;&lt;/a&gt;Coordinator&lt;/h4&gt;&lt;p&gt;　负责管理 Worker 和 MetaStore 节点，以及接受客户端查询请求，并进行 SQL 的语法解析（Parser）、执行计划生成与优化（Planner）和查询任务的调度（Scheduler）&lt;/p&gt;
-&lt;div class=&quot;note info&quot;&gt;Coordinator 通过 RESTful 接口与 Client 和 Worker 交互&lt;/div&gt;
-
-&lt;h4 id=&quot;Worker&quot;&gt;&lt;a href=&quot;#Worker&quot; class=&quot;headerlink&quot; title=&quot;Worker&quot;&gt;&lt;/a&gt;Worker&lt;/h4&gt;&lt;p&gt;　负责具体的查询计算和数据读写&lt;/p&gt;
-&lt;h4 id=&quot;Discovery-Server&quot;&gt;&lt;a href=&quot;#Discovery-Server&quot; class=&quot;headerlink&quot; title=&quot;Discovery Server&quot;&gt;&lt;/a&gt;Discovery Server&lt;/h4&gt;&lt;p&gt;　负责发现集群的各个节点，用于节点间心跳监控&lt;/p&gt;
-&lt;div class=&quot;note success&quot;&gt;一般 Discovery Server 混布在 Coordinator 节点上，也支持单独部署&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/categories/SQL/"/>
-    
-    
-    <category term="SQL" scheme="https://yuzhouwan.com/tags/SQL/"/>
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Maven" scheme="https://yuzhouwan.com/tags/Maven/"/>
-    
-    <category term="Java" scheme="https://yuzhouwan.com/tags/Java/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="PrestoDB" scheme="https://yuzhouwan.com/tags/PrestoDB/"/>
-    
-    <category term="Apache Hive" scheme="https://yuzhouwan.com/tags/Apache-Hive/"/>
-    
-    <category term="Python" scheme="https://yuzhouwan.com/tags/Python/"/>
-    
-    <category term="Presto" scheme="https://yuzhouwan.com/tags/Presto/"/>
-    
-    <category term="PrestoSQL" scheme="https://yuzhouwan.com/tags/PrestoSQL/"/>
-    
-    <category term="Trino" scheme="https://yuzhouwan.com/tags/Trino/"/>
-    
-    <category term="MPP" scheme="https://yuzhouwan.com/tags/MPP/"/>
-    
-    <category term="SPI" scheme="https://yuzhouwan.com/tags/SPI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ZooKeeper 原理与优化</title>
-    <link href="https://yuzhouwan.com/posts/31915/"/>
-    <id>https://yuzhouwan.com/posts/31915/</id>
-    <published>2017-04-22T00:38:04.000Z</published>
-    <updated>2021-06-11T15:51:52.678Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;ZooKeeper-是什么？&quot;&gt;&lt;a href=&quot;#ZooKeeper-是什么？&quot; class=&quot;headerlink&quot; title=&quot;ZooKeeper 是什么？&quot;&gt;&lt;/a&gt;ZooKeeper 是什么？&lt;/h2&gt;&lt;p&gt;　&lt;strong&gt;ZooKeeper&lt;/strong&gt; 是一个基于 &lt;a href=&quot;https://static.googleusercontent.com/media/research.google.com/zh-CN//archive/chubby-osdi06.pdf&quot;&gt;Google Chubby&lt;/a&gt; 论文实现的一款解决分布式数据一致性问题的开源实现，方便了依赖 ZooKeeper 的应用实现 &lt;code&gt;数据发布 / 订阅&lt;/code&gt;、&lt;code&gt;负载均衡&lt;/code&gt;、&lt;code&gt;服务注册与发现&lt;/code&gt;、&lt;code&gt;分布式协调&lt;/code&gt;、&lt;code&gt;事件通知&lt;/code&gt;、&lt;code&gt;集群管理&lt;/code&gt;、&lt;code&gt;Leader 选举&lt;/code&gt;、 &lt;code&gt;分布式锁和队列&lt;/code&gt; 等功能&lt;/p&gt;
-&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&quot;集群角色&quot;&gt;&lt;a href=&quot;#集群角色&quot; class=&quot;headerlink&quot; title=&quot;集群角色&quot;&gt;&lt;/a&gt;集群角色&lt;/h3&gt;&lt;p&gt;　一般的，在分布式系统中，构成集群的每一台机器都有自己的角色，最为典型的集群模式就是 &lt;code&gt;Master / Slave&lt;/code&gt; 主备模式。在该模式中，我们把能够处理所有&lt;code&gt;写操作&lt;/code&gt;的机器称为 &lt;code&gt;Master&lt;/code&gt; 节点，并把所有通过&lt;code&gt;异步复制&lt;/code&gt;方式获取最新数据、提供&lt;code&gt;读服务&lt;/code&gt;的机器称为 &lt;code&gt;Slave&lt;/code&gt; 节点&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_master_slave.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;
-
-&lt;p&gt;　而 ZooKeeper 中，则是引入了 &lt;code&gt;领导者（Leader）&lt;/code&gt;、&lt;code&gt;跟随者（Follower）&lt;/code&gt;、&lt;code&gt;观察者（Observer）&lt;/code&gt; 三种角色 和 &lt;code&gt;领导（Leading）&lt;/code&gt;、&lt;code&gt;跟随（Following）&lt;/code&gt;、&lt;code&gt;观察（Observing）&lt;/code&gt;、&lt;code&gt;寻找（Looking）&lt;/code&gt; 等相应的&lt;a href=&quot;https://github.com/apache/zookeeper/blob/master/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java#L370&quot;&gt;状态&lt;/a&gt;。在 ZooKeeper 集群中的通过一种 &lt;code&gt;Leader 选举&lt;/code&gt;的过程，来选定某个节点作为 &lt;code&gt;Leader&lt;/code&gt; 节点，该节点为客户端提供&lt;code&gt;读&lt;/code&gt;和&lt;code&gt;写&lt;/code&gt;服务。而 &lt;code&gt;Follower&lt;/code&gt; 和 &lt;code&gt;Observer&lt;/code&gt; 节点，则都能提供&lt;code&gt;读&lt;/code&gt;服务，唯一的区别在于，&lt;code&gt;Observer&lt;/code&gt; 机器&lt;code&gt;不参与 Leader 选举&lt;/code&gt;过程 和 &lt;code&gt;写操作&lt;/code&gt;的&lt;code&gt;&quot;过半写成功&quot;&lt;/code&gt;策略，&lt;code&gt;Observer&lt;/code&gt; 只会被告知已经 commit 的 proposal。因此 &lt;code&gt;Observer&lt;/code&gt; 可以在&lt;code&gt;不影响写性能&lt;/code&gt;的情况下提升集群的&lt;code&gt;读性能&lt;/code&gt;（详见下文 “性能优化 - 优化策略 - Observer 模式” 部分）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/picture/zk/zk_leader_follower_observer.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;center&gt;（利用 &lt;a href=&quot;https://www.axure.com.cn/&quot; target=&quot;_blank&quot;&gt;Axure&lt;/a&gt;™ 绘制而成）&lt;/center&gt;</summary>
-    
-    
-    
-    <category term="大数据" scheme="https://yuzhouwan.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Apache Storm" scheme="https://yuzhouwan.com/tags/Apache-Storm/"/>
-    
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Apache Hadoop" scheme="https://yuzhouwan.com/tags/Apache-Hadoop/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="JVM" scheme="https://yuzhouwan.com/tags/JVM/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="Paxos" scheme="https://yuzhouwan.com/tags/Paxos/"/>
-    
-    <category term="Raft" scheme="https://yuzhouwan.com/tags/Raft/"/>
-    
-    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
-    
-    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
-    
-    <category term="Apache Yarn" scheme="https://yuzhouwan.com/tags/Apache-Yarn/"/>
-    
-    <category term="ZAB" scheme="https://yuzhouwan.com/tags/ZAB/"/>
-    
-    <category term="Chubby" scheme="https://yuzhouwan.com/tags/Chubby/"/>
-    
-    <category term="HyperTable" scheme="https://yuzhouwan.com/tags/HyperTable/"/>
-    
-    <category term="Fourinone" scheme="https://yuzhouwan.com/tags/Fourinone/"/>
-    
-    <category term="Consul" scheme="https://yuzhouwan.com/tags/Consul/"/>
-    
-    <category term="Etcd" scheme="https://yuzhouwan.com/tags/Etcd/"/>
-    
-    <category term="Registrator" scheme="https://yuzhouwan.com/tags/Registrator/"/>
-    
-    <category term="Confd" scheme="https://yuzhouwan.com/tags/Confd/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Apache IoTDB：一款面向物联网的数据库</title>
     <link href="https://yuzhouwan.com/posts/201221/"/>
     <id>https://yuzhouwan.com/posts/201221/</id>
@@ -505,50 +576,6 @@
     <category term="物联网" scheme="https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
     
     <category term="Apache IoTDB" scheme="https://yuzhouwan.com/tags/Apache-IoTDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何成为 Apache 的 PMC</title>
-    <link href="https://yuzhouwan.com/posts/19631/"/>
-    <id>https://yuzhouwan.com/posts/19631/</id>
-    <published>2017-04-03T07:46:21.000Z</published>
-    <updated>2021-05-18T08:46:24.910Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;关于本文&quot;&gt;&lt;a href=&quot;#关于本文&quot; class=&quot;headerlink&quot; title=&quot;关于本文&quot;&gt;&lt;/a&gt;关于本文&lt;/h2&gt;&lt;p&gt;　本文主要是为了，记录给 &lt;a href=&quot;https://yuzhouwan.com/posts/5845/&quot;&gt;&lt;code&gt;Apache Druid&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/39683/&quot;&gt;&lt;code&gt;Apache Eagle&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/20644/&quot;&gt;&lt;code&gt;Apache Flink&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/45888/&quot;&gt;&lt;code&gt;Apache HBase&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/26002/&quot;&gt;&lt;code&gt;Apache Kafka&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/743/&quot;&gt;&lt;code&gt;Apache Superset&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache ZooKeeper&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://yuzhouwan.com/posts/31915/&quot;&gt;&lt;code&gt;Apache Curator&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://yuzhouwan.com/posts/42737/&quot;&gt;&lt;code&gt;TensorFlow&lt;/code&gt;&lt;/a&gt; / &lt;a href=&quot;https://github.com/alibaba/DataX&quot;&gt;&lt;code&gt;Alibaba DataX&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://yuzhouwan.com/posts/19631/#其他&quot;&gt;等&lt;/a&gt;开源项目贡献代码，尽自己一点绵薄之力的过程&lt;/p&gt;
-&lt;p&gt;　文章最后，总结了一些经验之谈，期冀能帮助到同样&lt;strong&gt;热爱开源&lt;/strong&gt;、也想成为 &lt;a href=&quot;http://people.apache.org/committer-index.html#asdf2014&quot;&gt;PMC&lt;/a&gt; 的小伙伴们&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/categories/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Apache Kafka" scheme="https://yuzhouwan.com/tags/Apache-Kafka/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="Apache ZooKeeper" scheme="https://yuzhouwan.com/tags/Apache-ZooKeeper/"/>
-    
-    <category term="Apache Flink" scheme="https://yuzhouwan.com/tags/Apache-Flink/"/>
-    
-    <category term="开源社区" scheme="https://yuzhouwan.com/tags/%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA/"/>
-    
-    <category term="Git" scheme="https://yuzhouwan.com/tags/Git/"/>
-    
-    <category term="Github" scheme="https://yuzhouwan.com/tags/Github/"/>
-    
-    <category term="Apache Eagle" scheme="https://yuzhouwan.com/tags/Apache-Eagle/"/>
-    
-    <category term="Apache HBase" scheme="https://yuzhouwan.com/tags/Apache-HBase/"/>
-    
-    <category term="Apache Superset" scheme="https://yuzhouwan.com/tags/Apache-Superset/"/>
-    
-    <category term="TensorFlow" scheme="https://yuzhouwan.com/tags/TensorFlow/"/>
     
   </entry>
   
@@ -715,33 +742,6 @@
     <category term="Linux" scheme="https://yuzhouwan.com/tags/Linux/"/>
     
     <category term="Shell" scheme="https://yuzhouwan.com/tags/Shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kubernetes 实战</title>
-    <link href="https://yuzhouwan.com/posts/200919/"/>
-    <id>https://yuzhouwan.com/posts/200919/</id>
-    <published>2020-09-19T00:25:16.000Z</published>
-    <updated>2021-04-20T09:39:33.705Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="云原生" scheme="https://yuzhouwan.com/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"/>
-    
-    
-    <category term="Kubernetes" scheme="https://yuzhouwan.com/tags/Kubernetes/"/>
-    
-    <category term="Docker" scheme="https://yuzhouwan.com/tags/Docker/"/>
-    
-    <category term="Helm" scheme="https://yuzhouwan.com/tags/Helm/"/>
-    
-    <category term="Apache Druid" scheme="https://yuzhouwan.com/tags/Apache-Druid/"/>
-    
-    <category term="OpenTSDB" scheme="https://yuzhouwan.com/tags/OpenTSDB/"/>
     
   </entry>
   

@@ -216,6 +216,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201018/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/201018/" class="post-title-link" itemprop="url">Apache Calcite：一款开源 SQL 解析工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-18 00:02:26" itemprop="dateCreated datePublished" datetime="2020-10-18T00:02:26+08:00">2020-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-18 13:43:58" itemprop="dateModified" datetime="2021-07-18T13:43:58+08:00">2021-07-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Apache-Calcite-是什么？"><a href="#Apache-Calcite-是什么？" class="headerlink" title="Apache Calcite 是什么？"></a>Apache Calcite 是什么？</h2><blockquote>
+<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/calcite">Apache Calcite</a></strong>™ is a dynamic data management framework.</p>
+</blockquote>
+<p><img src="/picture/calcite/calcite_mountain.jpg" alt="Calcite Mountain"></p>
+<center>（图片来源：<a href="https://pixabay.com/photos/landscape-travertine-pamukkale-2380833/" target="_blank" rel="external nofollow noopener noreferrer">Pixabay</a>™ 官网，已确认无版权）</center>
+
+
+
+
+
+
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="Catelog"><a href="#Catelog" class="headerlink" title="Catelog"></a>Catelog</h3><p>　用于定义 SQL 语义相关的元数据与命名空间</p>
+<h3 id="SQL-Parser"><a href="#SQL-Parser" class="headerlink" title="SQL Parser"></a>SQL Parser</h3><p>　负责将 SQL 转化成 AST（<strong>A</strong>bstract <strong>S</strong>yntax <strong>T</strong>ree）</p>
+<h3 id="SQL-Validator"><a href="#SQL-Validator" class="headerlink" title="SQL Validator"></a>SQL Validator</h3><p>　负责通过 Catalog 对 AST 进行校证</p>
+<h3 id="Query-Optimizer"><a href="#Query-Optimizer" class="headerlink" title="Query Optimizer"></a>Query Optimizer</h3><p>　负责将 AST 转化成物理执行计划、优化物理执行计划</p>
+<h3 id="SQL-Generator"><a href="#SQL-Generator" class="headerlink" title="SQL Generator"></a>SQL Generator</h3><p>　负责将物理执行计划反向转化成 SQL 语句</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>支持标准 SQL 语言</li>
+<li>通过适配器（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/adapter.html">Adapter</a>）可以支持连接任何数据源</li>
+<li>支持丰富的关系代数（并集、交集、连接、笛卡尔积等）</li>
+<li>支持对逻辑规划规则进行定制（例如 Filter 下推）</li>
+<li>支持成本模型优化（<strong>CBO</strong>, <strong>C</strong>ost-<strong>B</strong>ased <strong>O</strong>ptimizer 和 <strong>RBO</strong>, <strong>R</strong>ule-<strong>B</strong>ased <strong>O</strong>ptimizer）</li>
+<li>支持管理物化视图（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://calcite.apache.org/docs/materialized_views.html">Materialized view</a>）</li>
+<li>支持查询流式数据</li>
+<li>稳定可靠（开发迭代 10 年以上）</li>
+<li>已贡献给 Apache 基金会（于 2013 年）</li>
+<li>开源社区活跃（<a href="https://yuzhouwan.com/posts/5845/">Apache Druid</a>、Apache Hive、Apache Drill、<a href="https://yuzhouwan.com/posts/20644/">Apache Flink</a>、<a href="https://yuzhouwan.com/posts/45888/#Phoenix-%E5%91%BD%E4%BB%A4">Apache Phoenix</a> 等项目均在使用）</li>
+</ul>
+<div class="note success">Apache Calcite 借助开源的 JavaCC 完成 SQL 解析，将 SQL 语句转化为 Java 代码</div>
+<div class="note success">Apache Calcite 还使用了轻量级 Janino 编译运行时 Java 代码，以便灵活地管理元数据</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/201018/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/666/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -601,141 +727,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/200725/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201220/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/201220/" class="post-title-link" itemprop="url">一幅持续扩展的物联网思维导图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-20 11:50:00" itemprop="dateCreated datePublished" datetime="2020-12-20T11:50:00+08:00">2020-12-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/" itemprop="url" rel="index"><span itemprop="name">物联网</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一幅持续扩展的物联网思维导图"><a href="#一幅持续扩展的物联网思维导图" class="headerlink" title="一幅持续扩展的物联网思维导图"></a>一幅持续扩展的物联网思维导图</h2><p><img src="/picture/iot/iot_mind_map.png" alt="一幅持续扩展的物联网思维导图"></p>
-<center>（利用 MindNode™ 绘制而成）</center>
-
-<h2 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">日期</th>
-<th style="text-align:center">更新</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2020-12-20</td>
-<td style="text-align:center">初次发布，包含定义、行业、传感器、数据分析、安全、协议、机构、历史等内容</td>
-</tr>
-<tr>
-<td style="text-align:center">2020-12-21</td>
-<td style="text-align:center">扩充了 1982 年 ~ 2016 年之间关于物联网的大事件</td>
-</tr>
-<tr>
-<td style="text-align:center">2020-12-22</td>
-<td style="text-align:center">增加 eSIM 的应用场景</td>
-</tr>
-<tr>
-<td style="text-align:center">2020-12-25</td>
-<td style="text-align:center">增加边缘计算平台和物联网操作系统</td>
-</tr>
-<tr>
-<td style="text-align:center">2020-12-26</td>
-<td style="text-align:center">增加物联网设备数量统计信息</td>
-</tr>
-<tr>
-<td style="text-align:center">2020-12-28</td>
-<td style="text-align:center">增加全球移动通讯系统协会</td>
-</tr>
-</tbody>
-</table>
-</div>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/201220/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

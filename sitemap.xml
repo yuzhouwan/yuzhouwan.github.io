@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuzhouwan.com/posts/210313/</loc>
+    
+    <lastmod>2021-07-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/posts/5845/</loc>
     
     <lastmod>2021-07-18</lastmod>
@@ -150,13 +157,6 @@
   
   <url>
     <loc>https://yuzhouwan.com/posts/200726/</loc>
-    
-    <lastmod>2021-07-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/posts/210313/</loc>
     
     <lastmod>2021-07-18</lastmod>
     
@@ -711,6 +711,20 @@
   </url>
   
   <url>
+    <loc>https://yuzhouwan.com/tags/JVM/</loc>
+    <lastmod>2021-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/Apache-Spark/</loc>
+    <lastmod>2021-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yuzhouwan.com/tags/IDC/</loc>
     <lastmod>2021-07-18</lastmod>
     <changefreq>daily</changefreq>
@@ -746,21 +760,21 @@
   </url>
   
   <url>
-    <loc>https://yuzhouwan.com/tags/JVM/</loc>
-    <lastmod>2021-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/Apache-Spark/</loc>
-    <lastmod>2021-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yuzhouwan.com/tags/%E4%BA%BA%E7%89%A9/</loc>
+    <lastmod>2021-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/IoT/</loc>
+    <lastmod>2021-07-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/</loc>
     <lastmod>2021-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -789,20 +803,6 @@
   
   <url>
     <loc>https://yuzhouwan.com/tags/LaTeX/</loc>
-    <lastmod>2021-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/IoT/</loc>
-    <lastmod>2021-07-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yuzhouwan.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/</loc>
     <lastmod>2021-07-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -216,7 +216,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201001/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/4534/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -230,7 +230,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/201001/" class="post-title-link" itemprop="url">Serverless 详解</a>
+            <a href="/posts/4534/" class="post-title-link" itemprop="url">有趣的数学</a>
         </h2>
 
         <div class="post-meta">
@@ -240,14 +240,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-10-01 18:52:02" itemprop="dateCreated datePublished" datetime="2020-10-01T18:52:02+08:00">2020-10-01</time>
+              <time title="创建时间：2017-11-23 11:12:59" itemprop="dateCreated datePublished" datetime="2017-11-23T11:12:59+08:00">2017-11-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:48:33" itemprop="dateModified" datetime="2020-10-29T21:48:33+08:00">2020-10-29</time>
+                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Serverless/" itemprop="url" rel="index"><span itemprop="name">Serverless</span></a>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
                 </span>
             </span>
 
@@ -267,14 +267,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
+              <span>18k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>17 分钟</span>
             </span>
 
         </div>
@@ -286,26 +286,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Serverless-是什么？"><a href="#Serverless-是什么？" class="headerlink" title="Serverless 是什么？"></a>Serverless 是什么？</h2><blockquote>
-<p>Serverless computing is a cloud computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources. Pricing is based on the actual amount of resources consumed by an application, rather than on pre-purchased units of capacity. It can be a form of utility computing. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Serverless_computing">wikipedia.org</a></p>
-<p>Serverless architectures are application designs that incorporate third-party “Backend as a Service” (BaaS) services, and/or that include custom code run in managed, ephemeral containers on a “Functions as a Service” (FaaS) platform. — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://martinfowler.com/articles/serverless.html">《Serverless Architectures》</a></p>
-<p>无服务器架构是基于互联网的系统，其中应用开发不使用常规的服务进程。相反，它们仅依赖于第三方服务（例如 AWS Lambda 服务），客户端逻辑和服务托管远程过程调用的组合。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://aws.amazon.com/cn/blogs/china/iaas-faas-serverless/">亚马逊 AWS 官方博客</a></p>
-<p>Serverless（无服务器架构）是指服务端逻辑由开发者实现，运行在无状态的计算容器中，由事件触发，完全被第三方管理，其业务层面的状态则存储在数据库或其他介质中。  — <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.bookstack.cn/read/serverless-handbook/concepts-what-is-serverless.md">《无服务架构实践手册》</a></p>
-<p>If your PaaS can efficiently start instances in 20ms that run for half a second, then call it serverless.  — Adrian Cockroft</p>
-</blockquote>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><h4 id="低成本"><a href="#低成本" class="headerlink" title="低成本"></a>低成本</h4><h5 id="运维成本"><a href="#运维成本" class="headerlink" title="运维成本"></a>运维成本</h5><p>　服务器、中间件、数据库等均托管于 BaaS/FaaS 平台，用户无需再参与基础设施及软件的维护，省去了集群的运维成本</p>
-<h5 id="开发成本"><a href="#开发成本" class="headerlink" title="开发成本"></a>开发成本</h5><p>　对比 IaaS 或者 PaaS 平台的服务器或者操作系统，Serverless 的架构中，用户操作的是服务化的组件，比如存储服务、授权服务等，可以缩短开发周期，节约时间成本</p>
-<h4 id="按需计费"><a href="#按需计费" class="headerlink" title="按需计费"></a>按需计费</h4><p>　Serverless/FaaS 区别于 IaaS/PaaS 预先分配计算资源的计费方式，其计费方式通常是按请求次数及运行时间。如此一来，不仅可以最大程度地利用资源，还能实现真正的按需计费，以降低用户的使用成本</p>
-<p><img src="/picture/serverless/serverless_cost.png" alt="Serverless cost"></p>
-<center>（使用 <a href="https://www.apple.com/cn/ipad/" target="_blank" rel="external nofollow noopener noreferrer">iPad</a>™ 手绘而成）</center>
-
-<h4 id="高扩展"><a href="#高扩展" class="headerlink" title="高扩展"></a>高扩展</h4><p>　自动进行横向扩展（毫秒级部署，秒级生命周期）</p>
-<h4 id="高资源利用率"><a href="#高资源利用率" class="headerlink" title="高资源利用率"></a>高资源利用率</h4><p>　提供细粒度的计算能力，最大限度满足实时需求，使得资源利用率大幅度提升</p>
-<h4 id="NoOps"><a href="#NoOps" class="headerlink" title="NoOps"></a>NoOps</h4><p>　运维的发展经历了，人肉运维、自动化运维、DevOps、AiOps 等。而 Serverless 模式下，用户只需要关心业务编码，真正实现了零运维成本</p>
-<div class="note info">从更广泛的意义上来讲，Ops 除了指服务器维护，还会包括部署、网络、安全、监控、故障恢复和水平扩展等</div>
+          Here's something encrypted, password is required to continue reading.
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/201001/#more" rel="contents">
+              <a class="btn" href="/posts/4534/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/190101/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
+      <meta itemprop="name" content="Benedict Jin">
+      <meta itemprop="description" content="Benedict Jin's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宇宙湾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/190101/" class="post-title-link" itemprop="url">程序员的 Mac 高效手册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 19:58:02" itemprop="dateCreated datePublished" datetime="2019-01-01T19:58:02+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>如何将 Mac 这个生产工具的效能发挥到极致呢（如何省出一个小长假）？本文将从 Mac 的基础环境配置、Java、Maven、高级命令、工具、快捷键和预先整理相关资源等方面，来阐述如何提升工作效率的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/190101/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -360,7 +441,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -430,7 +511,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/2254/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/200314/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -444,7 +525,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/2254/" class="post-title-link" itemprop="url">Maven 高级玩法</a>
+            <a href="/posts/200314/" class="post-title-link" itemprop="url">容器引擎 Docker</a>
         </h2>
 
         <div class="post-meta">
@@ -454,14 +535,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-04-10 23:11:13" itemprop="dateCreated datePublished" datetime="2017-04-10T23:11:13+08:00">2017-04-10</time>
+              <time title="创建时间：2020-03-14 23:45:56" itemprop="dateCreated datePublished" datetime="2020-03-14T23:45:56+08:00">2020-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-29 21:44:24" itemprop="dateModified" datetime="2020-10-29T21:44:24+08:00">2020-10-29</time>
+                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -469,7 +550,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
                 </span>
             </span>
 
@@ -481,98 +562,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>34k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>31 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>介绍 Maven 工具的实用技巧，以及如何解决一些常见的问题，包括本地缓存、下载、编译、语法、依赖和相关插件等问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/2254/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/201025/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
-      <meta itemprop="name" content="Benedict Jin">
-      <meta itemprop="description" content="Benedict Jin's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="宇宙湾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/201025/" class="post-title-link" itemprop="url">Aapche Drill：一款分布式查询引擎</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-25 00:36:00 / 修改时间：01:04:22" itemprop="dateCreated datePublished" datetime="2020-10-25T00:36:00+08:00">2020-10-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
-                </span>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
+              <span>4.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -591,34 +581,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Aapche-Drill-是什么？"><a href="#Aapche-Drill-是什么？" class="headerlink" title="Aapche Drill 是什么？"></a>Aapche Drill 是什么？</h2><blockquote>
-<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/apache/drill">Apache Drill</a></strong>™ is a distributed MPP query layer that supports SQL and alternative query languages against NoSQL and Hadoop data storage systems. It was inspired in part by <a target="_blank" rel="external nofollow noopener noreferrer" href="http://research.google.com/pubs/pub36632.html">Google’s Dremel</a>.</p>
+          <h2 id="什么是-Docker？"><a href="#什么是-Docker？" class="headerlink" title="什么是 Docker？"></a>什么是 Docker？</h2><blockquote>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.docker.com/">Docker</a>™ provides a way to run applications securely isolated in a container, packaged with all its dependencies and libraries.</p>
 </blockquote>
-<p><img src="/picture/drill/drill.jpg" alt="Drill"></p>
-<center>（图片来源：<a href="https://www.pexels.com/zh-cn/photo/87236/" target="_blank" rel="external nofollow noopener noreferrer">Pexels</a>™ 官网，已确认无版权）</center>
-
-
-
-
-
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
-<li>支持自定义的嵌套数据结构</li>
-<li>兼容 Hive（包括 Hive 的 UDF，且支持自定义 UDF）</li>
-<li>高性能、低延迟的 SQL 查询</li>
-<li>支持多数据源（插件化，包括 <a href="https://yuzhouwan.com/posts/26002/">Apache Kafka</a>、<a href="https://yuzhouwan.com/posts/45888/">Apache HBase</a>、Apache Hive、OpenTSDB、S3 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://drill.apache.org/docs/connect-a-data-source-introduction/">等</a>）</li>
-</ul>
-<div class="note info">UDF（User Defined Funcation）：用户定义普通函数，只作用于单行记录</div>
-<div class="note info">UDAF（User Defined Aggregation Funcation）：用户定义聚合函数，只作用于多行记录</div>
-<div class="note info">UDTF（User Defined Table Generating Funcation）：用户定义表生成函数，可以输入一行记录输出多行记录</div>
-
-<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul>
-<li>与标准 SQL 略有不同</li>
-<li>外部依赖较多（基于 <a href="https://yuzhouwan.com/posts/31915/">Apache ZooKeeper</a> 实现分布式、基于 <a href="https://yuzhouwan.com/posts/201018/">Apache Calcite</a> 实现 SQL 解析）</li>
-<li>比较小众，相关资料缺乏</li>
-</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew cask install docker</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>　从 Toolbox 的 Archive <a target="_blank" rel="external nofollow noopener noreferrer" href="https://get.daocloud.io/toolbox/">页面</a>找到 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://dn-dao-github-mirror.daocloud.io/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe">DockerToolbox-19.03.1.exe</a> 并下载</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.docker.com/toolbox/overview/">安装</a></h4><p>　注意安装组件的时候，选择 <code>Full installation</code>，其他的均使用默认的选项，即可</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><h5 id="代理"><a href="#代理" class="headerlink" title="代理"></a><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.docker.com/network/proxy/#configure-the-docker-client">代理</a></h5><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.docker/config.json</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"proxies"</span>: {</span><br><span class="line">    <span class="attr">"default"</span>: {</span><br><span class="line">      <span class="attr">"httpProxy"</span>: <span class="string">"socks5://127.0.0.1:1080"</span>,</span><br><span class="line">      <span class="attr">"httpsProxy"</span>: <span class="string">"socks5://127.0.0.1:1080"</span>,</span><br><span class="line">      <span class="attr">"noProxy"</span>: <span class="string">"*.yuzhouwan.com"</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/201025/#more" rel="contents">
+              <a class="btn" href="/posts/200314/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -642,7 +615,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/191026/">
+    <link itemprop="mainEntityOfPage" href="https://yuzhouwan.com/posts/19989/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yuzhouwan_logo_128x128.ico">
@@ -656,7 +629,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/191026/" class="post-title-link" itemprop="url">重拾 Golang</a>
+            <a href="/posts/19989/" class="post-title-link" itemprop="url">为什么 JavaScript 对服务端开发很重要?</a>
         </h2>
 
         <div class="post-meta">
@@ -666,14 +639,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-26 00:06:52" itemprop="dateCreated datePublished" datetime="2019-10-26T00:06:52+08:00">2019-10-26</time>
+              <time title="创建时间：2014-11-04 10:40:12" itemprop="dateCreated datePublished" datetime="2014-11-04T10:40:12+08:00">2014-11-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-20 21:55:55" itemprop="dateModified" datetime="2020-10-20T21:55:55+08:00">2020-10-20</time>
+                <time title="修改时间：2021-07-18 13:36:44" itemprop="dateModified" datetime="2021-07-18T13:36:44+08:00">2021-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -693,14 +666,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.1k</span>
+              <span>387</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -712,34 +685,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="什么是-Golang？"><a href="#什么是-Golang？" class="headerlink" title="什么是 Golang？"></a>什么是 Golang？</h2><blockquote>
-<p><strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://golang.org/">Go</a></strong>™ is an open source programming language that makes it easy to build simple, reliable, and efficient software.</p>
-</blockquote>
-<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h3><ul>
-<li>静态语言</li>
-<li>编译型语言</li>
-</ul>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>语言层面支持并发</li>
-<li>无依赖，直译机器码</li>
-<li>内置 <code>runtime</code>，支持 GC</li>
-<li>可跨平台编译</li>
-<li>支持内嵌 C</li>
-<li>丰富的标准库</li>
-<li>学习曲线低</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>接口是枚举类型</li>
-<li><code>import</code> 包不支持版本</li>
-<li><code>goroutine</code> 一旦启动，切换将不受程序控制</li>
-</ul>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>　根据操作系统，在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://golang.org/dl/">Download</a> 页面下载对应的安装包，进行安装</p>
-<h4 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装完成后，iTerm 中看到可以执行 go 命令了</span></span><br><span class="line">$ <span class="built_in">which</span> go</span><br><span class="line">  /usr/<span class="built_in">local</span>/go/bin/go</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://dl.google.com/go/go1.14.4.linux-amd64.tar.gz</span><br><span class="line">$ sudo tar -C /usr/<span class="built_in">local</span>/ -xzvf go1.14.4.linux-amd64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境变量</span></span><br><span class="line">$ vim ~/.bashrc</span><br><span class="line">  <span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">  <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 工作目录</span></span><br><span class="line"><span class="comment"># bin: 存放可执行文件</span></span><br><span class="line"><span class="comment"># pkg: 存放编译好的库文件</span></span><br><span class="line"><span class="comment"># src: 存放 go 的源文件</span></span><br><span class="line">$ mkdir -p ~/code/gopath</span><br><span class="line">$ vim ~/.bashrc</span><br><span class="line">  <span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line">  <span class="built_in">export</span> GOPATH=~/code/gopath</span><br><span class="line">  <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+          <h2 id="开发人员用一种语言就能编写整个-Web-应用"><a href="#开发人员用一种语言就能编写整个-Web-应用" class="headerlink" title="开发人员用一种语言就能编写整个 Web 应用"></a>开发人员用一种语言就能编写整个 Web 应用</h2><p>　可以减少开发客户端和服务端时所需的语言切换（Clojure, <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clojure/clojurescript/">ClojureScript</a> 一样的道理）<br>　代码可以再客户端和服务端中共享（表单校验或游戏逻辑中使用同样的代码）</p>
+<h2 id="JSON-是目前非常流行的数据交换格式"><a href="#JSON-是目前非常流行的数据交换格式" class="headerlink" title="JSON 是目前非常流行的数据交换格式"></a>JSON 是目前非常流行的数据交换格式</h2><p>　<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.json.org/json-zh.html">JSON</a> 还是 JavaScript 原生的</p>
+<h2 id="有些-NoSQL-数据库中用的就是-JavaScript-语言"><a href="#有些-NoSQL-数据库中用的就是-JavaScript-语言" class="headerlink" title="有些 NoSQL 数据库中用的就是 JavaScript 语言"></a>有些 NoSQL 数据库中用的就是 JavaScript 语言</h2><p>　MongoDB 的管理和查询语言都是 JavaScript<br>　CouchDB 的 Map/reduce 也是 JavaScript</p>
+<h2 id="JavaScript-是一门编译目标语言"><a href="#JavaScript-是一门编译目标语言" class="headerlink" title="JavaScript 是一门编译目标语言"></a>JavaScript 是一门编译目标语言</h2><p>　<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS/">List of languages that compile to JS</a></p>
+<h2 id="Node-用的虚拟机（V8）会紧跟-ECMAScirpt-标准"><a href="#Node-用的虚拟机（V8）会紧跟-ECMAScirpt-标准" class="headerlink" title="Node 用的虚拟机（V8）会紧跟 ECMAScirpt 标准"></a>Node 用的虚拟机（V8）会紧跟 ECMAScirpt 标准</h2><p>　在 Node 中如果想用新的 JavaScript 语言特性，不用等到所有浏览器都支持</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/191026/#more" rel="contents">
+              <a class="btn" href="/posts/19989/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
